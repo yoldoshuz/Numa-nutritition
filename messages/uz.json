@@ -1,0 +1,1899 @@
+{
+  "Meta": {
+    "home": {
+      "title": "NUMA Nutrition — sog'lom hayot uchun innovatsion oziqlanish",
+      "description": "Immunitet, yurak, jigar va energiyani qo'llab-quvvatlovchi NUMA Nutrition tabiiy vitaminlari, BAQlari va siroplari. Xalqaro sifat sertifikatlari, O'zbekiston bo'ylab yetkazib berish.",
+      "keywords": "vitaminlar, BAQ, NUMA Nutrition, tabiiy qo'shimchalar, O'zbekiston, Toshkent, salomatlik, immunitet"
+    },
+    "products": {
+      "title": "NUMA Nutrition mahsulotlari — vitaminlar va BAQlar katalogi",
+      "description": "NUMA Nutrition tabiiy mahsulotlari katalogi: immunitet, yurak, jigar, bo'g'imlar va energiya uchun siroplar, kapsulalar, asal va kompleкslar.",
+      "keywords": "vitaminlar katalogi, BAQ sotib olish, tabiiy siroplar, NUMA Nutrition, Toshkent"
+    },
+    "blog": {
+      "title": "NUMA Nutrition blogi — salomatlik haqida ekspert maqolalari",
+      "description": "Tabiiy oziqlanish, NUMA Nutrition ishlab chiqarishi, ilmiy yondashuv va sifatning xalqaro e'tirofi haqida foydali maqolalar.",
+      "keywords": "salomatlik blogi, oziqlanish maqolalari, NUMA Nutrition, ekspert materiallari"
+    },
+    "contacts": {
+      "title": "NUMA Nutrition kontaktlari — Toshkent, O'zbekiston",
+      "description": "NUMA Nutrition bilan bog'laning: telefon, Telegram, Instagram, manzil va ish vaqti. Mahsulotlar bo'yicha savollarga javob beramiz va dastur tanlaymiz.",
+      "keywords": "NUMA Nutrition kontaktlari, telefon, manzil, Toshkent"
+    },
+    "cart": {
+      "title": "Savat — NUMA Nutrition",
+      "description": "Sizning NUMA Nutrition savatingiz. Buyurtma tarkibini tekshiring va O'zbekiston bo'ylab yetkazib berishni rasmiylashtiring."
+    },
+    "checkout": {
+      "title": "Buyurtmani rasmiylashtirish — NUMA Nutrition",
+      "description": "NUMA Nutrition mahsulotlarini bepul kuryerlik yetkazib berish bilan buyurtma qiling."
+    },
+    "consultation": {
+      "title": "NUMA Nutrition mutaxassisi konsultatsiyasi",
+      "description": "Fan va tabiiy yechimlarga asoslangan shaxsiy tavsiyalar. Ariza qoldiring — mutaxassis siz bilan bog'lanadi.",
+      "keywords": "nutritsiolog konsultatsiyasi, vitamin tanlash, NUMA Nutrition"
+    },
+    "notFound": {
+      "title": "Sahifa topilmadi — NUMA Nutrition",
+      "description": "Afsuski, bunday sahifa mavjud emas."
+    },
+    "productTemplate": {
+      "title": "{name} — Toshkentda sotib olish | NUMA Nutrition",
+      "description": "{tagline} Narxi {price} so'm. Tabiiy tarkib, xalqaro sertifikatlar, O'zbekiston bo'ylab yetkazib berish."
+    },
+    "articleTemplate": {
+      "title": "{title} | NUMA Nutrition blogi"
+    }
+  },
+  "Common": {
+    "brand": "NUMA",
+    "brandFull": "NUMA NUTRITION",
+    "brandSub": "NUTRITION",
+    "currency": "so'm",
+    "buy": "Sotib olish",
+    "details": "Batafsil",
+    "addToCart": "Savatga",
+    "readMore": "Davomini o'qish",
+    "readArticle": "Maqolani o'qish",
+    "allProducts": "Barcha mahsulotlar",
+    "allArticles": "Barcha maqolalar",
+    "goToCatalog": "Katalogga o'tish",
+    "backHome": "Bosh sahifaga qaytish",
+    "consultation": "Konsultatsiya",
+    "sendRequest": "Ariza yuborish",
+    "callNow": "Hoziroq qo'ng'iroq qilish",
+    "prev": "Orqaga",
+    "next": "Oldinga",
+    "close": "Yopish",
+    "share": "Ulashish",
+    "pcs": "dona",
+    "free": "Bepul",
+    "required": "Majburiy maydon",
+    "loading": "Yuklanmoqda…"
+  },
+  "Nav": {
+    "home": "Bosh sahifa",
+    "products": "Mahsulotlar",
+    "blog": "Blog",
+    "contacts": "Kontaktlar"
+  },
+  "Header": {
+    "openMenu": "Menyuni ochish",
+    "closeMenu": "Menyuni yopish",
+    "menuTitle": "Menyu",
+    "cart": "Savat",
+    "cartCount": "Savatdagi mahsulotlar: {count}",
+    "language": "Til",
+    "skipToContent": "Asosiy qismga o'tish"
+  },
+  "Footer": {
+    "about": "Fan, tabiat va innovatsiyalarni birlashtirgan zamonaviy salomatlik yechimlari ekotizimi.",
+    "directions": "Yo'nalishlar",
+    "company": "Kompaniya",
+    "contacts": "Kontaktlar",
+    "socials": "Ijtimoiy tarmoqlarda",
+    "rights": "© {year} NUMA NUTRIOTION",
+    "rightsSecond": "Barcha huquqlar himoyalangan",
+    "privacy": "Maxfiylik siyosati",
+    "terms": "Foydalanuvchi shartnomasi",
+    "directionLinks": {
+      "family": "NUMA Family",
+      "kids": "NUMA Kids",
+      "nabaviy": "Nabaviy Tabobat",
+      "diagnostics": "NUMA Diagnostics",
+      "bettery": "Bettery Organic"
+    },
+    "companyLinks": {
+      "home": "Bosh sahifa",
+      "about": "Kompaniya haqida",
+      "news": "Yangiliklar",
+      "video": "Video",
+      "reviews": "Sharhlar",
+      "certificates": "Sertifikatlar",
+      "contacts": "Kontaktlar"
+    },
+    "socialNames": {
+      "telegram": "Telegram",
+      "website": "Veb-sayt",
+      "instagram": "Instagram"
+    }
+  },
+  "CtaBand": {
+    "learnMore": "NUMA NUTRITION haqida ko'proq bilmoqchimisiz?",
+    "needHelp": "Buyurtma bo'yicha yordam kerakmi?"
+  },
+  "Home": {
+    "hero": {
+      "eyebrow": "Ilmiy yondashuv · Tabiiy tarkib · Xalqaro sifat",
+      "title": "Sog'lom hayot uchun innovatsion oziqlanish",
+      "description": "NUMA Nutrition tabiiy mahsulotlari organizmni qo'llab-quvvatlash, salomatlikni mustahkamlash va hayot sifatini yaxshilash uchun ishlab chiqilgan",
+      "catalog": "Mahsulotlar katalogi",
+      "imageAlt": "NUMA Nutrition tabiiy siroplari liniyasi"
+    },
+    "features": {
+      "natural": "Tabiiy tarkib",
+      "production": "Zamonaviy ishlab chiqarish",
+      "standards": "Xalqaro standartlar",
+      "quality": "Sifat nazorati",
+      "support": "Salomatlikni qo'llab-quvvatlash"
+    },
+    "popular": {
+      "eyebrow": "Bizning mahsulotlar",
+      "title": "Ommabop mahsulotlar"
+    },
+    "why": {
+      "title": "Nega Numa Nutrition tanlanadi?",
+      "description": "Mahsulotlarimiz tanangiz bilan uyg'unlikda ishlab, barcha muhim tizimlarni kompleks qo'llab-quvvatlaydi",
+      "wheel": {
+        "immunity": {
+          "title": "Immunitet",
+          "text": "Organizm himoya kuchlarini mustahkamlash"
+        },
+        "digestion": {
+          "title": "Hazm qilish",
+          "text": "Hazm tizimi ishini yaxshilash"
+        },
+        "detox": {
+          "title": "Detoks",
+          "text": "Tozalash va toksinlarni chiqarish"
+        },
+        "beauty": {
+          "title": "Go'zallik",
+          "text": "Sog'lom teri, soch va tirnoqlar"
+        },
+        "energy": {
+          "title": "Energiya",
+          "text": "Energiya va ish qobiliyatini oshirish"
+        },
+        "heart": {
+          "title": "Yurak",
+          "text": "Yurak-qon tomir tizimini qo'llab-quvvatlash"
+        }
+      }
+    },
+    "stats": {
+      "clients": {
+        "value": "1 000 000+",
+        "label": "Mamnun mijozlar"
+      },
+      "products": {
+        "value": "1000+",
+        "label": "Tabiiy mahsulotlar"
+      },
+      "partners": {
+        "value": "500+",
+        "label": "Rasmiy hamkorlar"
+      },
+      "since": {
+        "value": "2020 yildan",
+        "label": "Odamlar salomatligi uchun mahsulot yaratamiz"
+      }
+    },
+    "videos": {
+      "title": "Ekspertlar videosi va haqiqiy natijalar",
+      "description": "NUMA Nutrition mahsulotlari bilan mutaxassislar videosi orqali tanishing",
+      "play": "Videoni ko'rish",
+      "items": {
+        "shaykhova": "Guli Shayxova NUMA Nutrition ilmiy yondashuvi haqida",
+        "detox": "Detox Hepar Energy: haqiqiy tajriba",
+        "entrepreneur": "Nega tadbirkorlar NUMA Nutrition'ni tanlaydi",
+        "beauty": "NUMA Nutrition bilan go'zallik va salomatlik"
+      }
+    },
+    "certificates": {
+      "title": "Bizning xalqaro sertifikatlarimiz",
+      "description": "Mahsulotlarimizni ishlab chiqarishning barcha bosqichlarida xalqaro sifat va xavfsizlik standartlariga amal qilamiz",
+      "items": {
+        "euroleaf": {
+          "title": "EURO-LEAF",
+          "subtitle": "Yevropa organik sertifikati",
+          "text": "Yevropa Ittifoqining rasmiy organik mahsulot belgisi. Mahsulotning organik ishlab chiqarish, ekologiklik va sifat nazorati bo'yicha qat'iy talablarga muvofiqligini tasdiqlaydi"
+        },
+        "halal": {
+          "title": "HALAL CERTIFICATE",
+          "subtitle": "Halol sertifikati",
+          "text": "Mahsulot halol talablariga javob berishini va islom sifat, xavfsizlik hamda poklik standartlariga muvofiq ishlab chiqarilishini tasdiqlaydi"
+        },
+        "usda": {
+          "title": "USDA ORGANIC",
+          "subtitle": "AQSh milliy organik dasturi",
+          "text": "AQSh Qishloq xo'jaligi vazirligi sertifikati bo'lib, mahsulotning organik ishlab chiqarish, qayta ishlash, saqlash va sotish standartlariga muvofiqligini tasdiqlaydi"
+        },
+        "iso": {
+          "title": "ISO 22000:2018",
+          "subtitle": "Oziq-ovqat xavfsizligi menejmenti tizimi",
+          "text": "Ishlab chiqarish va yetkazib berishning barcha bosqichlarida oziq-ovqat sifati va xavfsizligi samarali nazoratini tasdiqlovchi xalqaro standart"
+        },
+        "gmp": {
+          "title": "GMP",
+          "subtitle": "Good Manufacturing Practice",
+          "text": "Ishlab chiqarish, sifat nazorati, xavfsizlik va samaradorlik bo'yicha yuqori talablarga rioya qilinishini tasdiqlovchi xalqaro ishlab chiqarish amaliyoti standarti"
+        }
+      }
+    },
+    "blog": {
+      "eyebrow": "Foydali maqolalar",
+      "title": "Ekspert materiallari"
+    },
+    "reviews": {
+      "title": "Mijozlarimiz sharhlari",
+      "description": "Numa Nutrition mahsulotlarini tanlagan odamlar nima deyishini bilib oling",
+      "items": {
+        "akbar": {
+          "text": "Mutaxassis konsultatsiyasini oldim va o'zim uchun dastur tanladim. Hammasi batafsil tushuntirildi, natija esa kutganimdan ham yaxshi bo'ldi. Professional yondashuv uchun Numa Nutrition jamoasiga rahmat",
+          "name": "Akbar Yusupov",
+          "location": "O'zbekiston, Samarqand"
+        },
+        "malika": {
+          "text": "Mahsulotni tanishlarim tavsiyasi bilan tanladim. Sifat haqiqatan ham kutganimga mos keldi, qulay qabul dasturi esa uni kundalik ratsionga osongina kiritishga yordam berdi",
+          "name": "Malika Rahimova",
+          "location": "O'zbekiston, Toshkent"
+        },
+        "sanjar": {
+          "text": "NUMA Nutrition mahsulotlaridan bir necha oydan beri foydalanaman. Tabiiy tarkibi va umumiy holatimning sezilarli yaxshilanishi yoqdi. Ayniqsa kun davomida energiya ko'proq sezilyapti",
+          "name": "Sanjar Mamatov",
+          "location": "O'zbekiston, Toshkent"
+        },
+        "dilnoza": {
+          "text": "Butun oila uchun buyurtma berdim: yetkazib berish tez, qadoqlash ozoda. Bolalar vitaminlarni zavq bilan qabul qilishadi, men esa bir oyda natijani ko'rdim",
+          "name": "Dilnoza Karimova",
+          "location": "O'zbekiston, Buxoro"
+        }
+      }
+    }
+  },
+  "Catalog": {
+    "eyebrow": "Bizning mahsulotlar",
+    "title": "Sizning salomatligingiz uchun yaratilgan",
+    "description": "Immunitetdan yurak va bo'g'imlar salomatligigacha — organizmni kundalik qo'llab-quvvatlash uchun NUMA Nutrition tabiiy mahsulotlari",
+    "empty": "Mahsulotlar topilmadi",
+    "badges": {
+      "hit": "Xit savdo",
+      "new": "Yangilik",
+      "rec": "Tavsiya etamiz"
+    },
+    "forms": {
+      "syrup": "Sirop",
+      "capsules": "Kapsulalar",
+      "tablets": "Tabletkalar",
+      "honey": "Asal"
+    }
+  },
+  "Product": {
+    "breadcrumbProducts": "Mahsulotlar",
+    "specsTitle": "Xususiyatlari",
+    "quantity": "Miqdori",
+    "decrease": "Miqdorni kamaytirish",
+    "increase": "Miqdorni oshirish",
+    "added": "Mahsulot savatga qo'shildi",
+    "purposeTitle": "{name} nima uchun kerak?",
+    "usageTitle": "{name} qanday qabul qilinadi?",
+    "usageSubtitle": "Maksimal natijaga erishish uchun qo'llash bo'yicha tavsiyalarga amal qiling",
+    "importantTitle": "Muhim qoidalar",
+    "benefitsTitle": "{name} afzalliklari",
+    "galleryBack": "Orqa tomoni",
+    "relatedTitle": "O'xshash mahsulotlar",
+    "important": [
+      "Tavsiya etilgan kunlik dozadan oshirmang",
+      "Qo'llashdan oldin mutaxassis bilan maslahatlashish tavsiya etiladi",
+      "Dori vositasi emas",
+      "Tarkibiy qismlarga individual sezuvchanlikda qo'llamang",
+      "Bolalar qo'li yetmaydigan joyda saqlang"
+    ],
+    "cardio-control": {
+      "name": "Cardio Control",
+      "tagline": "Yurak-qon tomir tizimini qo'llab-quvvatlash uchun tabiiy sirop",
+      "short": "Yurak salomatligi va normal qon aylanishini qo'llab-quvvatlaydi",
+      "description": "Cardio Control — yurak va qon tomirlar ishini qo'llab-quvvatlash uchun ishlab chiqilgan tabiiy sirop. Mahsulot formulasi normal qon aylanishini saqlashga, yurak-qon tomir tizimini mustahkamlashga va organizmni kundalik qo'llab-quvvatlashga yordam beradi",
+      "specs": [
+        {
+          "label": "Hajmi",
+          "value": "500 ml"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Sirop"
+        },
+        {
+          "label": "Yosh",
+          "value": "15 yoshdan"
+        },
+        {
+          "label": "Ishlab chiqaruvchi davlat",
+          "value": "O'zbekiston"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "+25°C dan yuqori bo'lmagan haroratda"
+        }
+      ],
+      "purposeSubtitle": "Cardio Control yurak va qon tomirlar ishini qo'llab-quvvatlashga, qon aylanishini yaxshilashga va organizmni mustahkamlashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Miokard oziqlanishi",
+          "text": "Yurak mushagi oziqlanishini yaxshilashga yordam beradi"
+        },
+        {
+          "title": "Ishemik holatlar",
+          "text": "Yurak ishemik kasalligi profilaktikasiga yordam beradi"
+        },
+        {
+          "title": "Qon aylanishi",
+          "text": "Qon aylanishini rag'batlantiradi va tomirlar ishini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Tiklanish",
+          "text": "Miokard infarktidan keyingi tiklanish davrida organizmni qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Immunitet",
+          "text": "Cardio Control organizm immun tizimini mustahkamlashga yordam beradi"
+        },
+        {
+          "title": "Qon tomirlar",
+          "text": "Koronar tomirlar trombozining oldini olishga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llash usuli",
+          "text": "Iste'mol qilishdan oldin flakonni yaxshilab chayqating"
+        },
+        {
+          "title": "Dozasi",
+          "text": "Ovqatdan 30 daqiqa oldin ertalab va kechqurun 30 ml dan qabul qiling"
+        },
+        {
+          "title": "Qo'llash yoshi",
+          "text": "Kattalar va 15 yoshdan oshgan bolalarga tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash sharoiti",
+          "text": "Quruq salqin joyda, +25°C dan yuqori bo'lmagan haroratda, to'g'ridan-to'g'ri quyosh nuridan uzoqda saqlang"
+        }
+      ],
+      "highlightTitle": "Yurak-qon tomir tizimini qo'llab-quvvatlash uchun tabiiy sirop",
+      "highlightText": "Cardio Control yurak va qon tomirlar ishini qo'llab-quvvatlash uchun tabiiy komponentlar asosida yaratilgan. Faol ingredientlar qon aylanishini yaxshilashga, yurak-qon tomir tizimini mustahkamlashga va organizmning umumiy holatini saqlashga yordam beradi",
+      "chips": [
+        {
+          "value": "30 ml",
+          "label": "Dozasi"
+        },
+        {
+          "value": "100%",
+          "label": "Tabiiy tarkib"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "15+",
+          "label": "Tavsiya etilgan yosh"
+        }
+      ],
+      "benefits": [
+        "Yurak-qon tomir tizimi salomatligini qo'llab-quvvatlaydi",
+        "Normal xolesterin darajasini saqlashga yordam beradi",
+        "Qon aylanishi va yurak mushagi oziqlanishini yaxshilashga yordam beradi",
+        "Yurak-qon tomir yuklamalaridan keyin tiklanishga yordam beradi",
+        "Yurak ishemik kasalligi profilaktikasiga yordam beradi",
+        "Koronar tomirlarda tromb hosil bo'lish xavfini kamaytirishga yordam beradi"
+      ],
+      "stats": [
+        {
+          "label": "Yurakni qo'llab-quvvatlash",
+          "text": "Yurak mushagi ishini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Qon aylanishi",
+          "text": "Normal qon oqimi va to'qimalar oziqlanishiga yordam beradi"
+        },
+        {
+          "label": "Tomirlar salomatligi",
+          "text": "Tomirlar elastikligini saqlashga yordam beradi"
+        },
+        {
+          "label": "Xolesterin balansi",
+          "text": "Normal xolesterin darajasini saqlaydi"
+        },
+        {
+          "label": "Kundalik qo'llab-quvvatlash",
+          "text": "Umumiy hayotiy tonusni qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Tabiiy kompleks",
+          "text": "Tabiiy o'simlik komponentlari majmuasi"
+        }
+      ]
+    },
+    "king-bee": {
+      "name": "KING BEE",
+      "tagline": "Immunitetni mustahkamlash va energiyani tiklash uchun tabiiy asal kompleksi",
+      "short": "Immunitet, hayotiy tonus va organizmning tabiiy energiyasini qo'llab-quvvatlash",
+      "description": "KING BEE — organik asal va tabiiy komponentlar asosida yaratilgan tabiiy asal kompleksi. Mahsulot immunitetni mustahkamlashga, hayotiy tonusni oshirishga, kuchni tiklashga va organizm umumiy salomatligini qo'llab-quvvatlashga yordam beradi",
+      "specs": [
+        {
+          "label": "Og'irligi",
+          "value": "500 g"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Asal kompleksi"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Ishlab chiqaruvchi davlat",
+          "value": "O'zbekiston"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "KING BEE immun tizimini mustahkamlashga va energiya zaxirasini to'ldirishga yordam beradi",
+      "purpose": [
+        {
+          "title": "Immunitetni mustahkamlash",
+          "text": "Organizmning tabiiy himoyasini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Antioksidant himoya",
+          "text": "Organizm hujayralarini erkin radikallar ta'siridan himoya qiladi"
+        },
+        {
+          "title": "Energiya manbai",
+          "text": "Organizmni tabiiy energiya bilan ta'minlaydi va charchoqqa qarshi kurashishga yordam beradi"
+        },
+        {
+          "title": "Asab tizimini qo'llab-quvvatlash",
+          "text": "Charchoq hissini kamaytirishga va hissiy muvozanatni saqlashga yordam beradi"
+        },
+        {
+          "title": "Ish qobiliyatini oshirish",
+          "text": "Jismoniy va aqliy faollikni yaxshilashga yordam beradi"
+        },
+        {
+          "title": "Organizmni umumiy mustahkamlash",
+          "text": "Salomatlik va hayotiy tonusni saqlashga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llashdan oldin",
+          "text": "Kuniga 1–2 marta 1 choy qoshiqdan iste'mol qiling"
+        },
+        {
+          "title": "Qabul vaqti",
+          "text": "Ertalab yoki ovqatdan 30 daqiqa oldin qabul qilish tavsiya etiladi"
+        },
+        {
+          "title": "Kurs davomiyligi",
+          "text": "Maksimal samaraga erishish uchun muntazam kurs bilan qabul qilish tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash sharoiti",
+          "text": "Ochilgandan keyin qopqog'ini zich yoping va quruq salqin joyda saqlang"
+        }
+      ],
+      "highlightTitle": "Asalning tabiiy kuchi",
+      "highlightText": "KING BEE tabiiy organik asal va tabiiy komponentlarni birlashtirib, immunitetni mustahkamlashga, yuqori energiya darajasini saqlashga va organizmning tez tiklanishiga yordam beradi. Sog'lom turmush tarzi doirasida kundalik qo'llash uchun mos",
+      "chips": [
+        {
+          "value": "500 g",
+          "label": "Mahsulot og'irligi"
+        },
+        {
+          "value": "100%",
+          "label": "Yuqori sifat"
+        },
+        {
+          "value": "Kuniga 1–2 marta",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "18+",
+          "label": "Tavsiya etilgan yosh"
+        }
+      ],
+      "benefits": [
+        "Immun tizimini qo'llab-quvvatlaydi",
+        "Ish qobiliyatini yaxshilashga yordam beradi",
+        "Hayotiy tonusni oshiradi",
+        "Tabiiy antioksidantlarni o'z ichiga oladi",
+        "Yuklamalardan keyin kuchni tiklashga yordam beradi",
+        "Organik asal asosida ishlab chiqarilgan"
+      ],
+      "stats": [
+        {
+          "label": "Immunitetni qo'llab-quvvatlash",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        },
+        {
+          "label": "Energiya va hayotiy tonus",
+          "text": "Yuqori faollik darajasini saqlashga yordam beradi"
+        },
+        {
+          "label": "Organizmning tiklanishi",
+          "text": "Jismoniy va aqliy yuklamalardan keyin tiklanishga yordam beradi"
+        },
+        {
+          "label": "Antioksidant himoya",
+          "text": "Organizm hujayralarini oksidlanish stressidan himoya qiladi"
+        },
+        {
+          "label": "Asab tizimini qo'llab-quvvatlash",
+          "text": "Charchoqni kamaytirishga va hissiy muvozanatni saqlashga yordam beradi"
+        },
+        {
+          "label": "Tabiiy tarkib",
+          "text": "Organik asal va tabiiy komponentlar asosida ishlab chiqarilgan"
+        }
+      ]
+    },
+    "vitamin-d3": {
+      "name": "Vitamin D3",
+      "tagline": "Immunitet va suyaklar salomatligi uchun tabiiy D3 vitamini",
+      "short": "Suyaklar, immun tizimi va kalsiy so'rilishini mustahkamlashga yordam beradi",
+      "description": "Vitamin D3 — suyaklar, immun tizimi, mushaklar va yurak-qon tomir tizimi salomatligini qo'llab-quvvatlash uchun ishlab chiqilgan tabiiy oziq-ovqat qo'shimchasi. D3 vitamini yetishmovchiligini to'ldirishga va yil davomida organizmni qo'llab-quvvatlashga yordam beradi",
+      "specs": [
+        {
+          "label": "Miqdori",
+          "value": "180 kapsula"
+        },
+        {
+          "label": "Dozasi",
+          "value": "5000 IU"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Kapsulalar"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Vitamin D3 immunitetni mustahkamlashga, suyaklar, tishlar va mushaklar salomatligini qo'llab-quvvatlashga hamda kalsiy so'rilishiga yordam beradi",
+      "purpose": [
+        {
+          "title": "Immunitetni qo'llab-quvvatlash",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        },
+        {
+          "title": "Mushaklar salomatligi",
+          "text": "Mushak tizimining normal ishini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Suyaklar salomatligi",
+          "text": "Suyak to'qimasi va bo'g'imlar mustahkamligini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Yurakni qo'llab-quvvatlash",
+          "text": "Yurak-qon tomir tizimining normal ishlashiga yordam beradi"
+        },
+        {
+          "title": "Kalsiy so'rilishi",
+          "text": "Kalsiy va fosforning samarali so'rilishiga yordam beradi"
+        },
+        {
+          "title": "Kundalik qo'llab-quvvatlash",
+          "text": "D vitamini yetishmovchiligini to'ldirishga va yaxshi kayfiyatni saqlashga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llash usuli",
+          "text": "Kuniga 1 kapsuladan qabul qiling"
+        },
+        {
+          "title": "Eng yaxshi qabul vaqti",
+          "text": "Ovqat vaqtida yoki undan keyin yetarli miqdorda suv bilan qabul qiling"
+        },
+        {
+          "title": "Kurs davomiyligi",
+          "text": "Individual yoki mutaxassis tavsiyasiga ko'ra belgilanadi"
+        },
+        {
+          "title": "Saqlash sharoiti",
+          "text": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Organizm uchun tabiiy qo'llab-quvvatlash",
+      "highlightText": "Vitamin D3 immunitet, suyaklar va mushaklar salomatligini qo'llab-quvvatlashga, kalsiyning normal so'rilishiga yordam beradi va organizmni kundalik faollik uchun zarur D3 vitamini bilan ta'minlaydi",
+      "chips": [
+        {
+          "value": "180 kapsula",
+          "label": "Qadoqdagi miqdori"
+        },
+        {
+          "value": "100%",
+          "label": "Yuqori sifat"
+        },
+        {
+          "value": "Kuniga 1 kapsula",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "5000 IU",
+          "label": "Yuqori konsentratsiya"
+        }
+      ],
+      "benefits": [
+        "Immun tizimini qo'llab-quvvatlaydi",
+        "Mushaklar salomatligini qo'llab-quvvatlaydi",
+        "Suyaklar va tishlarni mustahkamlashga yordam beradi",
+        "Yurakning normal ishlashiga yordam beradi",
+        "Kalsiy va fosfor so'rilishini yaxshilaydi",
+        "D3 vitamini yetishmovchiligini to'ldirishga yordam beradi"
+      ],
+      "stats": [
+        {
+          "label": "Immun tizimi",
+          "text": "Organizmning tabiiy himoyasini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Suyaklar salomatligi",
+          "text": "Suyak to'qimasi mustahkamligini saqlashga yordam beradi"
+        },
+        {
+          "label": "Kalsiy so'rilishi",
+          "text": "Kalsiy va fosfor so'rilishi samaradorligini oshiradi"
+        },
+        {
+          "label": "Mushaklar salomatligi",
+          "text": "Mushak tizimining normal ishini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Yurakni qo'llab-quvvatlash",
+          "text": "Yurak-qon tomir tizimining normal ishlashiga yordam beradi"
+        },
+        {
+          "label": "D3 vitamini darajasi",
+          "text": "Organizmda D3 vitamini optimal darajasini saqlashga yordam beradi"
+        }
+      ]
+    },
+    "black-honey": {
+      "name": "Black Honey",
+      "tagline": "Immunitet va hayotiy energiya uchun tabiiy asal",
+      "short": "Organizm va hayotiy kuchni kundalik qo'llab-quvvatlash uchun tabiiy kompleks",
+      "description": "Black Honey — immunitetni qo'llab-quvvatlash, hayotiy tonusni oshirish va organizm umumiy salomatligini saqlash uchun ishlab chiqilgan asal asosidagi tabiiy mahsulot. Tabiiy oziq moddalarga boy va kundalik iste'mol uchun mos",
+      "specs": [
+        {
+          "label": "Hajmi",
+          "value": "400 ml"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Tabiiy asal"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar va 12 yoshdan oshgan bolalar"
+        },
+        {
+          "label": "Ishlab chiqaruvchi davlat",
+          "value": "O'zbekiston"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Black Honey immunitetni mustahkamlashga, energiya zaxirasini to'ldirishga, organizm ishini qo'llab-quvvatlashga va umumiy kayfiyatni yaxshilashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Immunitetni qo'llab-quvvatlash",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        },
+        {
+          "title": "Hazmni qo'llab-quvvatlash",
+          "text": "Oshqozon-ichak yo'lining normal ishiga yordam beradi"
+        },
+        {
+          "title": "Energiya manbai",
+          "text": "Kun davomida organizmni tabiiy energiya bilan ta'minlaydi"
+        },
+        {
+          "title": "Organizmni umumiy mustahkamlash",
+          "text": "Salomatlik va hayotiy tonusni saqlashga yordam beradi"
+        },
+        {
+          "title": "Antioksidant himoya",
+          "text": "Organizm hujayralarini himoya qiluvchi tabiiy antioksidantlarni o'z ichiga oladi"
+        },
+        {
+          "title": "Tabiiy oziqlanish",
+          "text": "Vitaminlar, minerallar va boshqa tabiiy komponentlar manbai hisoblanadi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llashdan oldin",
+          "text": "Kuniga 1–2 marta 1 choy qoshiqdan iste'mol qiling"
+        },
+        {
+          "title": "Eng yaxshi qabul vaqti",
+          "text": "Ertalab yoki ovqatlar orasida qabul qilish tavsiya etiladi"
+        },
+        {
+          "title": "Muntazamlik",
+          "text": "Maksimal samaraga erishish uchun muntazam iste'mol qilish tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash",
+          "text": "Ochilgandan keyin zich yopib, quruq salqin joyda saqlang"
+        }
+      ],
+      "highlightTitle": "Tabiatning tabiiy kuchi",
+      "highlightText": "Black Honey tabiiy asal va tabiiy komponentlarni birlashtirib, immunitetni saqlashga, energiya zaxirasini to'ldirishga va organizmni mustahkamlashga yordam beradi. Muvozanatli ovqatlanishning bir qismi sifatida kundalik iste'mol uchun mos",
+      "chips": [
+        {
+          "value": "400 ml",
+          "label": "Mahsulot og'irligi"
+        },
+        {
+          "value": "100%",
+          "label": "Tabiiy tarkib"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "12+",
+          "label": "Tavsiya etilgan yosh"
+        }
+      ],
+      "benefits": [
+        "Immun tizimini qo'llab-quvvatlaydi",
+        "Normal hazmni qo'llab-quvvatlaydi",
+        "Organizmni tabiiy energiya bilan ta'minlaydi",
+        "Organizmni umumiy mustahkamlashga yordam beradi",
+        "Tabiiy antioksidantlarni o'z ichiga oladi",
+        "Tabiiy asal asosida ishlab chiqarilgan"
+      ],
+      "stats": [
+        {
+          "label": "Immunitetni qo'llab-quvvatlash",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        },
+        {
+          "label": "Tabiiy energiya",
+          "text": "Yuqori faollik darajasini saqlashga yordam beradi"
+        },
+        {
+          "label": "Antioksidant himoya",
+          "text": "Organizm hujayralarini oksidlanish stressidan himoya qiladi"
+        },
+        {
+          "label": "Sog'lom hazm",
+          "text": "Hazm tizimining normal ishini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Umumiy hayotiy tonus",
+          "text": "Tetiklik va yaxshi kayfiyatni saqlashga yordam beradi"
+        },
+        {
+          "label": "Tabiiy mahsulot",
+          "text": "Sun'iy qo'shimchalarsiz tabiiy asal asosida ishlab chiqarilgan"
+        }
+      ]
+    },
+    "detox-hepar-energy": {
+      "name": "Detox Hepar Energy",
+      "tagline": "Organizmni tozalash va jigarni qo'llab-quvvatlash uchun tabiiy sirop",
+      "short": "Organizmni tozalashga yordam beradi va jigarning tabiiy ishini qo'llab-quvvatlaydi",
+      "description": "Detox Hepar Energy — jigar funksiyalarini qo'llab-quvvatlash, organizmni tozalash, moddalar almashinuvini yaxshilash va tabiiy detoksikatsiya jarayonlarini saqlash uchun ishlab chiqilgan tabiiy sirop. Formula energiyani tiklashga va hazm tizimi salomatligini qo'llab-quvvatlashga yordam beradi",
+      "specs": [
+        {
+          "label": "Hajmi",
+          "value": "500 ml"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Sirop"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Ishlab chiqaruvchi davlat",
+          "value": "O'zbekiston"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Detox Hepar Energy organizmning tabiiy tozalanishiga va jigar salomatligini qo'llab-quvvatlashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Organizmni tozalash",
+          "text": "Organizmning tabiiy detoksikatsiya jarayonlariga yordam beradi"
+        },
+        {
+          "title": "Ichak salomatligi",
+          "text": "Hazm tizimining normal ishini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Jigarni qo'llab-quvvatlash",
+          "text": "Jigarning normal funksiyasini saqlashga yordam beradi"
+        },
+        {
+          "title": "Energiya va hayotiy tonus",
+          "text": "Charchoq hissini kamaytirishga va faollikni qo'llab-quvvatlashga yordam beradi"
+        },
+        {
+          "title": "Moddalar almashinuvi",
+          "text": "Almashinuv jarayonlarini normallashtirishga yordam beradi"
+        },
+        {
+          "title": "Immun qo'llab-quvvatlash",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llashdan oldin",
+          "text": "Iste'mol qilishdan oldin flakonni yaxshilab chayqating"
+        },
+        {
+          "title": "Dozasi",
+          "text": "Ovqatdan 30 daqiqa oldin kuniga 2 marta 30 ml dan qabul qiling"
+        },
+        {
+          "title": "Muntazam kurs",
+          "text": "Sezilarli samaraga erishish uchun to'liq kursni o'tash tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash",
+          "text": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Jigar va organizmni tozalash uchun tabiiy qo'llab-quvvatlash",
+      "highlightText": "Detox Hepar Energy jigarni qo'llab-quvvatlashga, organizmni tozalashga, moddalar almashinuvini yaxshilashga va energiyani tiklashga yordam beruvchi tabiiy komponentlarni o'z ichiga oladi. Sog'lom turmush tarzi doirasida kundalik qo'llash uchun mos",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Flakon hajmi"
+        },
+        {
+          "value": "100%",
+          "label": "Tabiiy tarkib"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "18+",
+          "label": "Tavsiya etilgan yosh"
+        }
+      ],
+      "benefits": [
+        "Organizmni tozalashga yordam beradi",
+        "Ichak ishini qo'llab-quvvatlaydi",
+        "Jigar salomatligini qo'llab-quvvatlaydi",
+        "Hayotiy tonus va energiya darajasini oshiradi",
+        "Moddalar almashinuvini yaxshilaydi",
+        "Tabiiy faol komponentlarni o'z ichiga oladi"
+      ],
+      "stats": [
+        {
+          "label": "Organizmni tozalash",
+          "text": "Organizmning tabiiy detoksikatsiyasiga yordam beradi"
+        },
+        {
+          "label": "Jigarni qo'llab-quvvatlash",
+          "text": "Jigarning normal funksiyasini saqlashga yordam beradi"
+        },
+        {
+          "label": "Moddalar almashinuvi",
+          "text": "Metabolizmni normallashtirishga yordam beradi"
+        },
+        {
+          "label": "Ichak salomatligi",
+          "text": "Qulay hazmni qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Energiya va faollik",
+          "text": "Tetiklik va hayotiy tonusni saqlashga yordam beradi"
+        },
+        {
+          "label": "Tabiiy tarkib",
+          "text": "Organizmni kundalik qo'llab-quvvatlash uchun tabiiy komponentlar majmuasi"
+        }
+      ]
+    },
+    "insulin-balance": {
+      "name": "Insulin Balance",
+      "tagline": "Qonda normal shakar darajasini qo'llab-quvvatlash uchun tabiiy sirop",
+      "short": "Sog'lom shakar darajasi va uglevodlar almashinuvini qo'llab-quvvatlaydi",
+      "description": "Insulin Balance — uglevod almashinuvi, qonda normal shakar darajasi va umumiy moddalar almashinuvini qo'llab-quvvatlash uchun ishlab chiqilgan tabiiy sirop. Formula energetik muvozanatni saqlashga va organizmning normal ishlashiga yordam beradi",
+      "specs": [
+        {
+          "label": "Hajmi",
+          "value": "500 ml"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Sirop"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Ishlab chiqaruvchi davlat",
+          "value": "O'zbekiston"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Insulin Balance qonda normal shakar darajasini saqlashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Shakar darajasi nazorati",
+          "text": "Qonda normal glyukoza darajasini saqlashga yordam beradi"
+        },
+        {
+          "title": "Moddalar almashinuvi",
+          "text": "Normal metabolizmga yordam beradi"
+        },
+        {
+          "title": "Uglevod almashinuvi",
+          "text": "Uglevodlarning normal almashinuviga yordam beradi"
+        },
+        {
+          "title": "Oshqozon osti bezini qo'llab-quvvatlash",
+          "text": "Oshqozon osti bezining normal funksiyasini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Energiya va faollik",
+          "text": "Kun davomida organizmni energiya bilan qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Antioksidant himoya",
+          "text": "Organizm hujayralarini oksidlanish stressidan himoya qilishga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llashdan oldin",
+          "text": "Iste'mol qilishdan oldin flakonni yaxshilab chayqating"
+        },
+        {
+          "title": "Dozasi",
+          "text": "Ovqatdan 30 daqiqa oldin kuniga 2 marta 30 ml dan qabul qiling"
+        },
+        {
+          "title": "Muntazam kurs",
+          "text": "Sezilarli natijaga erishish uchun to'liq kursni o'tash tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash",
+          "text": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Moddalar almashinuvi uchun tabiiy qo'llab-quvvatlash",
+      "highlightText": "Insulin Balance normal shakar darajasi, sog'lom moddalar almashinuvi va energetik muvozanatni qo'llab-quvvatlashga yo'naltirilgan tabiiy komponentlarni o'z ichiga oladi. Sog'lom turmush tarzi doirasida kundalik qo'llash uchun mos",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Flakon hajmi"
+        },
+        {
+          "value": "100%",
+          "label": "Tabiiy tarkib"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "Kattalar uchun",
+          "label": "Tavsiya etilgan yosh"
+        }
+      ],
+      "benefits": [
+        "Qonda normal shakar darajasini qo'llab-quvvatlaydi",
+        "Moddalar almashinuvini normallashtirishga yordam beradi",
+        "Sog'lom uglevod almashinuviga yordam beradi",
+        "Oshqozon osti bezi funksiyalarini qo'llab-quvvatlaydi",
+        "Organizmning energetik muvozanatini qo'llab-quvvatlaydi",
+        "Tabiiy faol komponentlarni o'z ichiga oladi"
+      ],
+      "stats": [
+        {
+          "label": "Shakar darajasi nazorati",
+          "text": "Normal glyukoza darajasini saqlashga yordam beradi"
+        },
+        {
+          "label": "Moddalar almashinuvi",
+          "text": "Sog'lom metabolizmni qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Energetik muvozanat",
+          "text": "Kun davomida faollikni saqlashga yordam beradi"
+        },
+        {
+          "label": "Oshqozon osti bezi",
+          "text": "Oshqozon osti bezining normal ishiga yordam beradi"
+        },
+        {
+          "label": "Antioksidant himoya",
+          "text": "Organizm hujayralarini himoya qilishga yordam beradi"
+        },
+        {
+          "label": "Tabiiy tarkib",
+          "text": "Organizmni kundalik qo'llab-quvvatlash uchun tabiiy komponentlar majmuasi"
+        }
+      ]
+    },
+    "endo-marine": {
+      "name": "Endo Marine+",
+      "tagline": "Qalqonsimon bez, moddalar almashinuvi va umumiy salomatlik uchun tabiiy sirop",
+      "short": "Endokrin tizim va gormonal muvozanatni qo'llab-quvvatlash kompleksi",
+      "description": "Endo Marine+ — dengiz suvo'tlari, vitaminlar va minerallar asosidagi tabiiy sirop. Mahsulot formulasi qalqonsimon bezning normal funksiyasi, moddalar almashinuvi, immun tizimi va organizmning umumiy holatini qo'llab-quvvatlashga yordam beradi",
+      "specs": [
+        {
+          "label": "Hajmi",
+          "value": "500 ml"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Sirop"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Ishlab chiqaruvchi davlat",
+          "value": "O'zbekiston"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Qalqonsimon bez va tabiiy gormonal muvozanatni qo'llab-quvvatlash",
+      "purpose": [
+        {
+          "title": "Qalqonsimon bezni qo'llab-quvvatlash",
+          "text": "Yod tarkibi hisobiga qalqonsimon bezning normal ishiga yordam beradi"
+        },
+        {
+          "title": "Gormonal muvozanat",
+          "text": "Organizmning tabiiy gormonal muvozanatini saqlashga yordam beradi"
+        },
+        {
+          "title": "Xotirani yaxshilash",
+          "text": "Kognitiv funksiyalar, xotira va diqqat konsentratsiyasini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Immunitetni qo'llab-quvvatlash",
+          "text": "Immun tizimini mustahkamlashga yordam beradi"
+        },
+        {
+          "title": "Moddalar almashinuvi",
+          "text": "Metabolizmni normallashtirishga yordam beradi"
+        },
+        {
+          "title": "Yurak-qon tomir tizimi",
+          "text": "Normal yurak ritmi va organizmning umumiy holatini saqlashga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llashdan oldin",
+          "text": "Iste'mol qilishdan oldin flakonni yaxshilab chayqating"
+        },
+        {
+          "title": "Qo'llash usuli",
+          "text": "Ovqatdan 30 daqiqa oldin kuniga 2 marta 2 osh qoshiqdan qabul qiling"
+        },
+        {
+          "title": "Iste'moldan oldin",
+          "text": "Tarkibdagi yod miqdori haqidagi ma'lumot bilan tanishish tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash sharoiti",
+          "text": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Dengiz komponentlari asosidagi tabiiy sirop",
+      "highlightText": "Endo Marine+ qalqonsimon bez, moddalar almashinuvi va organizmning umumiy salomatligini qo'llab-quvvatlash uchun zarur dengiz ekstraktlari, vitaminlar va minerallar majmuasini o'z ichiga oladi. Formula kundalik qo'llash uchun ishlab chiqilgan",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Flakon hajmi"
+        },
+        {
+          "value": "100%",
+          "label": "Tabiiy komponentlar"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "Kattalar uchun",
+          "label": "Tavsiya etilgan yosh"
+        }
+      ],
+      "benefits": [
+        "Qalqonsimon bez funksiyasini qo'llab-quvvatlaydi",
+        "Xotira va diqqatni yaxshilashga yordam beradi",
+        "Moddalar almashinuvini normallashtirishga yordam beradi",
+        "Immun tizimini qo'llab-quvvatlaydi",
+        "Gormonal muvozanatni saqlashga yordam beradi",
+        "Yurak-qon tomir tizimi salomatligini saqlashga yordam beradi"
+      ],
+      "stats": [
+        {
+          "label": "Qalqonsimon bez",
+          "text": "Qalqonsimon bezning normal ishini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Moddalar almashinuvi",
+          "text": "Metabolizmni normallashtirishga yordam beradi"
+        },
+        {
+          "label": "Gormonal muvozanat",
+          "text": "Tabiiy gormonal fonni qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Xotira va diqqat",
+          "text": "Kognitiv funksiyalarni yaxshilashga yordam beradi"
+        },
+        {
+          "label": "Immun tizimi",
+          "text": "Organizmning tabiiy himoyasini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Tabiiy tarkib",
+          "text": "Dengiz ekstraktlari, vitaminlar va minerallar majmuasi"
+        }
+      ]
+    },
+    "hemoglobin": {
+      "name": "Hemoglobin+",
+      "tagline": "Normal gemoglobin darajasini qo'llab-quvvatlash uchun tabiiy sirop",
+      "short": "Normal gemoglobin va temir darajasini saqlashga yordam beradi",
+      "description": "Hemoglobin+ — normal gemoglobin darajasini qo'llab-quvvatlash, qon yaratilishini yaxshilash va organizmni zarur mikroelementlar bilan ta'minlash uchun ishlab chiqilgan tabiiy sirop. Formula energiyani saqlashga, charchoqni kamaytirishga va umumiy holatni yaxshilashga yordam beradi",
+      "specs": [
+        {
+          "label": "Hajmi",
+          "value": "500 ml"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Sirop"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Ishlab chiqaruvchi davlat",
+          "value": "O'zbekiston"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Tabiiy formula charchoqni kamaytirishga va kundalik faollikni qo'llab-quvvatlashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Gemoglobin darajasi",
+          "text": "Qonda normal gemoglobin darajasini saqlashga yordam beradi"
+        },
+        {
+          "title": "Kislorod bilan to'yinish",
+          "text": "Organizm to'qimalariga kislorodning samarali yetkazilishiga yordam beradi"
+        },
+        {
+          "title": "Qon yaratilishi",
+          "text": "Eritrotsitlar hosil bo'lishining tabiiy jarayonlarini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Immunitetni qo'llab-quvvatlash",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        },
+        {
+          "title": "Energiya va faollik",
+          "text": "Charchoq hissini kamaytirishga va hayotiy tonusni saqlashga yordam beradi"
+        },
+        {
+          "title": "Organizmni mustahkamlash",
+          "text": "Yaxshi kayfiyat va kundalik faollikni qo'llab-quvvatlaydi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llashdan oldin",
+          "text": "Iste'mol qilishdan oldin flakonni yaxshilab chayqating"
+        },
+        {
+          "title": "Dozasi",
+          "text": "Ovqatdan 30 daqiqa oldin kuniga 2 marta 30 ml dan qabul qiling"
+        },
+        {
+          "title": "Muntazam qabul",
+          "text": "Sezilarli natijaga erishish uchun to'liq kursni o'tash tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash",
+          "text": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Gemoglobin darajasini tabiiy qo'llab-quvvatlash",
+      "highlightText": "Hemoglobin+ qon yaratilish jarayonlarini qo'llab-quvvatlashga, normal gemoglobin darajasini saqlashga va organizmni energiya bilan ta'minlashga yo'naltirilgan tabiiy komponentlarni o'z ichiga oladi. Muvozanatli turmush tarzi doirasida kundalik qo'llash uchun mos",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Flakon hajmi"
+        },
+        {
+          "value": "100%",
+          "label": "Tabiiy tarkib"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        },
+        {
+          "value": "Kattalar uchun",
+          "label": "Tavsiya etilgan yosh"
+        }
+      ],
+      "benefits": [
+        "Normal gemoglobin darajasini qo'llab-quvvatlaydi",
+        "Organizmda kislorod tashilishini qo'llab-quvvatlaydi",
+        "Qon yaratilish jarayonlariga yordam beradi",
+        "Immunitetni mustahkamlashga yordam beradi",
+        "Charchoq hissini kamaytirishga yordam beradi",
+        "Umumiy hayotiy tonusni qo'llab-quvvatlaydi"
+      ],
+      "stats": [
+        {
+          "label": "Gemoglobin darajasi",
+          "text": "Normal gemoglobin darajasini saqlashga yordam beradi"
+        },
+        {
+          "label": "Qon yaratilishi",
+          "text": "Eritrotsitlarning tabiiy hosil bo'lishini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Energiya va faollik",
+          "text": "Charchoqni kamaytirishga va hayotiy tonusni oshirishga yordam beradi"
+        },
+        {
+          "label": "Kislorod bilan to'yinish",
+          "text": "Kislorodning samarali tashilishini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Immun tizimi",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        },
+        {
+          "label": "Tabiiy tarkib",
+          "text": "Organizmni kundalik qo'llab-quvvatlash uchun tabiiy komponentlar majmuasi"
+        }
+      ]
+    },
+    "collagen-pro": {
+      "name": "Collagen PRO+",
+      "tagline": "Bo'g'imlar, suyaklar, teri va biriktiruvchi to'qimalar salomatligi uchun kollagen",
+      "short": "Teri, soch, tirnoq go'zalligi va bo'g'imlar salomatligini qo'llab-quvvatlash",
+      "description": "Collagen PRO+ — bo'g'imlar, boylamlar, tog'aylar, suyaklar va teri salomatligini qo'llab-quvvatlash uchun ishlab chiqilgan kollagen, glyukozamin, xondroitin va C vitamini bilan zamonaviy kompleks. Formula bo'g'imlar harakatchanligini saqlashga va biriktiruvchi to'qimalarning tabiiy tiklanishiga yordam beradi",
+      "specs": [
+        {
+          "label": "Miqdori",
+          "value": "180 tabletka"
+        },
+        {
+          "label": "Dozasi",
+          "value": "600 mg"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Tabletkalar"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Collagen PRO+ bo'g'imlar, suyaklar, boylamlar va tog'aylar salomatligini qo'llab-quvvatlashga, harakatchanlikni saqlashga va teri holatini yaxshilashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Bo'g'imlar salomatligi",
+          "text": "Bo'g'imlar harakatchanligini saqlashga va harakatdagi noqulaylikni kamaytirishga yordam beradi"
+        },
+        {
+          "title": "Teri salomatligi",
+          "text": "Teri elastikligi va tarangligini saqlashga yordam beradi"
+        },
+        {
+          "title": "Mustahkam suyaklar",
+          "text": "Suyak to'qimasi salomatligi va mustahkamligini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Biriktiruvchi to'qimalar",
+          "text": "Paylar va boylamlar salomatligini saqlashda ishtirok etadi"
+        },
+        {
+          "title": "Tog'aylarning tiklanishi",
+          "text": "Tog'ay to'qimasi va boylamlar salomatligini saqlashga yordam beradi"
+        },
+        {
+          "title": "Harakat erkinligi",
+          "text": "Kundalik jismoniy yuklamalarda qulaylik va faollikni saqlashga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llash usuli",
+          "text": "Kuniga 2 marta 1 tabletkadan qabul qiling"
+        },
+        {
+          "title": "Qabul vaqti",
+          "text": "Ovqat vaqtida yoki undan keyin yetarli miqdorda suv bilan qabul qilish tavsiya etiladi"
+        },
+        {
+          "title": "Kurs davomiyligi",
+          "text": "Sezilarli samaraga erishish uchun kamida 2–3 oylik kurs tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash sharoiti",
+          "text": "Quruq salqin joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Bo'g'imlar va terini kompleks qo'llab-quvvatlash",
+      "highlightText": "Collagen PRO+ kollagen, glyukozamin, xondroitin va C vitaminini birlashtirib, bo'g'imlar, suyaklar, boylamlar va teri salomatligini qo'llab-quvvatlashga yordam beradi. Kompleks faol turmush tarzi va kundalik profilaktik qo'llab-quvvatlash uchun mos",
+      "chips": [
+        {
+          "value": "180 tabletka",
+          "label": "Qadoqdagi miqdori"
+        },
+        {
+          "value": "Kollagen +",
+          "label": "Glyukozamin + Xondroitin"
+        },
+        {
+          "value": "600 mg",
+          "label": "Optimal doza"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        }
+      ],
+      "benefits": [
+        "Bo'g'imlar salomatligini qo'llab-quvvatlaydi",
+        "Teri tarangligini saqlashga yordam beradi",
+        "Suyak to'qimasi mustahkamligini qo'llab-quvvatlaydi",
+        "Harakatchanlik va harakat erkinligini saqlashga yordam beradi",
+        "Boylamlar va paylar salomatligini saqlashda ishtirok etadi",
+        "Kollagen, glyukozamin, xondroitin va C vitaminini o'z ichiga oladi"
+      ],
+      "stats": [
+        {
+          "label": "Bo'g'imlar salomatligi",
+          "text": "Bo'g'imlar harakatchanligini saqlashga yordam beradi"
+        },
+        {
+          "label": "Teri elastikligi",
+          "text": "Teri tarangligi va tonusini saqlashga yordam beradi"
+        },
+        {
+          "label": "Suyaklar mustahkamligi",
+          "text": "Suyak to'qimasi salomatligini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Biriktiruvchi to'qimalar",
+          "text": "Boylamlar va paylar salomatligini saqlashda ishtirok etadi"
+        },
+        {
+          "label": "Harakat erkinligi",
+          "text": "Jismoniy yuklamalarda qulaylikni saqlashga yordam beradi"
+        },
+        {
+          "label": "Faol moddalar majmuasi",
+          "text": "Kollagen, glyukozamin, xondroitin va C vitamini"
+        }
+      ]
+    },
+    "omega-3-6-9": {
+      "name": "Omega 3-6-9",
+      "tagline": "Yurak, miya va umumiy salomatlik uchun almashtirib bo'lmaydigan yog' kislotalari kompleksi",
+      "short": "Yurak, miya salomatligi va normal lipid almashinuvini qo'llab-quvvatlaydi",
+      "description": "Omega 3-6-9 — yurak-qon tomir tizimi, miya ishi, ko'rish va organizmning umumiy salomatligini qo'llab-quvvatlash uchun ishlab chiqilgan poli to'yinmagan yog' kislotalari kompleksi. Organizmni kundalik qo'llab-quvvatlash uchun Omega-3, Omega-6 va Omega-9 ning optimal kombinatsiyasini o'z ichiga oladi",
+      "specs": [
+        {
+          "label": "Miqdori",
+          "value": "180 kapsula"
+        },
+        {
+          "label": "Dozasi",
+          "value": "500 mg"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Kapsulalar"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Omega 3-6-9 yurak, miya, qon tomirlar va ko'rish salomatligini qo'llab-quvvatlashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Yurakni qo'llab-quvvatlash",
+          "text": "Yurak-qon tomir tizimining normal ishiga yordam beradi"
+        },
+        {
+          "title": "Qon tomirlarni qo'llab-quvvatlash",
+          "text": "Tomirlar elastikligi va normal qon aylanishini saqlashga yordam beradi"
+        },
+        {
+          "title": "Miya faoliyati",
+          "text": "Xotira, diqqat va kognitiv funksiyalarni qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Moddalar almashinuvi",
+          "text": "Normal lipid almashinuvini qo'llab-quvvatlaydi"
+        },
+        {
+          "title": "Ko'rish salomatligi",
+          "text": "Ko'z salomatligi va o'tkirligini saqlashga yordam beradi"
+        },
+        {
+          "title": "Organizmni mustahkamlash",
+          "text": "Hayotiy tonus va umumiy salomatlikni saqlashga yordam beradi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llash usuli",
+          "text": "Kuniga 2 marta 1 kapsuladan qabul qiling"
+        },
+        {
+          "title": "Qabul vaqti",
+          "text": "Ovqat vaqtida yoki undan keyin darhol suv bilan qabul qilish tavsiya etiladi"
+        },
+        {
+          "title": "Kurs davomiyligi",
+          "text": "Sezilarli samaraga erishish uchun muntazam kurs tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash sharoiti",
+          "text": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Omega yog' kislotalarining tabiiy manbai",
+      "highlightText": "Omega 3-6-9 organizmni yurak, miya, qon tomirlar va ko'rish salomatligi uchun zarur almashtirib bo'lmaydigan yog' kislotalari bilan ta'minlaydi. Kompleks kundalik qo'llash uchun mos va faol turmush tarzini saqlashga yordam beradi",
+      "chips": [
+        {
+          "value": "180 kapsula",
+          "label": "Qadoqdagi miqdori"
+        },
+        {
+          "value": "100%",
+          "label": "Omega 3-6-9 majmuasi"
+        },
+        {
+          "value": "500 mg",
+          "label": "Optimal doza"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        }
+      ],
+      "benefits": [
+        "Yurak salomatligini qo'llab-quvvatlaydi",
+        "Tomirlar elastikligini qo'llab-quvvatlaydi",
+        "Miyaning normal ishiga yordam beradi",
+        "Normal moddalar almashinuviga yordam beradi",
+        "Ko'rish salomatligini saqlashga yordam beradi",
+        "Omega-3, Omega-6 va Omega-9 majmuasini o'z ichiga oladi"
+      ],
+      "stats": [
+        {
+          "label": "Yurakni qo'llab-quvvatlash",
+          "text": "Yurak-qon tomir tizimining normal ishiga yordam beradi"
+        },
+        {
+          "label": "Miya faoliyati",
+          "text": "Xotira, diqqat va kognitiv funksiyalarni qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Ko'rish salomatligi",
+          "text": "Normal ko'rishni saqlashga yordam beradi"
+        },
+        {
+          "label": "Tomirlar salomatligi",
+          "text": "Tomirlar elastikligini saqlashga yordam beradi"
+        },
+        {
+          "label": "Moddalar almashinuvi",
+          "text": "Normal lipid almashinuvini qo'llab-quvvatlaydi"
+        },
+        {
+          "label": "Omega majmuasi",
+          "text": "Omega-3, Omega-6 va Omega-9 ning muvozanatli kombinatsiyasi"
+        }
+      ]
+    }
+  },
+  "Blog": {
+    "eyebrow": "Foydali maqolalar",
+    "title": "Ekspert materiallari",
+    "description": "Ilmiy yondashuv, ishlab chiqarish va haqiqiy hikoyalar — NUMA Nutrition haqida bilish kerak bo'lgan hamma narsa",
+    "readingTime": "{minutes} daqiqa o'qish",
+    "relatedTitle": "O'xshash maqolalar",
+    "backToBlog": "Barcha maqolalar",
+    "categories": {
+      "production": "Ishlab chiqarish",
+      "expert": "Ekspert",
+      "achievements": "Yutuqlar",
+      "products": "Mahsulotlar",
+      "international": "Xalqaro rivojlanish"
+    },
+    "posts": {
+      "how-numa-products-are-made": {
+        "title": "Numa Nutrition mahsulotlari qanday yaratiladi",
+        "excerpt": "Zamonaviy ishlab chiqarish, tabiiy ingredientlar va har bosqichda qat'iy sifat nazorati",
+        "lead": "Har bir NUMA Nutrition mahsuloti uzoq yo'lni bosib o'tadi — xomashyo tanlashdan yakuniy laboratoriya tekshiruvigacha. Ishlab chiqarish qanday tashkil etilganini va sifat nazorati nega quyishdan ancha oldin boshlanishini so'zlab beramiz.",
+        "sections": [
+          {
+            "heading": "Xomashyo tanlash",
+            "text": "Har bir formulaning asosi tabiiy komponentlar: o'simlik ekstraktlari, asal, dengiz suvo'tlari, vitaminlar va minerallar. Yetkazib beruvchilar majburiy tekshiruvdan o'tadi, har bir xomashyo partiyasi kelib chiqishi va xavfsizligi haqidagi hujjatlar bilan ta'minlanadi."
+          },
+          {
+            "heading": "Zamonaviy ishlab chiqarish",
+            "text": "Ishlab chiqarish xalqaro GMP va ISO 22000:2018 standartlariga muvofiq tashkil etilgan. Texnologik liniyalar faol moddalarning xususiyatlarini saqlashga imkon beradi, yopiq quyish sikli esa mahsulotning tashqi muhit bilan aloqasini istisno qiladi."
+          },
+          {
+            "heading": "Har bosqichda sifat nazorati",
+            "text": "Mahsulot kirishda, jarayonda va chiqishda laboratoriya nazoratidan o'tadi. Mikrobiologik ko'rsatkichlar, faol moddalar miqdori, formula barqarorligi va qadoqning germetikligi tekshiriladi. Hech bir partiya tasdiqlangan protokolsiz sotuvga chiqmaydi."
+          },
+          {
+            "heading": "Xaridor uchun shaffoflik",
+            "text": "Biz haqiqiy tarkib, dozalar va yaroqlilik muddatini ko'rsatamiz. Har bir mahsulot qo'llash bo'yicha tavsiyalar bilan ta'minlanadi, kompaniya mutaxassislari esa doimo savollarga javob berishga va dastur tanlashga tayyor."
+          }
+        ],
+        "outro": "Bunday yondashuv bizga sifat haqida va'da sifatida emas, balki tekshirish mumkin bo'lgan jarayon sifatida gapirishga imkon beradi."
+      },
+      "scientific-approach": {
+        "title": "Ilmiy yondashuv — NUMA Family falsafasining asosi",
+        "excerpt": "Mahsulot ilmiy tadqiqotlar va yetakchi mutaxassislar tavsiyalari asosida yaratiladi",
+        "lead": "NUMA Family o'z faoliyatida nafaqat tabiiy ingredientlar va zamonaviy texnologiyalarga, balki ilmiy yondashuvga ham tayanadi. Kasbiy tajribasi gigiyena, oziqlanish va bolalar salomatligi rivojiga bog'liq ekspertlardan biri — Guli Islomovna Shayxova.",
+        "sections": [
+          {
+            "heading": "Guli Islomovna Shayxova kim?",
+            "text": "Guli Islomovna Shayxova — o'zbek olimasi, tibbiyot fanlari doktori, professor. U gigiyena rivojiga, xususan bolalar, o'smirlar gigiyenasi va oziqlanish sohasiga sezilarli hissa qo'shgan."
+          },
+          {
+            "heading": "Kasbiy faoliyat",
+            "text": "Guli Islomovna 1951 yilda tug'ilgan. U Toshkent tibbiyot akademiyasining «Bolalar, o'smirlar gigiyenasi va oziqlanish» kafedrasida ishlaydi. Uning asosiy mutaxassisligi gigiyena, bolalar salomatligi va ratsional oziqlanish masalalari bilan bog'liq."
+          },
+          {
+            "heading": "Ilmiy ishlar va yutuqlar",
+            "text": "650 dan ortiq ilmiy va ilmiy-ommabop ish chop etilgan, ulardan qariyb 100 tasi ixtisoslashtirilgan ilmiy jurnallarda. U darsliklar, monografiyalar va uslubiy qo'llanmalar muallifi, shuningdek ko'plab fan nomzodlari va doktorlarini tayyorlagan."
+          },
+          {
+            "heading": "Sog'lom oziqlanish rivojiga hissa",
+            "text": "Guli Islomovna oziq moddalar yetishmovchiligi va yod tanqisligi masalalari bo'yicha milliy dasturlar va qonun hujjatlarini ishlab chiqishda ishtirok etgan. Uning tajribasi salomatlik, oziqlanish va profilaktika masalalarida ilmiy yondashuvning muhimligini ta'kidlaydi."
+          }
+        ],
+        "outro": "Aynan shunday poydevor NUMA Family'ga butun O'zbekiston oilalari ishonadigan mahsulot yaratishga imkon beradi."
+      },
+      "international-recognition": {
+        "title": "Sifatning xalqaro e'tirofi",
+        "excerpt": "NUMA Nutrition mahsuloti xalqaro mukofotlar va sifat sertifikatlari bilan taqdirlangan",
+        "lead": "So'nggi yillarda NUMA Nutrition mahsuloti xalqaro maydonlarda e'tirof etildi: soha ko'rgazmalaridan tortib ixtisoslashtirilgan innovatsiya tanlovlarigacha.",
+        "sections": [
+          {
+            "heading": "Mukofotlar va tanlovlar",
+            "text": "Kompaniya mahsuloti xalqaro ixtirolar va innovatsiyalar tanlovlarining oltin medallari bilan taqdirlangan, shuningdek sifat va ishlab chiqarish rivojiga qo'shgan hissasi uchun milliy soha mukofotlarini olgan."
+          },
+          {
+            "heading": "Xalqaro sertifikatlar",
+            "text": "Ishlab chiqarish ISO 22000:2018 va GMP standartlari bo'yicha sertifikatlangan, mahsulot esa HALAL, USDA Organic sertifikatlari va Yevropa organik EURO-LEAF belgisi bilan tasdiqlangan."
+          },
+          {
+            "heading": "Bu xaridor uchun nimani anglatadi",
+            "text": "Sertifikat — bu shunchaki hujjat emas. Bu muntazam auditlar, formulaning takrorlanuvchanligi va bugun sotib olingan mahsulot bir yildan keyin olinadiganidan farq qilmasligi kafolati."
+          }
+        ],
+        "outro": "Biz sifatning xalqaro tasdiqlari ro'yxatini kengaytirish ustida ishlashda davom etamiz."
+      },
+      "normal-hemoglobin-level": {
+        "title": "Normal gemoglobin darajasini qanday saqlash kerak",
+        "excerpt": "Temir yetishmovchiligi kayfiyat va ish qobiliyatiga ta'sir qilishi mumkin. Normal gemoglobin darajasini tabiiy yo'l bilan qanday saqlashni bilib oling",
+        "lead": "Charchoq, terining oqarishi, diqqatning pasayishi — bularning barchasi temir yetishmovchiligi bilan bog'liq bo'lishi mumkin. Nimalarga e'tibor berish va organizmni qanday qo'llab-quvvatlash kerakligini ko'rib chiqamiz.",
+        "sections": [
+          {
+            "heading": "Gemoglobin darajasi nega muhim",
+            "text": "Gemoglobin kislorodni o'pkadan to'qimalarga tashish uchun javob beradi. Uning darajasi pasayganda organizm kamroq kislorod oladi — charchoq, chidamlilik va ish qobiliyatining pasayishi shundan."
+          },
+          {
+            "heading": "Avvalo ovqatlanish",
+            "text": "Ratsionda temir manbalari bo'lishi kerak: go'sht, jigar, dukkaklilar, grechka, yashil bargli sabzavotlar. C vitamini temir so'rilishini yaxshilaydi, ovqatdan keyin darhol ichilgan quyuq choy va kofe esa aksincha uni pasaytiradi."
+          },
+          {
+            "heading": "Qo'shimcha qo'llab-quvvatlash",
+            "text": "Hemoglobin+ kabi tabiiy siroplar qon yaratilish jarayonlarini qo'llab-quvvatlovchi va muvozanatli turmush tarzi doirasida normal gemoglobin darajasini saqlashga yordam beruvchi komponentlarni o'z ichiga oladi."
+          },
+          {
+            "heading": "Qachon mutaxassisga murojaat qilish kerak",
+            "text": "Agar charchoq bir necha hafta davom etsa, umumiy qon tahlilini topshirib, natijalarni shifokor bilan muhokama qilish kerak. Oziq-ovqat va qo'shimchalar tibbiy yordamni almashtirmaydi."
+          }
+        ],
+        "outro": "Muntazamlik va o'z holatingizga e'tibor bir martalik choralardan yaxshiroq ishlaydi."
+      },
+      "expanding-geography": {
+        "title": "NUMA Family faoliyat geografiyasini kengaytirmoqda",
+        "excerpt": "Kompaniya xalqaro hamkorlikni mustahkamlab, xorijiy bozorlardagi ishtirokini rivojlantirmoqda",
+        "lead": "NUMA Family izchil ravishda O'zbekiston chegarasidan tashqariga chiqmoqda: yangi distribyutsiya yo'nalishlari ochilmoqda, rasmiy hamkorlar soni ortmoqda.",
+        "sections": [
+          {
+            "heading": "Yangi bozorlar",
+            "text": "Kompaniya Markaziy Osiyo, Yaqin Sharq va MDH davlatlari bilan hamkorlikni rivojlantirmoqda. Har bir mintaqada mahsulot mahalliy ro'yxatdan o'tish va qadoqni bozor talablariga moslashtirishdan o'tadi."
+          },
+          {
+            "heading": "Hamkorlar tarmog'i",
+            "text": "Bugungi kunda kompaniya bilan 500 dan ortiq rasmiy hamkor ishlaydi. Hamkorlar mahsulot bo'yicha o'quv, marketing yordami va kompaniya mutaxassislariga to'g'ridan-to'g'ri kirish imkonini oladi."
+          },
+          {
+            "heading": "Rivojlanish rejalari",
+            "text": "Yaqin rejalar orasida bolalar va oila salomatligi uchun mahsulot liniyasini kengaytirish, shuningdek NUMA Diagnostics yo'nalishi doirasida yangi diagnostika formatlarini ishga tushirish bor."
+          }
+        ],
+        "outro": "Biz sifatli tabiiy oziqlanishdan foydalanish imkoniyati har bir oilada bo'lishi kerak deb hisoblaymiz."
+      }
+    },
+    "heroTitle": "Blog",
+    "heroAccent": "NUMA Nutrition",
+    "heroDescription": "Salomatlik, tabiiy oziqlanish, ilmiy tadqiqotlar va NUMA Nutrition mahsulotlari haqida foydali maqolalar",
+    "latest": "So'nggi maqolalar",
+    "popular": "Ommabop maqolalar",
+    "heroImageAlt": "Detox Hepar Energy — NUMA Nutrition tabiiy siropi"
+  },
+  "Contacts": {
+    "titleFirst": "Bog'laning",
+    "titleAccent": "NUMA Nutrition bilan",
+    "description": "Biz doimo savollaringizga javob berishga, kompaniya faoliyati yo'nalishlari haqida batafsil so'zlab berishga va qulay aloqa usulini tanlashga yordam berishga tayyormiz",
+    "telegram": "Telegram orqali",
+    "infoTitle": "Kontakt ma'lumotlari",
+    "cardTitle": "Biz bilan bog'laning",
+    "schedule": "Dushanba – Shanba: 9:00 – 20:00",
+    "address": "Toshkent, O'zbekiston",
+    "mapAlt": "Toshkentdagi NUMA Nutrition ofisi joylashuvi xaritasi",
+    "openMap": "Xaritani ochish"
+  },
+  "Cart": {
+    "title": "Savat",
+    "summaryTitle": "Savat",
+    "items": "Mahsulotlar ({count})",
+    "delivery": "Yetkazib berish",
+    "total": "Jami",
+    "checkout": "Buyurtmani rasmiylashtirish",
+    "remove": "Mahsulotni o'chirish",
+    "empty": "Savatingiz bo'sh",
+    "emptyDescription": "Buyurtma berish uchun katalogdan mahsulot qo'shing",
+    "perks": {
+      "delivery": {
+        "title": "Tez yetkazib berish",
+        "text": "1–2 kun"
+      },
+      "natural": {
+        "title": "Tabiiy mahsulotlar",
+        "text": "100% sifat"
+      },
+      "support": {
+        "title": "24/7 qo'llab-quvvatlash",
+        "text": "Biz doimo aloqadamiz"
+      }
+    }
+  },
+  "Checkout": {
+    "title": "Buyurtmani rasmiylashtirish",
+    "contactTitle": "Kontakt ma'lumotlari",
+    "name": "Ismingiz",
+    "namePlaceholder": "Ruslan Ahmedov",
+    "phone": "Telefoningiz",
+    "phonePlaceholder": "+998 94 011 53 63",
+    "city": "Shahar",
+    "cityPlaceholder": "Toshkent, O'zbekiston",
+    "address": "Yetkazib berish manzili",
+    "addressPlaceholder": "Amir Temur ko'chasi, 123",
+    "deliveryTitle": "Yetkazib berish usuli",
+    "deliveryOption": "Kuryerlik yetkazib berish",
+    "deliveryTime": "1–3 kun",
+    "orderTitle": "Sizning buyurtmangiz",
+    "pay": "Click orqali to'lash",
+    "successTitle": "Buyurtma rasmiylashtirildi!",
+    "successText": "Buyurtmangizni qabul qildik va tasdiqlash uchun tez orada siz bilan bog'lanamiz",
+    "emptyRedirect": "Savatda mahsulot yo'q"
+  },
+  "Consultation": {
+    "titleFirst": "Konsultatsiya",
+    "titleSecond": "NUMA NUTRITION",
+    "description": "Fan va tabiiy yechimlarga asoslangan sizning salomatligingiz uchun individual tavsiyalar",
+    "name": "Ismingiz",
+    "namePlaceholder": "Ismingizni kiriting",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "Telefon raqamingizni kiriting",
+    "question": "Savolingiz",
+    "questionPlaceholder": "Savolingiz, maqsadingiz yoki muammoingizni tasvirlab bering. Masalan charchoq, hazm muammolari, vazn nazorati va h.k.",
+    "privacy": "Konsultatsiya maxfiy tarzda o'tkaziladi.",
+    "privacySecond": "Ma'lumotlaringiz xavfsiz va uchinchi shaxslarga berilmaydi.",
+    "submit": "Konsultatsiya olish",
+    "submitting": "Yuborilmoqda…",
+    "successTitle": "Arizangiz uchun rahmat!",
+    "successText": "Arizangiz muvaffaqiyatli yuborildi. Numa Nutrition mutaxassisi tez orada siz bilan bog'lanadi",
+    "successTime": "Odatda ish vaqtida 15–30 daqiqa ichida javob beramiz",
+    "errors": {
+      "name": "Ismingizni kiriting",
+      "phone": "To'g'ri telefon raqamini kiriting",
+      "question": "Savolingizni tasvirlab bering"
+    }
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Sahifa topilmadi",
+    "description": "Sahifa ko'chirilgan bo'lishi yoki manzil xato kiritilgan bo'lishi mumkin"
+  },
+  "MetaLegal": {
+    "privacy": {
+      "title": "Maxfiylik siyosati — NUMA Nutrition",
+      "description": "NUMA Nutrition sayt foydalanuvchilarining shaxsiy ma'lumotlarini qanday to'plashi, ishlatishi va himoya qilishi."
+    },
+    "terms": {
+      "title": "Foydalanuvchi shartnomasi — NUMA Nutrition",
+      "description": "Saytdan foydalanish va NUMA Nutrition mahsulotlariga buyurtma berish shartlari."
+    }
+  },
+  "Legal": {
+    "updated": "Oxirgi yangilanish: 2026-yil 1-yanvar",
+    "privacy": {
+      "title": "Maxfiylik siyosati",
+      "intro": "Ushbu siyosat NUMA Nutrition saytdan foydalanishda qanday ma'lumotlarni to'plashini va ularni qanday qayta ishlashini tavsiflaydi.",
+      "sections": [
+        {
+          "heading": "Qanday ma'lumot to'playmiz",
+          "text": "Biz faqat siz ixtiyoriy ravishda taqdim etgan ma'lumotlarni to'playmiz: buyurtma rasmiylashtirishda ism, telefon raqami, shahar va yetkazib berish manzili, konsultatsiya arizasida esa murojaat matni."
+        },
+        {
+          "heading": "Ma'lumotlardan qanday foydalanamiz",
+          "text": "Ma'lumotlar faqat buyurtmalarni qayta ishlash, mahsulotni yetkazib berish va murojaatingiz bo'yicha siz bilan bog'lanish uchun ishlatiladi. Roziligingizsiz reklama tarqatish uchun foydalanmaymiz."
+        },
+        {
+          "heading": "Uchinchi shaxslarga uzatish",
+          "text": "Biz shaxsiy ma'lumotlaringizni sotmaymiz va uchinchi shaxslarga bermaymiz, buyurtmani bajarish uchun zarur bo'lgan hajmda yetkazib berish xizmatlari va to'lov tizimlari bundan mustasno."
+        },
+        {
+          "heading": "Cookie fayllari",
+          "text": "Sayt savat ishlashi va tanlangan tilni saqlash uchun zarur bo'lgan texnik cookie fayllaridan foydalanadi. Ularni brauzer sozlamalarida o'chirishingiz mumkin."
+        },
+        {
+          "heading": "Sizning huquqlaringiz",
+          "text": "Siz o'z ma'lumotlaringizga kirish, ularni tuzatish yoki o'chirishni so'rashga haqlisiz. Buning uchun info@numanutrition.uz manziliga yozing."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Foydalanuvchi shartnomasi",
+      "intro": "NUMA Nutrition saytidan foydalanish orqali siz quyida keltirilgan shartlarga rozilik bildirasiz.",
+      "sections": [
+        {
+          "heading": "Shartnoma predmeti",
+          "text": "Sayt NUMA Nutrition mahsulotlari haqida ma'lumot va buyurtma rasmiylashtirish imkonini beradi. Sayt mazmuni axborot xarakteriga ega."
+        },
+        {
+          "heading": "Mahsulot",
+          "text": "NUMA Nutrition mahsulotlari biologik faol qo'shimchalar va oziq-ovqat mahsulotlari bo'lib, dori vositasi emas. Qo'llashdan oldin mutaxassis bilan maslahatlashish tavsiya etiladi."
+        },
+        {
+          "heading": "Buyurtma va to'lov",
+          "text": "Buyurtma berish orqali siz ko'rsatilgan kontakt ma'lumotlarining to'g'riligini tasdiqlaysiz. Mahsulot narxi va mavjudligi buyurtma tasdiqlangunga qadar o'zgarishi mumkin."
+        },
+        {
+          "heading": "Intellektual mulk",
+          "text": "Sayt materiallari, jumladan matnlar, tasvirlar va tovar belgilari NUMA Nutrition ga tegishli va yozma ruxsatsiz foydalanilishi mumkin emas."
+        },
+        {
+          "heading": "Shartlarning o'zgarishi",
+          "text": "Biz ushbu shartnomani yangilashimiz mumkin. Amaldagi versiya doimo shu sahifada mavjud."
+        }
+      ]
+    }
+  }
+}

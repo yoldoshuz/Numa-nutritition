@@ -1,0 +1,1899 @@
+{
+  "Meta": {
+    "home": {
+      "title": "NUMA Nutrition — innovative nutrition for a healthy life",
+      "description": "Natural vitamins, supplements and syrups by NUMA Nutrition supporting immunity, heart, liver and energy. International quality certificates, delivery across Uzbekistan.",
+      "keywords": "vitamins, supplements, NUMA Nutrition, natural supplements, Uzbekistan, Tashkent, health, immunity"
+    },
+    "products": {
+      "title": "NUMA Nutrition products — vitamins and supplements catalogue",
+      "description": "Catalogue of natural NUMA Nutrition products: syrups, capsules, honey and complexes for immunity, heart, liver, joints and energy.",
+      "keywords": "vitamin catalogue, buy supplements, natural syrups, NUMA Nutrition, Tashkent"
+    },
+    "blog": {
+      "title": "NUMA Nutrition blog — expert articles about health",
+      "description": "Useful articles about natural nutrition, NUMA Nutrition manufacturing, the scientific approach and international quality recognition.",
+      "keywords": "health blog, nutrition articles, NUMA Nutrition, expert materials"
+    },
+    "contacts": {
+      "title": "NUMA Nutrition contacts — Tashkent, Uzbekistan",
+      "description": "Get in touch with NUMA Nutrition: phone, Telegram, Instagram, address and working hours. We will answer questions about the products and build a programme for you.",
+      "keywords": "NUMA Nutrition contacts, phone, address, Tashkent"
+    },
+    "cart": {
+      "title": "Cart — NUMA Nutrition",
+      "description": "Your NUMA Nutrition cart. Review the order and arrange delivery across Uzbekistan."
+    },
+    "checkout": {
+      "title": "Checkout — NUMA Nutrition",
+      "description": "Place your NUMA Nutrition order with free courier delivery."
+    },
+    "consultation": {
+      "title": "NUMA Nutrition specialist consultation",
+      "description": "Personal health recommendations based on science and natural solutions. Leave a request and a specialist will contact you.",
+      "keywords": "nutritionist consultation, vitamin selection, NUMA Nutrition"
+    },
+    "notFound": {
+      "title": "Page not found — NUMA Nutrition",
+      "description": "Unfortunately, this page does not exist."
+    },
+    "productTemplate": {
+      "title": "{name} — buy in Tashkent | NUMA Nutrition",
+      "description": "{tagline} Price {price} UZS. Natural formula, international certificates, delivery across Uzbekistan."
+    },
+    "articleTemplate": {
+      "title": "{title} | NUMA Nutrition blog"
+    }
+  },
+  "Common": {
+    "brand": "NUMA",
+    "brandFull": "NUMA NUTRITION",
+    "brandSub": "NUTRITION",
+    "currency": "UZS",
+    "buy": "Buy",
+    "details": "Details",
+    "addToCart": "Add to cart",
+    "readMore": "Read more",
+    "readArticle": "Read article",
+    "allProducts": "View all products",
+    "allArticles": "Read all articles",
+    "goToCatalog": "Go to catalogue",
+    "backHome": "Back to home",
+    "consultation": "Consultation",
+    "sendRequest": "Send a request",
+    "callNow": "Call now",
+    "prev": "Previous",
+    "next": "Next",
+    "close": "Close",
+    "share": "Share",
+    "pcs": "pcs",
+    "free": "Free",
+    "required": "Required field",
+    "loading": "Loading…"
+  },
+  "Nav": {
+    "home": "Home",
+    "products": "Products",
+    "blog": "Blog",
+    "contacts": "Contacts"
+  },
+  "Header": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuTitle": "Menu",
+    "cart": "Cart",
+    "cartCount": "Items in cart: {count}",
+    "language": "Language",
+    "skipToContent": "Skip to content"
+  },
+  "Footer": {
+    "about": "An ecosystem of modern health solutions that brings together science, nature and innovation.",
+    "directions": "Directions",
+    "company": "Company",
+    "contacts": "Contacts",
+    "socials": "Follow us",
+    "rights": "© {year} NUMA NUTRIOTION",
+    "rightsSecond": "All rights reserved",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "directionLinks": {
+      "family": "NUMA Family",
+      "kids": "NUMA Kids",
+      "nabaviy": "Nabaviy Tabobat",
+      "diagnostics": "NUMA Diagnostics",
+      "bettery": "Bettery Organic"
+    },
+    "companyLinks": {
+      "home": "Home",
+      "about": "About us",
+      "news": "News",
+      "video": "Video",
+      "reviews": "Reviews",
+      "certificates": "Certificates",
+      "contacts": "Contacts"
+    },
+    "socialNames": {
+      "telegram": "Telegram",
+      "website": "Website",
+      "instagram": "Instagram"
+    }
+  },
+  "CtaBand": {
+    "learnMore": "Ready to learn more about NUMA NUTRITION?",
+    "needHelp": "Need help with your order?"
+  },
+  "Home": {
+    "hero": {
+      "eyebrow": "Scientific approach · Natural formula · International quality",
+      "title": "Innovative nutrition for a healthy life",
+      "description": "NUMA Nutrition natural products are designed to support the body, strengthen health and improve quality of life",
+      "catalog": "Product catalogue",
+      "imageAlt": "The NUMA Nutrition range of natural syrups"
+    },
+    "features": {
+      "natural": "Natural formula",
+      "production": "Modern manufacturing",
+      "standards": "International standards",
+      "quality": "Quality control",
+      "support": "Health support"
+    },
+    "popular": {
+      "eyebrow": "Our products",
+      "title": "Popular products"
+    },
+    "why": {
+      "title": "Why people choose Numa Nutrition?",
+      "description": "Our products work in harmony with your body, providing comprehensive support for every important system",
+      "wheel": {
+        "immunity": {
+          "title": "Immunity",
+          "text": "Strengthening the body's defences"
+        },
+        "digestion": {
+          "title": "Digestion",
+          "text": "Improving the digestive system"
+        },
+        "detox": {
+          "title": "Detox",
+          "text": "Cleansing and removing toxins"
+        },
+        "beauty": {
+          "title": "Beauty",
+          "text": "Healthy skin, hair and nails"
+        },
+        "energy": {
+          "title": "Energy",
+          "text": "More energy and performance"
+        },
+        "heart": {
+          "title": "Heart",
+          "text": "Support for the cardiovascular system"
+        }
+      }
+    },
+    "stats": {
+      "clients": {
+        "value": "1 000 000+",
+        "label": "Happy customers"
+      },
+      "products": {
+        "value": "1000+",
+        "label": "Natural products"
+      },
+      "partners": {
+        "value": "500+",
+        "label": "Official partners"
+      },
+      "since": {
+        "value": "Since 2020",
+        "label": "Creating products for people's health"
+      }
+    },
+    "videos": {
+      "title": "Expert videos and real results",
+      "description": "Discover NUMA Nutrition products through videos from specialists",
+      "play": "Watch video",
+      "items": {
+        "shaykhova": "Guli Shaykhova on the scientific approach of NUMA Nutrition",
+        "detox": "Detox Hepar Energy: real experience",
+        "entrepreneur": "Why entrepreneurs choose NUMA Nutrition",
+        "beauty": "Beauty and health with NUMA Nutrition"
+      }
+    },
+    "certificates": {
+      "title": "Our international certificates",
+      "description": "We follow international quality and safety standards at every stage of manufacturing our products",
+      "items": {
+        "euroleaf": {
+          "title": "EURO-LEAF",
+          "subtitle": "European organic certificate",
+          "text": "The official organic mark of the European Union. It confirms that the products meet strict requirements for organic production, sustainability and quality control"
+        },
+        "halal": {
+          "title": "HALAL CERTIFICATE",
+          "subtitle": "Halal certificate",
+          "text": "Confirms that the products meet halal requirements and are manufactured in line with Islamic standards of quality, safety and purity"
+        },
+        "usda": {
+          "title": "USDA ORGANIC",
+          "subtitle": "National Organic Program, USA",
+          "text": "A certificate of the United States Department of Agriculture confirming that the products meet organic standards of production, processing, storage and distribution"
+        },
+        "iso": {
+          "title": "ISO 22000:2018",
+          "subtitle": "Food safety management system",
+          "text": "An international standard confirming effective quality and safety control of food products at every stage of manufacturing and supply"
+        },
+        "gmp": {
+          "title": "GMP",
+          "subtitle": "Good Manufacturing Practice",
+          "text": "An international good manufacturing practice standard confirming compliance with high requirements for production, quality control, safety and product efficacy"
+        }
+      }
+    },
+    "blog": {
+      "eyebrow": "Useful articles",
+      "title": "Expert materials"
+    },
+    "reviews": {
+      "title": "What our customers say",
+      "description": "Find out what people who have already chosen Numa Nutrition think",
+      "items": {
+        "akbar": {
+          "text": "I had a consultation with a specialist and picked a programme for myself. Everything was explained in detail and the result exceeded my expectations. Thank you to the Numa Nutrition team for the professional approach",
+          "name": "Akbar Yusupov",
+          "location": "Uzbekistan, Samarkand"
+        },
+        "malika": {
+          "text": "I chose the products on a friend's recommendation. The quality really matches expectations, and the convenient intake programme made it easy to fit into my daily routine",
+          "name": "Malika Rakhimova",
+          "location": "Uzbekistan, Tashkent"
+        },
+        "sanjar": {
+          "text": "I have been using NUMA Nutrition products for several months. I liked the natural formula and the noticeable improvement in my overall wellbeing. I especially feel more energy during the day",
+          "name": "Sanjar Mamatov",
+          "location": "Uzbekistan, Tashkent"
+        },
+        "dilnoza": {
+          "text": "I ordered for the whole family: fast delivery, neat packaging. The children take their vitamins happily and I saw the result within a month",
+          "name": "Dilnoza Karimova",
+          "location": "Uzbekistan, Bukhara"
+        }
+      }
+    }
+  },
+  "Catalog": {
+    "eyebrow": "Our products",
+    "title": "Created for your health",
+    "description": "Natural NUMA Nutrition products for daily support — from immunity to heart and joint health",
+    "empty": "No products found",
+    "badges": {
+      "hit": "Bestseller",
+      "new": "New",
+      "rec": "Recommended"
+    },
+    "forms": {
+      "syrup": "Syrup",
+      "capsules": "Capsules",
+      "tablets": "Tablets",
+      "honey": "Honey"
+    }
+  },
+  "Product": {
+    "breadcrumbProducts": "Products",
+    "specsTitle": "Specifications",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "added": "Product added to cart",
+    "purposeTitle": "What is {name} for?",
+    "usageTitle": "How to take {name}?",
+    "usageSubtitle": "Follow the usage guidelines to get the best result",
+    "importantTitle": "Important to follow",
+    "benefitsTitle": "Benefits of {name}",
+    "galleryBack": "Back",
+    "relatedTitle": "Related products",
+    "important": [
+      "Do not exceed the recommended daily dose",
+      "Consult a specialist before use",
+      "Not a medicinal product",
+      "Do not use in case of individual intolerance to any component",
+      "Keep out of reach of children"
+    ],
+    "cardio-control": {
+      "name": "Cardio Control",
+      "tagline": "A natural syrup supporting the cardiovascular system",
+      "short": "Supports heart health and normal blood circulation",
+      "description": "Cardio Control is a natural syrup developed to support the work of the heart and blood vessels. The formula helps maintain normal circulation, supports the cardiovascular system and provides daily support for the body",
+      "specs": [
+        {
+          "label": "Volume",
+          "value": "500 ml"
+        },
+        {
+          "label": "Form",
+          "value": "Syrup"
+        },
+        {
+          "label": "Age",
+          "value": "15+"
+        },
+        {
+          "label": "Country of origin",
+          "value": "Uzbekistan"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "At a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Cardio Control helps support the heart and blood vessels, improves circulation and helps strengthen the body",
+      "purpose": [
+        {
+          "title": "Myocardial nutrition",
+          "text": "Helps improve the nutrition of the heart muscle"
+        },
+        {
+          "title": "Ischaemic conditions",
+          "text": "Supports the prevention of ischaemic heart disease"
+        },
+        {
+          "title": "Blood circulation",
+          "text": "Stimulates circulation and supports the work of blood vessels"
+        },
+        {
+          "title": "Recovery",
+          "text": "Supports the body during recovery after myocardial infarction"
+        },
+        {
+          "title": "Immunity",
+          "text": "Cardio Control helps strengthen the body's immune system"
+        },
+        {
+          "title": "Blood vessels",
+          "text": "Helps prevent thrombosis of the coronary vessels"
+        }
+      ],
+      "steps": [
+        {
+          "title": "How to use",
+          "text": "Shake the bottle well before use"
+        },
+        {
+          "title": "Dosage",
+          "text": "Take 30 ml in the morning and in the evening, 30 minutes before meals"
+        },
+        {
+          "title": "Age of use",
+          "text": "Recommended for adults and children over 15 years old"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry cool place at a temperature not above +25°C, away from direct sunlight"
+        }
+      ],
+      "highlightTitle": "A natural syrup supporting the cardiovascular system",
+      "highlightText": "Cardio Control is built on natural components that support the work of the heart and blood vessels. The active ingredients help improve circulation, strengthen the cardiovascular system and maintain the general condition of the body",
+      "chips": [
+        {
+          "value": "30 ml",
+          "label": "Dosage"
+        },
+        {
+          "value": "100%",
+          "label": "Natural formula"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "15+",
+          "label": "Recommended age"
+        }
+      ],
+      "benefits": [
+        "Supports the health of the cardiovascular system",
+        "Helps maintain a normal cholesterol level",
+        "Helps improve circulation and nutrition of the heart muscle",
+        "Supports recovery after cardiovascular strain",
+        "Supports the prevention of ischaemic heart disease",
+        "Helps reduce the risk of coronary blood clots"
+      ],
+      "stats": [
+        {
+          "label": "Heart support",
+          "text": "Supports the work of the heart muscle"
+        },
+        {
+          "label": "Blood circulation",
+          "text": "Supports normal blood flow and tissue nutrition"
+        },
+        {
+          "label": "Vessel health",
+          "text": "Helps maintain the elasticity of blood vessels"
+        },
+        {
+          "label": "Cholesterol balance",
+          "text": "Maintains a normal cholesterol level"
+        },
+        {
+          "label": "Daily support",
+          "text": "Supports general vitality"
+        },
+        {
+          "label": "Natural complex",
+          "text": "A complex of natural plant components"
+        }
+      ]
+    },
+    "king-bee": {
+      "name": "KING BEE",
+      "tagline": "A natural honey complex for stronger immunity and restored energy",
+      "short": "Support for immunity, vitality and the body's natural energy",
+      "description": "KING BEE is a natural honey complex made from organic honey and natural components. The product helps strengthen immunity, increase vitality, restore energy and support the overall health of the body",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "500 g"
+        },
+        {
+          "label": "Form",
+          "value": "Honey complex"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Country of origin",
+          "value": "Uzbekistan"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "KING BEE helps strengthen the immune system and replenish energy reserves",
+      "purpose": [
+        {
+          "title": "Stronger immunity",
+          "text": "Supports the body's natural defences"
+        },
+        {
+          "title": "Antioxidant protection",
+          "text": "Protects the body's cells from free radicals"
+        },
+        {
+          "title": "Source of energy",
+          "text": "Provides natural energy and helps fight fatigue"
+        },
+        {
+          "title": "Nervous system support",
+          "text": "Helps reduce fatigue and supports emotional balance"
+        },
+        {
+          "title": "Higher performance",
+          "text": "Helps improve physical and mental activity"
+        },
+        {
+          "title": "General strengthening",
+          "text": "Helps maintain health and vitality"
+        }
+      ],
+      "steps": [
+        {
+          "title": "How to use",
+          "text": "Take one teaspoon 1–2 times a day"
+        },
+        {
+          "title": "Best time",
+          "text": "Take in the morning or 30 minutes before a meal"
+        },
+        {
+          "title": "Course duration",
+          "text": "For the best result, take regularly as a full course"
+        },
+        {
+          "title": "Storage",
+          "text": "After opening, close the lid tightly and store in a dry cool place"
+        }
+      ],
+      "highlightTitle": "The natural power of honey",
+      "highlightText": "KING BEE combines natural organic honey with natural components, helping strengthen immunity, maintain high energy levels and support fast recovery. Suitable for daily use as part of a healthy lifestyle",
+      "chips": [
+        {
+          "value": "500 g",
+          "label": "Product weight"
+        },
+        {
+          "value": "100%",
+          "label": "Premium quality"
+        },
+        {
+          "value": "1–2 times a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "18+",
+          "label": "Recommended age"
+        }
+      ],
+      "benefits": [
+        "Supports the immune system",
+        "Helps improve performance",
+        "Increases vitality",
+        "Contains natural antioxidants",
+        "Helps restore strength after strain",
+        "Made from organic honey"
+      ],
+      "stats": [
+        {
+          "label": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "label": "Energy and vitality",
+          "text": "Helps maintain a high level of activity"
+        },
+        {
+          "label": "Body recovery",
+          "text": "Supports recovery after physical and mental strain"
+        },
+        {
+          "label": "Antioxidant protection",
+          "text": "Protects the body's cells from oxidative stress"
+        },
+        {
+          "label": "Nervous system support",
+          "text": "Helps reduce fatigue and maintain emotional balance"
+        },
+        {
+          "label": "Natural formula",
+          "text": "Made from organic honey and natural components"
+        }
+      ]
+    },
+    "vitamin-d3": {
+      "name": "Vitamin D3",
+      "tagline": "Natural vitamin D3 for immunity and bone health",
+      "short": "Supports bones, the immune system and calcium absorption",
+      "description": "Vitamin D3 is a natural food supplement designed to support bone health, the immune system, muscles and the cardiovascular system. It helps make up a vitamin D3 deficiency and supports the body all year round",
+      "specs": [
+        {
+          "label": "Quantity",
+          "value": "180 capsules"
+        },
+        {
+          "label": "Dosage",
+          "value": "5000 IU"
+        },
+        {
+          "label": "Form",
+          "value": "Capsules"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Vitamin D3 helps strengthen immunity, supports bones, teeth and muscles and helps the body absorb calcium",
+      "purpose": [
+        {
+          "title": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "title": "Muscle health",
+          "text": "Supports the normal work of the muscular system"
+        },
+        {
+          "title": "Bone health",
+          "text": "Supports the strength of bone tissue and joints"
+        },
+        {
+          "title": "Heart support",
+          "text": "Supports the normal function of the cardiovascular system"
+        },
+        {
+          "title": "Calcium absorption",
+          "text": "Helps the effective absorption of calcium and phosphorus"
+        },
+        {
+          "title": "Daily support",
+          "text": "Helps make up a vitamin D deficiency and maintain wellbeing"
+        }
+      ],
+      "steps": [
+        {
+          "title": "How to use",
+          "text": "Take one capsule a day"
+        },
+        {
+          "title": "Best time",
+          "text": "Take during or after a meal with enough water"
+        },
+        {
+          "title": "Course duration",
+          "text": "Determined individually or as recommended by a specialist"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "Natural support for the body",
+      "highlightText": "Vitamin D3 helps support immunity, bone and muscle health, promotes normal calcium absorption and provides the body with the vitamin D3 it needs for daily activity",
+      "chips": [
+        {
+          "value": "180 capsules",
+          "label": "Per pack"
+        },
+        {
+          "value": "100%",
+          "label": "Premium quality"
+        },
+        {
+          "value": "1 capsule a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "5000 IU",
+          "label": "High concentration"
+        }
+      ],
+      "benefits": [
+        "Supports the immune system",
+        "Supports muscle health",
+        "Helps strengthen bones and teeth",
+        "Supports the normal work of the heart",
+        "Improves calcium and phosphorus absorption",
+        "Helps make up a vitamin D3 deficiency"
+      ],
+      "stats": [
+        {
+          "label": "Immune system",
+          "text": "Supports the body's natural defences"
+        },
+        {
+          "label": "Bone health",
+          "text": "Helps maintain the strength of bone tissue"
+        },
+        {
+          "label": "Calcium absorption",
+          "text": "Improves the absorption of calcium and phosphorus"
+        },
+        {
+          "label": "Muscle health",
+          "text": "Supports the normal work of the muscular system"
+        },
+        {
+          "label": "Heart support",
+          "text": "Supports the normal function of the cardiovascular system"
+        },
+        {
+          "label": "Vitamin D3 levels",
+          "text": "Helps maintain an optimal vitamin D3 level in the body"
+        }
+      ]
+    },
+    "black-honey": {
+      "name": "Black Honey",
+      "tagline": "Natural honey for immunity and vital energy",
+      "short": "A natural complex for daily support of the body and vitality",
+      "description": "Black Honey is a natural honey-based product designed to support immunity, increase vitality and support the overall health of the body. Rich in natural nutrients and suitable for daily use",
+      "specs": [
+        {
+          "label": "Volume",
+          "value": "400 ml"
+        },
+        {
+          "label": "Form",
+          "value": "Natural honey"
+        },
+        {
+          "label": "Age",
+          "value": "Adults and children over 12"
+        },
+        {
+          "label": "Country of origin",
+          "value": "Uzbekistan"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Black Honey helps strengthen immunity, replenish energy, support the body and improve overall wellbeing",
+      "purpose": [
+        {
+          "title": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "title": "Digestive support",
+          "text": "Supports the normal work of the gastrointestinal tract"
+        },
+        {
+          "title": "Source of energy",
+          "text": "Provides the body with natural energy throughout the day"
+        },
+        {
+          "title": "General strengthening",
+          "text": "Helps maintain health and vitality"
+        },
+        {
+          "title": "Antioxidant protection",
+          "text": "Contains natural antioxidants that protect the body's cells"
+        },
+        {
+          "title": "Natural nutrition",
+          "text": "A source of vitamins, minerals and other natural components"
+        }
+      ],
+      "steps": [
+        {
+          "title": "How to use",
+          "text": "Take one teaspoon 1–2 times a day"
+        },
+        {
+          "title": "Best time",
+          "text": "Take in the morning or between meals"
+        },
+        {
+          "title": "Regularity",
+          "text": "For the best result, use regularly"
+        },
+        {
+          "title": "Storage",
+          "text": "After opening, keep tightly closed in a dry cool place"
+        }
+      ],
+      "highlightTitle": "The natural power of nature",
+      "highlightText": "Black Honey combines natural honey with natural components, helping support immunity, replenish energy and strengthen the body. Suitable for daily use as part of a balanced diet",
+      "chips": [
+        {
+          "value": "400 ml",
+          "label": "Product weight"
+        },
+        {
+          "value": "100%",
+          "label": "Natural formula"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "12+",
+          "label": "Recommended age"
+        }
+      ],
+      "benefits": [
+        "Supports the immune system",
+        "Supports normal digestion",
+        "Provides the body with natural energy",
+        "Helps strengthen the body overall",
+        "Contains natural antioxidants",
+        "Made from natural honey"
+      ],
+      "stats": [
+        {
+          "label": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "label": "Natural energy",
+          "text": "Helps maintain a high level of activity"
+        },
+        {
+          "label": "Antioxidant protection",
+          "text": "Protects the body's cells from oxidative stress"
+        },
+        {
+          "label": "Healthy digestion",
+          "text": "Supports the normal work of the digestive system"
+        },
+        {
+          "label": "General vitality",
+          "text": "Helps stay energetic and feel well"
+        },
+        {
+          "label": "Natural product",
+          "text": "Made from natural honey without artificial additives"
+        }
+      ]
+    },
+    "detox-hepar-energy": {
+      "name": "Detox Hepar Energy",
+      "tagline": "A natural syrup for cleansing the body and supporting the liver",
+      "short": "Helps cleanse the body and supports the natural work of the liver",
+      "description": "Detox Hepar Energy is a natural syrup developed to support liver function, cleanse the body, improve metabolism and maintain natural detoxification processes. The formula helps restore energy and supports digestive health",
+      "specs": [
+        {
+          "label": "Volume",
+          "value": "500 ml"
+        },
+        {
+          "label": "Form",
+          "value": "Syrup"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Country of origin",
+          "value": "Uzbekistan"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Detox Hepar Energy supports the natural cleansing of the body and liver health",
+      "purpose": [
+        {
+          "title": "Body cleansing",
+          "text": "Supports the body's natural detoxification processes"
+        },
+        {
+          "title": "Gut health",
+          "text": "Supports the normal work of the digestive system"
+        },
+        {
+          "title": "Liver support",
+          "text": "Helps maintain normal liver function"
+        },
+        {
+          "title": "Energy and vitality",
+          "text": "Helps reduce fatigue and supports activity"
+        },
+        {
+          "title": "Metabolism",
+          "text": "Helps normalise metabolic processes"
+        },
+        {
+          "title": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Before use",
+          "text": "Shake the bottle thoroughly before use"
+        },
+        {
+          "title": "Dosage",
+          "text": "Take 30 ml twice a day, 30 minutes before meals"
+        },
+        {
+          "title": "Regular course",
+          "text": "For a pronounced effect, complete the full course"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "Natural support for the liver and body cleansing",
+      "highlightText": "Detox Hepar Energy contains natural components that support the liver, cleanse the body, improve metabolism and restore energy. Suitable for daily use as part of a healthy lifestyle",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Bottle volume"
+        },
+        {
+          "value": "100%",
+          "label": "Natural formula"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "18+",
+          "label": "Recommended age"
+        }
+      ],
+      "benefits": [
+        "Supports the cleansing of the body",
+        "Supports the work of the gut",
+        "Supports liver health",
+        "Increases vitality and energy levels",
+        "Improves metabolism",
+        "Contains natural active components"
+      ],
+      "stats": [
+        {
+          "label": "Body cleansing",
+          "text": "Supports the natural detoxification of the body"
+        },
+        {
+          "label": "Liver support",
+          "text": "Helps maintain normal liver function"
+        },
+        {
+          "label": "Metabolism",
+          "text": "Helps normalise metabolism"
+        },
+        {
+          "label": "Gut health",
+          "text": "Supports comfortable digestion"
+        },
+        {
+          "label": "Energy and activity",
+          "text": "Helps stay energetic and vital"
+        },
+        {
+          "label": "Natural formula",
+          "text": "A complex of natural components for daily support"
+        }
+      ]
+    },
+    "insulin-balance": {
+      "name": "Insulin Balance",
+      "tagline": "A natural syrup supporting normal blood sugar levels",
+      "short": "Supports healthy sugar levels and carbohydrate metabolism",
+      "description": "Insulin Balance is a natural syrup developed to support carbohydrate metabolism, normal blood sugar levels and overall metabolism. The formula helps maintain energy balance and supports the normal work of the body",
+      "specs": [
+        {
+          "label": "Volume",
+          "value": "500 ml"
+        },
+        {
+          "label": "Form",
+          "value": "Syrup"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Country of origin",
+          "value": "Uzbekistan"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Insulin Balance helps maintain a normal blood sugar level",
+      "purpose": [
+        {
+          "title": "Sugar level control",
+          "text": "Helps maintain a normal blood glucose level"
+        },
+        {
+          "title": "Metabolism",
+          "text": "Supports normal metabolism"
+        },
+        {
+          "title": "Carbohydrate metabolism",
+          "text": "Supports the normal metabolism of carbohydrates"
+        },
+        {
+          "title": "Pancreas support",
+          "text": "Supports the normal function of the pancreas"
+        },
+        {
+          "title": "Energy and activity",
+          "text": "Supports the body with energy throughout the day"
+        },
+        {
+          "title": "Antioxidant protection",
+          "text": "Helps protect the body's cells from oxidative stress"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Before use",
+          "text": "Shake the bottle thoroughly before use"
+        },
+        {
+          "title": "Dosage",
+          "text": "Take 30 ml twice a day, 30 minutes before meals"
+        },
+        {
+          "title": "Regular course",
+          "text": "For a pronounced result, complete the full course"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "Natural support for metabolism",
+      "highlightText": "Insulin Balance contains natural components aimed at supporting a normal sugar level, healthy metabolism and energy balance. Suitable for daily use as part of a healthy lifestyle",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Bottle volume"
+        },
+        {
+          "value": "100%",
+          "label": "Natural formula"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "Adults",
+          "label": "Recommended age"
+        }
+      ],
+      "benefits": [
+        "Supports a normal blood sugar level",
+        "Helps normalise metabolism",
+        "Supports healthy carbohydrate metabolism",
+        "Supports pancreatic function",
+        "Supports the body's energy balance",
+        "Contains natural active components"
+      ],
+      "stats": [
+        {
+          "label": "Sugar level control",
+          "text": "Helps maintain a normal glucose level"
+        },
+        {
+          "label": "Metabolism",
+          "text": "Supports healthy metabolism"
+        },
+        {
+          "label": "Energy balance",
+          "text": "Helps stay active throughout the day"
+        },
+        {
+          "label": "Pancreas support",
+          "text": "Supports the normal work of the pancreas"
+        },
+        {
+          "label": "Antioxidant protection",
+          "text": "Helps protect the body's cells"
+        },
+        {
+          "label": "Natural formula",
+          "text": "A complex of natural components for daily support"
+        }
+      ]
+    },
+    "endo-marine": {
+      "name": "Endo Marine+",
+      "tagline": "A natural syrup for the thyroid, metabolism and overall health",
+      "short": "A complex supporting the endocrine system and hormonal balance",
+      "description": "Endo Marine+ is a natural syrup based on seaweed, vitamins and minerals. The formula supports normal thyroid function, metabolism, the immune system and the general condition of the body",
+      "specs": [
+        {
+          "label": "Volume",
+          "value": "500 ml"
+        },
+        {
+          "label": "Form",
+          "value": "Syrup"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Country of origin",
+          "value": "Uzbekistan"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Support for the thyroid gland and natural hormonal balance",
+      "purpose": [
+        {
+          "title": "Thyroid support",
+          "text": "Supports normal thyroid function thanks to its iodine content"
+        },
+        {
+          "title": "Hormonal balance",
+          "text": "Helps maintain the body's natural hormonal balance"
+        },
+        {
+          "title": "Better memory",
+          "text": "Supports cognitive function, memory and concentration"
+        },
+        {
+          "title": "Immune support",
+          "text": "Helps strengthen the immune system"
+        },
+        {
+          "title": "Metabolism support",
+          "text": "Helps normalise metabolism"
+        },
+        {
+          "title": "Cardiovascular support",
+          "text": "Helps maintain a normal heart rhythm and general condition"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Before use",
+          "text": "Shake the bottle well before use"
+        },
+        {
+          "title": "How to use",
+          "text": "Take two tablespoons twice a day, 30 minutes before meals"
+        },
+        {
+          "title": "Before taking",
+          "text": "Review the information about the iodine content in the formula"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "A natural syrup based on marine components",
+      "highlightText": "Endo Marine+ contains a complex of marine extracts, vitamins and minerals needed to support the thyroid gland, metabolism and overall health. The formula is designed for daily use",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Bottle volume"
+        },
+        {
+          "value": "100%",
+          "label": "Natural components"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "Adults",
+          "label": "Recommended age"
+        }
+      ],
+      "benefits": [
+        "Supports thyroid function",
+        "Helps improve memory and concentration",
+        "Helps normalise metabolism",
+        "Supports the immune system",
+        "Helps maintain hormonal balance",
+        "Helps support cardiovascular health"
+      ],
+      "stats": [
+        {
+          "label": "Thyroid support",
+          "text": "Supports normal thyroid function"
+        },
+        {
+          "label": "Metabolism",
+          "text": "Helps normalise metabolism"
+        },
+        {
+          "label": "Hormonal balance",
+          "text": "Supports the natural hormonal background"
+        },
+        {
+          "label": "Memory and concentration",
+          "text": "Helps improve cognitive function"
+        },
+        {
+          "label": "Immune system",
+          "text": "Supports the body's natural defences"
+        },
+        {
+          "label": "Natural formula",
+          "text": "A complex of marine extracts, vitamins and minerals"
+        }
+      ]
+    },
+    "hemoglobin": {
+      "name": "Hemoglobin+",
+      "tagline": "A natural syrup supporting a normal haemoglobin level",
+      "short": "Helps maintain a normal haemoglobin and iron level",
+      "description": "Hemoglobin+ is a natural syrup developed to support a normal haemoglobin level, improve blood formation and supply the body with essential trace elements. The formula helps maintain energy, reduce fatigue and improve overall wellbeing",
+      "specs": [
+        {
+          "label": "Volume",
+          "value": "500 ml"
+        },
+        {
+          "label": "Form",
+          "value": "Syrup"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Country of origin",
+          "value": "Uzbekistan"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "The natural formula helps reduce fatigue and supports daily activity",
+      "purpose": [
+        {
+          "title": "Haemoglobin support",
+          "text": "Helps maintain a normal haemoglobin level in the blood"
+        },
+        {
+          "title": "Oxygen saturation",
+          "text": "Supports the effective transport of oxygen to the body's tissues"
+        },
+        {
+          "title": "Blood formation",
+          "text": "Supports the natural formation of red blood cells"
+        },
+        {
+          "title": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "title": "Energy and activity",
+          "text": "Helps reduce fatigue and support vitality"
+        },
+        {
+          "title": "General strengthening",
+          "text": "Supports wellbeing and daily activity"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Before use",
+          "text": "Shake the bottle well before use"
+        },
+        {
+          "title": "Dosage",
+          "text": "Take 30 ml twice a day, 30 minutes before meals"
+        },
+        {
+          "title": "Regular intake",
+          "text": "For a pronounced result, complete the full course"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "Natural support for haemoglobin levels",
+      "highlightText": "Hemoglobin+ contains natural components aimed at supporting blood formation, maintaining a normal haemoglobin level and supplying the body with energy. Suitable for daily use as part of a balanced lifestyle",
+      "chips": [
+        {
+          "value": "500 ml",
+          "label": "Bottle volume"
+        },
+        {
+          "value": "100%",
+          "label": "Natural formula"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        },
+        {
+          "value": "Adults",
+          "label": "Recommended age"
+        }
+      ],
+      "benefits": [
+        "Supports a normal haemoglobin level",
+        "Supports oxygen transport in the body",
+        "Supports blood formation processes",
+        "Helps strengthen immunity",
+        "Helps reduce the feeling of fatigue",
+        "Supports general vitality"
+      ],
+      "stats": [
+        {
+          "label": "Haemoglobin support",
+          "text": "Helps maintain a normal haemoglobin level"
+        },
+        {
+          "label": "Blood formation",
+          "text": "Supports the natural formation of red blood cells"
+        },
+        {
+          "label": "Energy and activity",
+          "text": "Helps reduce fatigue and increase vitality"
+        },
+        {
+          "label": "Oxygen saturation",
+          "text": "Supports effective oxygen transport"
+        },
+        {
+          "label": "Immune system",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "label": "Natural formula",
+          "text": "A complex of natural components for daily support"
+        }
+      ]
+    },
+    "collagen-pro": {
+      "name": "Collagen PRO+",
+      "tagline": "Collagen for joints, bones, skin and connective tissue",
+      "short": "Support for skin, hair and nail beauty and joint health",
+      "description": "Collagen PRO+ is a modern complex with collagen, glucosamine, chondroitin and vitamin C, developed to support joints, ligaments, cartilage, bones and skin health. The formula helps preserve joint mobility and supports the natural recovery of connective tissue",
+      "specs": [
+        {
+          "label": "Quantity",
+          "value": "180 tablets"
+        },
+        {
+          "label": "Dosage",
+          "value": "600 mg"
+        },
+        {
+          "label": "Form",
+          "value": "Tablets"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Collagen PRO+ helps support joints, bones, ligaments and cartilage, preserves mobility and improves the condition of the skin",
+      "purpose": [
+        {
+          "title": "Joint health",
+          "text": "Helps maintain joint mobility and reduce discomfort when moving"
+        },
+        {
+          "title": "Skin health",
+          "text": "Helps preserve the firmness and elasticity of the skin"
+        },
+        {
+          "title": "Strong bones",
+          "text": "Supports the health and strength of bone tissue"
+        },
+        {
+          "title": "Connective tissue support",
+          "text": "Takes part in maintaining the health of tendons and ligaments"
+        },
+        {
+          "title": "Cartilage recovery",
+          "text": "Helps maintain the health of cartilage tissue and ligaments"
+        },
+        {
+          "title": "Freedom of movement",
+          "text": "Helps preserve comfort and activity during daily physical load"
+        }
+      ],
+      "steps": [
+        {
+          "title": "How to use",
+          "text": "Take one tablet twice a day"
+        },
+        {
+          "title": "Best time",
+          "text": "Take during or after a meal with enough water"
+        },
+        {
+          "title": "Course duration",
+          "text": "For a pronounced effect, a course of at least 2–3 months is recommended"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry cool place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "Comprehensive support for joints and skin",
+      "highlightText": "Collagen PRO+ combines collagen, glucosamine, chondroitin and vitamin C, helping support the health of joints, bones, ligaments and skin. The complex suits people with an active lifestyle and daily preventive support",
+      "chips": [
+        {
+          "value": "180 tablets",
+          "label": "Per pack"
+        },
+        {
+          "value": "Collagen +",
+          "label": "Glucosamine + Chondroitin"
+        },
+        {
+          "value": "600 mg",
+          "label": "Optimal dosage"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        }
+      ],
+      "benefits": [
+        "Supports joint health",
+        "Helps preserve skin firmness",
+        "Supports the strength of bone tissue",
+        "Helps preserve mobility and freedom of movement",
+        "Takes part in maintaining ligament and tendon health",
+        "Contains collagen, glucosamine, chondroitin and vitamin C"
+      ],
+      "stats": [
+        {
+          "label": "Joint health",
+          "text": "Helps maintain joint mobility"
+        },
+        {
+          "label": "Skin elasticity",
+          "text": "Helps preserve skin firmness and tone"
+        },
+        {
+          "label": "Bone strength",
+          "text": "Supports the health of bone tissue"
+        },
+        {
+          "label": "Connective tissue",
+          "text": "Takes part in maintaining ligament and tendon health"
+        },
+        {
+          "label": "Freedom of movement",
+          "text": "Helps preserve comfort during physical load"
+        },
+        {
+          "label": "Active complex",
+          "text": "Collagen, glucosamine, chondroitin and vitamin C"
+        }
+      ]
+    },
+    "omega-3-6-9": {
+      "name": "Omega 3-6-9",
+      "tagline": "A complex of essential fatty acids for the heart, brain and overall health",
+      "short": "Supports heart and brain health and normal lipid metabolism",
+      "description": "Omega 3-6-9 is a complex of polyunsaturated fatty acids developed to support the cardiovascular system, brain function, vision and overall health. It contains an optimal combination of Omega-3, Omega-6 and Omega-9 for daily support",
+      "specs": [
+        {
+          "label": "Quantity",
+          "value": "180 capsules"
+        },
+        {
+          "label": "Dosage",
+          "value": "500 mg"
+        },
+        {
+          "label": "Form",
+          "value": "Capsules"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Omega 3-6-9 supports the health of the heart, brain, blood vessels and vision",
+      "purpose": [
+        {
+          "title": "Heart support",
+          "text": "Supports the normal work of the cardiovascular system"
+        },
+        {
+          "title": "Vessel support",
+          "text": "Helps preserve vessel elasticity and normal circulation"
+        },
+        {
+          "title": "Brain function",
+          "text": "Supports memory, attention and cognitive function"
+        },
+        {
+          "title": "Metabolism",
+          "text": "Supports normal lipid metabolism"
+        },
+        {
+          "title": "Eye health",
+          "text": "Helps maintain eye health and visual acuity"
+        },
+        {
+          "title": "General strengthening",
+          "text": "Helps maintain vitality and overall health"
+        }
+      ],
+      "steps": [
+        {
+          "title": "How to use",
+          "text": "Take one capsule twice a day"
+        },
+        {
+          "title": "Best time",
+          "text": "Take during or right after a meal with water"
+        },
+        {
+          "title": "Course duration",
+          "text": "For a pronounced effect, a regular course is recommended"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "A natural source of Omega fatty acids",
+      "highlightText": "Omega 3-6-9 provides the body with the essential fatty acids needed for the health of the heart, brain, blood vessels and vision. The complex suits daily use and helps maintain an active lifestyle",
+      "chips": [
+        {
+          "value": "180 capsules",
+          "label": "Per pack"
+        },
+        {
+          "value": "100%",
+          "label": "Omega 3-6-9 complex"
+        },
+        {
+          "value": "500 mg",
+          "label": "Optimal dosage"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        }
+      ],
+      "benefits": [
+        "Supports heart health",
+        "Supports vessel elasticity",
+        "Supports the normal work of the brain",
+        "Supports normal metabolism",
+        "Helps preserve eye health",
+        "Contains an Omega-3, Omega-6 and Omega-9 complex"
+      ],
+      "stats": [
+        {
+          "label": "Heart support",
+          "text": "Supports the normal work of the cardiovascular system"
+        },
+        {
+          "label": "Brain function",
+          "text": "Supports memory, attention and cognitive function"
+        },
+        {
+          "label": "Eye health",
+          "text": "Helps maintain normal vision"
+        },
+        {
+          "label": "Vessel health",
+          "text": "Helps maintain vessel elasticity"
+        },
+        {
+          "label": "Metabolism",
+          "text": "Supports normal lipid metabolism"
+        },
+        {
+          "label": "Omega complex",
+          "text": "Contains a balanced combination of Omega-3, Omega-6 and Omega-9"
+        }
+      ]
+    }
+  },
+  "Blog": {
+    "eyebrow": "Useful articles",
+    "title": "Expert materials",
+    "description": "The scientific approach, manufacturing and real stories — everything worth knowing about NUMA Nutrition",
+    "readingTime": "{minutes} min read",
+    "relatedTitle": "Related articles",
+    "backToBlog": "All articles",
+    "categories": {
+      "production": "Manufacturing",
+      "expert": "Expert",
+      "achievements": "Achievements",
+      "products": "Products",
+      "international": "International growth"
+    },
+    "posts": {
+      "how-numa-products-are-made": {
+        "title": "How Numa Nutrition products are made",
+        "excerpt": "Modern manufacturing, natural ingredients and strict quality control at every stage",
+        "lead": "Every NUMA Nutrition product travels a long way — from raw material selection to the final laboratory check. Here is how manufacturing works and why quality control starts long before bottling.",
+        "sections": [
+          {
+            "heading": "Raw material selection",
+            "text": "Each formula is built on natural components: plant extracts, honey, seaweed, vitamins and minerals. Suppliers pass a mandatory review and every batch of raw material comes with documents on origin and safety."
+          },
+          {
+            "heading": "Modern manufacturing",
+            "text": "Production is organised in line with the international GMP and ISO 22000:2018 standards. The technological lines preserve the properties of active substances, while a closed bottling cycle prevents any contact with the outside environment."
+          },
+          {
+            "heading": "Quality control at every stage",
+            "text": "Products pass laboratory control at the input, in process and at the output. We check microbiological indicators, the content of active substances, formula stability and packaging tightness. No batch goes on sale without a confirmed protocol."
+          },
+          {
+            "heading": "Transparency for the customer",
+            "text": "We state the real formula, dosages and shelf life. Every product comes with usage recommendations, and company specialists are always ready to answer questions and help build a programme."
+          }
+        ],
+        "outro": "This approach lets us speak about quality not as a promise, but as a process that can be verified."
+      },
+      "scientific-approach": {
+        "title": "The scientific approach — the foundation of the NUMA Family philosophy",
+        "excerpt": "Products are created on the basis of scientific research and the recommendations of leading specialists",
+        "lead": "In its work NUMA Family relies not only on natural ingredients and modern technology, but also on a scientific approach. One of the experts whose professional experience is connected with the development of hygiene, nutrition and children's health is Guli Islamovna Shaykhova.",
+        "sections": [
+          {
+            "heading": "Who is Guli Islamovna Shaykhova?",
+            "text": "Guli Islamovna Shaykhova is an Uzbek scientist, Doctor of Medical Sciences and professor. She has made a significant contribution to the development of hygiene, in particular in the field of the hygiene of children, adolescents and nutrition."
+          },
+          {
+            "heading": "Professional work",
+            "text": "Guli Islamovna was born in 1951. She works at the department of Hygiene of Children, Adolescents and Nutrition at the Tashkent Medical Academy. Her main specialisation is connected with hygiene, children's health and questions of rational nutrition."
+          },
+          {
+            "heading": "Scientific work and achievements",
+            "text": "More than 650 scientific and popular-science works have been published, around 100 of them in specialised scientific journals. She is the author of textbooks, monographs and methodological manuals, and has supervised a large number of candidates and doctors of science."
+          },
+          {
+            "heading": "Contribution to healthy nutrition",
+            "text": "Guli Islamovna took part in developing national programmes and legislative acts on nutrient deficiency and iodine insufficiency. Her experience underlines the importance of a scientific approach to health, nutrition and prevention."
+          }
+        ],
+        "outro": "It is exactly this foundation that lets NUMA Family create products trusted by families across Uzbekistan."
+      },
+      "international-recognition": {
+        "title": "International recognition of quality",
+        "excerpt": "NUMA Nutrition products have been recognised with international awards and quality certificates",
+        "lead": "Over recent years NUMA Nutrition products have gained recognition on international stages: from industry exhibitions to specialised innovation competitions.",
+        "sections": [
+          {
+            "heading": "Awards and competitions",
+            "text": "The company's products have been awarded gold medals at international invention and innovation competitions, and have received national industry awards for quality and contribution to the development of manufacturing."
+          },
+          {
+            "heading": "International certificates",
+            "text": "Production is certified to the ISO 22000:2018 and GMP standards, and the products are confirmed by HALAL, USDA Organic certificates and the European organic EURO-LEAF mark."
+          },
+          {
+            "heading": "What this means for the customer",
+            "text": "A certificate is not only a document. It means regular audits, a reproducible formula and a guarantee that the product bought today will not differ from the one bought a year from now."
+          }
+        ],
+        "outro": "We continue to work on expanding the list of international quality confirmations."
+      },
+      "normal-hemoglobin-level": {
+        "title": "How to maintain a normal haemoglobin level",
+        "excerpt": "An iron deficiency can affect wellbeing and performance. Learn how to maintain a normal haemoglobin level naturally",
+        "lead": "Fatigue, pale skin, reduced concentration — all of this can be linked to an iron deficiency. Let us look at what to pay attention to and how to support the body.",
+        "sections": [
+          {
+            "heading": "Why the haemoglobin level matters",
+            "text": "Haemoglobin carries oxygen from the lungs to the tissues. When its level drops, the body receives less oxygen — hence the fatigue and the reduced stamina and performance."
+          },
+          {
+            "heading": "Nutrition comes first",
+            "text": "The diet should include sources of iron: meat, liver, legumes, buckwheat and green leafy vegetables. Vitamin C improves iron absorption, while strong tea and coffee right after a meal reduce it."
+          },
+          {
+            "heading": "Additional support",
+            "text": "Natural syrups such as Hemoglobin+ contain components that support blood formation and help maintain a normal haemoglobin level as part of a balanced lifestyle."
+          },
+          {
+            "heading": "When to see a specialist",
+            "text": "If fatigue persists for several weeks, take a complete blood count and discuss the results with a doctor. Food and supplements do not replace medical care."
+          }
+        ],
+        "outro": "Consistency and attention to how you feel work better than one-off measures."
+      },
+      "expanding-geography": {
+        "title": "NUMA Family expands its geography",
+        "excerpt": "The company is strengthening international cooperation and continues to grow its presence in foreign markets",
+        "lead": "NUMA Family is steadily moving beyond Uzbekistan: new distribution directions are opening and the number of official partners keeps growing.",
+        "sections": [
+          {
+            "heading": "New markets",
+            "text": "The company is developing cooperation with Central Asia, the Middle East and the CIS. In each region the products pass local registration and packaging adaptation to market requirements."
+          },
+          {
+            "heading": "Partner network",
+            "text": "Today more than 500 official partners work with the company. Partners receive product training, marketing support and direct access to company specialists."
+          },
+          {
+            "heading": "Development plans",
+            "text": "The nearest plans include expanding the range for children's and family health, as well as launching new diagnostic formats within the NUMA Diagnostics direction."
+          }
+        ],
+        "outro": "We believe that every family should have access to quality natural nutrition."
+      }
+    },
+    "heroTitle": "Blog",
+    "heroAccent": "NUMA Nutrition",
+    "heroDescription": "Useful articles about health, natural nutrition, scientific research and NUMA Nutrition products",
+    "latest": "Latest articles",
+    "popular": "Popular articles",
+    "heroImageAlt": "Detox Hepar Energy — a natural NUMA Nutrition syrup"
+  },
+  "Contacts": {
+    "titleFirst": "Get in touch",
+    "titleAccent": "with NUMA Nutrition",
+    "description": "We are always ready to answer your questions, tell you more about the company's directions and help you choose a convenient way to get in touch",
+    "telegram": "Via Telegram",
+    "infoTitle": "Contact information",
+    "cardTitle": "Contact us",
+    "schedule": "Monday – Saturday: 9:00 – 20:00",
+    "address": "Tashkent, Uzbekistan",
+    "mapAlt": "Map showing the NUMA Nutrition office in Tashkent",
+    "openMap": "Open map"
+  },
+  "Cart": {
+    "title": "Cart",
+    "summaryTitle": "Cart",
+    "items": "Items ({count})",
+    "delivery": "Delivery",
+    "total": "Total",
+    "checkout": "Place order",
+    "remove": "Remove item",
+    "empty": "Your cart is empty",
+    "emptyDescription": "Add products from the catalogue to place an order",
+    "perks": {
+      "delivery": {
+        "title": "Fast delivery",
+        "text": "1–2 days"
+      },
+      "natural": {
+        "title": "Natural products",
+        "text": "100% quality"
+      },
+      "support": {
+        "title": "24/7 support",
+        "text": "We are always in touch"
+      }
+    }
+  },
+  "Checkout": {
+    "title": "Checkout",
+    "contactTitle": "Contact details",
+    "name": "Your name",
+    "namePlaceholder": "Ruslan Akhmedov",
+    "phone": "Your phone",
+    "phonePlaceholder": "+998 94 011 53 63",
+    "city": "City",
+    "cityPlaceholder": "Tashkent, Uzbekistan",
+    "address": "Delivery address",
+    "addressPlaceholder": "Amir Temur street, 123",
+    "deliveryTitle": "Delivery method",
+    "deliveryOption": "Courier delivery",
+    "deliveryTime": "1–3 days",
+    "orderTitle": "Your order",
+    "pay": "Pay with Click",
+    "successTitle": "Order placed!",
+    "successText": "We have received your order and will contact you shortly to confirm it",
+    "emptyRedirect": "There are no items in the cart"
+  },
+  "Consultation": {
+    "titleFirst": "Consultation",
+    "titleSecond": "NUMA NUTRITION",
+    "description": "Personal health recommendations based on science and natural solutions",
+    "name": "Your name",
+    "namePlaceholder": "Enter your name",
+    "phone": "Phone number",
+    "phonePlaceholder": "Enter your phone number",
+    "question": "Your question",
+    "questionPlaceholder": "Describe your question, goal or problem. For example fatigue, digestion issues, weight control, etc.",
+    "privacy": "The consultation is confidential.",
+    "privacySecond": "Your data is safe and is never shared with third parties.",
+    "submit": "Get a consultation",
+    "submitting": "Sending…",
+    "successTitle": "Thank you for your request!",
+    "successText": "Your request has been sent successfully. A Numa Nutrition specialist will contact you shortly",
+    "successTime": "We usually reply within 15–30 minutes during working hours",
+    "errors": {
+      "name": "Enter your name",
+      "phone": "Enter a valid phone number",
+      "question": "Describe your question"
+    }
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page may have been moved or the address contains a typo"
+  },
+  "MetaLegal": {
+    "privacy": {
+      "title": "Privacy policy — NUMA Nutrition",
+      "description": "How NUMA Nutrition collects, uses and protects the personal data of site users."
+    },
+    "terms": {
+      "title": "Terms of use — NUMA Nutrition",
+      "description": "Terms for using the site and ordering NUMA Nutrition products."
+    }
+  },
+  "Legal": {
+    "updated": "Last updated: 1 January 2026",
+    "privacy": {
+      "title": "Privacy policy",
+      "intro": "This policy describes what data NUMA Nutrition collects when you use the site and how we process it.",
+      "sections": [
+        {
+          "heading": "What data we collect",
+          "text": "We only collect data you provide voluntarily: name, phone number, city and delivery address when placing an order, and the text of your message when requesting a consultation."
+        },
+        {
+          "heading": "How we use the data",
+          "text": "The data is used solely to process orders, deliver products and contact you about your request. We do not use it for marketing campaigns without your consent."
+        },
+        {
+          "heading": "Sharing with third parties",
+          "text": "We never sell or share your personal data with third parties, except delivery services and payment providers to the extent required to fulfil an order."
+        },
+        {
+          "heading": "Cookies",
+          "text": "The site uses technical cookies required for the cart to work and to remember the selected language. You can disable them in your browser settings."
+        },
+        {
+          "heading": "Your rights",
+          "text": "You may request access to your data, its correction or deletion. Write to info@numanutrition.uz to do so."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of use",
+      "intro": "By using the NUMA Nutrition site you agree to the terms set out below.",
+      "sections": [
+        {
+          "heading": "Subject of the agreement",
+          "text": "The site provides information about NUMA Nutrition products and the ability to place an order. The content of the site is informational."
+        },
+        {
+          "heading": "Products",
+          "text": "NUMA Nutrition products are food supplements and food products, not medicinal products. Consult a specialist before use."
+        },
+        {
+          "heading": "Orders and payment",
+          "text": "By placing an order you confirm that the contact details provided are accurate. Prices and availability may change until an order is confirmed."
+        },
+        {
+          "heading": "Intellectual property",
+          "text": "All site materials, including texts, images and trademarks, belong to NUMA Nutrition and may not be used without written permission."
+        },
+        {
+          "heading": "Changes to the terms",
+          "text": "We may update these terms. The current version is always available on this page."
+        }
+      ]
+    }
+  }
+}

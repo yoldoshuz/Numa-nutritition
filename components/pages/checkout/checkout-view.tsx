@@ -1,0 +1,195 @@
+"use client";
+
+import Image from "next/image";
+import { CircleCheck } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
+
+import { Container } from "@/components/shared/container";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useCart } from "@/hooks";
+import { formatAmount } from "@/lib/format";
+import { Link } from "@/lib/i18n/navigation";
+import type { AppLocale } from "@/types";
+
+const fields = ["name", "phone", "city", "address"] as const;
+
+export function CheckoutView() {
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("Checkout");
+  const tCommon = useTranslations("Common");
+  const tCart = useTranslations("Cart");
+  const tProduct = useTranslations("Product");
+  const { items, count, subtotal, ready, clear } = useCart();
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    // The payment provider is wired up once the backend is connected.
+    setSubmitted(true);
+    clear();
+  }
+
+  if (submitted) {
+    return (
+      <section className="py-16 lg:py-24">
+        <Container className="flex max-w-lg flex-col items-center gap-4 text-center">
+          <CircleCheck className="size-16 text-brand" strokeWidth={1.5} />
+          <h1 className="font-heading text-2xl font-extrabold text-ink sm:text-3xl">
+            {t("successTitle")}
+          </h1>
+          <p className="text-sm leading-relaxed text-muted-ink">{t("successText")}</p>
+          <Link
+            href="/"
+            className="mt-2 inline-flex h-12 items-center justify-center rounded-lg bg-brand px-7 text-sm font-bold text-white transition-colors hover:bg-brand-600"
+          >
+            {tCommon("backHome")}
+          </Link>
+        </Container>
+      </section>
+    );
+  }
+
+  return (
+    <section className="pt-8 pb-14 lg:pt-10 lg:pb-20">
+      <Container>
+        <h1 className="font-heading text-[2rem] font-extrabold text-ink sm:text-[2.75rem]">
+          {t("title")}
+        </h1>
+
+        {ready && items.length === 0 ? (
+          <div className="mt-8 rounded-2xl border border-line bg-white p-10 text-center shadow-card">
+            <p className="font-heading text-lg font-bold text-ink">{t("emptyRedirect")}</p>
+            <Link
+              href="/products"
+              className="mt-5 inline-flex h-12 items-center justify-center rounded-lg bg-brand px-7 text-sm font-bold text-white transition-colors hover:bg-brand-600"
+            >
+              {tCommon("goToCatalog")}
+            </Link>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8"
+          >
+            <div className="flex flex-col gap-6">
+              <fieldset className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-7">
+                <legend className="px-1 font-heading text-lg font-extrabold text-ink sm:text-xl">
+                  {t("contactTitle")}
+                </legend>
+
+                <div className="mt-4 flex flex-col gap-4">
+                  {fields.map((field) => (
+                    <div key={field} className="flex flex-col gap-1.5">
+                      <Label htmlFor={field} className="text-[0.8125rem] font-bold text-ink">
+                        {t(field)}
+                        <span className="text-brand">*</span>
+                      </Label>
+                      <Input
+                        id={field}
+                        name={field}
+                        required
+                        type={field === "phone" ? "tel" : "text"}
+                        autoComplete={
+                          field === "phone"
+                            ? "tel"
+                            : field === "name"
+                              ? "name"
+                              : field === "city"
+                                ? "address-level2"
+                                : "street-address"
+                        }
+                        placeholder={t(`${field}Placeholder`)}
+                        className="h-12 rounded-lg border-line px-4 text-sm"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-7">
+                <h2 className="font-heading text-lg font-extrabold text-ink sm:text-xl">
+                  {t("deliveryTitle")}
+                </h2>
+                <div className="mt-4 flex items-center justify-between rounded-lg border border-brand-200 bg-brand-50/60 px-4 py-3">
+                  <span className="leading-tight">
+                    <span className="block text-[0.875rem] font-semibold text-ink">
+                      {t("deliveryOption")}
+                    </span>
+                    <span className="block text-[0.75rem] text-muted-ink">
+                      {t("deliveryTime")}
+                    </span>
+                  </span>
+                  <span className="text-[0.8125rem] font-bold text-brand">
+                    {tCommon("free")}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <aside className="flex h-fit flex-col gap-4 rounded-2xl border border-line bg-white p-6 shadow-card sm:p-7">
+              <h2 className="font-heading text-lg font-extrabold text-ink sm:text-xl">
+                {t("orderTitle")}
+              </h2>
+
+              <ul className="flex flex-col gap-4">
+                {items.map((item) => (
+                  <li key={item.slug} className="flex items-center gap-4">
+                    <span className="grid size-16 shrink-0 place-items-center rounded-xl border border-brand-200 bg-surface-mint">
+                      <Image
+                        src={item.product.image}
+                        alt=""
+                        width={54}
+                        height={72}
+                        className="h-[85%] w-auto object-contain"
+                      />
+                    </span>
+                    <span className="min-w-0 flex-1 leading-tight">
+                      <span className="block text-[0.875rem] font-bold text-ink">
+                        {tProduct(`${item.slug}.name`)}
+                      </span>
+                      <span className="block text-[0.75rem] text-muted-ink">
+                        {item.quantity} {tCommon("pcs")}
+                      </span>
+                    </span>
+                    <span className="text-[0.875rem] font-semibold text-ink">
+                      {formatAmount(item.product.price * item.quantity, locale)}{" "}
+                      {tCommon("currency")}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <dl className="flex flex-col gap-3 border-t border-line pt-4 text-[0.9375rem]">
+                <div className="flex items-center justify-between">
+                  <dt className="text-muted-ink">{tCart("items", { count })}</dt>
+                  <dd className="font-bold text-ink">
+                    {formatAmount(subtotal, locale)} {tCommon("currency")}
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between">
+                  <dt className="text-muted-ink">{tCart("delivery")}</dt>
+                  <dd className="font-bold text-ink">{tCommon("free")}</dd>
+                </div>
+                <div className="flex items-center justify-between border-t border-line pt-3">
+                  <dt className="font-bold text-ink">{tCart("total")}</dt>
+                  <dd className="font-heading text-lg font-extrabold text-ink">
+                    {formatAmount(subtotal, locale)} {tCommon("currency")}
+                  </dd>
+                </div>
+              </dl>
+
+              <button
+                type="submit"
+                className="inline-flex h-12 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white transition-all duration-200 hover:bg-brand-600 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              >
+                {t("pay")}
+              </button>
+            </aside>
+          </form>
+        )}
+      </Container>
+    </section>
+  );
+}

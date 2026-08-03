@@ -1,26 +1,228 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------------
+ * NUMA Nutrition design tokens — sampled directly from the Figma source files.
+ * Every design decision lives here as a Tailwind theme key so components stay
+ * on utility classes only.
+ * ------------------------------------------------------------------------- */
+@theme {
+  /* Brand green — hero, footer, CTA bands, primary buttons */
+  --color-brand-50: #eafcf3;
+  --color-brand-100: #d8f8e9;
+  --color-brand-200: #b6f1d5;
+  --color-brand-300: #7fe7b8;
+  --color-brand-400: #4bdf9c;
+  --color-brand: #26d883;
+  --color-brand-600: #16c273;
+  --color-brand-700: #0faa61;
+  --color-brand-800: #009a50;
+  --color-brand-900: #067444;
+
+  /* Teal accent — logo, benefit wheel, certificate marks */
+  --color-teal-brand: #117477;
+  --color-teal-logo: #0d8a83;
+  --color-teal-soft: #6db7b3;
+
+  /* Neutrals */
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #3f3f46;
+  --color-muted-ink: #6b7280;
+  --color-line: #e7e9ec;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f7f9f8;
+  --color-surface-mint: #eafcf3;
+
+  /* Catalog badges */
+  --color-badge-hit: #d3fa99;
+  --color-badge-hit-ink: #46621f;
+  --color-badge-new: #9e5e5e;
+  --color-badge-rec: #a49f65;
+
+  /* Rating stars */
+  --color-star: #fb923c;
+
+  /* Typography */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* Layout */
+  --spacing-header: 6.5rem;
+  --container-page: 81rem;
+  --container-prose-page: 55rem;
+
+  /* Elevation used across cards in the Figma file */
+  --shadow-card: 0 2px 18px -6px rgb(16 24 40 / 0.12);
+  --shadow-card-hover: 0 18px 40px -18px rgb(16 24 40 / 0.28);
+  --shadow-float: 0 10px 34px -14px rgb(16 24 40 / 0.35);
+
+  /* Motion */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-marquee: marquee 26s linear infinite;
+  --animate-fade-up: fade-up 0.5s var(--ease-brand) both;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* shadcn/ui palette mapped onto the NUMA brand */
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #26d883;
+  --primary-foreground: #ffffff;
+  --secondary: #eafcf3;
+  --secondary-foreground: #067444;
+  --muted: #f4f6f5;
+  --muted-foreground: #6b7280;
+  --accent: #eafcf3;
+  --accent-foreground: #067444;
+  --destructive: #dc2626;
+  --border: #e7e9ec;
+  --input: #e7e9ec;
+  --ring: #26d883;
+  --chart-1: #26d883;
+  --chart-2: #117477;
+  --chart-3: #0faa61;
+  --chart-4: #a49f65;
+  --chart-5: #9e5e5e;
+  --radius: 0.75rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #26d883;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eafcf3;
+  --sidebar-accent-foreground: #067444;
+  --sidebar-border: #e7e9ec;
+  --sidebar-ring: #26d883;
+}
+
+.dark {
+  --background: #0c1512;
+  --foreground: #f5f7f6;
+  --card: #121e1a;
+  --card-foreground: #f5f7f6;
+  --popover: #121e1a;
+  --popover-foreground: #f5f7f6;
+  --primary: #26d883;
+  --primary-foreground: #06251a;
+  --secondary: #172b23;
+  --secondary-foreground: #d8f8e9;
+  --muted: #172b23;
+  --muted-foreground: #9aa8a2;
+  --accent: #172b23;
+  --accent-foreground: #d8f8e9;
+  --destructive: #f87171;
+  --border: #ffffff1a;
+  --input: #ffffff26;
+  --ring: #26d883;
+  --sidebar: #121e1a;
+  --sidebar-foreground: #f5f7f6;
+  --sidebar-primary: #26d883;
+  --sidebar-primary-foreground: #06251a;
+  --sidebar-accent: #172b23;
+  --sidebar-accent-foreground: #d8f8e9;
+  --sidebar-border: #ffffff1a;
+  --sidebar-ring: #26d883;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/40;
+  }
+
+  html {
+    @apply font-sans scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-brand text-white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Horizontal carousels use native scroll-snap; hide the scrollbar chrome. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Clamp helpers used by card copy so grids stay on a rhythm. */
+@utility line-clamp-fix {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
