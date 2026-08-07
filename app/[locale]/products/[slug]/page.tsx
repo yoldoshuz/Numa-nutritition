@@ -12,7 +12,8 @@ import { ProductUsage } from "@/components/pages/product/product-usage";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ProductCard } from "@/components/shared/product-card";
-import { getProduct, getRelatedProducts, products } from "@/lib/data/products";
+import { getProduct, getRelatedProducts } from "@/lib/api/catalog";
+import { products as staticProducts } from "@/lib/data/products";
 import { formatAmount } from "@/lib/format";
 import { locales } from "@/lib/i18n/routing";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/jsonld";
@@ -21,15 +22,20 @@ import type { AppLocale } from "@/types";
 
 type Params = Promise<{ locale: AppLocale; slug: string }>;
 
+/**
+ * Prerenders the catalogue the storefront ships with. Products added later in
+ * the CMS are not known at build time and render on first request instead, so
+ * the build never depends on the backend being reachable.
+ */
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
-    products.map((product) => ({ locale, slug: product.slug }))
+    staticProducts.map((product) => ({ locale, slug: product.slug }))
   );
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
   if (!product) return {};
 
   const t = await getTranslations({ locale, namespace: `Product.${slug}` });
@@ -51,14 +57,14 @@ export default async function ProductPage({ params }: { params: Params }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
   if (!product) notFound();
 
   const t = await getTranslations({ locale, namespace: `Product.${slug}` });
   const tProduct = await getTranslations({ locale, namespace: "Product" });
   const tNav = await getTranslations({ locale, namespace: "Nav" });
 
-  const related = getRelatedProducts(slug);
+  const related = await getRelatedProducts(slug);
 
   return (
     <>

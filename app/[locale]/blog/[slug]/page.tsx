@@ -10,7 +10,8 @@ import { BlogCard } from "@/components/shared/blog-card";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
-import { blogPosts, getPost, getRelatedPosts } from "@/lib/data/content";
+import { getBlogPost, getRelatedPosts } from "@/lib/api/catalog";
+import { blogPosts as staticBlogPosts } from "@/lib/data/content";
 import { formatDate } from "@/lib/format";
 import { locales } from "@/lib/i18n/routing";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
@@ -24,15 +25,19 @@ interface Section {
   text: string;
 }
 
+/**
+ * Prerenders the articles the storefront ships with; posts published later in
+ * the CMS render on first request, so the build needs no backend.
+ */
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
-    blogPosts.map((post) => ({ locale, slug: post.slug }))
+    staticBlogPosts.map((post) => ({ locale, slug: post.slug }))
   );
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = getPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) return {};
 
   const t = await getTranslations({ locale, namespace: `Blog.posts.${slug}` });
@@ -53,7 +58,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const post = getPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) notFound();
 
   const t = await getTranslations({ locale, namespace: `Blog.posts.${slug}` });
@@ -61,7 +66,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
   const tNav = await getTranslations({ locale, namespace: "Nav" });
 
   const sections = t.raw("sections") as Section[];
-  const related = getRelatedPosts(slug);
+  const related = await getRelatedPosts(slug);
   const url = localizedUrl(locale, `/blog/${slug}`);
 
   return (

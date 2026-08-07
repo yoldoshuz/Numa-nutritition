@@ -73,10 +73,23 @@ export function BlogCard({
           {tPost("excerpt")}
         </p>
 
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-2 text-[0.8125rem] font-semibold text-brand transition-transform duration-200 group-hover:translate-x-0.5">
+        {/*
+          A real link rather than decorative text. The title's stretched
+          `::after` already covers the card, but anything painted over it — or
+          any stacking context introduced above this subtree — silently turns
+          the call to action into dead text. Giving it its own `z-10` link makes
+          the click work regardless. It is hidden from assistive tech and taken
+          out of the tab order so the card still exposes exactly one link.
+        */}
+        <Link
+          href={href}
+          aria-hidden
+          tabIndex={-1}
+          className="relative z-10 mt-auto inline-flex w-fit items-center gap-1.5 pt-2 text-[0.8125rem] font-semibold text-brand transition-transform duration-200 group-hover:translate-x-0.5"
+        >
           {horizontal ? t("readArticle") : t("readMore")}
           <ArrowRight className="size-3.5" />
-        </span>
+        </Link>
       </div>
     </article>
   );

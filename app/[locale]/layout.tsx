@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { JsonLd } from "@/components/shared/json-ld";
 import { CartProvider } from "@/hooks";
+import { getProducts } from "@/lib/api/catalog";
 import { htmlLang, locales, routing, type AppLocale } from "@/lib/i18n/routing";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
 import { alternateLanguages, localizedUrl } from "@/lib/seo";
@@ -79,6 +80,9 @@ export default async function LocaleLayout({
   // Enables static rendering for every message-consuming component below.
   setRequestLocale(locale);
 
+  // The cart addresses items by backend id, so it needs the resolved catalogue.
+  const catalog = await getProducts();
+
   return (
     <html
       lang={htmlLang[locale as AppLocale]}
@@ -87,7 +91,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col bg-white">
         <NextIntlClientProvider>
-          <CartProvider>
+          <CartProvider catalog={catalog}>
             <Header />
             <main id="main" className="flex-1">
               {children}

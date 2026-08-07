@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { LeafDecor } from "@/components/shared/leaf-decor";
 import { ProductCard } from "@/components/shared/product-card";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { products } from "@/lib/data/products";
+import { getProducts } from "@/lib/api/catalog";
 import { breadcrumbJsonLd, itemListJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 import type { AppLocale } from "@/types";
@@ -40,6 +40,8 @@ export default async function ProductsPage({
   const t = await getTranslations({ locale, namespace: "Catalog" });
   const tNav = await getTranslations({ locale, namespace: "Nav" });
   const tProduct = await getTranslations({ locale, namespace: "Product" });
+
+  const products = await getProducts();
 
   const listItems = products.map((product) => ({
     name: tProduct(`${product.slug}.name`),

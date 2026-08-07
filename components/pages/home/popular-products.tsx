@@ -1,17 +1,17 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { Carousel } from "@/components/shared/carousel";
 import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
 import { ProductCard } from "@/components/shared/product-card";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { getFeaturedProducts } from "@/lib/data/products";
+import { getFeaturedProducts } from "@/lib/api/catalog";
 import { Link } from "@/lib/i18n/navigation";
 
-export function PopularProducts() {
-  const t = useTranslations("Home.popular");
-  const tCommon = useTranslations("Common");
-  const featured = getFeaturedProducts();
+export async function PopularProducts() {
+  const t = await getTranslations("Home.popular");
+  const tCommon = await getTranslations("Common");
+  const featured = await getFeaturedProducts();
 
   return (
     <section id="products" className="relative isolate py-14 lg:py-20">
