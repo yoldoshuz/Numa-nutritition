@@ -1,7 +1,15 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { isApiConfigured } from "@/lib/api/config";
 import {
@@ -99,6 +107,13 @@ export function CartProvider({
 
   const [localLines, setLocalLines] = useState<CartLine[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  /**
+   * The just-applied change, shown until the server confirms it. Without this
+   * the optimistic update is written to `localLines` and then immediately
+   * discarded, because `lines` reads from the server snapshot whenever the
+   * cart is online — so adding an item appeared to do nothing at all.
+   */
+  const [optimistic, setOptimistic] = useState<CartLine[] | null>(null);
 
   useEffect(() => {
     setLocalLines(readStorage());
@@ -116,8 +131,10 @@ export function CartProvider({
   const online = serverBacked && !cartQuery.isError;
 
   const lines = useMemo(
-    () => (online && cartQuery.data ? toLines(cartQuery.data) : localLines),
-    [online, cartQuery.data, localLines],
+    () =>
+      optimistic ??
+      (online && cartQuery.data ? toLines(cartQuery.data) : localLines),
+    [optimistic, online, cartQuery.data, localLines],
   );
 
   // Keep the mirror current so a mid-session outage does not empty the basket.
@@ -141,12 +158,19 @@ export function CartProvider({
     return map;
   }, [catalog]);
 
+  const optimisticRef = useRef<typeof optimistic>(null);
+  optimisticRef.current = optimistic;
+
   const writeCart = useMutation({
     mutationFn: (run: () => Promise<ApiCart | null>) => run(),
     onSuccess: (cart) => {
       if (cart) queryClient.setQueryData(queryKeys.cart(), cart);
       else queryClient.invalidateQueries({ queryKey: queryKeys.cart() });
+      setOptimistic(null);
     },
+    // A failed write leaves the projection in place: the local mirror is the
+    // truth from here on, and snapping the basket back would lose the item.
+    onError: () => setLocalLines((current) => optimisticRef.current ?? current),
   });
 
   /**
@@ -157,7 +181,14 @@ export function CartProvider({
   const apply = useCallback(
     (next: CartLine[], run: (() => Promise<ApiCart | null>) | null) => {
       setLocalLines(next);
-      if (online && run) writeCart.mutate(run);
+      // Show the change straight away whether or not a request follows: a
+      // product with no backend id still belongs in the basket.
+      if (online && run) {
+        setOptimistic(next);
+        writeCart.mutate(run);
+      } else {
+        setOptimistic(null);
+      }
     },
     [online, writeCart],
   );
