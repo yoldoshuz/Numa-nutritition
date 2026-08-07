@@ -18,19 +18,25 @@ import {
 } from "@/lib/data/products";
 import type { BlogPost, Product, ProductBadge, ProductForm } from "@/types";
 
-import { apiFetch } from "./client";
-import { CATALOG_REVALIDATE_SECONDS, STORE, isApiConfigured } from "./config";
-import type {
-  ApiBlogPost,
-  ApiFeaturedList,
-  ApiProduct,
-  ApiProductList,
-} from "./types";
+import {
+  getBlogFeed,
+  getBlogPostBySlug,
+  getFeatured,
+  getProductBySlug,
+  getProductList,
+} from "./endpoints";
+import { isApiConfigured } from "./config";
+import { resolveMediaUrl } from "./media";
+import type { ApiBlogPost, ApiProduct } from "./types";
 
 /* ── mapping ─────────────────────────────────────────────────────────────── */
 
 const mainMediaUrl = (api: ApiProduct): string | undefined =>
   (api.media ?? []).find((m) => m.isMain)?.url ?? (api.media ?? [])[0]?.url;
+
+const img = (url: string | null | undefined) => resolveMediaUrl(url);
+const imgs = (urls: (string | null | undefined)[] | undefined) =>
+  (urls ?? []).map(img).filter(Boolean);
 
 /**
  * Folds an API product onto the storefront's `Product`.
@@ -44,8 +50,10 @@ function toProduct(api: ApiProduct): Product {
   const attrs = api.attributes ?? {};
   const images = attrs.images ?? {};
   const base = getStaticProduct(api.slug);
-  const cardImage = images.card ?? mainMediaUrl(api) ?? base?.image ?? "";
-  const gallery = images.gallery ?? base?.gallery ?? (api.media ?? []).map((m) => m.url);
+  const cardImage = img(images.card ?? mainMediaUrl(api)) || base?.image || "";
+  const gallery = images.gallery
+    ? imgs(images.gallery)
+    : (base?.gallery ?? imgs((api.media ?? []).map((m) => m.url)));
 
   return {
     id: api.id,
@@ -57,12 +65,19 @@ function toProduct(api: ApiProduct): Product {
     badge: (attrs.badge as ProductBadge) ?? base?.badge ?? "rec",
     form: (attrs.form as ProductForm) ?? base?.form ?? "capsules",
     image: cardImage,
-    hero: images.hero ?? base?.hero ?? cardImage,
+    hero: img(images.hero) || base?.hero || cardImage,
     gallery: gallery.length ? gallery : [cardImage],
-    usage: images.usage ?? base?.usage ?? { small: [cardImage, cardImage], wide: cardImage },
-    benefitSlides: images.benefitSlides ?? base?.benefitSlides ?? [cardImage],
-    ringImage: images.ring ?? base?.ringImage ?? cardImage,
-    statImage: images.stat ?? base?.statImage ?? cardImage,
+    usage: images.usage
+      ? {
+          small: [img(images.usage.small?.[0]), img(images.usage.small?.[1])] as [string, string],
+          wide: img(images.usage.wide),
+        }
+      : (base?.usage ?? { small: [cardImage, cardImage], wide: cardImage }),
+    benefitSlides: images.benefitSlides
+      ? imgs(images.benefitSlides)
+      : (base?.benefitSlides ?? [cardImage]),
+    ringImage: img(images.ring) || base?.ringImage || cardImage,
+    statImage: img(images.stat) || base?.statImage || cardImage,
     featured: api.isFeatured,
     rating: attrs.rating ?? base?.rating ?? 5,
     reviewCount: attrs.reviewCount ?? base?.reviewCount ?? 0,
@@ -77,15 +92,13 @@ function toBlogPost(api: ApiBlogPost): BlogPost {
     category: (api.tags?.[0] ?? base?.category ?? "products") as BlogPost["category"],
     date: (api.publishedAt ?? base?.date ?? new Date().toISOString()).slice(0, 10),
     readingMinutes: api.readTimeMinutes ?? base?.readingMinutes ?? 5,
-    cover: api.coverImageUrl ?? base?.cover ?? "",
+    cover: img(api.coverImageUrl) || base?.cover || "",
     figures: base?.figures ?? [],
     featured: base?.featured ?? false,
   };
 }
 
 /* ── fetchers ────────────────────────────────────────────────────────────── */
-
-const revalidate = CATALOG_REVALIDATE_SECONDS;
 
 /** Resolves to `null` on any failure, which is the caller's cue to fall back. */
 async function tryFetch<T>(run: () => Promise<T>): Promise<T | null> {
@@ -99,21 +112,12 @@ async function tryFetch<T>(run: () => Promise<T>): Promise<T | null> {
 
 /** Raw API products — used by the i18n content overlay, which needs `attributes`. */
 export async function fetchApiProducts(): Promise<ApiProduct[] | null> {
-  return tryFetch(async () => {
-    const data = await apiFetch<ApiProductList>(
-      `/products/store/${STORE}?limit=100&sortBy=createdAt&sortDir=asc`,
-      { revalidate },
-    );
-    return data.products ?? [];
-  });
+  return tryFetch(async () => (await getProductList()).products ?? []);
 }
 
 export async function fetchApiBlogPosts(): Promise<ApiBlogPost[] | null> {
   return tryFetch(async () => {
-    const data = await apiFetch<ApiBlogPost[] | { posts: ApiBlogPost[] }>(
-      `/blog/${STORE}?limit=100`,
-      { revalidate },
-    );
+    const data = await getBlogFeed();
     return Array.isArray(data) ? data : (data.posts ?? []);
   });
 }
@@ -127,20 +131,13 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 export async function getProduct(slug: string): Promise<Product | undefined> {
-  const api = await tryFetch(() =>
-    apiFetch<ApiProduct>(`/products/${STORE}/${encodeURIComponent(slug)}`, { revalidate }),
-  );
+  const api = await tryFetch(() => getProductBySlug(slug));
   return api ? toProduct(api) : getStaticProduct(slug);
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
   const api = await tryFetch(async () => {
-    // This endpoint returns Sequelize's `{ rows, count }` rather than the
-    // paginated `{ products, total }` shape used by the list endpoint.
-    const data = await apiFetch<ApiFeaturedList | ApiProduct[]>(
-      `/products/featured/${STORE}`,
-      { revalidate },
-    );
+    const data = await getFeatured();
     return Array.isArray(data) ? data : (data.rows ?? []);
   });
 
@@ -169,9 +166,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
-  const api = await tryFetch(() =>
-    apiFetch<ApiBlogPost>(`/blog/${STORE}/${encodeURIComponent(slug)}`, { revalidate }),
-  );
+  const api = await tryFetch(() => getBlogPostBySlug(slug));
   return api ? toBlogPost(api) : getStaticPost(slug);
 }
 

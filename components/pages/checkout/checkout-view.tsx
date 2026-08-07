@@ -3,19 +3,13 @@
 import Image from "next/image";
 import { CircleCheck, Loader2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Container } from "@/components/shared/container";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useCart } from "@/hooks";
-import { checkout, fetchPaymentUrl } from "@/lib/api/cart";
-import {
-  checkoutErrorKey,
-  enabledPaymentMethods,
-  newIdempotencyKey,
-  normalizePhone,
-} from "@/lib/api/checkout";
+import { useCart, useCheckout } from "@/hooks";
+import { enabledPaymentMethods, normalizePhone } from "@/lib/api/checkout";
 import type { PaymentMethod } from "@/lib/api/types";
 import { formatAmount } from "@/lib/format";
 import { Link } from "@/lib/i18n/navigation";
@@ -32,8 +26,6 @@ const autoComplete: Record<(typeof fields)[number], string> = {
   address: "street-address",
 };
 
-type Status = "idle" | "submitting" | "redirecting";
-
 export function CheckoutView() {
   const locale = useLocale() as AppLocale;
   const t = useTranslations("Checkout");
@@ -41,21 +33,15 @@ export function CheckoutView() {
   const tCart = useTranslations("Cart");
   const tProduct = useTranslations("Product");
 
-  const { items, count, subtotal, ready, clear, refresh } = useCart();
+  const { items, count, subtotal, ready } = useCart();
+  const { phase, errorKey, orderId, busy, setErrorKey, submit } = useCheckout();
 
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorKey, setErrorKey] = useState<string | null>(null);
-  const [placedOrderId, setPlacedOrderId] = useState<string | null>(null);
   const [method, setMethod] = useState<PaymentMethod>("cash");
-
   const methods = enabledPaymentMethods();
 
-  // Reused across retries so a double submit cannot create a second order.
-  const idempotencyKey = useRef<string>(newIdempotencyKey());
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (status !== "idle") return;
+    if (busy) return;
 
     const form = new FormData(event.currentTarget);
     const phone = normalizePhone(String(form.get("phone") ?? ""));
@@ -65,10 +51,9 @@ export function CheckoutView() {
     }
 
     setErrorKey(null);
-    setStatus("submitting");
-
-    try {
-      const { order } = await checkout({
+    submit({
+      method,
+      payload: {
         customerName: String(form.get("name") ?? "").trim(),
         customerSurname: String(form.get("surname") ?? "").trim(),
         customerPhone: phone,
@@ -78,41 +63,11 @@ export function CheckoutView() {
           .filter(Boolean)
           .join(", "),
         deliveryType: "delivery",
-        paymentMethod: method,
-        idempotencyKey: idempotencyKey.current,
-      });
-
-      // Checkout consumes the server cart; mirror that locally either way.
-      clear();
-
-      if (method === "cash") {
-        setPlacedOrderId(order.id);
-        setStatus("idle");
-        return;
-      }
-
-      setStatus("redirecting");
-      try {
-        const { url } = await fetchPaymentUrl(order.id, method);
-        window.location.href = url;
-      } catch {
-        // The order exists and is reserved; only the redirect failed, so the
-        // customer must not be told the purchase did not happen.
-        setPlacedOrderId(order.id);
-        setErrorKey("errorPayment");
-        setStatus("idle");
-      }
-    } catch (error) {
-      setErrorKey(checkoutErrorKey(error));
-      setStatus("idle");
-      // A 409 means someone else took the stock — resync so the cart tells the
-      // truth before the customer tries again.
-      refresh();
-      idempotencyKey.current = newIdempotencyKey();
-    }
+      },
+    });
   }
 
-  if (placedOrderId && !errorKey) {
+  if (orderId && !errorKey) {
     return (
       <section className="py-16 lg:py-24">
         <Container className="flex max-w-lg flex-col items-center gap-4 text-center">
@@ -124,7 +79,7 @@ export function CheckoutView() {
           <p className="text-xs text-muted-ink">
             {t("orderNumber")}:{" "}
             <span className="font-mono font-semibold text-ink">
-              {placedOrderId.slice(0, 8).toUpperCase()}
+              {orderId.slice(0, 8).toUpperCase()}
             </span>
           </p>
           <Link
@@ -138,8 +93,6 @@ export function CheckoutView() {
     );
   }
 
-  const busy = status !== "idle";
-
   return (
     <section className="pt-8 pb-14 lg:pt-10 lg:pb-20">
       <Container>
@@ -147,7 +100,7 @@ export function CheckoutView() {
           {t("title")}
         </h1>
 
-        {ready && items.length === 0 && !placedOrderId ? (
+        {ready && items.length === 0 && !orderId ? (
           <div className="mt-8 rounded-2xl border border-line bg-white p-10 text-center shadow-card">
             <p className="font-heading text-lg font-bold text-ink">{t("emptyRedirect")}</p>
             <Link
@@ -318,9 +271,9 @@ export function CheckoutView() {
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-brand text-sm font-bold text-white transition-all duration-200 hover:bg-brand-600 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
                 {busy ? <Loader2 className="size-4 animate-spin" /> : null}
-                {status === "submitting"
+                {phase === "submitting"
                   ? t("submitting")
-                  : status === "redirecting"
+                  : phase === "redirecting"
                     ? t("redirecting")
                     : method === "cash"
                       ? t("payCash")

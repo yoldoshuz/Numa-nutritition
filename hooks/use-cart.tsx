@@ -1,51 +1,31 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-import {
-  addCartItem,
-  clearCart as clearServerCart,
-  fetchCart,
-  removeCartItem,
-  setCartItemQuantity,
-} from "@/lib/api/cart";
 import { isApiConfigured } from "@/lib/api/config";
-import { products as staticProducts } from "@/lib/data/products";
+import {
+  deleteCart,
+  deleteCartItem,
+  getCart,
+  patchCartItem,
+  postCartItem,
+} from "@/lib/api/endpoints";
+import { queryKeys } from "@/lib/api/query-keys";
 import type { ApiCart } from "@/lib/api/types";
+import { products as staticProducts } from "@/lib/data/products";
 import type { CartLine, CartLineWithProduct, Product } from "@/types";
 
 const STORAGE_KEY = "numa-cart";
 const MAX_QUANTITY = 99;
-
-/**
- * The cart runs against the backend when one is configured and reachable, and
- * against localStorage otherwise. Both modes expose the same surface, so the
- * storefront is fully usable — browse, add, review, and (cash) checkout — even
- * with the API down; only live stock and online payment need the server.
- *
- * Writes are applied optimistically and reconciled with the server response, so
- * the quantity stepper never waits on a round-trip.
- */
-type Mode = "local" | "server";
 
 /* ── localStorage mirror ─────────────────────────────────────────────────── */
 
 function readStorage(): CartLine[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed: unknown = JSON.parse(raw);
+    const parsed: unknown = JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "[]");
     if (!Array.isArray(parsed)) return [];
-
     return parsed.filter(
       (line): line is CartLine =>
         typeof line === "object" &&
@@ -68,6 +48,9 @@ function writeStorage(lines: CartLine[]): void {
   }
 }
 
+const toLines = (cart: ApiCart): CartLine[] =>
+  cart.items.map((item) => ({ slug: item.product.slug, quantity: item.quantity }));
+
 /* ── context ─────────────────────────────────────────────────────────────── */
 
 interface CartContextValue {
@@ -85,12 +68,21 @@ interface CartContextValue {
   setQuantity: (slug: string, quantity: number) => void;
   remove: (slug: string) => void;
   clear: () => void;
-  /** Re-reads the server cart, e.g. after returning from a payment provider. */
   refresh: () => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+/**
+ * The cart runs against the backend when one is configured and reachable, and
+ * against localStorage otherwise. Both modes expose the same surface, so the
+ * storefront stays usable — browse, add, review, cash checkout — with the API
+ * down; only live stock and online payment need the server.
+ *
+ * The server cart is a React Query resource: mutations write through and hand
+ * their response straight back into the cache, so the stepper never waits on a
+ * round-trip and never shows a stale quantity.
+ */
 export function CartProvider({
   children,
   catalog,
@@ -98,22 +90,40 @@ export function CartProvider({
   children: React.ReactNode;
   /**
    * Server-resolved catalogue. Products carry the backend ids the cart API
-   * addresses items by; without it the cart can only run in local mode.
+   * addresses items by; without them the cart can only run in local mode.
    */
   catalog?: Product[];
 }) {
-  const [lines, setLines] = useState<CartLine[]>([]);
-  const [ready, setReady] = useState(false);
-  const [pending, setPending] = useState(false);
-  const [mode, setMode] = useState<Mode>(() =>
-    isApiConfigured() ? "server" : "local",
+  const queryClient = useQueryClient();
+  const serverBacked = isApiConfigured();
+
+  const [localLines, setLocalLines] = useState<CartLine[]>([]);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setLocalLines(readStorage());
+    setHydrated(true);
+  }, []);
+
+  const cartQuery = useQuery({
+    queryKey: queryKeys.cart(),
+    queryFn: getCart,
+    enabled: serverBacked,
+    staleTime: 0,
+  });
+
+  // A failed cart read means no usable server cart for this session.
+  const online = serverBacked && !cartQuery.isError;
+
+  const lines = useMemo(
+    () => (online && cartQuery.data ? toLines(cartQuery.data) : localLines),
+    [online, cartQuery.data, localLines],
   );
 
-  // Read inside callbacks without making them depend on the latest render.
-  const modeRef = useRef(mode);
-  modeRef.current = mode;
-  const linesRef = useRef(lines);
-  linesRef.current = lines;
+  // Keep the mirror current so a mid-session outage does not empty the basket.
+  useEffect(() => {
+    if (hydrated) writeStorage(lines);
+  }, [hydrated, lines]);
 
   const catalogBySlug = useMemo(() => {
     const map = new Map<string, Product>();
@@ -131,151 +141,81 @@ export function CartProvider({
     return map;
   }, [catalog]);
 
-  const commit = useCallback((next: CartLine[]) => {
-    setLines(next);
-    writeStorage(next);
-  }, []);
-
-  /** Projects a server cart onto local lines, keyed by slug. */
-  const applyServerCart = useCallback(
-    (cart: ApiCart) => {
-      const next = cart.items.map((item) => ({
-        slug: item.product.slug,
-        quantity: item.quantity,
-      }));
-      commit(next);
+  const writeCart = useMutation({
+    mutationFn: (run: () => Promise<ApiCart | null>) => run(),
+    onSuccess: (cart) => {
+      if (cart) queryClient.setQueryData(queryKeys.cart(), cart);
+      else queryClient.invalidateQueries({ queryKey: queryKeys.cart() });
     },
-    [commit],
-  );
-
-  /** Drops to local mode for the rest of the session. */
-  const degrade = useCallback(() => setMode("local"), []);
-
-  /* ── hydrate ───────────────────────────────────────────────────────────── */
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const stored = readStorage();
-    setLines(stored);
-
-    if (!isApiConfigured()) {
-      setReady(true);
-      return;
-    }
-
-    void (async () => {
-      try {
-        const cart = await fetchCart();
-        if (cancelled) return;
-        applyServerCart(cart);
-      } catch {
-        // Backend unreachable — keep whatever localStorage had and go local.
-        if (!cancelled) degrade();
-      } finally {
-        if (!cancelled) setReady(true);
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [applyServerCart, degrade]);
-
-  /* ── mutations ─────────────────────────────────────────────────────────── */
+  });
 
   /**
-   * Applies `optimistic` immediately, then runs `write` when the cart is
-   * server-backed. A failed write degrades to local mode and keeps the
-   * optimistic state rather than snapping the UI back.
+   * Applies `next` locally, then writes through when the cart is server-backed
+   * and the product has a backend id. A failed write leaves the optimistic
+   * state in place rather than snapping the UI back.
    */
-  const mutate = useCallback(
-    (optimistic: CartLine[], write: (() => Promise<ApiCart | null>) | null) => {
-      commit(optimistic);
-      if (modeRef.current !== "server" || !write) return;
-
-      setPending(true);
-      void (async () => {
-        try {
-          const cart = await write();
-          if (cart) applyServerCart(cart);
-        } catch {
-          degrade();
-        } finally {
-          setPending(false);
-        }
-      })();
+  const apply = useCallback(
+    (next: CartLine[], run: (() => Promise<ApiCart | null>) | null) => {
+      setLocalLines(next);
+      if (online && run) writeCart.mutate(run);
     },
-    [applyServerCart, commit, degrade],
+    [online, writeCart],
   );
 
   const add = useCallback(
     (slug: string, quantity = 1) => {
-      const current = linesRef.current;
-      const existing = current.find((line) => line.slug === slug);
+      const existing = lines.find((line) => line.slug === slug);
       const next = existing
-        ? current.map((line) =>
+        ? lines.map((line) =>
             line.slug === slug
               ? { ...line, quantity: Math.min(MAX_QUANTITY, line.quantity + quantity) }
               : line,
           )
-        : [...current, { slug, quantity }];
+        : [...lines, { slug, quantity }];
 
       const productId = idBySlug.get(slug);
-      mutate(next, productId ? () => addCartItem(productId, quantity) : null);
+      apply(next, productId ? () => postCartItem(productId, quantity) : null);
     },
-    [idBySlug, mutate],
+    [lines, idBySlug, apply],
   );
 
   const setQuantity = useCallback(
     (slug: string, quantity: number) => {
-      const current = linesRef.current;
       const capped = Math.min(MAX_QUANTITY, quantity);
       const next =
         capped <= 0
-          ? current.filter((line) => line.slug !== slug)
-          : current.map((line) => (line.slug === slug ? { ...line, quantity: capped } : line));
+          ? lines.filter((line) => line.slug !== slug)
+          : lines.map((line) => (line.slug === slug ? { ...line, quantity: capped } : line));
 
       const productId = idBySlug.get(slug);
-      if (!productId) {
-        mutate(next, null);
-        return;
-      }
-      mutate(
+      apply(
         next,
-        capped <= 0
-          ? () => removeCartItem(productId)
-          : () => setCartItemQuantity(productId, capped),
+        !productId
+          ? null
+          : capped <= 0
+            ? () => deleteCartItem(productId)
+            : () => patchCartItem(productId, capped),
       );
     },
-    [idBySlug, mutate],
+    [lines, idBySlug, apply],
   );
 
   const remove = useCallback(
     (slug: string) => {
-      const next = linesRef.current.filter((line) => line.slug !== slug);
+      const next = lines.filter((line) => line.slug !== slug);
       const productId = idBySlug.get(slug);
-      mutate(next, productId ? () => removeCartItem(productId) : null);
+      apply(next, productId ? () => deleteCartItem(productId) : null);
     },
-    [idBySlug, mutate],
+    [lines, idBySlug, apply],
   );
 
   const clear = useCallback(() => {
-    mutate([], () => clearServerCart().then(() => null));
-  }, [mutate]);
+    apply([], () => deleteCart().then(() => null));
+  }, [apply]);
 
   const refresh = useCallback(() => {
-    if (modeRef.current !== "server") return;
-    void (async () => {
-      try {
-        applyServerCart(await fetchCart());
-      } catch {
-        degrade();
-      }
-    })();
-  }, [applyServerCart, degrade]);
-
-  /* ── derived ───────────────────────────────────────────────────────────── */
+    queryClient.invalidateQueries({ queryKey: queryKeys.cart() });
+  }, [queryClient]);
 
   const items = useMemo(
     () =>
@@ -290,9 +230,9 @@ export function CartProvider({
     () => ({
       lines,
       items,
-      ready,
-      pending,
-      online: mode === "server",
+      ready: hydrated && (!serverBacked || !cartQuery.isPending),
+      pending: writeCart.isPending,
+      online,
       count: items.reduce((total, item) => total + item.quantity, 0),
       subtotal: items.reduce((total, item) => total + item.product.price * item.quantity, 0),
       add,
@@ -301,7 +241,20 @@ export function CartProvider({
       clear,
       refresh,
     }),
-    [lines, items, ready, pending, mode, add, setQuantity, remove, clear, refresh],
+    [
+      lines,
+      items,
+      hydrated,
+      serverBacked,
+      cartQuery.isPending,
+      writeCart.isPending,
+      online,
+      add,
+      setQuantity,
+      remove,
+      clear,
+      refresh,
+    ],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

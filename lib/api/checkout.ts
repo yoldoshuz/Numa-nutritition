@@ -1,6 +1,6 @@
 /** Client-side helpers shared by the checkout form. */
 
-import { ApiError } from "./client";
+import { ApiError } from "./axios";
 import type { PaymentMethod } from "./types";
 
 /** Methods the storefront may offer, narrowed by env to what's provisioned. */
