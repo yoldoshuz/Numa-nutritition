@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { blogPosts } from "@/lib/data/content";
-import { products } from "@/lib/data/products";
+import { getBlogPosts, getProducts } from "@/lib/api/catalog";
 import { defaultLocale, htmlLang, locales } from "@/lib/i18n/routing";
 import { localizedUrl } from "@/lib/seo";
 
@@ -22,8 +21,10 @@ const staticEntries: Entry[] = [
   { path: "/terms", priority: 0.2, changeFrequency: "yearly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+
+  const [products, blogPosts] = await Promise.all([getProducts(), getBlogPosts()]);
 
   const entries: Entry[] = [
     ...staticEntries,

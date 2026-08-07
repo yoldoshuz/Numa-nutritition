@@ -20,7 +20,6 @@ export function ProductCard({
 }) {
   const t = useTranslations("Common");
   const tProduct = useTranslations(`Product.${product.slug}`);
-  const tShared = useTranslations("Product");
   const href = `/products/${product.slug}`;
 
   return (
@@ -65,7 +64,6 @@ export function ProductCard({
         <AddToCartButton
           slug={product.slug}
           label={t("buy")}
-          addedLabel={tShared("added")}
           className="h-10 flex-1 px-3 text-[0.8125rem]"
         />
         <Link

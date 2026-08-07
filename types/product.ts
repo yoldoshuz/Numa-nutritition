@@ -7,6 +7,14 @@ export type ProductForm = "syrup" | "capsules" | "tablets" | "honey";
  * under the `Catalog.<slug>` namespace so the whole catalogue is localizable.
  */
 export interface Product {
+  /**
+   * Backend UUID. Present only on products resolved from the API — the server
+   * cart addresses items by id, so its absence is what tells the cart to fall
+   * back to its local, offline mode.
+   */
+  id?: string;
+  /** Units left in stock; `undefined` when serving the static catalogue. */
+  stock?: number;
   /** URL segment and translation namespace key. */
   slug: string;
   /** Brand name — identical in every locale. */

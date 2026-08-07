@@ -7,7 +7,7 @@ import { BlogCard } from "@/components/shared/blog-card";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { LeafDecor } from "@/components/shared/leaf-decor";
-import { blogPosts } from "@/lib/data/content";
+import { getBlogPosts } from "@/lib/api/catalog";
 import { breadcrumbJsonLd, itemListJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 import type { AppLocale } from "@/types";
@@ -40,7 +40,10 @@ export default async function BlogPage({
   const t = await getTranslations({ locale, namespace: "Blog" });
   const tNav = await getTranslations({ locale, namespace: "Nav" });
 
-  const popular = blogPosts.filter((post) => post.featured).slice(0, 2);
+  const blogPosts = await getBlogPosts();
+  // CMS-authored posts carry no `featured` flag; the newest stand in for them.
+  const highlighted = blogPosts.filter((post) => post.featured);
+  const popular = (highlighted.length ? highlighted : blogPosts).slice(0, 2);
   const latest = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
 
   return (

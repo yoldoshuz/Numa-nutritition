@@ -1,19 +1,30 @@
 "use client";
 
 import Image from "next/image";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, Loader2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { Container } from "@/components/shared/container";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useCart } from "@/hooks";
+import { useCart, useCheckout } from "@/hooks";
+import { enabledPaymentMethods, normalizePhone } from "@/lib/api/checkout";
+import type { PaymentMethod } from "@/lib/api/types";
 import { formatAmount } from "@/lib/format";
 import { Link } from "@/lib/i18n/navigation";
+import { cn } from "@/lib/utils";
 import type { AppLocale } from "@/types";
 
-const fields = ["name", "phone", "city", "address"] as const;
+const fields = ["name", "surname", "phone", "city", "address"] as const;
+
+const autoComplete: Record<(typeof fields)[number], string> = {
+  name: "given-name",
+  surname: "family-name",
+  phone: "tel",
+  city: "address-level2",
+  address: "street-address",
+};
 
 export function CheckoutView() {
   const locale = useLocale() as AppLocale;
@@ -21,17 +32,42 @@ export function CheckoutView() {
   const tCommon = useTranslations("Common");
   const tCart = useTranslations("Cart");
   const tProduct = useTranslations("Product");
-  const { items, count, subtotal, ready, clear } = useCart();
-  const [submitted, setSubmitted] = useState(false);
+
+  const { items, count, subtotal, ready } = useCart();
+  const { phase, errorKey, orderId, busy, setErrorKey, submit } = useCheckout();
+
+  const [method, setMethod] = useState<PaymentMethod>("cash");
+  const methods = enabledPaymentMethods();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // The payment provider is wired up once the backend is connected.
-    setSubmitted(true);
-    clear();
+    if (busy) return;
+
+    const form = new FormData(event.currentTarget);
+    const phone = normalizePhone(String(form.get("phone") ?? ""));
+    if (!phone) {
+      setErrorKey("phonePlaceholder");
+      return;
+    }
+
+    setErrorKey(null);
+    submit({
+      method,
+      payload: {
+        customerName: String(form.get("name") ?? "").trim(),
+        customerSurname: String(form.get("surname") ?? "").trim(),
+        customerPhone: phone,
+        // The API takes a single address line; the city input is folded in.
+        customerAddress: [form.get("city"), form.get("address")]
+          .map((part) => String(part ?? "").trim())
+          .filter(Boolean)
+          .join(", "),
+        deliveryType: "delivery",
+      },
+    });
   }
 
-  if (submitted) {
+  if (orderId && !errorKey) {
     return (
       <section className="py-16 lg:py-24">
         <Container className="flex max-w-lg flex-col items-center gap-4 text-center">
@@ -40,6 +76,12 @@ export function CheckoutView() {
             {t("successTitle")}
           </h1>
           <p className="text-sm leading-relaxed text-muted-ink">{t("successText")}</p>
+          <p className="text-xs text-muted-ink">
+            {t("orderNumber")}:{" "}
+            <span className="font-mono font-semibold text-ink">
+              {orderId.slice(0, 8).toUpperCase()}
+            </span>
+          </p>
           <Link
             href="/"
             className="mt-2 inline-flex h-12 items-center justify-center rounded-lg bg-brand px-7 text-sm font-bold text-white transition-colors hover:bg-brand-600"
@@ -58,7 +100,7 @@ export function CheckoutView() {
           {t("title")}
         </h1>
 
-        {ready && items.length === 0 ? (
+        {ready && items.length === 0 && !orderId ? (
           <div className="mt-8 rounded-2xl border border-line bg-white p-10 text-center shadow-card">
             <p className="font-heading text-lg font-bold text-ink">{t("emptyRedirect")}</p>
             <Link
@@ -69,12 +111,12 @@ export function CheckoutView() {
             </Link>
           </div>
         ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8"
-          >
+          <form onSubmit={handleSubmit} className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8">
             <div className="flex flex-col gap-6">
-              <fieldset className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-7">
+              <fieldset
+                disabled={busy}
+                className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-7"
+              >
                 <legend className="px-1 font-heading text-lg font-extrabold text-ink sm:text-xl">
                   {t("contactTitle")}
                 </legend>
@@ -91,15 +133,8 @@ export function CheckoutView() {
                         name={field}
                         required
                         type={field === "phone" ? "tel" : "text"}
-                        autoComplete={
-                          field === "phone"
-                            ? "tel"
-                            : field === "name"
-                              ? "name"
-                              : field === "city"
-                                ? "address-level2"
-                                : "street-address"
-                        }
+                        inputMode={field === "phone" ? "tel" : undefined}
+                        autoComplete={autoComplete[field]}
                         placeholder={t(`${field}Placeholder`)}
                         className="h-12 rounded-lg border-line px-4 text-sm"
                       />
@@ -126,6 +161,50 @@ export function CheckoutView() {
                   </span>
                 </div>
               </div>
+
+              <fieldset
+                disabled={busy}
+                className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-7"
+              >
+                <legend className="px-1 font-heading text-lg font-extrabold text-ink sm:text-xl">
+                  {t("paymentTitle")}
+                </legend>
+
+                <div className="mt-4 flex flex-col gap-3">
+                  {methods.map((option) => {
+                    const active = method === option;
+                    const key = option.charAt(0).toUpperCase() + option.slice(1);
+                    return (
+                      <label
+                        key={option}
+                        className={cn(
+                          "flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-3 transition-colors",
+                          active
+                            ? "border-brand bg-brand-50/60"
+                            : "border-line hover:border-brand-200",
+                        )}
+                      >
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value={option}
+                          checked={active}
+                          onChange={() => setMethod(option)}
+                          className="mt-0.5 size-4 accent-brand"
+                        />
+                        <span className="leading-tight">
+                          <span className="block text-[0.875rem] font-semibold text-ink">
+                            {t(`payment${key}`)}
+                          </span>
+                          <span className="block text-[0.75rem] text-muted-ink">
+                            {t(`payment${key}Hint`)}
+                          </span>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
             </div>
 
             <aside className="flex h-fit flex-col gap-4 rounded-2xl border border-line bg-white p-6 shadow-card sm:p-7">
@@ -180,11 +259,25 @@ export function CheckoutView() {
                 </div>
               </dl>
 
+              {errorKey ? (
+                <p role="alert" className="text-[0.8125rem] font-medium text-red-600">
+                  {t(errorKey)}
+                </p>
+              ) : null}
+
               <button
                 type="submit"
-                className="inline-flex h-12 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white transition-all duration-200 hover:bg-brand-600 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                disabled={busy}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-brand text-sm font-bold text-white transition-all duration-200 hover:bg-brand-600 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
-                {t("pay")}
+                {busy ? <Loader2 className="size-4 animate-spin" /> : null}
+                {phase === "submitting"
+                  ? t("submitting")
+                  : phase === "redirecting"
+                    ? t("redirecting")
+                    : method === "cash"
+                      ? t("payCash")
+                      : t("pay")}
               </button>
             </aside>
           </form>

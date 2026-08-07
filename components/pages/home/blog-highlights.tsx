@@ -1,16 +1,20 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { BlogCard } from "@/components/shared/blog-card";
 import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { blogPosts } from "@/lib/data/content";
+import { getBlogPosts } from "@/lib/api/catalog";
 import { Link } from "@/lib/i18n/navigation";
 
-export function BlogHighlights() {
-  const t = useTranslations("Home.blog");
-  const tCommon = useTranslations("Common");
-  const featured = blogPosts.filter((post) => post.featured).slice(0, 3);
+export async function BlogHighlights() {
+  const t = await getTranslations("Home.blog");
+  const tCommon = await getTranslations("Common");
+  const posts = await getBlogPosts();
+  // CMS-authored posts carry no `featured` flag, so the newest three stand in
+  // once the shipped catalogue is superseded.
+  const highlighted = posts.filter((post) => post.featured);
+  const featured = (highlighted.length ? highlighted : posts).slice(0, 3);
 
   return (
     <section className="relative isolate py-14 lg:py-20">
