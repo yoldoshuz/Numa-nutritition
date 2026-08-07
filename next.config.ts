@@ -20,13 +20,13 @@ const apiOrigin = (() => {
 
 const remotePatterns = apiOrigin
   ? [
-      {
-        protocol: apiOrigin.protocol.replace(":", "") as "http" | "https",
-        hostname: apiOrigin.hostname,
-        port: apiOrigin.port || undefined,
-        pathname: "/public/**",
-      },
-    ]
+    {
+      protocol: apiOrigin.protocol.replace(":", "") as "http" | "https",
+      hostname: apiOrigin.hostname,
+      port: apiOrigin.port || undefined,
+      pathname: "/public/**",
+    },
+  ]
   : [];
 
 const nextConfig: NextConfig = {

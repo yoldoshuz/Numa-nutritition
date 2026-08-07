@@ -5,7 +5,7 @@
  * Left empty the storefront runs entirely on its bundled static catalogue,
  * which is exactly what a preview deploy without a backend should do.
  */
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, "") ?? "";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, "") ?? "https://numa.yoldosh.uz/api/v1";
 
 /** This storefront's tenant in the multi-store backend. */
 export const STORE = "nutrition" as const;
