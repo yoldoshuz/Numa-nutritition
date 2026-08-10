@@ -130,12 +130,41 @@ export function CartProvider({
   // A failed cart read means no usable server cart for this session.
   const online = serverBacked && !cartQuery.isError;
 
-  const lines = useMemo(
-    () =>
-      optimistic ??
-      (online && cartQuery.data ? toLines(cartQuery.data) : localLines),
-    [optimistic, online, cartQuery.data, localLines],
-  );
+  const idBySlug = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const product of catalog ?? []) {
+      if (product.id) map.set(product.slug, product.id);
+    }
+    return map;
+  }, [catalog]);
+
+  /**
+   * What the basket shows.
+   *
+   * The server snapshot wins for anything the server knows about, but it must
+   * not be allowed to erase a line the server was never told about. A product
+   * with no backend id — one resolved from the static catalogue, or reached
+   * before the catalogue finished loading — is added locally with no request
+   * behind it; reading straight from the server snapshot then dropped it on the
+   * very next render, so adding such an item looked like the basket refused it.
+   * Worse, the mirror below wrote that empty result back to localStorage, so
+   * the line was gone for good.
+   *
+   * Server lines and local-only lines are therefore merged rather than one
+   * replacing the other.
+   */
+  const lines = useMemo(() => {
+    if (optimistic) return optimistic;
+    if (!online || !cartQuery.data) return localLines;
+
+    const serverLines = toLines(cartQuery.data);
+    const onServer = new Set(serverLines.map((line) => line.slug));
+    const localOnly = localLines.filter(
+      (line) => !onServer.has(line.slug) && !idBySlug.has(line.slug),
+    );
+
+    return localOnly.length ? [...serverLines, ...localOnly] : serverLines;
+  }, [optimistic, online, cartQuery.data, localLines, idBySlug]);
 
   // Keep the mirror current so a mid-session outage does not empty the basket.
   useEffect(() => {
@@ -147,14 +176,6 @@ export function CartProvider({
     for (const product of staticProducts) map.set(product.slug, product);
     // API products win: they carry ids, live prices and stock.
     for (const product of catalog ?? []) map.set(product.slug, product);
-    return map;
-  }, [catalog]);
-
-  const idBySlug = useMemo(() => {
-    const map = new Map<string, string>();
-    for (const product of catalog ?? []) {
-      if (product.id) map.set(product.slug, product.id);
-    }
     return map;
   }, [catalog]);
 

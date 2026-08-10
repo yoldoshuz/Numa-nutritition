@@ -160,7 +160,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
               <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted-ink">
                 {articleNote ?? tBlog("buy.subtitle")}
               </p>
-              <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <ul className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {articleProducts.map((product) => (
                   <li key={product.slug} className="h-full">
                     <ProductCard product={product} className="h-full" />

@@ -60,18 +60,26 @@ export function ProductCard({
         <Price value={product.price} className="mt-auto pt-2 text-base sm:text-[1.0625rem]" />
       </div>
 
-      <div className="relative z-10 mt-4 flex items-center gap-2">
+      {/*
+        Wraps instead of squeezing. Two `flex-1` buttons in a fixed row only fit
+        while the card is wide; drop the card into a three-across grid inside an
+        article and "Подробнее" gets crushed out of its own button. `flex-wrap`
+        plus a minimum width lets the pair stack the moment the card is too
+        narrow, which depends on the card, not on the viewport — the same card
+        renders at four widths across this storefront.
+      */}
+      <div className="relative z-10 mt-4 flex flex-wrap items-center gap-2">
         <AddToCartButton
           slug={product.slug}
           label={t("buy")}
-          className="h-10 flex-1 px-3 text-[0.8125rem]"
+          className="h-10 min-w-30 flex-1 px-3 text-[0.8125rem] whitespace-nowrap"
         />
         <Link
           href={href}
-          className="inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg border border-brand-300 px-3 text-[0.8125rem] font-medium text-brand-700 transition-colors duration-200 hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="inline-flex h-10 min-w-30 flex-1 items-center justify-center gap-1.5 rounded-lg border border-brand-300 px-3 text-[0.8125rem] font-medium whitespace-nowrap text-brand-700 transition-colors duration-200 hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
           {t("details")}
-          <ArrowRight className="size-3.5" />
+          <ArrowRight className="size-3.5 shrink-0" />
         </Link>
       </div>
     </article>

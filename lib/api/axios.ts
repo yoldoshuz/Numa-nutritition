@@ -70,13 +70,36 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   return config;
 });
 
+/** Pulls the guest cart token out of a cart response body. */
+function tokenFromBody(payload: unknown): string | null {
+  const data = (payload as { data?: { sessionToken?: unknown } } | undefined)?.data;
+  const token = data?.sessionToken;
+  return typeof token === "string" && token ? token : null;
+}
+
 api.interceptors.response.use(
   (response: AxiosResponse<ApiEnvelope<unknown>>) => {
-    // The backend echoes the guest cart token on every cart response.
+    const payload = response.data;
+
+    // The guest cart token arrives two ways and we take whichever we can get.
+    //
+    // The `X-Cart-Token` response header is the documented channel, but a
+    // cross-origin browser only sees it when the server names it in
+    // `Access-Control-Expose-Headers`, and any proxy or CDN in front of the API
+    // can drop it. When that happens the token is never persisted, every
+    // request opens a brand new cart, and the basket looks like it silently
+    // refuses to hold anything — which is exactly the bug this replaces.
+    //
+    // The body is not subject to any of that: every cart response already
+    // carries `sessionToken`, so it is the reliable source and the header is
+    // just a faster one.
     const issued = response.headers["x-cart-token"];
     if (typeof issued === "string" && issued) writeCartToken(issued);
+    else {
+      const fromBody = tokenFromBody(payload);
+      if (fromBody) writeCartToken(fromBody);
+    }
 
-    const payload = response.data;
     if (!payload?.success) {
       throw new ApiError(payload?.message ?? "Request failed", response.status, payload?.errors);
     }
