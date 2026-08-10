@@ -103,3 +103,34 @@ export async function getRelatedPosts(slug: string, limit = 3): Promise<BlogPost
   const all = await getBlogPosts();
   return all.filter((post) => post.slug !== slug).slice(0, limit);
 }
+
+/**
+ * The products an article recommends, with the editor's note for the lead one.
+ *
+ * An article that explains what a formula does and then stops is a dead end —
+ * the reader has to go back to the catalogue and work out which bottle was
+ * meant. The list is curated per article in the admin CMS, so what it offers is
+ * always what the text is about.
+ *
+ * Resolved against the storefront's own catalogue rather than built from the
+ * junction's trimmed payload, so these cards carry the same imagery, badges and
+ * copy as everywhere else. Empty when the API is unreachable — the strip is
+ * conditional, not a hole in the layout.
+ */
+export async function getArticleProducts(
+  slug: string,
+): Promise<{ products: Product[]; note: string | null }> {
+  const api = await tryFetch(() => getBlogPostBySlug(slug));
+  const rows = [...(api?.products ?? [])].sort((a, b) => a.sortOrder - b.sortOrder);
+  if (!rows.length) return { products: [], note: null };
+
+  const catalogue = await getProducts();
+  const bySlug = new Map(catalogue.map((product) => [product.slug, product]));
+
+  return {
+    products: rows
+      .map((row) => bySlug.get(row.product?.slug ?? ""))
+      .filter((product): product is Product => product !== undefined),
+    note: rows.find((row) => row.note)?.note ?? null,
+  };
+}

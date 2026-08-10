@@ -69,7 +69,8 @@
     "pcs": "dona",
     "free": "Bepul",
     "required": "Majburiy maydon",
-    "loading": "Yuklanmoqda…"
+    "loading": "Yuklanmoqda…",
+    "otherBrands": "NUMA ning boshqa loyihalari"
   },
   "Nav": {
     "home": "Bosh sahifa",
@@ -1617,6 +1618,10 @@
     "description": "Ilmiy yondashuv, ishlab chiqarish va haqiqiy hikoyalar — NUMA Nutrition haqida bilish kerak bo'lgan hamma narsa",
     "readingTime": "{minutes} daqiqa o'qish",
     "relatedTitle": "O'xshash maqolalar",
+    "buy": {
+      "title": "Ushbu maqoladagi mahsulotlar",
+      "subtitle": "Yuqorida so'z yuritilgan mahsulotlarni shu yerdan buyurtma qilish mumkin"
+    },
     "backToBlog": "Barcha maqolalar",
     "categories": {
       "production": "Ishlab chiqarish",
@@ -1914,5 +1919,11 @@
         }
       ]
     }
+  },
+  "Brands": {
+    "family": "NUMA FAMILY",
+    "kids": "NUMA KIDS",
+    "tabobat": "NABAVIY TABOBAT",
+    "catering": "NUMA CATERING"
   }
 }

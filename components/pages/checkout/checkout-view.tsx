@@ -3,13 +3,14 @@
 import Image from "next/image";
 import { CircleCheck, Loader2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 import { Container } from "@/components/shared/container";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCart, useCheckout } from "@/hooks";
 import { enabledPaymentMethods, normalizePhone } from "@/lib/api/checkout";
+import { formatUzPhoneInput, UZ_PHONE_PREFIX } from "@/lib/phone";
 import type { PaymentMethod } from "@/lib/api/types";
 import { formatAmount } from "@/lib/format";
 import { Link } from "@/lib/i18n/navigation";
@@ -136,6 +137,19 @@ export function CheckoutView() {
                         inputMode={field === "phone" ? "tel" : undefined}
                         autoComplete={autoComplete[field]}
                         placeholder={t(`${field}Placeholder`)}
+                        {...(field === "phone"
+                          ? {
+                              // The field carries the country code and regroups
+                              // digits as they are typed, so what the customer
+                              // sees is what the API will accept.
+                              defaultValue: UZ_PHONE_PREFIX,
+                              onInput: (event: FormEvent<HTMLInputElement>) => {
+                                event.currentTarget.value = formatUzPhoneInput(
+                                  event.currentTarget.value,
+                                );
+                              },
+                            }
+                          : {})}
                         className="h-12 rounded-lg border-line px-4 text-sm"
                       />
                     </div>

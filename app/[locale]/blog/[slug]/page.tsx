@@ -10,7 +10,8 @@ import { BlogCard } from "@/components/shared/blog-card";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
-import { getBlogPost, getRelatedPosts } from "@/lib/api/catalog";
+import { ProductCard } from "@/components/shared/product-card";
+import { getArticleProducts, getBlogPost, getRelatedPosts } from "@/lib/api/catalog";
 import { blogPosts as staticBlogPosts } from "@/lib/data/content";
 import { formatDate } from "@/lib/format";
 import { locales } from "@/lib/i18n/routing";
@@ -67,6 +68,8 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
   const sections = t.raw("sections") as Section[];
   const related = await getRelatedPosts(slug);
+  // What the article is about, offered for sale where the reader finishes it.
+  const { products: articleProducts, note: articleNote } = await getArticleProducts(slug);
   const url = localizedUrl(locale, `/blog/${slug}`);
 
   return (
@@ -148,6 +151,24 @@ export default async function ArticlePage({ params }: { params: Params }) {
           ))}
 
           <p className="mt-7 text-[0.9375rem] leading-relaxed text-ink-soft">{t("outro")}</p>
+
+          {articleProducts.length > 0 ? (
+            <aside className="mt-12 rounded-2xl border border-brand-200 bg-surface-mint p-6 sm:p-8">
+              <h2 className="font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                {tBlog("buy.title")}
+              </h2>
+              <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted-ink">
+                {articleNote ?? tBlog("buy.subtitle")}
+              </p>
+              <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {articleProducts.map((product) => (
+                  <li key={product.slug} className="h-full">
+                    <ProductCard product={product} className="h-full" />
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          ) : null}
 
           <div className="mt-8 border-t border-line pt-6">
             <ShareLinks url={url} title={t("title")} />

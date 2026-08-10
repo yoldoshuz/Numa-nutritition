@@ -6,7 +6,7 @@ import { CartButton } from "@/components/layout/cart-button";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Container } from "@/components/shared/container";
-import { Logo } from "@/components/shared/logo";
+import { BrandSwitcher } from "@/components/layout/brand-switcher";
 import { useScrolled } from "@/hooks";
 import { mainNav } from "@/lib/data/content";
 import { Link, usePathname } from "@/lib/i18n/navigation";
@@ -34,7 +34,7 @@ export function Header() {
       </a>
 
       <Container className="flex h-[4.5rem] items-center justify-between gap-4 lg:h-[6.5rem]">
-        <Logo />
+        <BrandSwitcher />
 
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex xl:gap-12">
           {mainNav.map((item) => {

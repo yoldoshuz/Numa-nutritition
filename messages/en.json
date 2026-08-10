@@ -69,7 +69,8 @@
     "pcs": "pcs",
     "free": "Free",
     "required": "Required field",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "otherBrands": "Other NUMA projects"
   },
   "Nav": {
     "home": "Home",
@@ -1617,6 +1618,10 @@
     "description": "The scientific approach, manufacturing and real stories — everything worth knowing about NUMA Nutrition",
     "readingTime": "{minutes} min read",
     "relatedTitle": "Related articles",
+    "buy": {
+      "title": "Products from this article",
+      "subtitle": "What the article is about, orderable right here"
+    },
     "backToBlog": "All articles",
     "categories": {
       "production": "Manufacturing",
@@ -1914,5 +1919,11 @@
         }
       ]
     }
+  },
+  "Brands": {
+    "family": "NUMA FAMILY",
+    "kids": "NUMA KIDS",
+    "tabobat": "NABAVIY TABOBAT",
+    "catering": "NUMA CATERING"
   }
 }

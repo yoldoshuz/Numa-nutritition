@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Link } from "@/lib/i18n/navigation";
+import { formatUzPhoneInput } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 
 type FieldName = "name" | "phone" | "question";
@@ -97,7 +98,9 @@ export function ConsultationForm() {
               type="tel"
               autoComplete="tel"
               value={values.phone}
-              onChange={(event) => update("phone", event.target.value)}
+              onChange={(event) =>
+                update("phone", formatUzPhoneInput(event.target.value))
+              }
               placeholder={t("phonePlaceholder")}
               aria-invalid={Boolean(errors.phone)}
               aria-describedby={errors.phone ? "phone-error" : undefined}

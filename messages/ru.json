@@ -69,7 +69,8 @@
     "pcs": "шт",
     "free": "Бесплатно",
     "required": "Обязательное поле",
-    "loading": "Загрузка…"
+    "loading": "Загрузка…",
+    "otherBrands": "Другие проекты NUMA"
   },
   "Nav": {
     "home": "Главная",
@@ -1617,6 +1618,10 @@
     "description": "Научный подход, производство и реальные истории — всё, что стоит знать о продукции NUMA Nutrition",
     "readingTime": "{minutes} мин чтения",
     "relatedTitle": "Похожие статьи",
+    "buy": {
+      "title": "Продукты из этой статьи",
+      "subtitle": "То, о чём шла речь выше — можно заказать прямо отсюда"
+    },
     "backToBlog": "Все статьи",
     "categories": {
       "production": "Производство",
@@ -1914,5 +1919,11 @@
         }
       ]
     }
+  },
+  "Brands": {
+    "family": "NUMA FAMILY",
+    "kids": "NUMA KIDS",
+    "tabobat": "NABAVIY TABOBAT",
+    "catering": "NUMA CATERING"
   }
 }

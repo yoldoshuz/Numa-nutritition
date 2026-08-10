@@ -115,6 +115,21 @@ export interface ApiBlogPost {
   tags: string[];
   readTimeMinutes: number | null;
   viewCount: number;
+  /**
+   * Products the article recommends, curated in the admin CMS
+   * (`blog_post_products`). Carried by the by-slug response only — the feed
+   * omits it.
+   */
+  products?: ApiBlogPostProduct[];
+}
+
+/** One row of the blog ↔ product junction. Only the slug and note are used. */
+export interface ApiBlogPostProduct {
+  productId: string;
+  /** The editor's line, carried by the lead product only. */
+  note: string | null;
+  sortOrder: number;
+  product: { id: string; slug: string };
 }
 
 /* ── cart / checkout ─────────────────────────────────────────────────────── */
