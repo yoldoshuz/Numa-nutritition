@@ -30,12 +30,20 @@ export const products: Product[] = [
     price: 250000,
     badge: "hit",
     form: "honey",
-    image: "/Asset 1 1.png",
+    // Единственный снимок King Bee в приемлемом разрешении — Asset 1 1-7.png
+    // (327×493). Asset 1 1.png / Asset 1 1-1.png — иконка 112×169, в деталке
+    // выглядит мылом. Слоты ниже намеренно ссылаются на один файл: галерея и
+    // benefitSlides используют путь как React key, поэтому дубликаты в массивах
+    // недопустимы — отсюда пустой gallery и один слайд. Раньше здесь стояли
+    // Rectangle 1699-6/1700-6/1702-6, то есть фото Cardio Control на странице
+    // King Bee. Развернуть обратно в полноценную галерею можно, как только
+    // появится съёмка King Bee с нескольких ракурсов.
+    image: "/Asset 1 1-7.png",
     hero: "/Asset 1 1-7.png",
-    gallery: ["/Asset 1 1-1.png", "/Asset 1 1-7.png", "/Rectangle 1699-6.png"],
-    usage: { small: ["/Rectangle 1702-6.png", "/Rectangle 1700-6.png"], wide: "/Rectangle 1701.png" },
-    benefitSlides: ["/Rectangle 1702-6.png", "/Rectangle 1699-6.png", "/Rectangle 1700-6.png"],
-    ringImage: "/Asset 1 1-1.png",
+    gallery: [],
+    usage: { small: ["/Asset 1 1-7.png", "/Asset 1 1-7.png"], wide: "/Asset 1 1-7.png" },
+    benefitSlides: ["/Asset 1 1-7.png"],
+    ringImage: "/Asset 1 1-7.png",
     statImage: "/Asset 1 1-7.png",
     featured: true,
     rating: 5,
