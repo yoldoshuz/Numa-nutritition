@@ -48,14 +48,15 @@ export function CartView() {
                 >
                   <Link
                     href={`/products/${item.slug}`}
-                    className="relative grid size-24 shrink-0 place-items-center rounded-xl border border-brand-200 bg-surface-mint sm:size-28"
+                    className="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-xl border border-brand-200 bg-surface-mint sm:size-28"
                   >
                     <Image
                       src={item.product.image}
                       alt=""
-                      width={90}
-                      height={120}
-                      className="h-[85%] w-auto object-contain"
+                      width={112}
+                      height={112}
+                      sizes="112px"
+                      className="h-full w-full object-contain p-2.5"
                     />
                   </Link>
 

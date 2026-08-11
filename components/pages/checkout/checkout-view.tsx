@@ -229,13 +229,14 @@ export function CheckoutView() {
               <ul className="flex flex-col gap-4">
                 {items.map((item) => (
                   <li key={item.slug} className="flex items-center gap-4">
-                    <span className="grid size-16 shrink-0 place-items-center rounded-xl border border-brand-200 bg-surface-mint">
+                    <span className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-xl border border-brand-200 bg-surface-mint">
                       <Image
                         src={item.product.image}
                         alt=""
-                        width={54}
-                        height={72}
-                        className="h-[85%] w-auto object-contain"
+                        width={64}
+                        height={64}
+                        sizes="64px"
+                        className="h-full w-full object-contain p-1.5"
                       />
                     </span>
                     <span className="min-w-0 flex-1 leading-tight">

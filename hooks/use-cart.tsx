@@ -182,12 +182,40 @@ export function CartProvider({
   const optimisticRef = useRef<typeof optimistic>(null);
   optimisticRef.current = optimistic;
 
+  /**
+   * Sequence guard for cart writes.
+   *
+   * Holding down "+" fires a write per press. The responses are independent
+   * requests and come back in whatever order the network gives them, and each
+   * one used to be written straight into the query cache — so a stale snapshot
+   * landing after a fresh one dragged the quantity backwards and the counter
+   * visibly walked 1, 2, 3… up to the real number instead of just showing it.
+   *
+   * `issued` is the ticket taken when a write starts; `settled` is the newest
+   * ticket whose response has been accepted. A response older than one already
+   * accepted is dropped, and the optimistic projection is only cleared by the
+   * last write in flight — so the basket shows the number the customer clicked
+   * to, from the first press until the server agrees.
+   */
+  const issued = useRef(0);
+  const settled = useRef(0);
+
   const writeCart = useMutation({
-    mutationFn: (run: () => Promise<ApiCart | null>) => run(),
-    onSuccess: (cart) => {
+    mutationFn: (run: () => Promise<ApiCart | null>) => {
+      const ticket = ++issued.current;
+      return run().then((cart) => ({ cart, ticket }));
+    },
+    onSuccess: ({ cart, ticket }) => {
+      // Superseded by a later write — its response is the current truth.
+      if (ticket < settled.current) return;
+      settled.current = ticket;
+
       if (cart) queryClient.setQueryData(queryKeys.cart(), cart);
       else queryClient.invalidateQueries({ queryKey: queryKeys.cart() });
-      setOptimistic(null);
+
+      // Anything still in flight is newer than this response; keep showing the
+      // optimistic value until it lands, or the count would flicker back.
+      if (ticket === issued.current) setOptimistic(null);
     },
     // A failed write leaves the projection in place: the local mirror is the
     // truth from here on, and snapping the basket back would lose the item.
