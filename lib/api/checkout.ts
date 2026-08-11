@@ -50,6 +50,13 @@ export function newIdempotencyKey(): string {
 /** Maps a failed checkout onto the message key the form should render. */
 export function checkoutErrorKey(error: unknown): string {
   if (error instanceof ApiError) {
+    // Checkout re-checks that every product is still on sale, not just that it
+    // was when it went into the basket — a cart lives seven days. The backend
+    // names the offending product in the message; the key here is generic
+    // because the fix is the same either way: refetch and drop the line.
+    if (error.status === 400 && /no longer available for sale/i.test(error.message)) {
+      return "errorUnavailable";
+    }
     if (error.status === 409) return "errorStock";
     if (error.status === 0 || error.status === 408) return "errorOffline";
   }

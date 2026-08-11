@@ -134,12 +134,38 @@ export interface ApiBlogPostProduct {
 
 /* ── cart / checkout ─────────────────────────────────────────────────────── */
 
+/**
+ * Money for the whole cart, computed server-side.
+ *
+ * The storefront used to sum the basket itself, which drifted from what the
+ * customer was actually charged: the reduce ran on floats and reached for
+ * `product.price` rather than the discounted one. These come off the same
+ * code path that prices the order, in whole tiyin, so `total` is by
+ * construction the `totalAmount` checkout will create.
+ */
+export interface ApiCartTotals {
+  /** Amount due, UZS. */
+  total: number;
+  /** The same amount in whole tiyin (1 UZS = 100 tiyin), for exact compares. */
+  totalTiyin: number;
+  /** Sum of the unavailable lines. Deliberately NOT part of `total`. */
+  unavailableTotal: number;
+  /** Number of lines in the cart, unavailable ones included. */
+  itemsCount: number;
+  /** Units across the available lines only. */
+  totalQuantity: number;
+}
+
 export interface ApiCartItem {
   id: string;
   productId: string;
   quantity: number;
   product: ApiProduct;
   isAvailable: boolean;
+  /** Price this line will actually go into the order at (discountPrice ?? price). */
+  unitPrice: number | null;
+  /** unitPrice × quantity. */
+  lineTotal: number | null;
 }
 
 export interface ApiCart {
@@ -148,6 +174,48 @@ export interface ApiCart {
   userId: string | null;
   sessionToken: string | null;
   items: ApiCartItem[];
+  /** Always present, including for a cart that does not exist yet. */
+  totals: ApiCartTotals;
+}
+
+/** `status` on an order, as returned by GET /orders/:store/:id/status. */
+export type OrderLifecycle = "new" | "processing" | "completed" | "cancelled";
+
+export type OrderPaymentStatus =
+  | "unpaid"
+  | "pending"
+  | "paid"
+  | "failed"
+  | "expired"
+  | "refunded";
+
+/**
+ * The only trustworthy answer to "did the customer pay".
+ *
+ * A provider redirect proves nothing — the shopper who paid, the shopper whose
+ * card was declined and the shopper who hit back all land on the same return
+ * URL. Payment is confirmed by the provider's server-to-server callback, and
+ * this endpoint reports what that callback established.
+ */
+export interface ApiOrderStatus {
+  orderId: string;
+  store: string;
+  status: OrderLifecycle;
+  paymentStatus: OrderPaymentStatus;
+  paymentMethod: PaymentMethod | null;
+  totalAmount: number;
+  /** Money confirmed by the callback. */
+  isPaid: boolean;
+  /** Callback has not arrived yet — poll again before deciding anything. */
+  isAwaitingPayment: boolean;
+  /** Payment did not happen and the order was rolled back. */
+  isFailed: boolean;
+  /** Always false: a rolled-back order releases its stock and cannot be repaid. */
+  canRetryPayment: boolean;
+  /** The rolled-back lines are back in the cart. */
+  cartRestored: boolean;
+  reservedUntil: string | null;
+  createdAt: string;
 }
 
 export type PaymentMethod = "cash" | "click" | "payme" | "uzum";

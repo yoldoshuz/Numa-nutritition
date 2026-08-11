@@ -7,6 +7,7 @@ import type {
   ApiCart,
   ApiCheckoutResult,
   ApiFeaturedList,
+  ApiOrderStatus,
   ApiPaymentUrl,
   ApiProduct,
   ApiProductList,
@@ -73,4 +74,15 @@ export const getPaymentUrl = (orderId: string, method: Exclude<PaymentMethod, "c
   request<ApiPaymentUrl>(
     "get",
     `${CHECKOUT_URL_PATH[method]}?orderId=${encodeURIComponent(orderId)}`,
+  );
+
+/**
+ * The order's real state, straight from the record the provider callback
+ * writes. This is what the return page must ask — the redirect that brought
+ * the customer back carries no proof of payment.
+ */
+export const getOrderStatus = (orderId: string) =>
+  request<ApiOrderStatus>(
+    "get",
+    `/orders/${STORE}/${encodeURIComponent(orderId)}/status`,
   );

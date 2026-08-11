@@ -20,7 +20,7 @@ import {
   postCartItem,
 } from "@/lib/api/endpoints";
 import { queryKeys } from "@/lib/api/query-keys";
-import type { ApiCart } from "@/lib/api/types";
+import type { ApiCart, ApiCartTotals } from "@/lib/api/types";
 import { products as staticProducts } from "@/lib/data/products";
 import type { CartLine, CartLineWithProduct, Product } from "@/types";
 
@@ -65,7 +65,18 @@ interface CartContextValue {
   lines: CartLine[];
   items: CartLineWithProduct[];
   count: number;
+  /**
+   * Amount due. Now just `totals.total` — the server prices the basket with the
+   * same code that prices the order, so this is what the customer will be
+   * charged rather than a client-side guess.
+   */
   subtotal: number;
+  /** Server-computed money for the whole cart. Never absent. */
+  totals: ApiCartTotals;
+  /** Per-line server truth, keyed by slug. Empty while offline. */
+  lineInfo: Map<string, CartLineInfo>;
+  /** Something in the basket cannot be ordered — block checkout on this. */
+  hasUnavailable: boolean;
   /** `false` until the cart has hydrated — prevents an SSR/client mismatch. */
   ready: boolean;
   /** True while a server write is in flight. */
@@ -79,7 +90,15 @@ interface CartContextValue {
   refresh: () => void;
 }
 
+/** What the server says about one line, as far as the views care. */
+export interface CartLineInfo {
+  unitPrice: number | null;
+  lineTotal: number | null;
+  isAvailable: boolean;
+}
+
 const CartContext = createContext<CartContextValue | null>(null);
+
 
 /**
  * The cart runs against the backend when one is configured and reachable, and
@@ -306,6 +325,54 @@ export function CartProvider({
     [lines, catalogBySlug],
   );
 
+  /**
+   * Prices and availability per line, straight off the last cart response.
+   * Keyed by slug because that is what the local mirror stores; the API item
+   * carries its product, so the two line up.
+   */
+  const serverLines = useMemo(() => {
+    const map = new Map<string, CartLineInfo>();
+    for (const item of cartQuery.data?.items ?? []) {
+      if (!item.product?.slug) continue;
+      map.set(item.product.slug, {
+        unitPrice: item.unitPrice ?? null,
+        lineTotal: item.lineTotal ?? null,
+        isAvailable: item.isAvailable,
+      });
+    }
+    return map;
+  }, [cartQuery.data]);
+
+  /**
+   * Server totals when we have them, a local sum when we do not.
+   *
+   * The fallback only runs with the API unreachable, where the local catalogue
+   * is all there is — it has no discount field, so `price` is the honest
+   * number to show. Online, nothing is recomputed here: `total` has to match
+   * the order to the tiyin, and a float reduce over the same lines does not.
+   */
+  const totals = useMemo<ApiCartTotals>(() => {
+    const server = cartQuery.data?.totals;
+    if (serverBacked && server) return server;
+
+    const total = items.reduce(
+      (sum, item) => sum + item.product.price * item.quantity,
+      0,
+    );
+    return {
+      total,
+      totalTiyin: Math.round(total * 100),
+      unavailableTotal: 0,
+      itemsCount: items.length,
+      totalQuantity: items.reduce((sum, item) => sum + item.quantity, 0),
+    };
+  }, [serverBacked, cartQuery.data, items]);
+
+  const hasUnavailable = useMemo(
+    () => items.some((item) => serverLines.get(item.slug)?.isAvailable === false),
+    [items, serverLines],
+  );
+
   const value = useMemo<CartContextValue>(
     () => ({
       lines,
@@ -314,7 +381,10 @@ export function CartProvider({
       pending: writeCart.isPending,
       online,
       count: items.reduce((total, item) => total + item.quantity, 0),
-      subtotal: items.reduce((total, item) => total + item.product.price * item.quantity, 0),
+      subtotal: totals.total,
+      totals,
+      lineInfo: serverLines,
+      hasUnavailable,
       add,
       setQuantity,
       remove,
@@ -324,6 +394,9 @@ export function CartProvider({
     [
       lines,
       items,
+      totals,
+      serverLines,
+      hasUnavailable,
       hydrated,
       serverBacked,
       cartQuery.isPending,

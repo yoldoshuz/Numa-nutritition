@@ -18,7 +18,8 @@ export function CartView() {
   const t = useTranslations("Cart");
   const tCommon = useTranslations("Common");
   const tProduct = useTranslations("Product");
-  const { items, count, subtotal, setQuantity, remove, ready } = useCart();
+  const { items, count, subtotal, totals, lineInfo, hasUnavailable, setQuantity, remove, ready } =
+    useCart();
 
   return (
     <section className="pt-8 pb-14 lg:pt-10 lg:pb-20">
@@ -41,10 +42,15 @@ export function CartView() {
         ) : (
           <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
             <ul className="flex flex-col gap-4 rounded-2xl border border-line bg-white p-4 shadow-card sm:p-6">
-              {items.map((item) => (
+              {items.map((item) => {
+                const info = lineInfo.get(item.slug);
+                const unavailable = info?.isAvailable === false;
+                return (
                 <li
                   key={item.slug}
-                  className="flex flex-col gap-4 border-b border-line pb-4 last:border-b-0 last:pb-0 sm:flex-row sm:items-center"
+                  className={`flex flex-col gap-4 border-b border-line pb-4 last:border-b-0 last:pb-0 sm:flex-row sm:items-center${
+                    unavailable ? " opacity-60" : ""
+                  }`}
                 >
                   <Link
                     href={`/products/${item.slug}`}
@@ -71,8 +77,14 @@ export function CartView() {
                       {tProduct(`${item.slug}.specs.0.value`)}
                     </p>
                     <p className="mt-2 font-heading text-[0.9375rem] font-bold text-ink">
-                      {formatAmount(item.product.price, locale)} {tCommon("currency")}
+                      {formatAmount(info?.unitPrice ?? item.product.price, locale)}{" "}
+                      {tCommon("currency")}
                     </p>
+                    {unavailable ? (
+                      <p className="mt-1 text-[0.75rem] font-bold text-red-600">
+                        {t("unavailable")}
+                      </p>
+                    ) : null}
                   </div>
 
                   <div className="flex items-center gap-3">
@@ -94,7 +106,8 @@ export function CartView() {
                     </button>
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
 
             <aside className="flex h-fit flex-col gap-5 rounded-2xl bg-brand p-6 text-white shadow-card sm:p-7">
@@ -111,6 +124,14 @@ export function CartView() {
                   <dt className="text-white/90">{t("delivery")}</dt>
                   <dd className="font-bold">{tCommon("free")}</dd>
                 </div>
+                {totals.unavailableTotal > 0 ? (
+                  <div className="flex items-center justify-between">
+                    <dt className="text-white/90">{t("unavailableTotal")}</dt>
+                    <dd className="font-bold text-white/70 line-through">
+                      {formatAmount(totals.unavailableTotal, locale)} {tCommon("currency")}
+                    </dd>
+                  </div>
+                ) : null}
                 <div className="flex items-center justify-between border-t border-white/30 pt-3">
                   <dt className="font-bold">{t("total")}</dt>
                   <dd className="font-heading text-lg font-extrabold">
@@ -119,9 +140,25 @@ export function CartView() {
                 </div>
               </dl>
 
+              {/* Checkout would reject these lines anyway; say so here instead of
+                  letting the customer bounce off a 400 on the next screen. */}
+              {hasUnavailable ? (
+                <div className="rounded-lg bg-white/15 p-3 text-[0.8125rem] leading-snug text-white">
+                  {t("unavailableHint")}
+                </div>
+              ) : null}
+
               <Link
                 href="/checkout"
-                className="inline-flex h-12 items-center justify-center rounded-lg bg-white text-sm font-bold text-brand transition-all duration-200 hover:bg-brand-50 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                aria-disabled={hasUnavailable}
+                onClick={(event) => {
+                  if (hasUnavailable) event.preventDefault();
+                }}
+                className={`inline-flex h-12 items-center justify-center rounded-lg bg-white text-sm font-bold text-brand transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white${
+                  hasUnavailable
+                    ? " pointer-events-none opacity-50"
+                    : " hover:bg-brand-50 active:translate-y-px"
+                }`}
               >
                 {t("checkout")}
               </Link>

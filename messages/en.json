@@ -1786,7 +1786,10 @@
         "title": "24/7 support",
         "text": "We are always in touch"
       }
-    }
+    },
+    "unavailable": "Out of stock",
+    "unavailableTotal": "Not available to order",
+    "unavailableHint": "Remove the unavailable items to place the order."
   },
   "Checkout": {
     "title": "Checkout",
@@ -1825,7 +1828,8 @@
     "errorPayment": "The order was created but payment could not be opened. We'll contact you.",
     "errorOffline": "The server is unavailable. We'll take your order by phone.",
     "orderNumber": "Order number",
-    "payCash": "Place order"
+    "payCash": "Place order",
+    "errorUnavailable": "This product is no longer on sale. Refresh the cart and remove it."
   },
   "Consultation": {
     "titleFirst": "Consultation",
@@ -1925,5 +1929,22 @@
     "kids": "NUMA KIDS",
     "tabobat": "NABAVIY TABOBAT",
     "catering": "NUMA CATERING"
+  },
+  "PaymentReturn": {
+    "metaTitle": "Payment status",
+    "metaDescription": "Checking the payment status of your order.",
+    "checking": "Checking the payment…",
+    "paidTitle": "Order paid",
+    "paidText": "Payment confirmed. We'll contact you about delivery.",
+    "failedTitle": "Payment failed",
+    "failedText": "You were not charged. The items are back in your cart, so you can order again.",
+    "stillPendingTitle": "Payment is processing",
+    "stillPendingText": "This can take a few minutes. The status will appear in your orders — nothing is lost.",
+    "unknownTitle": "Could not check the payment",
+    "unknownText": "Refresh the page or check the status later.",
+    "missingOrder": "No order specified",
+    "orderRef": "Order number:",
+    "toCart": "Go to cart",
+    "toCatalog": "To catalogue"
   }
 }

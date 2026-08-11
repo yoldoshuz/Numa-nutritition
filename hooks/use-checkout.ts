@@ -50,13 +50,19 @@ export function useCheckout() {
       // Checkout consumes the server cart; mirror that locally either way.
       clear();
       queryClient.removeQueries({ queryKey: queryKeys.cart() });
-      setOrderId(order.id);
 
       if (method === "cash") {
+        // Nothing left to confirm — the order stands and is paid on delivery.
+        setOrderId(order.id);
         setPhase("idle");
         return;
       }
 
+      // Deliberately not setting orderId for an online method. It is what
+      // renders the "order placed" screen, and at this point nothing has been
+      // paid: the customer is about to be handed to the provider. Only the
+      // provider's server-to-server callback settles it, so the answer is read
+      // back on /payment/return rather than assumed here.
       setPhase("redirecting");
       try {
         const { url } = await getPaymentUrl(order.id, method);

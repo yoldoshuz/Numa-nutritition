@@ -1786,7 +1786,10 @@
         "title": "24/7 qo'llab-quvvatlash",
         "text": "Biz doimo aloqadamiz"
       }
-    }
+    },
+    "unavailable": "Mavjud emas",
+    "unavailableTotal": "Buyurtma uchun mavjud emas",
+    "unavailableHint": "Buyurtma berish uchun mavjud bo'lmagan mahsulotlarni o'chiring."
   },
   "Checkout": {
     "title": "Buyurtmani rasmiylashtirish",
@@ -1825,7 +1828,8 @@
     "errorPayment": "Buyurtma yaratildi, ammo to'lovni ochib bo'lmadi. Siz bilan bog'lanamiz.",
     "errorOffline": "Server mavjud emas. Buyurtmani telefon orqali qabul qilamiz.",
     "orderNumber": "Buyurtma raqami",
-    "payCash": "Buyurtma berish"
+    "payCash": "Buyurtma berish",
+    "errorUnavailable": "Mahsulot sotuvdan olindi. Savatni yangilang va uni o'chiring."
   },
   "Consultation": {
     "titleFirst": "Konsultatsiya",
@@ -1925,5 +1929,22 @@
     "kids": "NUMA KIDS",
     "tabobat": "NABAVIY TABOBAT",
     "catering": "NUMA CATERING"
+  },
+  "PaymentReturn": {
+    "metaTitle": "To'lov holati",
+    "metaDescription": "Buyurtmangiz to'lovi holatini tekshiryapmiz.",
+    "checking": "To'lov tekshirilmoqda…",
+    "paidTitle": "Buyurtma to'landi",
+    "paidText": "To'lov tasdiqlandi. Yetkazib berish bo'yicha siz bilan bog'lanamiz.",
+    "failedTitle": "To'lov amalga oshmadi",
+    "failedText": "Pul yechilmadi. Mahsulotlar savatga qaytdi — buyurtmani qayta rasmiylashtirishingiz mumkin.",
+    "stillPendingTitle": "To'lov qayta ishlanmoqda",
+    "stillPendingText": "Bu bir necha daqiqa olishi mumkin. Holat buyurtmalaringizda ko'rinadi — pul yo'qolmaydi.",
+    "unknownTitle": "To'lovni tekshirib bo'lmadi",
+    "unknownText": "Sahifani yangilang yoki holatni keyinroq tekshiring.",
+    "missingOrder": "Buyurtma ko'rsatilmagan",
+    "orderRef": "Buyurtma raqami:",
+    "toCart": "Savatga o'tish",
+    "toCatalog": "Katalogga"
   }
 }
