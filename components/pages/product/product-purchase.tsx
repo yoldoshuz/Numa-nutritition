@@ -26,6 +26,8 @@ export function ProductPurchase({ slug }: { slug: string }) {
 
   const quantity = inCart > 0 ? inCart : draft;
 
+  // The add button is the one thing a phone visitor came here to press, so it
+  // gets a taller target than the desktop row it shares with the stepper.
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
       <QuantityStepper
@@ -41,7 +43,7 @@ export function ProductPurchase({ slug }: { slug: string }) {
       {ready && inCart > 0 ? (
         <Link
           href="/cart"
-          className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-lg border-2 border-brand bg-brand-50 px-8 text-sm font-bold text-brand-700 transition-colors duration-200 hover:bg-brand-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg sm:h-12 sm:w-auto sm:flex-1 border-2 border-brand bg-brand-50 px-8 text-sm font-bold text-brand-700 transition-colors duration-200 hover:bg-brand-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
           {pending ? (
             <Loader2 className="size-4 animate-spin" />
@@ -54,7 +56,7 @@ export function ProductPurchase({ slug }: { slug: string }) {
         <button
           type="button"
           onClick={() => add(slug, draft)}
-          className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-brand px-8 text-sm font-bold text-white transition-all duration-200 hover:bg-brand-600 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg sm:h-12 sm:w-auto sm:flex-1 bg-brand px-8 text-sm font-bold text-white transition-all duration-200 hover:bg-brand-600 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
           {pending ? <Loader2 className="size-4 animate-spin" /> : null}
           {tCommon("addToCart")}

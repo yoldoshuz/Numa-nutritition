@@ -52,7 +52,7 @@ export function ProductUsage({ product }: { product: Product }) {
             slice of its label blown up past the point of recognition.
           */}
           <div className="grid gap-4 sm:grid-cols-[1.4fr_1fr]">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-mint">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[4/3]">
               <Image
                 src={product.usage.small[0]}
                 alt=""
@@ -61,7 +61,7 @@ export function ProductUsage({ product }: { product: Product }) {
                 className="object-contain"
               />
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-auto">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-auto">
               <Image
                 src={product.usage.small[1]}
                 alt=""
@@ -71,16 +71,28 @@ export function ProductUsage({ product }: { product: Product }) {
               />
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl bg-surface-mint sm:col-span-2">
-              <Image
-                src={product.usage.wide}
-                alt=""
-                width={780}
-                height={340}
-                sizes="(max-width: 1024px) 100vw, 660px"
-                className="h-full min-h-56 w-full object-contain"
-              />
-              <div className="absolute inset-y-0 right-0 flex w-full flex-col justify-center gap-2 bg-gradient-to-l from-brand via-brand/95 to-brand/0 p-6 sm:w-3/5 sm:pl-10">
+            {/*
+              Two panels rather than text over a picture: the product keeps a
+              plate of its own and the rules keep a dark green one, so nothing
+              has to be dimmed and the copy never lands on a label.
+
+              Stacked on a phone — product above, rules below — and split in
+              half from `sm`, photo on the left. Neither panel takes its height
+              from the image file, which is what used to stretch this block to
+              517px when the slot held an upright packshot.
+            */}
+            <div className="overflow-hidden rounded-2xl bg-surface-mint sm:col-span-2 sm:grid sm:min-h-96 sm:grid-cols-2">
+              <div className="relative aspect-[16/10] w-full sm:aspect-auto sm:h-full">
+                <Image
+                  src={product.usage.wide}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, 330px"
+                  className="object-contain p-4"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center gap-2 bg-gradient-to-t from-brand-900 to-brand-700 p-6 sm:bg-gradient-to-r sm:p-8">
                 <p className="text-sm font-bold text-white">{tProduct("importantTitle")}</p>
                 <ul className="flex flex-col gap-1.5">
                   {important.map((rule) => (

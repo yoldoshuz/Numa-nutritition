@@ -12,7 +12,7 @@ export function ProductGallery({ product, name }: { product: Product; name: stri
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-mint">
+      <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[4/3]">
         <Image
           key={slides[active]}
           src={slides[active]}

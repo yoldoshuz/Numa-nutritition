@@ -33,11 +33,12 @@ export function ProductBenefits({ product }: { product: Product }) {
             across the middle of the label and reads as a broken image.
 
             On a phone that band is only ~145px tall, which leaves an upright
-            bottle the size of a thumbnail, hence the deeper box below `sm`.
+            bottle the size of a thumbnail — so the box is a little deeper
+            below `sm`, but not so deep that one slide fills the screen.
           */}
           {product.benefitSlides.map((slide) => (
             <div
-              className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[16/7]"
+              className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[16/7]"
               key={slide}
             >
               <Image
