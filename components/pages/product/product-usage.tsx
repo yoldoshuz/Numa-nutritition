@@ -45,6 +45,12 @@ export function ProductUsage({ product }: { product: Product }) {
             ))}
           </ol>
 
+          {/*
+            Every box below letterboxes rather than crops: these slots are
+            filled from the product's uploaded photos, which are as often an
+            upright packshot as a wide frame, and a cover-crop of a bottle is a
+            slice of its label blown up past the point of recognition.
+          */}
           <div className="grid gap-4 sm:grid-cols-[1.4fr_1fr]">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-mint">
               <Image
@@ -52,7 +58,7 @@ export function ProductUsage({ product }: { product: Product }) {
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 60vw, 380px"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-auto">
@@ -61,7 +67,7 @@ export function ProductUsage({ product }: { product: Product }) {
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 40vw, 260px"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
 
@@ -72,7 +78,7 @@ export function ProductUsage({ product }: { product: Product }) {
                 width={780}
                 height={340}
                 sizes="(max-width: 1024px) 100vw, 660px"
-                className="h-full min-h-56 w-full object-cover"
+                className="h-full min-h-56 w-full object-contain"
               />
               <div className="absolute inset-y-0 right-0 flex w-full flex-col justify-center gap-2 bg-gradient-to-l from-brand via-brand/95 to-brand/0 p-6 sm:w-3/5 sm:pl-10">
                 <p className="text-sm font-bold text-white">{tProduct("importantTitle")}</p>

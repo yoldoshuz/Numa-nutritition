@@ -26,14 +26,26 @@ export function ProductBenefits({ product }: { product: Product }) {
           itemClassName="w-full"
           trackClassName="gap-4"
         >
+          {/*
+            The slot takes whatever the moderator uploaded — a wide lifestyle
+            frame or an upright packshot — so it letterboxes onto the mint plate
+            instead of cropping. A 16:7 crop of a bottle is a horizontal band
+            across the middle of the label and reads as a broken image.
+
+            On a phone that band is only ~145px tall, which leaves an upright
+            bottle the size of a thumbnail, hence the deeper box below `sm`.
+          */}
           {product.benefitSlides.map((slide) => (
-            <div className="relative aspect-[16/7] w-full overflow-hidden rounded-2xl bg-surface-mint" key={slide}>
+            <div
+              className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[16/7]"
+              key={slide}
+            >
               <Image
                 src={slide}
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 100vw, 1100px"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
           ))}

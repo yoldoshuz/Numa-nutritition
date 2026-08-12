@@ -39,12 +39,13 @@ export function ProductGallery({ product, name }: { product: Product; name: stri
                 : "border-transparent hover:border-brand-200"
             )}
           >
+            {/* Matches the main frame above: whole product, never a slice. */}
             <Image
               src={slide}
               alt=""
               fill
               sizes="180px"
-              className="object-cover"
+              className="object-contain p-1.5"
             />
           </button>
         ))}
