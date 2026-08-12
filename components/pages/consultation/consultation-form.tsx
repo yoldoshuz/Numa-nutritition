@@ -7,14 +7,18 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  classifyConsultationError,
+  postConsultation,
+  PROBLEM_MAX_LENGTH,
+  PROBLEM_MIN_LENGTH,
+} from "@/lib/api/consultation";
 import { Link } from "@/lib/i18n/navigation";
-import { formatUzPhoneInput } from "@/lib/phone";
+import { formatUzPhoneInput, toApiPhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 
 type FieldName = "name" | "phone" | "question";
 type Errors = Partial<Record<FieldName, string>>;
-
-const phonePattern = /^[+()\d\s-]{9,20}$/;
 
 export function ConsultationForm() {
   const t = useTranslations("Consultation");
@@ -24,31 +28,49 @@ export function ConsultationForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  function validate(): Errors {
+  function validate(apiPhone: string | null): Errors {
     const next: Errors = {};
     if (values.name.trim().length < 2) next.name = t("errors.name");
-    if (!phonePattern.test(values.phone.trim())) next.phone = t("errors.phone");
-    if (values.question.trim().length < 5) next.question = t("errors.question");
+    if (!apiPhone) next.phone = t("errors.phone");
+    if (values.question.trim().length < PROBLEM_MIN_LENGTH) {
+      next.question = t("errors.question");
+    }
     return next;
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = validate();
+    const apiPhone = toApiPhone(values.phone);
+    const nextErrors = validate(apiPhone);
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
+    setSubmitError(null);
+    if (Object.keys(nextErrors).length > 0 || !apiPhone) return;
 
     setSubmitting(true);
-    // Replaced with the real endpoint once the backend is connected.
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setSubmitting(false);
-    setDone(true);
-    setValues({ name: "", phone: "", question: "" });
+    try {
+      await postConsultation({
+        name: values.name.trim(),
+        phone: apiPhone,
+        problem: values.question.trim().slice(0, PROBLEM_MAX_LENGTH),
+      });
+      setDone(true);
+      setValues({ name: "", phone: "", question: "" });
+    } catch (error) {
+      setSubmitError(
+        classifyConsultationError(error) === "rateLimit"
+          ? t("errors.rateLimit")
+          : t("errors.network"),
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   function update(field: FieldName, value: string) {
     setValues((current) => ({ ...current, [field]: value }));
+    setSubmitError(null);
     if (!errors[field]) return;
     setErrors((current) => {
       const next = { ...current };
@@ -123,6 +145,8 @@ export function ConsultationForm() {
             id="question"
             name="question"
             rows={4}
+            minLength={PROBLEM_MIN_LENGTH}
+            maxLength={PROBLEM_MAX_LENGTH}
             value={values.question}
             onChange={(event) => update("question", event.target.value)}
             placeholder={t("questionPlaceholder")}
@@ -145,6 +169,12 @@ export function ConsultationForm() {
             {t("privacySecond")}
           </span>
         </p>
+
+        {submitError ? (
+          <p role="alert" className="text-center text-sm font-medium text-red-500">
+            {submitError}
+          </p>
+        ) : null}
 
         <button
           type="submit"

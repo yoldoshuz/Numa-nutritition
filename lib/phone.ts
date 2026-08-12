@@ -32,3 +32,15 @@ export function formatUzPhoneInput(input: string): string {
 
 /** Value a phone input starts life with, so the prefix is never typed by hand. */
 export const UZ_PHONE_PREFIX = "+998 ";
+
+/**
+ * The strict `+998XXXXXXXXX` the API demands, out of whatever the field
+ * currently shows. Returns null while the number is still incomplete, so a
+ * half-typed one is caught by the form instead of coming back as a 422.
+ */
+export function toApiPhone(input: string): string | null {
+  let digits = input.replace(/\D/g, "");
+  if (digits.startsWith("998")) digits = digits.slice(3);
+  else if (digits.length === 10 && digits.startsWith("8")) digits = digits.slice(1);
+  return digits.length === 9 ? `+998${digits}` : null;
+}

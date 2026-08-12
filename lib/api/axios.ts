@@ -126,7 +126,8 @@ export async function request<T>(
   method: "get" | "post" | "patch" | "delete",
   url: string,
   data?: unknown,
+  headers?: Record<string, string>,
 ): Promise<T> {
-  const response = await api.request<T>({ method, url, data });
+  const response = await api.request<T>({ method, url, data, headers });
   return response.data;
 }

@@ -4,6 +4,13 @@ import { getBlogPosts, getProducts } from "@/lib/api/catalog";
 import { defaultLocale, htmlLang, locales } from "@/lib/i18n/routing";
 import { localizedUrl } from "@/lib/seo";
 
+/**
+ * The catalogue and article list below are read with axios, which Next's fetch
+ * cache knows nothing about — without this the sitemap is whatever the backend
+ * answered at build time and never learns about a new product or article.
+ */
+export const revalidate = 300;
+
 interface Entry {
   path: string;
   priority: number;

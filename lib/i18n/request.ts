@@ -14,8 +14,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   // Live product and article copy is layered over the bundled bundle, so the
   // storefront reads from the CMS when the backend answers and silently keeps
-  // its shipped copy when it does not.
-  const overlay = await buildContentMessages(locale);
+  // its shipped copy when it does not. The bundle goes in as well, so a record
+  // the storefront already ships copy for is topped up rather than reset.
+  const overlay = await buildContentMessages(locale, bundled);
 
   return {
     locale,

@@ -1851,7 +1851,9 @@
     "errors": {
       "name": "Enter your name",
       "phone": "Enter a valid phone number",
-      "question": "Describe your question"
+      "question": "Describe your question — at least 10 characters",
+      "rateLimit": "Too many requests. Please try again later",
+      "network": "Could not send the request. Please try again"
     }
   },
   "NotFound": {

@@ -1851,7 +1851,9 @@
     "errors": {
       "name": "Ismingizni kiriting",
       "phone": "To'g'ri telefon raqamini kiriting",
-      "question": "Savolingizni tasvirlab bering"
+      "question": "Savolingizni tasvirlab bering — kamida 10 ta belgi",
+      "rateLimit": "Juda ko'p ariza yuborildi. Birozdan so'ng urinib ko'ring",
+      "network": "Arizani yuborib bo'lmadi. Yana bir bor urinib ko'ring"
     }
   },
   "NotFound": {
