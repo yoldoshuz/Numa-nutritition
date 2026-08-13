@@ -8,6 +8,13 @@ export type I18nText = Record<AppLocale, string>;
 /** Rich article bodies and product copy keep their structure per locale. */
 export type I18nRich<T> = Record<AppLocale, T>;
 
+/**
+ * The tenants of the shared backend. One customer account spans all of them, so
+ * the account screens legitimately show orders from stores this storefront does
+ * not itself sell.
+ */
+export type StoreSlug = "nutrition" | "kids" | "halal" | "family";
+
 export interface ApiEnvelope<T> {
   success: boolean;
   statusCode: number;
@@ -218,7 +225,18 @@ export interface ApiOrderStatus {
   createdAt: string;
 }
 
+/** Every method an order may carry, including ones no longer offered. */
 export type PaymentMethod = "cash" | "click" | "payme" | "uzum";
+
+/**
+ * What checkout may offer today.
+ *
+ * Payme is deliberately absent, and Uzum has no Merchant API keys — offering
+ * either would hand the customer a dead redirect. Orders placed earlier keep
+ * whatever method they were paid with, which is why `PaymentMethod` above stays
+ * wider than this.
+ */
+export type OfferedPaymentMethod = "cash" | "click";
 export type DeliveryType = "delivery" | "pickup";
 
 export interface CheckoutPayload {

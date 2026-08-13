@@ -25,3 +25,24 @@ export const isApiConfigured = (): boolean => API_BASE_URL.length > 0;
 
 /** localStorage key mirroring the backend's `X-Cart-Token`. */
 export const CART_TOKEN_STORAGE_KEY = `numa-cart-token:${STORE}`;
+
+/**
+ * localStorage key for the customer's token pair.
+ *
+ * Not scoped to the store: one Numa account covers every storefront, and each
+ * site is its own origin anyway, so scoping would only log people out whenever
+ * the slug changed.
+ */
+export const SESSION_STORAGE_KEY = "numa-session";
+
+/**
+ * Account calls get a longer budget than the catalogue.
+ *
+ * The 4s above exists because a slow catalogue can fall back to bundled copy.
+ * The account has nothing to fall back on, and signing in does real work on the
+ * way — it adopts guest orders and pulls the customer's CRM purchase history —
+ * so a short budget turns a slow answer into a bogus "connection failed".
+ */
+export const ACCOUNT_TIMEOUT_MS = Number(
+  process.env.NEXT_PUBLIC_ACCOUNT_TIMEOUT_MS ?? 20000,
+);

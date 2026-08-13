@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuth } from "@/hooks";
+
 import { Info, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -24,7 +26,17 @@ export function ConsultationForm() {
   const t = useTranslations("Consultation");
   const tCommon = useTranslations("Common");
 
-  const [values, setValues] = useState({ name: "", phone: "", question: "" });
+  const { user } = useAuth();
+  /**
+   * Seeded from the account: nobody should retype a name and number we already
+   * store. The state is initialised once, so the component is keyed on the
+   * profile by its parent and remounts when it arrives.
+   */
+  const [values, setValues] = useState({
+    name: user ? [user.firstName, user.lastName].filter(Boolean).join(" ") : "",
+    phone: user ? formatUzPhoneInput(user.phone) : "",
+    question: "",
+  });
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);

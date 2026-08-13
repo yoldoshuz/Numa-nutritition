@@ -8,10 +8,10 @@ import { useState, type FormEvent } from "react";
 import { Container } from "@/components/shared/container";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useCart, useCheckout } from "@/hooks";
+import { useAuth, useCart, useCheckout } from "@/hooks";
 import { enabledPaymentMethods, normalizePhone } from "@/lib/api/checkout";
 import { formatUzPhoneInput, UZ_PHONE_PREFIX } from "@/lib/phone";
-import type { PaymentMethod } from "@/lib/api/types";
+import type { OfferedPaymentMethod } from "@/lib/api/types";
 import { formatAmount } from "@/lib/format";
 import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -35,10 +35,25 @@ export function CheckoutView() {
   const tProduct = useTranslations("Product");
 
   const { items, count, subtotal, ready } = useCart();
+  const { user } = useAuth();
   const { phase, errorKey, orderId, busy, setErrorKey, submit } = useCheckout();
 
-  const [method, setMethod] = useState<PaymentMethod>("cash");
+  // First offered wins, so the preselected method follows the list rather than
+  // a second constant that could drift from it.
   const methods = enabledPaymentMethods();
+
+  /**
+   * What the account already knows, so a signed-in customer is not asked to
+   * type it again. Empty for a guest, who fills the form as before.
+   */
+  const prefill: Partial<Record<(typeof fields)[number], string>> = user
+    ? {
+        name: user.firstName,
+        surname: user.lastName ?? "",
+        phone: formatUzPhoneInput(user.phone),
+      }
+    : {};
+  const [method, setMethod] = useState<OfferedPaymentMethod>(methods[0] ?? "click");
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -112,7 +127,7 @@ export function CheckoutView() {
             </Link>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8">
+          <form key={user?.id ?? "guest"} onSubmit={handleSubmit} className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8">
             <div className="flex flex-col gap-6">
               <fieldset
                 disabled={busy}
@@ -132,6 +147,11 @@ export function CheckoutView() {
                       <Input
                         id={field}
                         name={field}
+                        defaultValue={
+
+                          prefill[field] ?? (field === "phone" ? UZ_PHONE_PREFIX : undefined)
+
+                        }
                         required
                         type={field === "phone" ? "tel" : "text"}
                         inputMode={field === "phone" ? "tel" : undefined}
@@ -142,7 +162,6 @@ export function CheckoutView() {
                               // The field carries the country code and regroups
                               // digits as they are typed, so what the customer
                               // sees is what the API will accept.
-                              defaultValue: UZ_PHONE_PREFIX,
                               onInput: (event: FormEvent<HTMLInputElement>) => {
                                 event.currentTarget.value = formatUzPhoneInput(
                                   event.currentTarget.value,

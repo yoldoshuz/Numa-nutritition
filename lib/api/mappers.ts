@@ -8,14 +8,8 @@
  * renderable instead of blank.
  */
 
-import {
-  blogPosts as staticBlogPosts,
-  getPost as getStaticPost,
-} from "@/lib/data/content";
-import {
-  getProduct as getStaticProduct,
-  products as staticProducts,
-} from "@/lib/data/products";
+import { getPost as getStaticPost } from "@/lib/data/content";
+import { getProduct as getStaticProduct } from "@/lib/data/products";
 import type { BlogPost, Product, ProductBadge, ProductForm } from "@/types";
 
 import { resolveMediaUrl } from "./media";

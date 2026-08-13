@@ -12,7 +12,7 @@ import type {
   ApiProduct,
   ApiProductList,
   CheckoutPayload,
-  PaymentMethod,
+  OfferedPaymentMethod,
 } from "./types";
 
 /* ── catalogue ───────────────────────────────────────────────────────────── */
@@ -64,13 +64,14 @@ export const postCheckout = (payload: CheckoutPayload) =>
  * is not provisioned for this merchant and its routes are commented out in the
  * backend router.
  */
-const CHECKOUT_URL_PATH: Record<Exclude<PaymentMethod, "cash">, string> = {
+const CHECKOUT_URL_PATH: Record<Exclude<OfferedPaymentMethod, "cash">, string> = {
   click: "/payment/click/checkout-url",
-  payme: "/payment/payme/checkout-url",
-  uzum: "/payment/uzum/merchant/checkout-url",
 };
 
-export const getPaymentUrl = (orderId: string, method: Exclude<PaymentMethod, "cash">) =>
+export const getPaymentUrl = (
+  orderId: string,
+  method: Exclude<OfferedPaymentMethod, "cash">,
+) =>
   request<ApiPaymentUrl>(
     "get",
     `${CHECKOUT_URL_PATH[method]}?orderId=${encodeURIComponent(orderId)}`,

@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { checkoutErrorKey, newIdempotencyKey } from "@/lib/api/checkout";
 import { getPaymentUrl, postCheckout } from "@/lib/api/endpoints";
 import { queryKeys } from "@/lib/api/query-keys";
-import type { CheckoutPayload, PaymentMethod } from "@/lib/api/types";
+import type { CheckoutPayload, OfferedPaymentMethod } from "@/lib/api/types";
 
 import { useCart } from "./use-cart";
 
@@ -36,7 +36,7 @@ export function useCheckout() {
       method,
     }: {
       payload: Omit<CheckoutPayload, "idempotencyKey">;
-      method: PaymentMethod;
+      method: OfferedPaymentMethod;
     }) => {
       setPhase("submitting");
       const { order } = await postCheckout({

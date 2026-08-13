@@ -43,7 +43,7 @@ export function LanguageSwitcher({
       <SelectTrigger
         aria-label={t("language")}
         className={cn(
-          "h-10 gap-2 rounded-lg border px-3 text-sm font-medium transition-colors",
+          "!h-10 gap-2 rounded-lg border px-3 text-sm font-medium transition-colors [&>svg:last-child]:hidden",
           variant === "light"
             ? "border-line bg-white text-ink hover:bg-surface-soft"
             : "border-white/40 bg-white/10 text-white hover:bg-white/20",

@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { JsonLd } from "@/components/shared/json-ld";
-import { CartProvider, QueryProvider } from "@/hooks";
+import { AuthProvider, CartProvider, QueryProvider } from "@/hooks";
 import { getProducts } from "@/lib/api/catalog";
 import { htmlLang, locales, routing, type AppLocale } from "@/lib/i18n/routing";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
@@ -109,13 +109,15 @@ export default async function LocaleLayout({
       <body className="flex min-h-full flex-col bg-white">
         <NextIntlClientProvider>
           <QueryProvider>
-            <CartProvider catalog={catalog}>
-              <Header />
-              <main id="main" className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </CartProvider>
+            <AuthProvider>
+              <CartProvider catalog={catalog}>
+                <Header />
+                <main id="main" className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </CartProvider>
+            </AuthProvider>
           </QueryProvider>
         </NextIntlClientProvider>
         <JsonLd

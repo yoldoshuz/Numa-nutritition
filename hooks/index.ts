@@ -1,4 +1,5 @@
 export { QueryProvider } from "./query-provider";
+export { AuthProvider, useAuth } from "./use-auth";
 export { CartProvider, useCart } from "./use-cart";
 export { useCheckout } from "./use-checkout";
 export {

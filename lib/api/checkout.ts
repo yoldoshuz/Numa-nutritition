@@ -1,26 +1,25 @@
 /** Client-side helpers shared by the checkout form. */
 
 import { ApiError } from "./axios";
-import type { PaymentMethod } from "./types";
+import type { OfferedPaymentMethod } from "./types";
 
 /** Methods the storefront may offer, narrowed by env to what's provisioned. */
-const ALL_METHODS: PaymentMethod[] = ["cash", "click", "payme", "uzum"];
+const ALL_METHODS: OfferedPaymentMethod[] = ["click", "cash"];
 
 /**
- * Which payment methods to show. Defaults to cash + the two providers that
- * have credentials on the backend; Uzum stays off until its Merchant API keys
- * are configured, since offering it would hand the customer a dead redirect.
+ * Which payment methods to show, in the order they are offered — the first is
+ * what checkout preselects, so Click leads and cash stays as the fallback.
  */
-export function enabledPaymentMethods(): PaymentMethod[] {
+export function enabledPaymentMethods(): OfferedPaymentMethod[] {
   const raw = process.env.NEXT_PUBLIC_PAYMENT_METHODS;
-  if (!raw) return ["cash", "click", "payme"];
+  if (!raw) return ["click", "cash"];
 
   const requested = raw
     .split(",")
     .map((m) => m.trim().toLowerCase())
-    .filter((m): m is PaymentMethod => (ALL_METHODS as string[]).includes(m));
+    .filter((m): m is OfferedPaymentMethod => (ALL_METHODS as string[]).includes(m));
 
-  return requested.length ? requested : ["cash"];
+  return requested.length ? requested : ["click"];
 }
 
 /**
