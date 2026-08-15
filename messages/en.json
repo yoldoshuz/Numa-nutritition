@@ -2009,6 +2009,10 @@
     "emptyCart": "Your cart is empty.",
     "toCatalogue": "Browse the catalogue",
     "total": "Total",
-    "cartUnavailable": "Something in the cart is currently unavailable"
+    "cartUnavailable": "Something in the cart is currently unavailable",
+    "quantity": "Quantity",
+    "decrease": "Decrease",
+    "increase": "Increase",
+    "removeItem": "Remove from cart"
   }
 }

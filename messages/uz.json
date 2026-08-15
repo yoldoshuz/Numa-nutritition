@@ -2009,6 +2009,10 @@
     "emptyCart": "Savat bo'sh.",
     "toCatalogue": "Katalogga o'tish",
     "total": "Jami",
-    "cartUnavailable": "Savatdagi biror mahsulot hozir mavjud emas"
+    "cartUnavailable": "Savatdagi biror mahsulot hozir mavjud emas",
+    "quantity": "Miqdori",
+    "decrease": "Kamaytirish",
+    "increase": "Ko'paytirish",
+    "removeItem": "Savatdan olib tashlash"
   }
 }
