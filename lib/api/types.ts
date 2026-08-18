@@ -161,6 +161,14 @@ export interface ApiCartTotals {
   itemsCount: number;
   /** Units across the available lines only. */
   totalQuantity: number;
+  /** Delivery, UZS. 50 000 for a single-unit order, 0 from two units up. */
+  deliveryFee: number;
+  /** The same amount in whole tiyin. */
+  deliveryFeeTiyin: number;
+  /** `total` + `deliveryFee` — the figure the order will actually charge. */
+  grandTotal: number;
+  /** The same amount in whole tiyin. */
+  grandTotalTiyin: number;
 }
 
 export interface ApiCartItem {

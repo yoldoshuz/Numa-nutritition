@@ -27,7 +27,6 @@ export function organizationJsonLd(locale: AppLocale): JsonLd {
       streetAddress: siteConfig.address.street,
       addressLocality: siteConfig.address.city,
       addressRegion: siteConfig.address.region,
-      postalCode: siteConfig.address.postalCode,
       addressCountry: siteConfig.address.country,
     },
     sameAs: socialLinks.map((link) => link.href),
@@ -70,11 +69,6 @@ export function localBusinessJsonLd(locale: AppLocale): JsonLd {
       streetAddress: siteConfig.address.street,
       addressLocality: siteConfig.address.city,
       addressCountry: siteConfig.address.country,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: contactInfo.geo.latitude,
-      longitude: contactInfo.geo.longitude,
     },
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",

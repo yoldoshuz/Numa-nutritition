@@ -120,9 +120,15 @@ export function CartView() {
                     {formatAmount(subtotal, locale)} {tCommon("currency")}
                   </dd>
                 </div>
+                {/* Priced by the API so the basket and the created order
+                    cannot disagree; free from two units up. */}
                 <div className="flex items-center justify-between">
                   <dt className="text-white/90">{t("delivery")}</dt>
-                  <dd className="font-bold">{tCommon("free")}</dd>
+                  <dd className="font-bold">
+                    {totals.deliveryFee > 0
+                      ? `${formatAmount(totals.deliveryFee, locale)} ${tCommon("currency")}`
+                      : tCommon("free")}
+                  </dd>
                 </div>
                 {totals.unavailableTotal > 0 ? (
                   <div className="flex items-center justify-between">
@@ -135,7 +141,7 @@ export function CartView() {
                 <div className="flex items-center justify-between border-t border-white/30 pt-3">
                   <dt className="font-bold">{t("total")}</dt>
                   <dd className="font-heading text-lg font-extrabold">
-                    {formatAmount(subtotal, locale)} {tCommon("currency")}
+                    {formatAmount(totals.grandTotal, locale)} {tCommon("currency")}
                   </dd>
                 </div>
               </dl>

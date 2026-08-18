@@ -9,10 +9,9 @@ export const siteConfig = {
   twitter: "@numa_nutrition",
   foundingYear: 2020,
   address: {
-    street: "Yakkasaroy",
+    street: "Elbek street, 31",
     city: "Tashkent",
-    region: "Toshkent",
-    postalCode: "100015",
+    region: "Yashnabad",
     country: "UZ",
   },
 } as const;

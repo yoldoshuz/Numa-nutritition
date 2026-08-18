@@ -80,8 +80,8 @@ export const SIBLING_SITES = [
 
 
 export const contactInfo = {
-  phone: "+998 71 203 22 32",
-  phoneHref: "tel:+998712032232",
+  phone: "+998 55 513 33 33",
+  phoneHref: "tel:+998555133333",
   instagram: "@numa_nutrition",
   instagramHref: "https://instagram.com/numa_nutrition",
   telegramHref: "https://t.me/numanutrition",
@@ -90,11 +90,15 @@ export const contactInfo = {
   site: "www.numafamily.uz",
   siteHref: "https://numafamily.uz",
   mapImage: "/Rectangle 107.png",
-  /** Keyless Yandex widget embed centred on the Tashkent office. */
+  /**
+   * Keyless Yandex widget, resolved from the office address instead of a fixed
+   * pin — the old coordinate sat in the city centre, not in Yashnabod. No `geo`
+   * block until the exact point is surveyed: wrong coordinates in structured
+   * data send couriers to the wrong door.
+   */
   mapEmbed:
-    "https://yandex.uz/map-widget/v1/?ll=69.279700%2C41.311100&z=16&pt=69.279700,41.311100,pm2rdm&lang=ru_RU",
-  mapHref: "https://yandex.uz/maps/10335/tashkent/?ll=69.279700%2C41.311100&z=16",
-  geo: { latitude: 41.3111, longitude: 69.2797 },
+    "https://yandex.uz/map-widget/v1/?text=%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%AD%D0%BB%D0%B1%D0%B5%D0%BA%2C%2031&z=17&lang=ru_RU",
+  mapHref: "https://yandex.uz/maps/10335/tashkent/?text=%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%AD%D0%BB%D0%B1%D0%B5%D0%BA%2C%2031&z=17",
 } as const;
 
 /** The five promises rendered in the strip right under the hero. */

@@ -110,6 +110,14 @@ const CartContext = createContext<CartContextValue | null>(null);
  * their response straight back into the cache, so the stepper never waits on a
  * round-trip and never shows a stale quantity.
  */
+/**
+ * Delivery for a single-unit order, UZS; free from two units up.
+ *
+ * The API prices every online cart (`shared/utils/money.ts`); this copy only
+ * covers the offline fallback, where there is no server to ask.
+ */
+const DELIVERY_FEE = 50_000;
+
 export function CartProvider({
   children,
   catalog,
@@ -359,12 +367,21 @@ export function CartProvider({
       (sum, item) => sum + item.product.price * item.quantity,
       0,
     );
+    const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+    // Same rule as the API (shared/utils/money.ts): a one-unit order pays
+    // 50 000 for delivery, two units and up ride free.
+    const deliveryFee = totalQuantity === 1 ? DELIVERY_FEE : 0;
+
     return {
       total,
       totalTiyin: Math.round(total * 100),
       unavailableTotal: 0,
       itemsCount: items.length,
-      totalQuantity: items.reduce((sum, item) => sum + item.quantity, 0),
+      totalQuantity,
+      deliveryFee,
+      deliveryFeeTiyin: Math.round(deliveryFee * 100),
+      grandTotal: total + deliveryFee,
+      grandTotalTiyin: Math.round((total + deliveryFee) * 100),
     };
   }, [serverBacked, cartQuery.data, items]);
 
