@@ -65,12 +65,11 @@ export function Hero() {
         {/* Single artboard export — keeps the exact bottle composition from Figma. */}
         <div className="relative flex justify-center lg:justify-end">
           <Image
-            src="/bottles.svg"
+            src="/Group 37999.png"
             alt={t("imageAlt")}
-            width={607}
-            height={542}
+            width={1159}
+            height={1085}
             priority
-            unoptimized
             className="h-auto w-full max-w-md select-none lg:max-w-[38rem] lg:translate-y-2"
           />
         </div>
