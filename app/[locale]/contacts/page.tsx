@@ -3,7 +3,7 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CtaBand } from "@/components/layout/cta-band";
-import { InstagramIcon, TelegramIcon } from "@/components/shared/brand-icons";
+import { FacebookIcon, InstagramIcon, TelegramIcon } from "@/components/shared/brand-icons";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { contactInfo } from "@/lib/data/content";
@@ -44,6 +44,7 @@ export default async function ContactsPage({
     { Icon: Phone, label: contactInfo.phone, href: contactInfo.phoneHref },
     { Icon: InstagramIcon, label: contactInfo.instagram, href: contactInfo.instagramHref },
     { Icon: TelegramIcon, label: contactInfo.telegram, href: contactInfo.telegramHref },
+    { Icon: FacebookIcon, label: "Facebook", href: contactInfo.facebookHref },
     { Icon: Clock, label: t("schedule") },
     { Icon: MapPin, label: t("address") },
     { Icon: Mail, label: contactInfo.email, href: contactInfo.emailHref },
@@ -73,8 +74,9 @@ export default async function ContactsPage({
             >
               {tCommon("callNow")}
             </a>
+            {/* An offer to talk, so this one goes to the administrator. */}
             <a
-              href={contactInfo.telegramHref}
+              href={contactInfo.telegramAdminHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-lg border border-brand-300 px-7 text-sm font-medium text-brand-700 transition-colors duration-200 hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"

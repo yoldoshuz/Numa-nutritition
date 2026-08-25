@@ -291,3 +291,29 @@ export interface ApiPaymentUrl {
   amountUzs?: number;
   amountTiyin?: number;
 }
+
+/**
+ * A CMS review. Copy is stored in all three languages and the storefront picks
+ * one; `authorName`, `rating` and `videoUrl` are genuinely optional and come
+ * back as `null` often enough that the card has to render without them.
+ */
+export interface ApiReview {
+  id: string;
+  store: string;
+  title: I18nText;
+  description: I18nText;
+  authorName: string | null;
+  rating: number | null;
+  videoUrl: string | null;
+  sortOrder: number;
+  isActive: boolean;
+}
+
+/** `GET /reviews/{store}` — paginated, same envelope as the other lists. */
+export interface ApiReviewList {
+  items: ApiReview[];
+  total: number;
+  page: number;
+  limit: number;
+  pages: number;
+}

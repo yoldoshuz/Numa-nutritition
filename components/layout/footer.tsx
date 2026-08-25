@@ -1,7 +1,7 @@
 import { Globe } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { InstagramIcon, TelegramIcon } from "@/components/shared/brand-icons";
+import { FacebookIcon, InstagramIcon, TelegramIcon } from "@/components/shared/brand-icons";
 import { Container } from "@/components/shared/container";
 import { Logo } from "@/components/shared/logo";
 import {
@@ -16,6 +16,7 @@ const socialIcons = {
   telegram: TelegramIcon,
   web: Globe,
   instagram: InstagramIcon,
+  facebook: FacebookIcon,
 } as const;
 
 const linkClass =

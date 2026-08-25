@@ -30,6 +30,21 @@ export interface Review {
   rating: number;
 }
 
+/**
+ * A review as the section renders it, already in the reader's language.
+ *
+ * Resolved on the server so the card never has to know whether the text came
+ * from the CMS or from the bundled fallback.
+ */
+export interface ReviewCardData {
+  id: string;
+  name: string;
+  location: string;
+  text: string;
+  rating: number;
+  avatar: string;
+}
+
 export interface BenefitWheelItem {
   id: string;
   icon: string;
@@ -45,5 +60,5 @@ export interface NavLink {
 export interface SocialLink {
   key: string;
   href: string;
-  icon: "telegram" | "web" | "instagram";
+  icon: "telegram" | "web" | "instagram" | "facebook";
 }

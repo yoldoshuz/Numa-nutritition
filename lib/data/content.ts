@@ -15,12 +15,20 @@ export const mainNav: NavLink[] = [
   { key: "contacts", href: "/contacts" },
 ];
 
+/**
+ * Footer "directions" — the other NUMA properties.
+ *
+ * Every one of these pointed at numafamily.uz, which does not resolve, so the
+ * whole column led to a browser error page. They now go where the logo dropdown
+ * goes: the live deploys. Diagnostics and Bettery have no site of their own
+ * yet, so they land on Family rather than nowhere.
+ */
 export const directionLinks: NavLink[] = [
-  { key: "family", href: "https://numafamily.uz" },
-  { key: "kids", href: "https://numafamily.uz" },
-  { key: "nabaviy", href: "https://numafamily.uz" },
-  { key: "diagnostics", href: "https://numafamily.uz" },
-  { key: "bettery", href: "https://numafamily.uz" },
+  { key: "family", href: "https://numa-family.vercel.app/ru" },
+  { key: "kids", href: "https://numa-kids-olive.vercel.app/ru" },
+  { key: "nabaviy", href: "https://nabaviy-tabobat.vercel.app" },
+  { key: "diagnostics", href: "https://numa-family.vercel.app/ru" },
+  { key: "bettery", href: "https://numa-family.vercel.app/ru" },
 ];
 
 export const companyLinks: NavLink[] = [
@@ -34,9 +42,10 @@ export const companyLinks: NavLink[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { key: "telegram", href: "https://t.me/Numa_uz_admin", icon: "telegram" },
-  { key: "website", href: "https://numafamily.uz", icon: "web" },
+  { key: "telegram", href: "https://t.me/numa_uz", icon: "telegram" },
   { key: "instagram", href: "https://www.instagram.com/numa.uz", icon: "instagram" },
+  { key: "facebook", href: "https://www.facebook.com/share/1EVPsKHEgL/", icon: "facebook" },
+  { key: "website", href: "https://numafamily.uz", icon: "web" },
 ];
 
 /**
@@ -83,19 +92,25 @@ export const contactInfo = {
   phone: "+998 55 513 33 33",
   phoneHref: "tel:+998555133333",
   /*
-   * Group-wide handles. The tester round found the per-brand ones dead: the
-   * Instagram account was never registered and the Telegram username resolves
-   * to nothing. @Numa_uz_admin is the shared admin answering for all four NUMA
-   * sites, so it reads the same in every repo.
+   * Two Telegram destinations, and they are not interchangeable. `telegram` is
+   * the public channel — footers, the contact card, structured data, anywhere
+   * the site is just saying where to find the brand. `telegramAdmin` is a
+   * person and belongs only behind a button offering to carry on a
+   * conversation. Dropping someone from a footer icon into a private chat with
+   * an administrator is what split these apart.
    */
   instagram: "@numa.uz",
   instagramHref: "https://www.instagram.com/numa.uz",
-  telegram: "@Numa_uz_admin",
-  telegramHref: "https://t.me/Numa_uz_admin",
+  telegram: "@numa_uz",
+  telegramHref: "https://t.me/numa_uz",
+  telegramAdmin: "@Numa_uz_admin",
+  telegramAdminHref: "https://t.me/Numa_uz_admin",
+  facebookHref: "https://www.facebook.com/share/1EVPsKHEgL/",
   email: "numafamilyuz@gmail.com",
   emailHref: "mailto:numafamilyuz@gmail.com",
   site: "www.numafamily.uz",
-  siteHref: "https://numafamily.uz",
+  // The brand domain does not resolve yet; the footer link has to work today.
+  siteHref: "https://numa-family.vercel.app/ru",
   mapImage: "/Rectangle 107.png",
   /**
    * Keyless Yandex widget, resolved from the office address instead of a fixed

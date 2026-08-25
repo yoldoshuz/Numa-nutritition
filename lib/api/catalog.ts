@@ -15,7 +15,8 @@ import {
   products as staticProducts,
 } from "@/lib/data/products";
 import { isSoldOut } from "@/lib/utils";
-import type { BlogPost, Product } from "@/types";
+import type { AppLocale } from "@/lib/i18n/routing";
+import type { BlogPost, Product, ReviewCardData } from "@/types";
 
 import { isApiConfigured } from "./config";
 import {
@@ -24,6 +25,7 @@ import {
   getFeatured,
   getProductBySlug,
   getProductList,
+  getReviews,
 } from "./endpoints";
 import { toBlogPost, toProduct } from "./mappers";
 import type { ApiBlogPost, ApiProduct } from "./types";
@@ -144,4 +146,36 @@ export async function getArticleProducts(
       .filter((product): product is Product => product !== undefined),
     note: rows.find((row) => row.note)?.note ?? null,
   };
+}
+
+/**
+ * Published reviews, in the reader's language.
+ *
+ * `null` means "use the bundled copy" — returned both when the CMS cannot be
+ * reached and when it answers with nothing. The empty case is deliberate: the
+ * reviews are being migrated into the CMS store by store, and until this one is
+ * filled in, an empty response would silently delete a section that is on the
+ * page today. The moment the admin publishes one review, the CMS wins.
+ *
+ * Avatars are not a CMS field; they cycle through the set the section was
+ * designed around so a review added in the admin lands looking like the rest.
+ */
+const REVIEW_AVATARS = ["/Container.png", "/Container-1.png", "/Container-2.png"];
+
+export async function getReviewCards(
+  locale: AppLocale,
+): Promise<ReviewCardData[] | null> {
+  const api = await tryFetch(() => getReviews());
+  if (!api?.items?.length) return null;
+
+  return api.items.map((review, index) => ({
+    id: review.id,
+    name: review.authorName ?? review.title[locale] ?? "",
+    // The CMS has no separate location field; the title doubles as the line
+    // under the name when there is an author to put above it.
+    location: review.authorName ? (review.title[locale] ?? "") : "",
+    text: review.description[locale] ?? "",
+    rating: review.rating ?? 5,
+    avatar: REVIEW_AVATARS[index % REVIEW_AVATARS.length],
+  }));
 }

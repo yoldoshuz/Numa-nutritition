@@ -11,6 +11,7 @@ import type {
   ApiPaymentUrl,
   ApiProduct,
   ApiProductList,
+  ApiReviewList,
   CheckoutPayload,
   OfferedPaymentMethod,
 } from "./types";
@@ -87,3 +88,12 @@ export const getOrderStatus = (orderId: string) =>
     "get",
     `/orders/${STORE}/${encodeURIComponent(orderId)}/status`,
   );
+
+/**
+ * Published reviews for this storefront.
+ *
+ * `limit` is the endpoint's maximum. The section is a carousel, so everything
+ * the CMS has published is worth having in one call rather than paging.
+ */
+export const getReviews = () =>
+  request<ApiReviewList>("get", `/reviews/${STORE}?limit=50`);

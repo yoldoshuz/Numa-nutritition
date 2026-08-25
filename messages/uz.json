@@ -118,7 +118,8 @@
     "socialNames": {
       "telegram": "Telegram",
       "website": "Veb-sayt",
-      "instagram": "Instagram"
+      "instagram": "Instagram",
+      "facebook": "Facebook"
     }
   },
   "CtaBand": {
@@ -180,12 +181,12 @@
         "label": "Mamnun mijozlar"
       },
       "products": {
-        "value": "1000+",
-        "label": "Tabiiy mahsulotlar"
+        "value": "50+",
+        "label": "Tabiiy mahsulot"
       },
       "partners": {
-        "value": "500+",
-        "label": "Rasmiy hamkorlar"
+        "value": "20+",
+        "label": "Davlatga eksport"
       },
       "since": {
         "value": "2020 yildan",

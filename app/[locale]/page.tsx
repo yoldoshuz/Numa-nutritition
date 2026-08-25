@@ -14,7 +14,7 @@ import { WhyNuma } from "@/components/pages/home/why-numa";
 import { JsonLd } from "@/components/shared/json-ld";
 import { itemListJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
-import { getFeaturedProducts } from "@/lib/api/catalog";
+import { getFeaturedProducts, getReviewCards } from "@/lib/api/catalog";
 import type { AppLocale } from "@/types";
 
 export async function generateMetadata({
@@ -43,7 +43,10 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Product" });
-  const featured = await getFeaturedProducts();
+  const [featured, reviewCards] = await Promise.all([
+    getFeaturedProducts(),
+    getReviewCards(locale),
+  ]);
 
   return (
     <>
@@ -55,7 +58,7 @@ export default async function HomePage({
       <ExpertVideos />
       <Certificates />
       <BlogHighlights />
-      <Reviews />
+      <Reviews cards={reviewCards} />
       <CtaBand />
 
       <JsonLd

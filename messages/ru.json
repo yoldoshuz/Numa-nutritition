@@ -118,7 +118,8 @@
     "socialNames": {
       "telegram": "Telegram",
       "website": "Веб-сайт",
-      "instagram": "Instagram"
+      "instagram": "Instagram",
+      "facebook": "Facebook"
     }
   },
   "CtaBand": {
@@ -180,12 +181,12 @@
         "label": "Довольных клиентов"
       },
       "products": {
-        "value": "1000+",
+        "value": "50+",
         "label": "Натуральных продуктов"
       },
       "partners": {
-        "value": "500+",
-        "label": "Официальных партнёров"
+        "value": "20+",
+        "label": "Стран экспорта"
       },
       "since": {
         "value": "С 2020 года",

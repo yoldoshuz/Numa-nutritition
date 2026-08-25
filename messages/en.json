@@ -118,7 +118,8 @@
     "socialNames": {
       "telegram": "Telegram",
       "website": "Website",
-      "instagram": "Instagram"
+      "instagram": "Instagram",
+      "facebook": "Facebook"
     }
   },
   "CtaBand": {
@@ -176,16 +177,16 @@
     },
     "stats": {
       "clients": {
-        "value": "1 000 000+",
+        "value": "1,000,000+",
         "label": "Happy customers"
       },
       "products": {
-        "value": "1000+",
+        "value": "50+",
         "label": "Natural products"
       },
       "partners": {
-        "value": "500+",
-        "label": "Official partners"
+        "value": "20+",
+        "label": "Export countries"
       },
       "since": {
         "value": "Since 2020",

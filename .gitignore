@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Source video masters — hundreds of megabytes each, and GitHub rejects any
+# single file over 100 MB. They are hosted, not committed.
+/public/videos/

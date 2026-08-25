@@ -3,9 +3,23 @@ import { useTranslations } from "next-intl";
 
 import { RatingStars } from "@/components/shared/rating-stars";
 import { cn } from "@/lib/utils";
-import type { Review } from "@/types";
+import type { Review, ReviewCardData } from "@/types";
 
-export function ReviewCard({ review, className }: { review: Review; className?: string }) {
+/**
+ * One review card.
+ *
+ * Takes copy already resolved by the caller when the CMS supplied it, and falls
+ * back to the bundled translation keyed by `id` when it did not.
+ */
+export function ReviewCard({
+  review,
+  card,
+  className,
+}: {
+  review: Review;
+  card?: ReviewCardData;
+  className?: string;
+}) {
   const t = useTranslations(`Home.reviews.items.${review.id}`);
 
   return (
@@ -15,21 +29,21 @@ export function ReviewCard({ review, className }: { review: Review; className?: 
         className
       )}
     >
-      <RatingStars rating={review.rating} />
+      <RatingStars rating={card?.rating ?? review.rating} />
       <blockquote className="flex-1 text-[0.875rem] leading-relaxed text-white/95">
-        {t("text")}
+        {card?.text ?? t("text")}
       </blockquote>
       <figcaption className="flex items-center gap-3">
         <Image
-          src={review.avatar}
+          src={card?.avatar ?? review.avatar}
           alt=""
           width={44}
           height={44}
           className="size-11 shrink-0 rounded-full border-2 border-white/70 object-cover"
         />
         <span className="flex flex-col leading-tight">
-          <span className="text-sm font-bold">{t("name")}</span>
-          <span className="text-xs text-white/80">{t("location")}</span>
+          <span className="text-sm font-bold">{card?.name ?? t("name")}</span>
+          <span className="text-xs text-white/80">{card ? card.location : t("location")}</span>
         </span>
       </figcaption>
     </figure>
