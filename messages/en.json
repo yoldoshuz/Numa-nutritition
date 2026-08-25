@@ -70,7 +70,9 @@
     "free": "Free",
     "required": "Required field",
     "loading": "Loading…",
-    "otherBrands": "Other NUMA projects"
+    "otherBrands": "Other NUMA projects",
+    "outOfStock": "Out of stock",
+    "outOfStockNote": "This product is temporarily out of stock. Leave a request or write to us and we will let you know the moment it is back."
   },
   "Nav": {
     "home": "Home",
@@ -93,7 +95,7 @@
     "company": "Company",
     "contacts": "Contacts",
     "socials": "Follow us",
-    "rights": "© {year} NUMA NUTRIOTION",
+    "rights": "© {year} NUMA NUTRITION",
     "rightsSecond": "All rights reserved",
     "privacy": "Privacy policy",
     "terms": "Terms of use",
@@ -1895,7 +1897,7 @@
         },
         {
           "heading": "Your rights",
-          "text": "You may request access to your data, its correction or deletion. Write to info@numanutrition.uz to do so."
+          "text": "You may request access to your data, its correction or deletion. Write to numafamilyuz@gmail.com to do so."
         }
       ]
     },

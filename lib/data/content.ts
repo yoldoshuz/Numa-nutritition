@@ -34,9 +34,9 @@ export const companyLinks: NavLink[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { key: "telegram", href: "https://t.me/numanutrition", icon: "telegram" },
+  { key: "telegram", href: "https://t.me/Numa_uz_admin", icon: "telegram" },
   { key: "website", href: "https://numafamily.uz", icon: "web" },
-  { key: "instagram", href: "https://instagram.com/numa_nutrition", icon: "instagram" },
+  { key: "instagram", href: "https://www.instagram.com/numa.uz", icon: "instagram" },
 ];
 
 /**
@@ -82,11 +82,18 @@ export const SIBLING_SITES = [
 export const contactInfo = {
   phone: "+998 55 513 33 33",
   phoneHref: "tel:+998555133333",
-  instagram: "@numa_nutrition",
-  instagramHref: "https://instagram.com/numa_nutrition",
-  telegramHref: "https://t.me/numanutrition",
-  email: "info@numanutrition.uz",
-  emailHref: "mailto:info@numanutrition.uz",
+  /*
+   * Group-wide handles. The tester round found the per-brand ones dead: the
+   * Instagram account was never registered and the Telegram username resolves
+   * to nothing. @Numa_uz_admin is the shared admin answering for all four NUMA
+   * sites, so it reads the same in every repo.
+   */
+  instagram: "@numa.uz",
+  instagramHref: "https://www.instagram.com/numa.uz",
+  telegram: "@Numa_uz_admin",
+  telegramHref: "https://t.me/Numa_uz_admin",
+  email: "numafamilyuz@gmail.com",
+  emailHref: "mailto:numafamilyuz@gmail.com",
   site: "www.numafamily.uz",
   siteHref: "https://numafamily.uz",
   mapImage: "/Rectangle 107.png",

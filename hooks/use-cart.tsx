@@ -22,6 +22,7 @@ import {
 import { queryKeys } from "@/lib/api/query-keys";
 import type { ApiCart, ApiCartTotals } from "@/lib/api/types";
 import { products as staticProducts } from "@/lib/data/products";
+import { isSoldOut } from "@/lib/utils";
 import type { CartLine, CartLineWithProduct, Product } from "@/types";
 
 const STORAGE_KEY = "numa-cart";
@@ -385,8 +386,18 @@ export function CartProvider({
     };
   }, [serverBacked, cartQuery.data, items]);
 
+  /*
+   * Two sources, because either alone leaves a hole: the server flags a line
+   * it will refuse, and the catalogue flags a product whose stock has since hit
+   * zero — which is what happens to a basket filled before the last unit went,
+   * and to any basket held locally while the cart read is still in flight.
+   */
   const hasUnavailable = useMemo(
-    () => items.some((item) => serverLines.get(item.slug)?.isAvailable === false),
+    () =>
+      items.some(
+        (item) =>
+          serverLines.get(item.slug)?.isAvailable === false || isSoldOut(item.product),
+      ),
     [items, serverLines],
   );
 

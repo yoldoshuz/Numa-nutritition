@@ -3,7 +3,7 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CtaBand } from "@/components/layout/cta-band";
-import { InstagramIcon } from "@/components/shared/brand-icons";
+import { InstagramIcon, TelegramIcon } from "@/components/shared/brand-icons";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { contactInfo } from "@/lib/data/content";
@@ -43,6 +43,7 @@ export default async function ContactsPage({
   const rows = [
     { Icon: Phone, label: contactInfo.phone, href: contactInfo.phoneHref },
     { Icon: InstagramIcon, label: contactInfo.instagram, href: contactInfo.instagramHref },
+    { Icon: TelegramIcon, label: contactInfo.telegram, href: contactInfo.telegramHref },
     { Icon: Clock, label: t("schedule") },
     { Icon: MapPin, label: t("address") },
     { Icon: Mail, label: contactInfo.email, href: contactInfo.emailHref },

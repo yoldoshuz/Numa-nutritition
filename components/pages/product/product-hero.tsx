@@ -7,6 +7,7 @@ import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
 import { Price } from "@/components/shared/price";
 import { ProductBadge } from "@/components/shared/product-badge";
+import { isSoldOut } from "@/lib/utils";
 import type { Product } from "@/types";
 
 interface Spec {
@@ -18,8 +19,10 @@ export function ProductHero({ product }: { product: Product }) {
   const t = useTranslations(`Product.${product.slug}`);
   const tProduct = useTranslations("Product");
   const tNav = useTranslations("Nav");
+  const tCommon = useTranslations("Common");
 
   const name = t("name");
+  const soldOut = isSoldOut(product);
   const specs = t.raw("specs") as Spec[];
 
   return (
@@ -42,7 +45,13 @@ export function ProductHero({ product }: { product: Product }) {
               <h1 className="font-heading text-[1.75rem] leading-tight font-extrabold text-ink uppercase sm:text-4xl">
                 {name}
               </h1>
-              <ProductBadge kind={product.badge} />
+              {soldOut ? (
+                <span className="inline-flex items-center rounded-md bg-ink/80 px-2.5 py-1 text-[0.6875rem] leading-none font-semibold text-white">
+                  {tCommon("outOfStock")}
+                </span>
+              ) : (
+                <ProductBadge kind={product.badge} />
+              )}
             </div>
             <p className="text-[0.8125rem] leading-snug font-medium text-brand">
               {t("tagline")}
@@ -53,7 +62,7 @@ export function ProductHero({ product }: { product: Product }) {
 
           <Price value={product.price} className="text-2xl sm:text-[1.75rem]" />
 
-          <ProductPurchase slug={product.slug} />
+          <ProductPurchase slug={product.slug} soldOut={soldOut} />
 
           <div className="mt-2">
             <h2 className="font-heading text-lg font-extrabold text-ink sm:text-xl">

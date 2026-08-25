@@ -1,12 +1,12 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 
 import { AddToCartButton } from "@/components/shared/add-to-cart-button";
 import { Price } from "@/components/shared/price";
 import { ProductBadge } from "@/components/shared/product-badge";
+import { ProductImage } from "@/components/shared/product-image";
 import { Link } from "@/lib/i18n/navigation";
-import { cn } from "@/lib/utils";
+import { cn, isSoldOut } from "@/lib/utils";
 import type { Product } from "@/types";
 
 export function ProductCard({
@@ -21,6 +21,7 @@ export function ProductCard({
   const t = useTranslations("Common");
   const tProduct = useTranslations(`Product.${product.slug}`);
   const href = `/products/${product.slug}`;
+  const soldOut = isSoldOut(product);
 
   return (
     <article
@@ -29,7 +30,20 @@ export function ProductCard({
         className
       )}
     >
-      <ProductBadge kind={product.badge} className="absolute top-4 left-4 z-10" />
+      {soldOut ? (
+        /*
+         * A zero-stock product stays in the grid — the admin keeps it "Активный"
+         * and people search for it — but it has to say so before the packshot
+         * does any selling. The badge takes the slot the hit/new mark would
+         * have used rather than sitting beside it: two chips in one corner read
+         * as decoration, one reads as a status.
+         */
+        <span className="absolute top-4 left-4 z-10 inline-flex items-center rounded-md bg-ink/80 px-2.5 py-1 text-[0.6875rem] leading-none font-semibold text-white">
+          {t("outOfStock")}
+        </span>
+      ) : (
+        <ProductBadge kind={product.badge} className="absolute top-4 left-4 z-10" />
+      )}
 
       {/* Fixed-ratio box so every packshot occupies exactly the same space. */}
       <Link
@@ -38,13 +52,18 @@ export function ProductCard({
         aria-hidden
         className="relative mt-7 block h-44 w-full overflow-hidden sm:h-52"
       >
-        <Image
+        <ProductImage
+          slug={product.slug}
           src={product.image}
           alt=""
           fill
           priority={priority}
           sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 240px"
-          className="object-contain transition-transform duration-500 group-hover:scale-105"
+          className={cn(
+            "object-contain transition-transform duration-500 group-hover:scale-105",
+            // Drained of colour, so the card reads as unavailable at a glance.
+            soldOut && "opacity-45 saturate-25",
+          )}
         />
       </Link>
 
@@ -72,6 +91,7 @@ export function ProductCard({
         <AddToCartButton
           slug={product.slug}
           label={t("buy")}
+          soldOut={soldOut}
           className="h-10 min-w-30 flex-1 px-3 text-[0.8125rem] whitespace-nowrap"
         />
         <Link

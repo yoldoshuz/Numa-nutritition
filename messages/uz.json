@@ -70,7 +70,9 @@
     "free": "Bepul",
     "required": "Majburiy maydon",
     "loading": "Yuklanmoqda…",
-    "otherBrands": "NUMA ning boshqa loyihalari"
+    "otherBrands": "NUMA ning boshqa loyihalari",
+    "outOfStock": "Sotuvda yo‘q",
+    "outOfStockNote": "Mahsulot vaqtincha sotuvda yo‘q. Ariza qoldiring yoki bizga yozing — paydo bo‘lishi bilan xabar beramiz."
   },
   "Nav": {
     "home": "Bosh sahifa",
@@ -93,7 +95,7 @@
     "company": "Kompaniya",
     "contacts": "Kontaktlar",
     "socials": "Ijtimoiy tarmoqlarda",
-    "rights": "© {year} NUMA NUTRIOTION",
+    "rights": "© {year} NUMA NUTRITION",
     "rightsSecond": "Barcha huquqlar himoyalangan",
     "privacy": "Maxfiylik siyosati",
     "terms": "Foydalanuvchi shartnomasi",
@@ -1895,7 +1897,7 @@
         },
         {
           "heading": "Sizning huquqlaringiz",
-          "text": "Siz o'z ma'lumotlaringizga kirish, ularni tuzatish yoki o'chirishni so'rashga haqlisiz. Buning uchun info@numanutrition.uz manziliga yozing."
+          "text": "Siz o'z ma'lumotlaringizga kirish, ularni tuzatish yoki o'chirishni so'rashga haqlisiz. Buning uchun numafamilyuz@gmail.com manziliga yozing."
         }
       ]
     },

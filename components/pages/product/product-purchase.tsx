@@ -16,7 +16,13 @@ import { Link } from "@/lib/i18n/navigation";
  * a local draft — so a second press adds to what is already there rather than
  * silently replacing it.
  */
-export function ProductPurchase({ slug }: { slug: string }) {
+export function ProductPurchase({
+  slug,
+  soldOut = false,
+}: {
+  slug: string;
+  soldOut?: boolean;
+}) {
   const t = useTranslations("Product");
   const tCommon = useTranslations("Common");
   const { add, setQuantity, lines, pending, ready } = useCart();
@@ -25,6 +31,23 @@ export function ProductPurchase({ slug }: { slug: string }) {
   const [draft, setDraft] = useState(1);
 
   const quantity = inCart > 0 ? inCart : draft;
+
+  /*
+   * With nothing in stock there is no quantity worth picking, so the row is
+   * replaced outright rather than greyed in place: a dimmed stepper beside a
+   * dimmed button still invites a try, and this page was taking the order all
+   * the way through to checkout.
+   */
+  if (soldOut) {
+    return (
+      <div className="rounded-lg border border-line bg-line/20 px-5 py-4">
+        <p className="text-sm font-bold text-ink">{tCommon("outOfStock")}</p>
+        <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-ink">
+          {tCommon("outOfStockNote")}
+        </p>
+      </div>
+    );
+  }
 
   // The add button is the one thing a phone visitor came here to press, so it
   // gets a taller target than the desktop row it shares with the stepper.

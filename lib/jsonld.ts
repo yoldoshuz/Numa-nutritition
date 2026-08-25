@@ -2,6 +2,7 @@ import type { AppLocale } from "@/lib/i18n/routing";
 import { htmlLang } from "@/lib/i18n/routing";
 import { localizedUrl } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
+import { isSoldOut } from "@/lib/utils";
 import { contactInfo, socialLinks } from "@/lib/data/content";
 import type { BlogPost, Product } from "@/types";
 
@@ -116,7 +117,11 @@ export function productJsonLd({
       url: localizedUrl(locale, `/products/${product.slug}`),
       price: product.price,
       priceCurrency: "UZS",
-      availability: "https://schema.org/InStock",
+      // Mirrors the storefront: a zero-stock product must not tell Google it
+      // is buyable while the page itself refuses the order.
+      availability: isSoldOut(product)
+        ? "https://schema.org/OutOfStock"
+        : "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${siteConfig.url}/#organization` },
     },

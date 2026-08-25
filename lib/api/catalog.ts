@@ -14,6 +14,7 @@ import {
   getProduct as getStaticProduct,
   products as staticProducts,
 } from "@/lib/data/products";
+import { isSoldOut } from "@/lib/utils";
 import type { BlogPost, Product } from "@/types";
 
 import { isApiConfigured } from "./config";
@@ -71,7 +72,17 @@ export async function getFeaturedProducts(): Promise<Product[]> {
   });
 
   if (!api?.length) return staticProducts.filter((p) => p.featured);
-  return api.map(toProduct);
+  /*
+   * Sold-out products are dropped here rather than badged.
+   *
+   * The catalogue has to keep listing them — people search for a product by
+   * name and need to find it, if only to read that it is gone. A "popular
+   * products" shelf is the opposite job: a shortlist the storefront chose, and
+   * spending one of its few slots on something nobody can buy is a waste of the
+   * best space on the home page. `isFeatured` is set in the admin and never
+   * cleared when stock runs out, so the filter belongs on this side.
+   */
+  return api.map(toProduct).filter((product) => !isSoldOut(product));
 }
 
 export async function getRelatedProducts(slug: string, limit = 4): Promise<Product[]> {

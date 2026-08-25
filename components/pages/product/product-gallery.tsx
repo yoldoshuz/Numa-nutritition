@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import { ProductImage } from "@/components/shared/product-image";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -13,8 +14,9 @@ export function ProductGallery({ product, name }: { product: Product; name: stri
   return (
     <div className="flex flex-col gap-3">
       <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[4/3]">
-        <Image
+        <ProductImage
           key={slides[active]}
+          slug={product.slug}
           src={slides[active]}
           alt={name}
           fill

@@ -11,6 +11,8 @@ interface AddToCartButtonProps {
   quantity?: number;
   label: string;
   className?: string;
+  /** Nothing left in stock — the control is shown, disabled, in its place. */
+  soldOut?: boolean;
 }
 
 /**
@@ -30,11 +32,33 @@ export function AddToCartButton({
   quantity = 1,
   label,
   className,
+  soldOut = false,
 }: AddToCartButtonProps) {
   const { add, setQuantity, lines, ready } = useCart();
   const t = useTranslations("Product");
+  const tCommon = useTranslations("Common");
 
   const inCart = lines.find((line) => line.slug === slug)?.quantity ?? 0;
+
+  /*
+   * Sold out outranks everything, including a line already in the basket: the
+   * stock ran out while the shopper was browsing and the honest answer is that
+   * it cannot be ordered, not a stepper that pretends it can.
+   */
+  if (soldOut) {
+    return (
+      <button
+        type="button"
+        disabled
+        className={cn(
+          "inline-flex h-11 cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-line bg-line/30 px-5 text-sm font-semibold text-muted-ink",
+          className,
+        )}
+      >
+        <span className="truncate">{tCommon("outOfStock")}</span>
+      </button>
+    );
+  }
 
   // Before hydration the cart is empty on both sides of the boundary, so the
   // button always renders first and never mismatches during SSR.
