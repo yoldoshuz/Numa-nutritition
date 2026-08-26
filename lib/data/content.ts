@@ -143,11 +143,42 @@ export const benefitWheel: BenefitWheelItem[] = [
 
 export const companyStats = ["clients", "products", "partners", "since"] as const;
 
+/**
+ * Four clips from the brand's own channel, youtube.com/@NUMAUZ.
+ *
+ * The section shipped with four Figma placeholders and no `href`, so it was a
+ * wall of stills with nothing behind them. These are real videos, chosen for a
+ * spread of subjects — a specialist to camera, the product in hand, an everyday
+ * meal, and one on iodine — rather than four takes on the same shot.
+ *
+ * Posters are cropped and served from `public/video/` rather than hotlinked to
+ * `i.ytimg.com`: `next.config.ts` only allows the backend as a remote image
+ * host, and every clip is a Short, so YouTube's own thumbnail is the 9:16 frame
+ * letterboxed into a 16:9 box — pointing this 3:4 card at it would fill most of
+ * the card with black bars. The file name is the video id, so the poster and
+ * the link can never drift apart.
+ */
 export const expertVideos: ExpertVideo[] = [
-  { id: "shaykhova", poster: "/Rectangle 61.png" },
-  { id: "detox", poster: "/Rectangle 61-1.png" },
-  { id: "entrepreneur", poster: "/Rectangle 61-2.png" },
-  { id: "beauty", poster: "/Rectangle 61-3.png" },
+  {
+    id: "specialist",
+    poster: "/video/1Bydz-O-r88.jpg",
+    href: "https://www.youtube.com/shorts/1Bydz-O-r88",
+  },
+  {
+    id: "detox",
+    poster: "/video/5InExXEyNQI.jpg",
+    href: "https://www.youtube.com/shorts/5InExXEyNQI",
+  },
+  {
+    id: "nutrition",
+    poster: "/video/6ZrtnjrqmOg.jpg",
+    href: "https://www.youtube.com/shorts/6ZrtnjrqmOg",
+  },
+  {
+    id: "iodine",
+    poster: "/video/xXmN2f7wyuM.jpg",
+    href: "https://www.youtube.com/shorts/xXmN2f7wyuM",
+  },
 ];
 
 export const certificates: Certificate[] = [

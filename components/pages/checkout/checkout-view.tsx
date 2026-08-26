@@ -248,14 +248,22 @@ export function CheckoutView() {
               <ul className="flex flex-col gap-4">
                 {items.map((item) => (
                   <li key={item.slug} className="flex items-center gap-4">
-                    <span className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-xl border border-brand-200 bg-surface-mint">
+                    {/*
+                      The packshot is centred out of flow, so its box is 86% of
+                      the tile in both directions no matter what the file is.
+                      Sized in flow it took its height from `h-full`, which only
+                      resolves while the tile's own height stays definite — the
+                      same footing that let an upright bottle stretch the ring on
+                      the product page.
+                    */}
+                    <span className="relative size-16 shrink-0 overflow-hidden rounded-xl border border-brand-200 bg-surface-mint">
                       <Image
                         src={item.product.image}
                         alt=""
                         width={64}
                         height={64}
                         sizes="64px"
-                        className="h-full w-full object-contain p-1.5"
+                        className="absolute top-1/2 left-1/2 size-[86%] -translate-x-1/2 -translate-y-1/2 object-contain"
                       />
                     </span>
                     <span className="min-w-0 flex-1 leading-tight">

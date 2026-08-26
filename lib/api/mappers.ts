@@ -22,6 +22,39 @@ const imgs = (urls: (string | null | undefined)[] | undefined) =>
   (urls ?? []).map(img).filter(Boolean);
 
 /**
+ * Uploaded photos that must never reach the storefront, by product slug and
+ * file name.
+ *
+ * A content review found two products showing photography that is not theirs.
+ * Insulin Balance carried a frame of the pre-redesign 330 ml bottle and a shot
+ * of three Hemoglobin+ bottles; Hemoglobin+ carried three frames of its own
+ * discontinued blue bottle, while the product on sale is the purple 500 ml one.
+ * Both sets are attached to the live records, so they arrive on every request
+ * and outrank everything the storefront bundles.
+ *
+ * This is a stopgap, not the fix. The photos have to be deleted in the admin
+ * (`DELETE /products/cms/:id/media/:mediaId`); once they are, these entries do
+ * nothing and should be dropped. Matching is on the file name rather than the
+ * whole URL so moving the media origin does not quietly re-admit them.
+ */
+const REJECTED_SHOTS: Record<string, ReadonlySet<string>> = {
+  "insulin-balance": new Set([
+    "rectangle-1699-3.png", // discontinued 330 ml design
+    "product-1786538186303-294374715.webp", // three Hemoglobin+ bottles on driftwood
+  ]),
+  hemoglobin: new Set([
+    "rectangle-1699-2.png", // discontinued blue bottle
+    "rectangle-118-7.png", // discontinued blue bottle
+    "product-1786538559924-607669178.webp", // discontinued blue bottle
+  ]),
+};
+
+const fileNameOf = (url: string): string => {
+  const path = url.split(/[?#]/, 1)[0];
+  return decodeURIComponent(path.slice(path.lastIndexOf("/") + 1)).toLowerCase();
+};
+
+/**
  * The photos uploaded through the admin, the one marked main first and the rest
  * in their sort order.
  *
@@ -32,8 +65,11 @@ const imgs = (urls: (string | null | undefined)[] | undefined) =>
  * flagship product ended up rendering a broken card image.
  */
 function uploadedShots(api: ApiProduct): string[] {
+  const rejected = REJECTED_SHOTS[api.slug];
+
   return [...(api.media ?? [])]
     .filter((m) => m.type !== "video")
+    .filter((m) => !rejected?.has(fileNameOf(m.url ?? "")))
     .sort((a, b) => Number(b.isMain) - Number(a.isMain) || a.sortOrder - b.sortOrder)
     .map((m) => img(m.url))
     .filter(Boolean);
@@ -60,13 +96,31 @@ export function toProduct(api: ApiProduct): Product {
   const base = getStaticProduct(api.slug);
 
   const shots = uploadedShots(api);
-  /** Nth uploaded photo, wrapping — a set smaller than the layout still fills it. */
-  const shot = (index: number): string | undefined =>
-    shots.length ? shots[index % shots.length] : undefined;
 
-  const cardImage = shot(0) || base?.image || img(images.card) || "";
-  const gallery = shots.length
-    ? shots
+  /*
+   * The uploads drive the detail page's composition only when there are enough
+   * of them to fill it.
+   *
+   * The blocks below want five distinct photos between them. Wrapping a shorter
+   * set round to fill the slots put the same bottle in three boxes on one
+   * screen, and after a review pulled the wrong photos off Hemoglobin+ it would
+   * have left that page with a single packshot repeated down the whole page
+   * while four correct ones sat in the bundle unused. Three is the same
+   * threshold `usage` has always applied; it now governs the gallery and the
+   * benefits carousel too, so a product is dressed from one source rather than
+   * half from each.
+   *
+   * The card image is exempt: it is one slot, and one upload fills it.
+   */
+  const composed = shots.length >= 3 ? shots : [];
+  /** Nth photo of the composition set, wrapping. */
+  const shot = (index: number): string | undefined =>
+    composed.length ? composed[index % composed.length] : undefined;
+
+  const cardImage = shots[0] || base?.image || img(images.card) || "";
+  const hero = shot(1) || base?.hero || img(images.hero) || cardImage;
+  const gallery = composed.length
+    ? composed
     : base?.gallery?.length
       ? base.gallery
       : imgs(images.gallery);
@@ -81,10 +135,17 @@ export function toProduct(api: ApiProduct): Product {
     badge: (attrs.badge as ProductBadge) ?? base?.badge ?? "rec",
     form: (attrs.form as ProductForm) ?? base?.form ?? "capsules",
     image: cardImage,
-    hero: shot(1) || base?.hero || img(images.hero) || cardImage,
-    gallery: gallery.length ? gallery : [cardImage],
+    hero,
+    /*
+     * Left empty when the product has no second photo. It used to fall back to
+     * the card image, which put a thumbnail of the picture already filling the
+     * frame above it directly underneath — and since the bundled copy and the
+     * uploaded original are different URLs of the same artwork, the gallery had
+     * no way to notice and drop it.
+     */
+    gallery,
     usage:
-      shots.length >= 3
+      composed.length
         ? { small: [shot(2)!, shot(3)!] as [string, string], wide: shot(4)! }
         : (base?.usage ??
           (images.usage
@@ -96,12 +157,12 @@ export function toProduct(api: ApiProduct): Product {
                 wide: img(images.usage.wide),
               }
             : { small: [cardImage, cardImage], wide: cardImage })),
-    benefitSlides: shots.length
-      ? shots
+    benefitSlides: composed.length
+      ? composed
       : base?.benefitSlides?.length
         ? base.benefitSlides
         : (imgs(images.benefitSlides).length ? imgs(images.benefitSlides) : [cardImage]),
-    ringImage: shot(0) || base?.ringImage || img(images.ring) || cardImage,
+    ringImage: shots[0] || base?.ringImage || img(images.ring) || cardImage,
     statImage: shot(1) || base?.statImage || img(images.stat) || cardImage,
     featured: api.isFeatured,
     rating: attrs.rating ?? base?.rating ?? 5,

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
@@ -20,10 +19,24 @@ const orbit: Record<string, { angle: number; side: "left" | "right" }> = {
   digestion: { angle: 300, side: "left" },
 };
 
+/**
+ * The six glyphs are flat single-colour silhouettes exported at #117477, the
+ * teal accent — which is why this wheel used to read as a different palette
+ * from every other section on the page. They are painted through a mask rather
+ * than drawn as images so their colour comes from the theme like the labels
+ * next to them, instead of being baked into six PNGs that would have to be
+ * re-exported the next time the brand green moves.
+ */
 function WheelIcon({ src }: { src: string }) {
+  const mask = `url("${encodeURI(src)}") center / contain no-repeat`;
+
   return (
     <span className="grid size-14 shrink-0 place-items-center rounded-full bg-white shadow-card ring-1 ring-line/70">
-      <Image src={src} alt="" width={32} height={32} className="size-6 object-contain" />
+      <span
+        aria-hidden
+        className="size-6 bg-brand-700"
+        style={{ mask, WebkitMask: mask }}
+      />
     </span>
   );
 }
@@ -57,7 +70,7 @@ export function WhyNuma() {
             <li key={item.id} className="flex items-start gap-3">
               <WheelIcon src={item.icon} />
               <div className="min-w-0">
-                <p className="font-heading text-[0.9375rem] font-bold text-teal-brand">
+                <p className="font-heading text-[0.9375rem] font-bold text-brand-700">
                   {t(`wheel.${item.id}.title`)}
                 </p>
                 <p className="text-[0.75rem] leading-snug text-muted-ink">
@@ -70,9 +83,9 @@ export function WhyNuma() {
 
         <div className="relative hidden aspect-[7/5] w-full lg:block">
           {/* The dashed circle IS the coordinate space, so every item is exact. */}
-          <div className="absolute top-1/2 left-1/2 aspect-square w-[44%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-teal-brand/40">
-            <div className="absolute top-1/2 left-1/2 grid size-[62%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-teal-brand/20 bg-white text-center shadow-card">
-              <span className="flex flex-col leading-none text-teal-brand">
+          <div className="absolute top-1/2 left-1/2 aspect-square w-[44%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand/45">
+            <div className="absolute top-1/2 left-1/2 grid size-[62%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-brand/25 bg-white text-center shadow-card">
+              <span className="flex flex-col leading-none text-brand-700">
                 <span className="font-heading text-[1.6rem] font-extrabold tracking-tight">
                   NUMA
                 </span>
@@ -99,7 +112,7 @@ export function WhyNuma() {
                       side === "right" ? "left-10 text-left" : "right-10 text-right"
                     )}
                   >
-                    <p className="font-heading text-[0.9375rem] font-bold text-teal-brand">
+                    <p className="font-heading text-[0.9375rem] font-bold text-brand-700">
                       {t(`wheel.${item.id}.title`)}
                     </p>
                     <p className="text-[0.75rem] leading-snug text-muted-ink">

@@ -67,7 +67,7 @@ export function BrandSwitcher({ className }: { className?: string }) {
         onClick={() => setOpen((value) => !value)}
         className={cn(
           "group -mx-2 flex cursor-pointer items-center gap-2.5 rounded-xl px-2 py-1.5 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:gap-3",
-          open ? "bg-brand/10" : "hover:bg-brand/8",
+          open ? "bg-teal-logo/10" : "hover:bg-teal-logo/8",
         )}
       >
         <LogoMark priority />
@@ -117,6 +117,11 @@ export function BrandSwitcher({ className }: { className?: string }) {
  * It sits at 55% until the pointer arrives, so it hints rather than competes
  * with the logo, and the dots spread a hair on hover so the whole trigger
  * answers the cursor.
+ *
+ * `teal-logo` and not the brand green: the dots sit two millimetres from the
+ * wordmark, and the wordmark artwork is teal. Two different greens that close
+ * together read as a mismatch rather than as an accent, so the trigger takes
+ * the colour of the mark it belongs to — hover tint included.
  */
 function SwitcherGrid({ open }: { open: boolean }) {
   return (
@@ -130,7 +135,7 @@ function SwitcherGrid({ open }: { open: boolean }) {
       )}
     >
       {Array.from({ length: 9 }, (_, index) => (
-        <span key={index} className="size-[3.5px] rounded-full bg-brand" />
+        <span key={index} className="size-[3.5px] rounded-full bg-teal-logo" />
       ))}
     </span>
   );

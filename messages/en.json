@@ -198,10 +198,10 @@
       "description": "Discover NUMA Nutrition products through videos from specialists",
       "play": "Watch video",
       "items": {
-        "shaykhova": "Guli Shaykhova on the scientific approach of NUMA Nutrition",
-        "detox": "Detox Hepar Energy: real experience",
-        "entrepreneur": "Why entrepreneurs choose NUMA Nutrition",
-        "beauty": "Beauty and health with NUMA Nutrition"
+        "specialist": "A NUMA Nutrition specialist on the products",
+        "detox": "Detox Hepar Energy — about the product",
+        "nutrition": "Detox and everyday eating",
+        "iodine": "Endo Marine+ and iodine deficiency"
       }
     },
     "certificates": {
@@ -1218,6 +1218,137 @@
         {
           "label": "Natural formula",
           "text": "A complex of marine extracts, vitamins and minerals"
+        }
+      ]
+    },
+    "igneus": {
+      "name": "Igneus",
+      "tagline": "Black seed, costus and pumpkin seed oils in a single complex",
+      "short": "Black seed, costus and pumpkin seed in one capsule",
+      "description": "Igneus combines black seed, costus and pumpkin seed oils — a complex for immunity, digestion and liver support. 180 capsules of 500 mg.",
+      "specs": [
+        {
+          "label": "Quantity",
+          "value": "180 capsules"
+        },
+        {
+          "label": "Dosage",
+          "value": "500 mg"
+        },
+        {
+          "label": "Form",
+          "value": "Capsules"
+        },
+        {
+          "label": "Age",
+          "value": "Adults"
+        },
+        {
+          "label": "Shelf life",
+          "value": "24 months"
+        },
+        {
+          "label": "Storage",
+          "value": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "purposeSubtitle": "Igneus helps support immunity, digestion and the natural work of the liver",
+      "purpose": [
+        {
+          "title": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "title": "Healthy digestion",
+          "text": "Helps maintain the normal work of the digestive tract"
+        },
+        {
+          "title": "Liver support",
+          "text": "Supports normal liver function and the body's natural cleansing"
+        },
+        {
+          "title": "Antioxidant protection",
+          "text": "Helps protect cells from oxidative stress"
+        },
+        {
+          "title": "Energy and activity",
+          "text": "Helps maintain vitality throughout the day"
+        },
+        {
+          "title": "Natural composition",
+          "text": "A complex of plant oils with no synthetic additives"
+        }
+      ],
+      "steps": [
+        {
+          "title": "How to take",
+          "text": "Take 2 capsules twice a day"
+        },
+        {
+          "title": "When to take",
+          "text": "Best taken with or right after a meal, with water"
+        },
+        {
+          "title": "Course length",
+          "text": "A course of at least 1–2 months is recommended for a pronounced effect"
+        },
+        {
+          "title": "Storage",
+          "text": "Store in a dry place at a temperature not above +25°C"
+        }
+      ],
+      "highlightTitle": "The strength of three natural oils in one capsule",
+      "highlightText": "Igneus combines black seed, costus and pumpkin seed oils — traditional plant ingredients that support immunity, digestion and liver function. Suitable for daily use as part of a healthy lifestyle",
+      "chips": [
+        {
+          "value": "180 capsules",
+          "label": "Capsules per pack"
+        },
+        {
+          "value": "3 oils",
+          "label": "Plant complex"
+        },
+        {
+          "value": "500 mg",
+          "label": "Optimal dosage"
+        },
+        {
+          "value": "Twice a day",
+          "label": "Recommended intake"
+        }
+      ],
+      "benefits": [
+        "Helps strengthen immunity",
+        "Helps maintain healthy digestion",
+        "Supports the natural work of the liver",
+        "Helps protect cells from oxidative stress",
+        "Supports vitality and activity",
+        "Contains black seed, costus and pumpkin seed oils"
+      ],
+      "stats": [
+        {
+          "label": "Immune support",
+          "text": "Helps strengthen the body's natural defences"
+        },
+        {
+          "label": "Healthy digestion",
+          "text": "Helps maintain normal digestion"
+        },
+        {
+          "label": "Liver support",
+          "text": "Supports normal liver function"
+        },
+        {
+          "label": "Antioxidant protection",
+          "text": "Helps protect cells from oxidative stress"
+        },
+        {
+          "label": "Energy and activity",
+          "text": "Helps maintain vitality"
+        },
+        {
+          "label": "Natural composition",
+          "text": "A complex of three plant oils for daily support"
         }
       ]
     },

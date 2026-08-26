@@ -46,7 +46,10 @@ export function ProductHighlight({ product }: { product: Product }) {
             width={220}
             height={420}
             sizes="40vw"
-            className="h-52 w-auto object-contain"
+            // Bounded on both axes. `w-auto` took its width from the file, so a
+            // landscape frame in this slot came out ~2.4× as wide as it is tall
+            // and ran off the side of a phone.
+            className="h-52 w-full max-w-64 object-contain"
           />
           <ul className="grid w-full grid-cols-2 gap-3">
             {chips.map((chip) => (
@@ -60,13 +63,25 @@ export function ProductHighlight({ product }: { product: Product }) {
 
         <div className="relative hidden aspect-[7/5] w-full lg:block">
           <div className="absolute top-1/2 left-1/2 aspect-square w-[52%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand/45">
+            {/*
+              The image occupies a fixed square inside the ring and letterboxes
+              into it, so whatever ends up in this slot cannot change its size.
+
+              It used to be `h-[86%] w-auto`, which took the width from the
+              file: a packshot sat neatly inside the ring, but any landscape
+              frame — and most of the catalogue's photography is 1518×621 —
+              came out over twice the ring's width and laid itself across the
+              four chips orbiting it. `ringImage` is whichever photo the admin
+              marked as the product's main one, so the slot has to survive being
+              handed a wide one.
+            */}
             <Image
               src={product.ringImage}
               alt=""
               width={240}
               height={460}
               sizes="240px"
-              className="absolute top-1/2 left-1/2 h-[86%] w-auto -translate-x-1/2 -translate-y-1/2 object-contain"
+              className="absolute top-1/2 left-1/2 size-[86%] -translate-x-1/2 -translate-y-1/2 object-contain"
             />
 
             {chips.map((chip, index) => {

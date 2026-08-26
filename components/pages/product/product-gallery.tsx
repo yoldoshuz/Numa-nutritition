@@ -8,7 +8,12 @@ import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
 export function ProductGallery({ product, name }: { product: Product; name: string }) {
-  const slides = [product.hero, ...product.gallery];
+  /*
+   * The hero is normally one of the gallery photos, so it arrives twice — and
+   * both the slide list and the thumbnails key off the path, which meant React
+   * saw duplicate keys and the strip offered the same picture twice.
+   */
+  const slides = [...new Set([product.hero, ...product.gallery])];
   const [active, setActive] = useState(0);
 
   return (

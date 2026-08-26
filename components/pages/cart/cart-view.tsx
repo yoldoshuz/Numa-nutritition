@@ -54,15 +54,16 @@ export function CartView() {
                 >
                   <Link
                     href={`/products/${item.slug}`}
-                    className="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-xl border border-brand-200 bg-surface-mint sm:size-28"
+                    className="relative block size-24 shrink-0 overflow-hidden rounded-xl border border-brand-200 bg-surface-mint sm:size-28"
                   >
+                    {/* Centred the same way as the checkout summary tile. */}
                     <Image
                       src={item.product.image}
                       alt=""
                       width={112}
                       height={112}
                       sizes="112px"
-                      className="h-full w-full object-contain p-2.5"
+                      className="absolute top-1/2 left-1/2 size-[86%] -translate-x-1/2 -translate-y-1/2 object-contain"
                     />
                   </Link>
 

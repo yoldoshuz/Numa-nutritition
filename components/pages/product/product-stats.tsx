@@ -29,14 +29,25 @@ export function ProductStats({ product }: { product: Product }) {
           ))}
         </ul>
 
-        <div className="relative mx-auto grid aspect-square w-full max-w-sm place-items-center rounded-full bg-surface-mint">
+        {/*
+          The photo is positioned out of flow on purpose.
+
+          As an in-flow child its `78%` height had nothing definite to resolve
+          against — `aspect-square` only derives a height once the content is
+          measured — so it fell back to the file's own proportions. An upright
+          packshot is roughly 1:3, which stretched this circle into a 384×950
+          capsule with the bottle spilling out of the mint. Out of flow the
+          image no longer feeds the container's height, so the square resolves
+          from the width first and both percentages land on the same 384px.
+        */}
+        <div className="relative mx-auto aspect-square w-full max-w-sm rounded-full bg-surface-mint">
           <Image
             src={product.statImage}
             alt=""
             width={420}
             height={420}
             sizes="(max-width: 1024px) 70vw, 380px"
-            className="size-[78%] rounded-full object-contain"
+            className="absolute top-1/2 left-1/2 size-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full object-contain"
           />
         </div>
       </Container>

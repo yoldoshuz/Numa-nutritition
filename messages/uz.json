@@ -198,10 +198,10 @@
       "description": "NUMA Nutrition mahsulotlari bilan mutaxassislar videosi orqali tanishing",
       "play": "Videoni ko'rish",
       "items": {
-        "shaykhova": "Guli Shayxova NUMA Nutrition ilmiy yondashuvi haqida",
-        "detox": "Detox Hepar Energy: haqiqiy tajriba",
-        "entrepreneur": "Nega tadbirkorlar NUMA Nutrition'ni tanlaydi",
-        "beauty": "NUMA Nutrition bilan go'zallik va salomatlik"
+        "specialist": "NUMA Nutrition mutaxassisi mahsulot haqida",
+        "detox": "Detox Hepar Energy — mahsulot haqida",
+        "nutrition": "Detoks va kundalik ovqatlanish",
+        "iodine": "Endo Marine+ va yod yetishmovchiligi"
       }
     },
     "certificates": {
@@ -1218,6 +1218,137 @@
         {
           "label": "Tabiiy tarkib",
           "text": "Dengiz ekstraktlari, vitaminlar va minerallar majmuasi"
+        }
+      ]
+    },
+    "igneus": {
+      "name": "Igneus",
+      "tagline": "Qora sedana, qust va qovoq urugʻi moylari bitta kompleksda",
+      "short": "Bir kapsulada qora sedana, qust va qovoq urugʻi",
+      "description": "Igneus qora sedana, qust va qovoq urugʻi moylarini birlashtiradi — immunitet, hazm va jigarni qoʻllab-quvvatlash uchun kompleks. 500 mg dan 180 kapsula.",
+      "specs": [
+        {
+          "label": "Miqdori",
+          "value": "180 kapsula"
+        },
+        {
+          "label": "Dozasi",
+          "value": "500 mg"
+        },
+        {
+          "label": "Chiqarilish shakli",
+          "value": "Kapsulalar"
+        },
+        {
+          "label": "Yosh",
+          "value": "Kattalar uchun"
+        },
+        {
+          "label": "Yaroqlilik muddati",
+          "value": "24 oy"
+        },
+        {
+          "label": "Saqlash sharoiti",
+          "value": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "purposeSubtitle": "Igneus immunitet, hazm va jigarning tabiiy ishini qoʻllab-quvvatlashga yordam beradi",
+      "purpose": [
+        {
+          "title": "Immunitetni qoʻllab-quvvatlash",
+          "text": "Organizmning tabiiy himoya kuchlarini mustahkamlashga yordam beradi"
+        },
+        {
+          "title": "Sogʻlom hazm",
+          "text": "Oshqozon-ichak traktining normal ishlashini qoʻllab-quvvatlashga yordam beradi"
+        },
+        {
+          "title": "Jigarni qoʻllab-quvvatlash",
+          "text": "Jigarning normal ishlashi va organizmning tabiiy tozalanishiga yordam beradi"
+        },
+        {
+          "title": "Antioksidant himoya",
+          "text": "Hujayralarni oksidlanish stressidan himoya qilishga yordam beradi"
+        },
+        {
+          "title": "Energiya va faollik",
+          "text": "Kun davomida hayotiy tonusni saqlashga yordam beradi"
+        },
+        {
+          "title": "Tabiiy tarkib",
+          "text": "Sintetik qoʻshimchalarsiz oʻsimlik moylari kompleksi"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Qo'llash usuli",
+          "text": "Kuniga 2 marta 2 kapsuladan qabul qiling"
+        },
+        {
+          "title": "Qabul vaqti",
+          "text": "Ovqat vaqtida yoki undan keyin darhol suv bilan qabul qilish tavsiya etiladi"
+        },
+        {
+          "title": "Kurs davomiyligi",
+          "text": "Sezilarli samaraga erishish uchun kamida 1–2 oylik kurs tavsiya etiladi"
+        },
+        {
+          "title": "Saqlash sharoiti",
+          "text": "Quruq joyda, +25°C dan yuqori bo'lmagan haroratda saqlang"
+        }
+      ],
+      "highlightTitle": "Bir kapsulada uchta tabiiy moy kuchi",
+      "highlightText": "Igneus qora sedana, qust va qovoq urugʻi moylarini birlashtiradi — immunitet, hazm va jigar ishini qoʻllab-quvvatlaydigan an'anaviy oʻsimlik komponentlari. Sogʻlom turmush tarzi doirasida kundalik qabul uchun mos",
+      "chips": [
+        {
+          "value": "180 kapsula",
+          "label": "Qadoqdagi miqdori"
+        },
+        {
+          "value": "3 ta moy",
+          "label": "O'simlik kompleksi"
+        },
+        {
+          "value": "500 mg",
+          "label": "Optimal doza"
+        },
+        {
+          "value": "Kuniga 2 marta",
+          "label": "Tavsiya etilgan qabul"
+        }
+      ],
+      "benefits": [
+        "Immunitetni mustahkamlashga yordam beradi",
+        "Sogʻlom hazmni qoʻllab-quvvatlashga yordam beradi",
+        "Jigarning tabiiy ishini qoʻllab-quvvatlaydi",
+        "Hujayralarni oksidlanish stressidan himoya qilishga yordam beradi",
+        "Hayotiy tonus va faollikni qoʻllab-quvvatlaydi",
+        "Qora sedana, qust va qovoq urugʻi moylarini oʻz ichiga oladi"
+      ],
+      "stats": [
+        {
+          "label": "Immunitetni qoʻllab-quvvatlash",
+          "text": "Organizmning tabiiy himoyasini mustahkamlashga yordam beradi"
+        },
+        {
+          "label": "Sogʻlom hazm",
+          "text": "Hazmning normal ishlashini qoʻllab-quvvatlashga yordam beradi"
+        },
+        {
+          "label": "Jigarni qoʻllab-quvvatlash",
+          "text": "Jigarning normal ishlashiga yordam beradi"
+        },
+        {
+          "label": "Antioksidant himoya",
+          "text": "Hujayralarni oksidlanish stressidan himoya qilishga yordam beradi"
+        },
+        {
+          "label": "Energiya va faollik",
+          "text": "Hayotiy tonusni saqlashga yordam beradi"
+        },
+        {
+          "label": "Tabiiy tarkib",
+          "text": "Kundalik qoʻllab-quvvatlash uchun uchta oʻsimlik moyi kompleksi"
         }
       ]
     },
