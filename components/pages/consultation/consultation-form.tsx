@@ -14,13 +14,15 @@ import {
   postConsultation,
   PROBLEM_MAX_LENGTH,
   PROBLEM_MIN_LENGTH,
+  SUBJECT_MAX_LENGTH,
 } from "@/lib/api/consultation";
 import { Link } from "@/lib/i18n/navigation";
 import { formatUzPhoneInput, toApiPhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 
-type FieldName = "name" | "phone" | "question";
-type Errors = Partial<Record<FieldName, string>>;
+type FieldName = "name" | "phone" | "subject" | "question";
+/** The subject is optional, so it never carries one. */
+type Errors = Partial<Record<Exclude<FieldName, "subject">, string>>;
 
 export function ConsultationForm() {
   const t = useTranslations("Consultation");
@@ -35,6 +37,7 @@ export function ConsultationForm() {
   const [values, setValues] = useState({
     name: user ? [user.firstName, user.lastName].filter(Boolean).join(" ") : "",
     phone: user ? formatUzPhoneInput(user.phone) : "",
+    subject: "",
     question: "",
   });
   const [errors, setErrors] = useState<Errors>({});
@@ -65,10 +68,11 @@ export function ConsultationForm() {
       await postConsultation({
         name: values.name.trim(),
         phone: apiPhone,
+        subject: values.subject.trim().slice(0, SUBJECT_MAX_LENGTH),
         problem: values.question.trim().slice(0, PROBLEM_MAX_LENGTH),
       });
       setDone(true);
-      setValues({ name: "", phone: "", question: "" });
+      setValues({ name: "", phone: "", subject: "", question: "" });
     } catch (error) {
       setSubmitError(
         classifyConsultationError(error) === "rateLimit"
@@ -83,7 +87,7 @@ export function ConsultationForm() {
   function update(field: FieldName, value: string) {
     setValues((current) => ({ ...current, [field]: value }));
     setSubmitError(null);
-    if (!errors[field]) return;
+    if (field === "subject" || !errors[field]) return;
     setErrors((current) => {
       const next = { ...current };
       delete next[field];
@@ -146,6 +150,27 @@ export function ConsultationForm() {
               </p>
             ) : null}
           </div>
+        </div>
+
+        {/*
+          Optional, and deliberately unmarked: the CRM prints it as its own line
+          on the deal card, so a one-line "what is this about" is worth asking
+          for — but a required field between the phone number and the question
+          is one more thing to abandon the form over.
+        */}
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="subject" className="text-[0.8125rem] font-bold text-ink">
+            {t("subject")}
+          </Label>
+          <Input
+            id="subject"
+            name="subject"
+            maxLength={SUBJECT_MAX_LENGTH}
+            value={values.subject}
+            onChange={(event) => update("subject", event.target.value)}
+            placeholder={t("subjectPlaceholder")}
+            className={inputClass}
+          />
         </div>
 
         <div className="flex flex-col gap-1.5">

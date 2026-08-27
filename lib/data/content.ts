@@ -20,15 +20,18 @@ export const mainNav: NavLink[] = [
  *
  * Every one of these pointed at numafamily.uz, which does not resolve, so the
  * whole column led to a browser error page. They now go where the logo dropdown
- * goes: the live deploys. Diagnostics and Bettery have no site of their own
- * yet, so they land on Family rather than nowhere.
+ * goes: the live deploys, and Bettery Organic to its own domain.
+ *
+ * Diagnostics has no site yet. An empty `href` renders it as plain text rather
+ * than as a link that quietly lands somewhere else — being told "this exists"
+ * is honest, being sent to the wrong brand is not.
  */
 export const directionLinks: NavLink[] = [
   { key: "family", href: "https://numa-family.vercel.app/ru" },
   { key: "kids", href: "https://numa-kids-olive.vercel.app/ru" },
   { key: "nabaviy", href: "https://nabaviy-tabobat.vercel.app" },
-  { key: "diagnostics", href: "https://numa-family.vercel.app/ru" },
-  { key: "bettery", href: "https://numa-family.vercel.app/ru" },
+  { key: "diagnostics", href: "" },
+  { key: "bettery", href: "https://betteryorganic.uz" },
 ];
 
 export const companyLinks: NavLink[] = [
@@ -41,15 +44,23 @@ export const companyLinks: NavLink[] = [
   { key: "contacts", href: "/contacts" },
 ];
 
+/**
+ * The footer's social row, and the `sameAs` list in the organisation schema.
+ *
+ * `t.me/numa_uz` — with the underscore — was a stranger's channel titled "E".
+ * The brand's own channel is `t.me/numauz`, "Numa.uz", and its bio prints the
+ * phone number below. `numafamily.uz` has never been cut over, so the website
+ * icon goes to the group's live site instead of a DNS error.
+ */
 export const socialLinks: SocialLink[] = [
-  { key: "telegram", href: "https://t.me/numa_uz", icon: "telegram" },
+  { key: "telegram", href: "https://t.me/numauz", icon: "telegram" },
   { key: "instagram", href: "https://www.instagram.com/numa.uz", icon: "instagram" },
   { key: "facebook", href: "https://www.facebook.com/share/1EVPsKHEgL/", icon: "facebook" },
-  { key: "website", href: "https://numafamily.uz", icon: "web" },
+  { key: "website", href: "https://numa.uz", icon: "web" },
 ];
 
 /**
- * The four NUMA properties, surfaced from the logo dropdown.
+ * The six NUMA properties, surfaced from the logo dropdown.
  *
  * Every site carries the whole list including itself, so the menu reads the
  * same everywhere and a visitor can always see where they currently are. The
@@ -59,6 +70,14 @@ export const socialLinks: SocialLink[] = [
  * These are the deploy URLs, not the brand domains: numafamily.uz,
  * numanutrition.uz and nabaviytabobat.uz do not resolve yet, and a dropdown of
  * dead links is worse than no dropdown. Swap them the day DNS is cut over.
+ *
+ * NUMA Diagnostics has no site at all, so its `href` is empty and the menu
+ * renders it as an inert "coming soon" row: the group is six brands and the
+ * menu should say so, but a row that navigates nowhere — or worse, to a
+ * different brand — is the bug this shape avoids.
+ *
+ * `bettery.svg` and `diagnostics.svg` are stand-in marks, not the brands'
+ * artwork. Replace both the day real logos arrive.
  */
 export const SIBLING_SITES = [
   {
@@ -85,6 +104,18 @@ export const SIBLING_SITES = [
     href: "https://nabaviy-tabobat.vercel.app",
     logo: "/brands/tabobat.png",
   },
+  {
+    id: "bettery",
+    label: "BETTERY ORGANIC",
+    href: "https://betteryorganic.uz",
+    logo: "/brands/bettery.svg",
+  },
+  {
+    id: "diagnostics",
+    label: "NUMA DIAGNOSTICS",
+    href: "",
+    logo: "/brands/diagnostics.svg",
+  },
 ] as const;
 
 
@@ -101,16 +132,18 @@ export const contactInfo = {
    */
   instagram: "@numa.uz",
   instagramHref: "https://www.instagram.com/numa.uz",
-  telegram: "@numa_uz",
-  telegramHref: "https://t.me/numa_uz",
+  /** Public channel — no underscore. `@numa_uz` belongs to a stranger. */
+  telegram: "@numauz",
+  telegramHref: "https://t.me/numauz",
   telegramAdmin: "@Numa_uz_admin",
   telegramAdminHref: "https://t.me/Numa_uz_admin",
   facebookHref: "https://www.facebook.com/share/1EVPsKHEgL/",
   email: "numafamilyuz@gmail.com",
   emailHref: "mailto:numafamilyuz@gmail.com",
-  site: "www.numafamily.uz",
-  // The brand domain does not resolve yet; the footer link has to work today.
-  siteHref: "https://numa-family.vercel.app/ru",
+  // The brand domain has never been cut over, and a footer that prints a
+  // domain it cannot open is worse than one that prints the live one.
+  site: "numa.uz",
+  siteHref: "https://numa.uz",
   mapImage: "/Rectangle 107.png",
   /**
    * Keyless Yandex widget, resolved from the office address instead of a fixed
@@ -180,6 +213,23 @@ export const expertVideos: ExpertVideo[] = [
     href: "https://www.youtube.com/shorts/xXmN2f7wyuM",
   },
 ];
+
+/**
+ * The one certificate on the site we hold the actual document for, linked from
+ * the footer.
+ *
+ * What the PDF says, so nobody has to open it to find out: certificate
+ * № 24-E-1770 Rev. 0, ISO 22000:2018 Food Safety Management System, issued by
+ * IGC (register: igcert.org) to **NUTRI MAKON FACTORY LLC** — the factory, not
+ * the NUMA brand — for the production of dietary supplements.
+ *
+ * Issued 15.08.2024, **expires 14.08.2027**. After that date this link starts
+ * advertising a lapsed document, so it wants replacing before then.
+ *
+ * The other four marks in the row below have no document at all; only this one
+ * is linked anywhere.
+ */
+export const ISO_22000_CERTIFICATE = "/certificates/iso-22000-2018.pdf";
 
 export const certificates: Certificate[] = [
   { id: "euroleaf", icon: "/Ellipse 254.png" },

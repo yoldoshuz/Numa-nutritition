@@ -71,6 +71,7 @@
     "required": "Majburiy maydon",
     "loading": "Yuklanmoqda…",
     "otherBrands": "NUMA ning boshqa loyihalari",
+    "comingSoon": "Tez orada",
     "outOfStock": "Sotuvda yo‘q",
     "outOfStockNote": "Mahsulot vaqtincha sotuvda yo‘q. Ariza qoldiring yoki bizga yozing — paydo bo‘lishi bilan xabar beramiz."
   },
@@ -99,6 +100,7 @@
     "rightsSecond": "Barcha huquqlar himoyalangan",
     "privacy": "Maxfiylik siyosati",
     "terms": "Foydalanuvchi shartnomasi",
+    "certificate": "ISO 22000 sertifikati (PDF)",
     "directionLinks": {
       "family": "NUMA Family",
       "kids": "NUMA Kids",
@@ -1973,6 +1975,8 @@
     "namePlaceholder": "Ismingizni kiriting",
     "phone": "Telefon raqami",
     "phonePlaceholder": "Telefon raqamingizni kiriting",
+    "subject": "Murojaat mavzusi",
+    "subjectPlaceholder": "Masalan: vitamin tanlash",
     "question": "Savolingiz",
     "questionPlaceholder": "Savolingiz, maqsadingiz yoki muammoingizni tasvirlab bering. Masalan charchoq, hazm muammolari, vazn nazorati va h.k.",
     "privacy": "Konsultatsiya maxfiy tarzda o'tkaziladi.",
@@ -1985,7 +1989,7 @@
     "errors": {
       "name": "Ismingizni kiriting",
       "phone": "To'g'ri telefon raqamini kiriting",
-      "question": "Savolingizni tasvirlab bering — kamida 10 ta belgi",
+      "question": "Savolingizni tasvirlab bering",
       "rateLimit": "Juda ko'p ariza yuborildi. Birozdan so'ng urinib ko'ring",
       "network": "Arizani yuborib bo'lmadi. Yana bir bor urinib ko'ring"
     }

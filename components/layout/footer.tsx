@@ -8,6 +8,7 @@ import {
   companyLinks,
   contactInfo,
   directionLinks,
+  ISO_22000_CERTIFICATE,
   socialLinks,
 } from "@/lib/data/content";
 import { Link } from "@/lib/i18n/navigation";
@@ -61,16 +62,24 @@ export function Footer() {
             {t("directions")}
           </h2>
           <ul className="flex flex-col gap-3">
+            {/* A direction with no site of its own stays plain text — a link
+                that lands on a different brand is worse than no link. */}
             {directionLinks.map((item) => (
               <li key={item.key}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={linkClass}
-                >
-                  {t(`directionLinks.${item.key}`)}
-                </a>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={linkClass}
+                  >
+                    {t(`directionLinks.${item.key}`)}
+                  </a>
+                ) : (
+                  <span className="text-[0.9375rem] text-white/85">
+                    {t(`directionLinks.${item.key}`)}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
@@ -88,6 +97,20 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            {/*
+              A plain `<a>`, not the locale-aware `Link`: this is a file in
+              `public/`, and prefixing it with `/ru` would 404.
+            */}
+            <li>
+              <a
+                href={ISO_22000_CERTIFICATE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                {t("certificate")}
+              </a>
+            </li>
           </ul>
         </nav>
 

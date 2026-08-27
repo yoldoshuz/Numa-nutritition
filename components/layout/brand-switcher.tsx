@@ -79,32 +79,77 @@ export function BrandSwitcher({ className }: { className?: string }) {
           className="absolute top-full left-0 z-50 mt-3 w-72 rounded-2xl border border-brand-200 bg-brand p-3 shadow-xl"
           role="menu"
         >
-          {SIBLING_SITES.map((site) => (
-            <a
-              key={site.id}
-              href={site.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              role="menuitem"
-              className="flex items-center gap-3 rounded-xl p-2.5 transition hover:bg-white/20"
-            >
-              <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-white p-1">
-                <Image
-                  src={site.logo}
-                  alt=""
-                  width={72}
-                  height={72}
-                  className="h-full w-full object-contain"
-                />
-              </span>
-              <span className="flex-1 text-sm font-bold tracking-wide text-white">
-                {site.label}
-              </span>
-            </a>
-          ))}
+          {/*
+            A brand with no site of its own still belongs in the menu — the
+            group is six, and a visitor who has heard of NUMA Diagnostics should
+            find it here rather than conclude it does not exist. It renders as
+            an inert row with a "soon" badge: no hover lift, no pointer, nothing
+            that promises a destination there isn't one of.
+          */}
+          {SIBLING_SITES.map((site) =>
+            site.href ? (
+              <a
+                key={site.id}
+                href={site.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                role="menuitem"
+                className="flex items-center gap-3 rounded-xl p-2.5 transition hover:bg-white/20"
+              >
+                <BrandMark logo={site.logo} />
+                <span className="flex-1 text-sm font-bold tracking-wide text-white">
+                  {site.label}
+                </span>
+              </a>
+            ) : (
+              <div
+                key={site.id}
+                role="menuitem"
+                aria-disabled
+                className="flex cursor-default items-center gap-3 rounded-xl p-2.5"
+              >
+                <BrandMark logo={site.logo} muted />
+                <span className="flex-1 text-sm font-bold tracking-wide text-white/70">
+                  {site.label}
+                </span>
+                <span className="rounded-full bg-white/20 px-2 py-0.5 text-[0.6875rem] font-semibold text-white/85">
+                  {t("Common.comingSoon")}
+                </span>
+              </div>
+            ),
+          )}
         </div>
       )}
     </div>
+  );
+}
+
+
+/** The white plate the brand's logo sits on, inside a menu row. */
+function BrandMark({ logo, muted }: { logo: string; muted?: boolean }) {
+  return (
+    <span
+      className={cn(
+        "grid size-9 shrink-0 place-items-center rounded-lg bg-white p-1",
+        muted && "opacity-70",
+      )}
+    >
+      {/*
+        Next's optimizer answers 400 for SVG unless `dangerouslyAllowSVG` is on,
+        and turning that on would also let every allowed remote host serve
+        scripted SVG. The two stand-in marks are ours and a few hundred bytes
+        each, so they skip the optimizer instead; the real logos are PNG and go
+        through it as before.
+      */}
+      <Image
+        src={logo}
+        alt=""
+        width={72}
+        height={72}
+        unoptimized={logo.endsWith(".svg")}
+        className="h-full w-full object-contain"
+      />
+    </span>
   );
 }
 

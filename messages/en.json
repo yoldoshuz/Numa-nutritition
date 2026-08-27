@@ -71,6 +71,7 @@
     "required": "Required field",
     "loading": "Loading…",
     "otherBrands": "Other NUMA projects",
+    "comingSoon": "Coming soon",
     "outOfStock": "Out of stock",
     "outOfStockNote": "This product is temporarily out of stock. Leave a request or write to us and we will let you know the moment it is back."
   },
@@ -99,6 +100,7 @@
     "rightsSecond": "All rights reserved",
     "privacy": "Privacy policy",
     "terms": "Terms of use",
+    "certificate": "ISO 22000 certificate (PDF)",
     "directionLinks": {
       "family": "NUMA Family",
       "kids": "NUMA Kids",
@@ -1973,6 +1975,8 @@
     "namePlaceholder": "Enter your name",
     "phone": "Phone number",
     "phonePlaceholder": "Enter your phone number",
+    "subject": "Subject",
+    "subjectPlaceholder": "For example: choosing vitamins",
     "question": "Your question",
     "questionPlaceholder": "Describe your question, goal or problem. For example fatigue, digestion issues, weight control, etc.",
     "privacy": "The consultation is confidential.",
@@ -1985,7 +1989,7 @@
     "errors": {
       "name": "Enter your name",
       "phone": "Enter a valid phone number",
-      "question": "Describe your question — at least 10 characters",
+      "question": "Describe your question",
       "rateLimit": "Too many requests. Please try again later",
       "network": "Could not send the request. Please try again"
     }
