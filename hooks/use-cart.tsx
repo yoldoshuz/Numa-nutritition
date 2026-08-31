@@ -272,6 +272,14 @@ export function CartProvider({
 
   const add = useCallback(
     (slug: string, quantity = 1) => {
+      // Defense in depth: a sold-out product never enters the basket, whatever
+      // control called this. Every add button is already disabled or replaced
+      // where a product shows sold out, but this is the single choke point all
+      // of them run through — so one card that forgets the check (as the blog
+      // strip once did) cannot put the shop back to taking orders it can't fill.
+      const product = catalogBySlug.get(slug);
+      if (product && isSoldOut(product)) return;
+
       const existing = lines.find((line) => line.slug === slug);
       const next = existing
         ? lines.map((line) =>
@@ -284,7 +292,7 @@ export function CartProvider({
       const productId = idBySlug.get(slug);
       apply(next, productId ? () => postCartItem(productId, quantity) : null);
     },
-    [lines, idBySlug, apply],
+    [lines, idBySlug, apply, catalogBySlug],
   );
 
   const setQuantity = useCallback(
