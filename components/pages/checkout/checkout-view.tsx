@@ -275,7 +275,7 @@ export function CheckoutView() {
                       </span>
                     </span>
                     <span className="text-[0.875rem] font-semibold text-ink">
-                      {formatAmount(item.product.price * item.quantity, locale)}{" "}
+                      {formatAmount(item.product.price * item.quantity)}{" "}
                       {tCommon("currency")}
                     </span>
                   </li>
@@ -286,7 +286,7 @@ export function CheckoutView() {
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-ink">{tCart("items", { count })}</dt>
                   <dd className="font-bold text-ink">
-                    {formatAmount(subtotal, locale)} {tCommon("currency")}
+                    {formatAmount(subtotal)} {tCommon("currency")}
                   </dd>
                 </div>
                 {/* Priced by the API so the basket and the created order
@@ -295,14 +295,14 @@ export function CheckoutView() {
                   <dt className="text-muted-ink">{tCart("delivery")}</dt>
                   <dd className="font-bold text-ink">
                     {totals.deliveryFee > 0
-                      ? `${formatAmount(totals.deliveryFee, locale)} ${tCommon("currency")}`
+                      ? `${formatAmount(totals.deliveryFee)} ${tCommon("currency")}`
                       : tCommon("free")}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-line pt-3">
                   <dt className="font-bold text-ink">{tCart("total")}</dt>
                   <dd className="font-heading text-lg font-extrabold text-ink">
-                    {formatAmount(totals.grandTotal, locale)} {tCommon("currency")}
+                    {formatAmount(totals.grandTotal)} {tCommon("currency")}
                   </dd>
                 </div>
               </dl>

@@ -29,6 +29,11 @@ export function ExpertVideos() {
              * every poster showed a play badge and did nothing when clicked.
              */
             const Tag = video.href ? "a" : "figure";
+            /*
+             * Channel clips carry their own published title; the four
+             * commissioned for this site have a translated caption instead.
+             */
+            const caption = video.title ?? t(`items.${video.id}`);
             return (
             <Tag
               key={video.id}
@@ -39,12 +44,12 @@ export function ExpertVideos() {
             >
               <Image
                 src={video.poster}
-                alt={t(`items.${video.id}`)}
+                alt={caption}
                 fill
                 sizes="(max-width: 640px) 60vw, 300px"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               {video.href ? (
                 <>
                   <span className="absolute top-1/2 left-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-brand shadow-float transition-transform duration-300 group-hover:scale-110">
@@ -53,6 +58,14 @@ export function ExpertVideos() {
                   <span className="sr-only">{t("play")}</span>
                 </>
               ) : null}
+              {/* The title over the poster, so a shelf of fourteen clips is
+                  something you can read rather than fourteen stills to guess
+                  at. The gradient above it is what keeps it legible. */}
+              <span className="absolute inset-x-0 bottom-0 p-3">
+                <span className="line-clamp-2 text-[0.75rem] leading-snug font-semibold text-white">
+                  {caption}
+                </span>
+              </span>
             </Tag>
             );
           })}

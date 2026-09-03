@@ -1,3 +1,5 @@
+import type { ApiProductBlock } from "@/lib/api/types";
+
 export type ProductBadge = "hit" | "new" | "rec";
 
 export type ProductForm = "syrup" | "capsules" | "tablets" | "honey";
@@ -43,6 +45,22 @@ export interface Product {
   reviewCount: number;
   /** Number of purpose cards / benefit checks / stat rows for this product. */
   statValues: number[];
+  /**
+   * Position in the catalogue grid, editable in the admin.
+   *
+   * The API answers in its own insertion order, which has nothing to do with
+   * the merchandising sequence, so this is what decides the shelf.
+   */
+  order: number;
+  /**
+   * The product page's editable sections, authored in the admin — visible ones
+   * only, in the order they should render.
+   *
+   * Only the by-slug response carries them, so this is present on a product
+   * page and absent everywhere else. Absent (or empty) means the page falls
+   * back to the copy bundled in `messages/`.
+   */
+  blocks?: ApiProductBlock[];
 }
 
 export interface CartLine {

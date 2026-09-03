@@ -62,13 +62,23 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Single artboard export — keeps the exact bottle composition from Figma. */}
+        {/*
+          Single artboard export — one file keeps the bottle composition exactly
+          as it was signed off, with the front bottle now Endo Marine+ rather
+          than Cardio Control.
+
+          Transparent-trimmed and re-encoded to WebP with alpha: the supplied
+          PNG was 1.8 MB, and this hero is `priority`, so it is the first thing
+          the connection has to carry. Intrinsic dimensions match the file, and
+          the box is `h-auto w-full`, so nothing is cropped or squashed at any
+          width.
+        */}
         <div className="relative flex justify-center lg:justify-end">
           <Image
-            src="/Group 37999.png"
+            src="/numa-nutrition-hero.webp"
             alt={t("imageAlt")}
-            width={1159}
-            height={1085}
+            width={1200}
+            height={1250}
             priority
             className="h-auto w-full max-w-md select-none lg:max-w-[38rem] lg:translate-y-2"
           />

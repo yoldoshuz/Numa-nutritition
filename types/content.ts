@@ -20,8 +20,17 @@ export interface Certificate {
 export interface ExpertVideo {
   id: string;
   poster: string;
-  /** External video URL — wired to the backend later. */
+  /** Where the clip plays. A card with no link is a poster, not a player. */
   href?: string;
+  /**
+   * The clip's own published title.
+   *
+   * Set on the videos the channel published rather than commissioned for this
+   * site, and deliberately not translated: it is what YouTube shows, so a
+   * Russian rendering would promise a Russian-language clip that does not
+   * exist. When absent the caption comes from `Home.videos.items.<id>`.
+   */
+  title?: string;
 }
 
 export interface Review {

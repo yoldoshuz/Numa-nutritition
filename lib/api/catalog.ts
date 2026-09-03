@@ -56,10 +56,20 @@ export async function fetchApiBlogPosts(): Promise<ApiBlogPost[] | null> {
 
 /* ── public surface ──────────────────────────────────────────────────────── */
 
+/**
+ * The catalogue in the order the shop wants it shown.
+ *
+ * The API answers in its own insertion order, which has nothing to do with the
+ * merchandising sequence, so `order` — editable per product in the admin and
+ * seeded from the bundled catalogue — is what decides the grid. The sort is
+ * stable, so products sharing a number keep the order the API sent.
+ */
+const byOrder = (products: Product[]) => [...products].sort((a, b) => a.order - b.order);
+
 export async function getProducts(): Promise<Product[]> {
   const api = await fetchApiProducts();
-  if (!api?.length) return staticProducts;
-  return api.map(toProduct);
+  if (!api?.length) return byOrder(staticProducts);
+  return byOrder(api.map(toProduct));
 }
 
 export async function getProduct(slug: string): Promise<Product | undefined> {
@@ -73,7 +83,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     return Array.isArray(data) ? data : (data.rows ?? []);
   });
 
-  if (!api?.length) return staticProducts.filter((p) => p.featured);
+  if (!api?.length) return byOrder(staticProducts.filter((p) => p.featured));
   /*
    * Sold-out products are dropped here rather than badged.
    *
@@ -84,7 +94,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
    * best space on the home page. `isFeatured` is set in the admin and never
    * cleared when stock runs out, so the filter belongs on this side.
    */
-  return api.map(toProduct).filter((product) => !isSoldOut(product));
+  return byOrder(api.map(toProduct).filter((product) => !isSoldOut(product)));
 }
 
 export async function getRelatedProducts(slug: string, limit = 4): Promise<Product[]> {

@@ -47,6 +47,8 @@ export interface ApiCategory {
  * losing anything the existing page components need.
  */
 export interface ApiProductAttributes {
+  /** Position in the storefront grid, editable in the admin. */
+  order?: number;
   form?: string;
   badge?: string;
   rating?: number;
@@ -83,6 +85,45 @@ export interface ApiProduct {
   attributes: ApiProductAttributes;
   media?: ApiMedia[];
   category?: Pick<ApiCategory, "id" | "name" | "slug">;
+  /**
+   * The page's editable sections, visible ones only, in `position` order.
+   *
+   * Carried by the by-slug response only — the catalogue lists omit them, so
+   * this is `undefined` everywhere except on a product page.
+   */
+  blocks?: ApiProductBlock[];
+}
+
+/* ── product landing blocks ──────────────────────────────────────────────── */
+
+/**
+ * One section of a product page, authored in the admin.
+ *
+ * Everything below the buy box used to be bundled with the storefront, so the
+ * only parts a moderator could change were the name, the description, the
+ * photos and the stock. These blocks are the rest of the page.
+ */
+export type ApiProductBlockType =
+  | "hero"
+  | "specs"
+  | "benefits"
+  | "how_to_use"
+  | "warnings"
+  | "about"
+  | "advantages"
+  | "metrics"
+  | "faq";
+
+export interface ApiProductBlock {
+  id: string;
+  type: ApiProductBlockType;
+  /** Order on the page, ascending. */
+  position: number;
+  /**
+   * Shape depends on `type`; every text leaf is a `{uz, ru, en}` map. Hidden
+   * blocks never reach the storefront, so `isVisible` is absent here.
+   */
+  data: Record<string, unknown>;
 }
 
 /** `/products/store/:store` — paginated. */

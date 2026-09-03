@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { CtaBand } from "@/components/layout/cta-band";
 import { ProductBenefits } from "@/components/pages/product/product-benefits";
+import { ProductFaq } from "@/components/pages/product/product-faq";
 import { ProductHero } from "@/components/pages/product/product-hero";
 import { ProductHighlight } from "@/components/pages/product/product-highlight";
 import { ProductPurpose } from "@/components/pages/product/product-purpose";
@@ -12,6 +13,11 @@ import { ProductUsage } from "@/components/pages/product/product-usage";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ProductCard } from "@/components/shared/product-card";
+import {
+  resolveProductContent,
+  resolveSectionOrder,
+  type ContentSection,
+} from "@/lib/api/blocks";
 import { getProduct, getRelatedProducts } from "@/lib/api/catalog";
 import { products as staticProducts } from "@/lib/data/products";
 import { formatAmount } from "@/lib/format";
@@ -46,8 +52,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     path: `/products/${slug}`,
     title: tMeta("title", { name: t("name") }),
     description: tMeta("description", {
-      tagline: t("tagline"),
-      price: formatAmount(product.price, locale),
+      tagline: resolveProductContent(product.blocks, locale).hero?.tagline || t("tagline"),
+      price: formatAmount(product.price),
     }),
     images: [product.hero, product.image],
   });
@@ -66,14 +72,27 @@ export default async function ProductPage({ params }: { params: Params }) {
 
   const related = await getRelatedProducts(slug);
 
+  /*
+   * Everything below the buy box is written in the admin now. What comes back
+   * empty stays on the copy bundled in `messages/`, so a product whose landing
+   * nobody has filled in renders exactly the page it renders today.
+   */
+  const content = resolveProductContent(product.blocks, locale);
+
+  /* The order the moderator arranged the blocks in. */
+  const SECTION: Record<ContentSection, React.ReactNode> = {
+    benefits: <ProductPurpose key="benefits" product={product} content={content} />,
+    howToUse: <ProductUsage key="howToUse" product={product} content={content} />,
+    about: <ProductHighlight key="about" product={product} content={content} />,
+    advantages: <ProductBenefits key="advantages" product={product} content={content} />,
+    metrics: <ProductStats key="metrics" product={product} content={content} />,
+    faq: <ProductFaq key="faq" content={content} />,
+  };
+
   return (
     <>
-      <ProductHero product={product} />
-      <ProductPurpose product={product} />
-      <ProductUsage product={product} />
-      <ProductHighlight product={product} />
-      <ProductBenefits product={product} />
-      <ProductStats product={product} />
+      <ProductHero product={product} content={content} />
+      {resolveSectionOrder(product.blocks).map((section) => SECTION[section])}
 
       <section className="pb-14 lg:pb-20">
         <Container>
@@ -98,7 +117,7 @@ export default async function ProductPage({ params }: { params: Params }) {
             locale,
             product,
             name: t("name"),
-            description: t("description"),
+            description: content.hero?.text || t("description"),
           }),
           breadcrumbJsonLd(locale, [
             { name: tNav("home"), path: "/" },

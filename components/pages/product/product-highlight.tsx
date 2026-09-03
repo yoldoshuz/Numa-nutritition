@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
+import type { ProductContent } from "@/lib/api/blocks";
 import { cn, polarPosition } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -22,20 +23,36 @@ const chipOrbit: Array<{ angle: number; placement: string }> = [
   { angle: 135, placement: "left-5 top-1 items-start text-left" },
 ];
 
-export function ProductHighlight({ product }: { product: Product }) {
+export function ProductHighlight({
+  product,
+  content,
+}: {
+  product: Product;
+  content?: ProductContent;
+}) {
   const t = useTranslations(`Product.${product.slug}`);
-  const chips = (t.raw("chips") as Chip[]).slice(0, 4);
+
+  /*
+   * The admin's "описание с цифрами" block. Four chips, because they sit on
+   * the ring's four diagonals and a fifth would have nowhere to go — the extra
+   * numbers belong in the paragraph beside it.
+   */
+  const cms = content?.about;
+  const chips = (cms?.stats.length
+    ? cms.stats.map((stat) => ({ value: stat.value, label: stat.label }))
+    : (t.raw("chips") as Chip[])
+  ).slice(0, 4);
+  const heading = cms?.title || t("highlightTitle");
+  const body = cms?.text || t("highlightText");
 
   return (
     <section className="bg-surface-soft/60 py-14 lg:py-18">
       <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12">
         <div className="flex flex-col gap-4">
           <h2 className="max-w-md font-heading text-2xl leading-tight font-extrabold text-ink sm:text-[2rem]">
-            {t("highlightTitle")}
+            {heading}
           </h2>
-          <p className="max-w-md text-sm leading-relaxed text-muted-ink">
-            {t("highlightText")}
-          </p>
+          <p className="max-w-md text-sm leading-relaxed text-muted-ink">{body}</p>
         </div>
 
         {/* Below `lg` the ring collapses into a readable chip grid. */}
@@ -52,8 +69,8 @@ export function ProductHighlight({ product }: { product: Product }) {
             className="h-52 w-full max-w-64 object-contain"
           />
           <ul className="grid w-full grid-cols-2 gap-3">
-            {chips.map((chip) => (
-              <li key={chip.label} className="rounded-xl bg-brand px-4 py-3 text-center text-white shadow-card">
+            {chips.map((chip, index) => (
+              <li key={chip.label + index} className="rounded-xl bg-brand px-4 py-3 text-center text-white shadow-card">
                 <p className="font-heading text-sm leading-tight font-extrabold">{chip.value}</p>
                 <p className="mt-0.5 text-[0.6875rem] leading-snug text-white/90">{chip.label}</p>
               </li>
@@ -87,7 +104,7 @@ export function ProductHighlight({ product }: { product: Product }) {
             {chips.map((chip, index) => {
               const { angle, placement } = chipOrbit[index];
               return (
-                <div key={chip.label} className="absolute size-0" style={polarPosition(angle)}>
+                <div key={chip.label + index} className="absolute size-0" style={polarPosition(angle)}>
                   <span
                     aria-hidden
                     className="absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand"

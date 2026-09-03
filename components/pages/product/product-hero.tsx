@@ -7,6 +7,7 @@ import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
 import { Price } from "@/components/shared/price";
 import { ProductBadge } from "@/components/shared/product-badge";
+import type { ProductContent } from "@/lib/api/blocks";
 import { isSoldOut } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -15,7 +16,13 @@ interface Spec {
   value: string;
 }
 
-export function ProductHero({ product }: { product: Product }) {
+export function ProductHero({
+  product,
+  content,
+}: {
+  product: Product;
+  content?: ProductContent;
+}) {
   const t = useTranslations(`Product.${product.slug}`);
   const tProduct = useTranslations("Product");
   const tNav = useTranslations("Nav");
@@ -23,7 +30,18 @@ export function ProductHero({ product }: { product: Product }) {
 
   const name = t("name");
   const soldOut = isSoldOut(product);
-  const specs = t.raw("specs") as Spec[];
+
+  /*
+   * The buy box reads the admin's `hero` and `specs` blocks when the product
+   * has them and stays on the bundled copy when it does not. The spec sheet is
+   * not limited to the rows the design shipped: a moderator adding "Состав" or
+   * dropping "Срок хранения" is the whole point of moving this table into the
+   * CMS, so the rows carry their own labels.
+   */
+  const specs = content?.specs?.items ?? (t.raw("specs") as Spec[]);
+  const specsTitle = content?.specs?.title || tProduct("specsTitle");
+  const tagline = content?.hero?.tagline || t("tagline");
+  const description = content?.hero?.text || t("description");
 
   return (
     <section className="relative isolate pt-6 pb-12 lg:pt-8 lg:pb-16">
@@ -49,16 +67,30 @@ export function ProductHero({ product }: { product: Product }) {
                 <span className="inline-flex items-center rounded-md bg-ink/80 px-2.5 py-1 text-[0.6875rem] leading-none font-semibold text-white">
                   {tCommon("outOfStock")}
                 </span>
+              ) : content?.hero?.badge ? (
+                /*
+                 * A plash written in the admin replaces the design's badge
+                 * rather than joining it: "Рекомендуем" beside "Хит" is two
+                 * claims about the same bottle, and the moderator's is the
+                 * specific one.
+                 */
+                <span className="inline-flex items-center rounded-md bg-brand px-2.5 py-1 text-[0.6875rem] leading-none font-semibold text-white">
+                  {content.hero.badge}
+                </span>
               ) : (
                 <ProductBadge kind={product.badge} />
               )}
             </div>
-            <p className="text-[0.8125rem] leading-snug font-medium text-brand">
-              {t("tagline")}
-            </p>
+            {tagline && (
+              <p className="text-[0.8125rem] leading-snug font-medium text-brand">
+                {tagline}
+              </p>
+            )}
           </div>
 
-          <p className="text-sm leading-relaxed text-muted-ink">{t("description")}</p>
+          {description && (
+            <p className="text-sm leading-relaxed text-muted-ink">{description}</p>
+          )}
 
           <Price value={product.price} className="text-2xl sm:text-[1.75rem]" />
 
@@ -66,12 +98,12 @@ export function ProductHero({ product }: { product: Product }) {
 
           <div className="mt-2">
             <h2 className="font-heading text-lg font-extrabold text-ink sm:text-xl">
-              {tProduct("specsTitle")}
+              {specsTitle}
             </h2>
             <dl className="mt-3 divide-y divide-line">
-              {specs.map((spec) => (
+              {specs.map((spec, index) => (
                 <div
-                  key={spec.label}
+                  key={spec.label + index}
                   className="flex items-baseline justify-between gap-6 py-2.5 text-[0.8125rem]"
                 >
                   <dt className="text-muted-ink">{spec.label}:</dt>

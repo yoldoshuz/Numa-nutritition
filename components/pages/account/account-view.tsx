@@ -384,7 +384,7 @@ function CartPanel() {
                     {item.product.name}
                   </span>
                   <span className="block text-xs text-muted-ink">
-                    {formatAmount(item.product.price, locale)}
+                    {formatAmount(item.product.price)}
                   </span>
                 </span>
                 <span className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
@@ -397,7 +397,7 @@ function CartPanel() {
                     increaseLabel={t("increase")}
                   />
                   <span className="w-24 text-right text-sm font-bold whitespace-nowrap text-ink">
-                    {formatAmount(item.product.price * item.quantity, locale)}
+                    {formatAmount(item.product.price * item.quantity)}
                   </span>
                   <button
                     type="button"
@@ -415,7 +415,7 @@ function CartPanel() {
           <div className="mt-4 flex items-center justify-between rounded-xl bg-surface-mint px-4 py-3">
             <span className="text-sm font-medium text-ink">{t("total")}</span>
             <span className="font-heading text-xl font-extrabold text-ink">
-              {formatAmount(subtotal, locale)}
+              {formatAmount(subtotal)}
             </span>
           </div>
 
@@ -488,7 +488,7 @@ function OrdersPanel() {
                       <StoreTag store={order.store} />
                       <StatusPill status={order.status} />
                       <span className="font-heading text-base font-extrabold whitespace-nowrap text-ink">
-                        {formatAmount(Number(order.totalAmount), locale)}
+                        {formatAmount(Number(order.totalAmount))}
                       </span>
                       <ChevronDown
                         className={cn(
@@ -562,7 +562,7 @@ function OrderLines({ id }: { id: string }) {
             <span className="text-muted-ink/70"> × {item.quantity}</span>
           </span>
           <span className="whitespace-nowrap font-medium text-ink">
-            {formatAmount(Number(item.subtotal), locale)}
+            {formatAmount(Number(item.subtotal))}
           </span>
         </li>
       ))}
@@ -647,7 +647,7 @@ function PurchaseRow({ purchase, locale }: { purchase: Purchase; locale: AppLoca
           )}
           {/* `amount` is already in sums — nothing to divide here. */}
           <span className="font-heading text-base font-extrabold whitespace-nowrap text-ink">
-            {formatAmount(purchase.amount, locale)}
+            {formatAmount(purchase.amount)}
           </span>
         </div>
       </div>
@@ -664,7 +664,7 @@ function PurchaseRow({ purchase, locale }: { purchase: Purchase; locale: AppLoca
                 <span className="text-muted-ink/70"> × {item.quantity}</span>
               </span>
               <span className="whitespace-nowrap text-ink">
-                {formatAmount(item.price * item.quantity, locale)}
+                {formatAmount(item.price * item.quantity)}
               </span>
             </li>
           ))}

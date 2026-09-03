@@ -27,8 +27,8 @@ export const mainNav: NavLink[] = [
  * is honest, being sent to the wrong brand is not.
  */
 export const directionLinks: NavLink[] = [
-  { key: "family", href: "https://numa-family.vercel.app/ru" },
-  { key: "kids", href: "https://numa-kids-olive.vercel.app/ru" },
+  { key: "family", href: "https://numa-family.vercel.app/uz" },
+  { key: "kids", href: "https://numa-kids-olive.vercel.app/uz" },
   { key: "nabaviy", href: "https://nabaviy-tabobat.vercel.app" },
   { key: "diagnostics", href: "" },
   { key: "bettery", href: "https://betteryorganic.uz" },
@@ -89,13 +89,13 @@ export const SIBLING_SITES = [
   {
     id: "kids",
     label: "NUMA KIDS",
-    href: "https://numa-kids-olive.vercel.app/ru",
+    href: "https://numa-kids-olive.vercel.app/uz",
     logo: "/brands/kids.png",
   },
   {
     id: "family",
     label: "NUMA FAMILY",
-    href: "https://numa-family.vercel.app/ru",
+    href: "https://numa-family.vercel.app/uz",
     logo: "/brands/family.png",
   },
   {
@@ -211,6 +211,74 @@ export const expertVideos: ExpertVideo[] = [
     id: "iodine",
     poster: "/video/xXmN2f7wyuM.jpg",
     href: "https://www.youtube.com/shorts/xXmN2f7wyuM",
+  },
+  /*
+   * The ten Shorts the channel published, appended to the four commissioned
+   * for this site. Their ids are their caption keys as well, and they carry
+   * their own titles instead of an entry in `messages/` — see `ExpertVideo`.
+   *
+   * Four of them are called "Detox Hepar Energy": that is genuinely what the
+   * channel titled them, and they are four different clips.
+   */
+  {
+    id: "iikUOddZRME",
+    poster: "/video/iikUOddZRME.jpg",
+    href: "https://www.youtube.com/shorts/iikUOddZRME",
+    title: "Well Man Box",
+  },
+  {
+    id: "x8JQwnqy1Ms",
+    poster: "/video/x8JQwnqy1Ms.jpg",
+    href: "https://www.youtube.com/shorts/x8JQwnqy1Ms",
+    title: "Cardio Control",
+  },
+  {
+    id: "U1QzCxqjAPk",
+    poster: "/video/U1QzCxqjAPk.jpg",
+    href: "https://www.youtube.com/shorts/U1QzCxqjAPk",
+    title: "Igneus",
+  },
+  {
+    id: "qztNLPlQGAA",
+    poster: "/video/qztNLPlQGAA.jpg",
+    href: "https://www.youtube.com/shorts/qztNLPlQGAA",
+    title: "Igneus va Vitamin D siz uchun eng muhim!",
+  },
+  {
+    id: "Vnw9riVBPgA",
+    poster: "/video/Vnw9riVBPgA.jpg",
+    href: "https://www.youtube.com/shorts/Vnw9riVBPgA",
+    title: "Collagen Pro+",
+  },
+  {
+    id: "m5ZNjwMLejQ",
+    poster: "/video/m5ZNjwMLejQ.jpg",
+    href: "https://www.youtube.com/shorts/m5ZNjwMLejQ",
+    title: "Collagen Pro+",
+  },
+  {
+    id: "JiITHpt1MTU",
+    poster: "/video/JiITHpt1MTU.jpg",
+    href: "https://www.youtube.com/shorts/JiITHpt1MTU",
+    title: "Detox Hepar Energy",
+  },
+  {
+    id: "sGXJUUXFD64",
+    poster: "/video/sGXJUUXFD64.jpg",
+    href: "https://www.youtube.com/shorts/sGXJUUXFD64",
+    title: "Detox Hepar Energy",
+  },
+  {
+    id: "a4AfVSHOSFk",
+    poster: "/video/a4AfVSHOSFk.jpg",
+    href: "https://www.youtube.com/shorts/a4AfVSHOSFk",
+    title: "Detox Hepar Energy",
+  },
+  {
+    id: "Q0vU5DrGOPg",
+    poster: "/video/Q0vU5DrGOPg.jpg",
+    href: "https://www.youtube.com/shorts/Q0vU5DrGOPg",
+    title: "Detox Hepar Energy",
   },
 ];
 

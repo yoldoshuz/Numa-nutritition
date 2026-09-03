@@ -4,14 +4,23 @@ import { useTranslations } from "next-intl";
 
 import { Carousel } from "@/components/shared/carousel";
 import { Container } from "@/components/shared/container";
+import type { ProductContent } from "@/lib/api/blocks";
 import type { Product } from "@/types";
 
-export function ProductBenefits({ product }: { product: Product }) {
+export function ProductBenefits({
+  product,
+  content,
+}: {
+  product: Product;
+  content?: ProductContent;
+}) {
   const t = useTranslations(`Product.${product.slug}`);
   const tProduct = useTranslations("Product");
 
-  const benefits = t.raw("benefits") as string[];
-  const title = tProduct("benefitsTitle", { name: t("name") });
+  /* The admin's "Преимущества" block, or the bundled copy when it has none. */
+  const cms = content?.advantages;
+  const benefits = cms?.items ?? (t.raw("benefits") as string[]);
+  const title = cms?.title || tProduct("benefitsTitle", { name: t("name") });
 
   return (
     <section className="py-14 lg:py-18">

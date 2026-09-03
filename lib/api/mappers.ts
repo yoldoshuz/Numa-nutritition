@@ -168,6 +168,13 @@ export function toProduct(api: ApiProduct): Product {
     rating: attrs.rating ?? base?.rating ?? 5,
     reviewCount: attrs.reviewCount ?? base?.reviewCount ?? 0,
     statValues: attrs.statValues ?? base?.statValues ?? [],
+    order: Number(attrs.order ?? base?.order ?? 0),
+    // Only the by-slug response carries these, so on a list they are simply
+    // absent — the catalogue has no use for them and they would bloat the
+    // response.
+    blocks: api.blocks?.length
+      ? [...api.blocks].sort((a, b) => a.position - b.position)
+      : undefined,
   };
 }
 

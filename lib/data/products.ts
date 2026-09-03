@@ -38,6 +38,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 128,
     statValues: [95, 90, 85, 80, 90, 98],
+    order: 1,
   },
   {
     slug: "king-bee",
@@ -64,6 +65,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 214,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 2,
   },
   {
     slug: "vitamin-d3",
@@ -92,6 +94,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 96,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 3,
   },
   {
     slug: "black-honey",
@@ -115,6 +118,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 173,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 4,
   },
   {
     slug: "detox-hepar-energy",
@@ -134,6 +138,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 187,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 5,
   },
   {
     slug: "insulin-balance",
@@ -154,6 +159,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 142,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 6,
   },
   {
     slug: "endo-marine",
@@ -174,6 +180,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 118,
     statValues: [98, 95, 92, 90, 90, 100],
+    order: 7,
   },
   {
     /*
@@ -203,6 +210,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 0,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 8,
   },
   {
     slug: "hemoglobin",
@@ -225,6 +233,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 165,
     statValues: [98, 95, 92, 90, 90, 100],
+    order: 9,
   },
   {
     slug: "collagen-pro",
@@ -247,6 +256,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 87,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 10,
   },
   {
     slug: "omega-3-6-9",
@@ -267,6 +277,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 104,
     statValues: [98, 95, 92, 90, 88, 100],
+    order: 11,
   },
 ];
 

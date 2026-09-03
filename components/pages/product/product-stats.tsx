@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
 import { StatBar } from "@/components/shared/stat-bar";
+import type { ProductContent } from "@/lib/api/blocks";
 import type { Product } from "@/types";
 
 interface Stat {
@@ -10,24 +11,53 @@ interface Stat {
   text: string;
 }
 
-export function ProductStats({ product }: { product: Product }) {
+export function ProductStats({
+  product,
+  content,
+}: {
+  product: Product;
+  content?: ProductContent;
+}) {
   const t = useTranslations(`Product.${product.slug}`);
-  const stats = t.raw("stats") as Stat[];
+
+  /*
+   * The admin's "шкалы эффективности" block carries its own percentages, so a
+   * CMS row no longer has to line up with `statValues` — that array is seed
+   * data no screen edits, and a fifth stat added in the CMS used to fall back
+   * to a flat 90%.
+   */
+  const cms = content?.metrics;
+  const stats: Stat[] =
+    cms?.items.map((item) => ({ label: item.title, text: item.description })) ??
+    (t.raw("stats") as Stat[]);
 
   return (
     <section className="pb-14 lg:pb-20">
       <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-14">
-        <ul className="flex flex-col gap-5">
+        <div>
+          {/*
+            The design gives this block no heading, because the bundled stats
+            needed no introduction. A block written in the admin can have one,
+            and dropping it would mean a moderator typing a title into a field
+            that does nothing.
+          */}
+          {cms?.title && (
+            <h2 className="mb-7 font-heading text-2xl leading-tight font-extrabold text-ink sm:text-[2rem]">
+              {cms.title}
+            </h2>
+          )}
+          <ul className="flex flex-col gap-5">
           {stats.map((stat, index) => (
-            <li key={stat.label}>
+            <li key={stat.label + index}>
               <StatBar
                 label={stat.label}
                 text={stat.text}
-                value={product.statValues[index] ?? 90}
+                value={cms?.items[index]?.percent ?? product.statValues[index] ?? 90}
               />
             </li>
-          ))}
-        </ul>
+            ))}
+          </ul>
+        </div>
 
         {/*
           The photo is positioned out of flow on purpose.

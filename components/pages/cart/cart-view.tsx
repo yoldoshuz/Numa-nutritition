@@ -78,7 +78,7 @@ export function CartView() {
                       {tProduct(`${item.slug}.specs.0.value`)}
                     </p>
                     <p className="mt-2 font-heading text-[0.9375rem] font-bold text-ink">
-                      {formatAmount(info?.unitPrice ?? item.product.price, locale)}{" "}
+                      {formatAmount(info?.unitPrice ?? item.product.price)}{" "}
                       {tCommon("currency")}
                     </p>
                     {unavailable ? (
@@ -118,7 +118,7 @@ export function CartView() {
                 <div className="flex items-center justify-between">
                   <dt className="text-white/90">{t("items", { count })}</dt>
                   <dd className="font-bold">
-                    {formatAmount(subtotal, locale)} {tCommon("currency")}
+                    {formatAmount(subtotal)} {tCommon("currency")}
                   </dd>
                 </div>
                 {/* Priced by the API so the basket and the created order
@@ -127,7 +127,7 @@ export function CartView() {
                   <dt className="text-white/90">{t("delivery")}</dt>
                   <dd className="font-bold">
                     {totals.deliveryFee > 0
-                      ? `${formatAmount(totals.deliveryFee, locale)} ${tCommon("currency")}`
+                      ? `${formatAmount(totals.deliveryFee)} ${tCommon("currency")}`
                       : tCommon("free")}
                   </dd>
                 </div>
@@ -135,14 +135,14 @@ export function CartView() {
                   <div className="flex items-center justify-between">
                     <dt className="text-white/90">{t("unavailableTotal")}</dt>
                     <dd className="font-bold text-white/70 line-through">
-                      {formatAmount(totals.unavailableTotal, locale)} {tCommon("currency")}
+                      {formatAmount(totals.unavailableTotal)} {tCommon("currency")}
                     </dd>
                   </div>
                 ) : null}
                 <div className="flex items-center justify-between border-t border-white/30 pt-3">
                   <dt className="font-bold">{t("total")}</dt>
                   <dd className="font-heading text-lg font-extrabold">
-                    {formatAmount(totals.grandTotal, locale)} {tCommon("currency")}
+                    {formatAmount(totals.grandTotal)} {tCommon("currency")}
                   </dd>
                 </div>
               </dl>

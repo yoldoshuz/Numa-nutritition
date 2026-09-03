@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
+import type { ProductContent } from "@/lib/api/blocks";
 import type { Product } from "@/types";
 
 interface PurposeItem {
@@ -9,11 +10,21 @@ interface PurposeItem {
   text: string;
 }
 
-export function ProductPurpose({ product }: { product: Product }) {
+export function ProductPurpose({
+  product,
+  content,
+}: {
+  product: Product;
+  content?: ProductContent;
+}) {
   const t = useTranslations(`Product.${product.slug}`);
   const tProduct = useTranslations("Product");
 
-  const items = t.raw("purpose") as PurposeItem[];
+  /* The admin's "Для чего нужен" block, or the bundled copy when it has none. */
+  const cms = content?.benefits;
+  const items = cms?.items ?? (t.raw("purpose") as PurposeItem[]);
+  const heading = cms?.title || tProduct("purposeTitle", { name: t("name") });
+  const subtitle = cms?.subtitle || t("purposeSubtitle");
 
   return (
     <section className="relative isolate bg-surface-soft/60 py-14 lg:py-18">
@@ -21,9 +32,11 @@ export function ProductPurpose({ product }: { product: Product }) {
       <Container>
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
           <h2 className="font-heading text-2xl leading-tight font-extrabold text-ink sm:text-[2rem]">
-            {tProduct("purposeTitle", { name: t("name") })}
+            {heading}
           </h2>
-          <p className="text-sm leading-relaxed text-muted-ink">{t("purposeSubtitle")}</p>
+          {subtitle && (
+            <p className="text-sm leading-relaxed text-muted-ink">{subtitle}</p>
+          )}
         </div>
 
         <ul className="mt-9 grid gap-4 md:grid-cols-2 lg:gap-5">
