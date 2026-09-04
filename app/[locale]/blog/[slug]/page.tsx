@@ -14,6 +14,7 @@ import { ProductCard } from "@/components/shared/product-card";
 import { getArticleProducts, getBlogPost, getRelatedPosts } from "@/lib/api/catalog";
 import { blogPosts as staticBlogPosts } from "@/lib/data/content";
 import { formatDate } from "@/lib/format";
+import { noteForLocale } from "@/lib/i18n/note";
 import { locales } from "@/lib/i18n/routing";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { buildMetadata, localizedUrl } from "@/lib/seo";
@@ -158,7 +159,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
                 {tBlog("buy.title")}
               </h2>
               <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted-ink">
-                {articleNote ?? tBlog("buy.subtitle")}
+                {noteForLocale(articleNote, locale) ?? tBlog("buy.subtitle")}
               </p>
               <ul className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {articleProducts.map((product) => (

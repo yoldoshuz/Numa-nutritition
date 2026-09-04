@@ -38,7 +38,7 @@ export function generateStaticParams() {
  *
  * Must stay a literal — Next evaluates this statically and rejects an import.
  */
-export const revalidate = 300;
+export const revalidate = 60;
 
 export const viewport: Viewport = {
   themeColor: "#26d883",
