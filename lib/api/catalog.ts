@@ -60,9 +60,9 @@ export async function fetchApiBlogPosts(): Promise<ApiBlogPost[] | null> {
  * The catalogue in the order the shop wants it shown.
  *
  * The API answers in its own insertion order, which has nothing to do with the
- * merchandising sequence, so `order` — editable per product in the admin and
- * seeded from the bundled catalogue — is what decides the grid. The sort is
- * stable, so products sharing a number keep the order the API sent.
+ * merchandising sequence, so `order` — the admin's `sortOrder`, falling back to
+ * the bundled catalogue — is what decides the grid. The sort is stable, so
+ * products sharing a number keep the order the API sent.
  */
 const byOrder = (products: Product[]) => [...products].sort((a, b) => a.order - b.order);
 

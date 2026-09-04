@@ -82,6 +82,8 @@ export interface ApiProduct {
   status: "active" | "draft" | "archived";
   isFeatured: boolean;
   brand: string | null;
+  /** Manual position in the catalogue, 0 until someone sets it in the admin. */
+  sortOrder?: number;
   attributes: ApiProductAttributes;
   media?: ApiMedia[];
   category?: Pick<ApiCategory, "id" | "name" | "slug">;

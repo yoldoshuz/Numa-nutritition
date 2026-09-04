@@ -17,6 +17,28 @@ import type { ApiBlogPost, ApiProduct } from "./types";
 
 /* ── mapping ─────────────────────────────────────────────────────────────── */
 
+/**
+ * The product's place in the catalogue grid.
+ *
+ * `sortOrder` is the backend's own column, set from the admin's arrows, and it
+ * wins whenever it has been set. It starts at 0 for every product, so a
+ * catalogue nobody has ordered by hand falls through to `attributes.order`
+ * (where the position briefly lived) and then to the bundled catalogue, which
+ * is the sequence this storefront shipped with.
+ */
+function resolveOrder(
+  sortOrder: number | undefined,
+  attributeOrder: unknown,
+  bundled: number | undefined,
+  fallback: number,
+): number {
+  if (typeof sortOrder === "number" && sortOrder > 0) return sortOrder;
+  const legacy = Number(attributeOrder);
+  if (Number.isFinite(legacy) && legacy > 0) return legacy;
+  return bundled ?? fallback;
+}
+
+
 const img = (url: string | null | undefined) => resolveMediaUrl(url);
 const imgs = (urls: (string | null | undefined)[] | undefined) =>
   (urls ?? []).map(img).filter(Boolean);
@@ -168,7 +190,7 @@ export function toProduct(api: ApiProduct): Product {
     rating: attrs.rating ?? base?.rating ?? 5,
     reviewCount: attrs.reviewCount ?? base?.reviewCount ?? 0,
     statValues: attrs.statValues ?? base?.statValues ?? [],
-    order: Number(attrs.order ?? base?.order ?? 0),
+    order: resolveOrder(api.sortOrder, attrs.order, base?.order, 0),
     // Only the by-slug response carries these, so on a list they are simply
     // absent — the catalogue has no use for them and they would bloat the
     // response.
