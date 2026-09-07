@@ -2150,6 +2150,7 @@
       "alreadyRegistered": "This number is already registered — sign in instead",
       "wrongCode": "The code is wrong or has expired",
       "rateLimit": "Too many attempts. Please try again later",
+      "smsUnavailable": "We could not send the SMS. Please try again later",
       "validation": "Check the details you entered",
       "network": "The request failed. Please try again"
     },

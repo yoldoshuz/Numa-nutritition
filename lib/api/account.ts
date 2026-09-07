@@ -67,16 +67,24 @@ export interface VerifiedSession extends SessionTokens {
   user: UserProfile;
 }
 
-/** Sends a fresh code to a phone that already has an account. */
+/**
+ * Sends a fresh code to a phone that already has an account.
+ *
+ * `X-Store` picks which of the approved SMS templates the code is sent in, so
+ * without it the visitor gets a message naming a different Numa site.
+ */
 export const requestLoginOtp = (phone: string) =>
-  request<OtpChallenge>("post", "/auth/login", { phone });
+  request<OtpChallenge>("post", "/auth/login", { phone }, { "X-Store": STORE });
 
 /** Creates the account and sends the first code. */
 export const registerCustomer = (payload: {
   firstName: string;
   lastName?: string;
   phone: string;
-}) => request<OtpChallenge>("post", "/auth/register", payload);
+}) =>
+  request<OtpChallenge>("post", "/auth/register", payload, {
+    "X-Store": STORE,
+  });
 
 /**
  * Exchanges the code for a session and stores it.
@@ -204,6 +212,7 @@ export type AuthFailure =
   | "alreadyRegistered"
   | "wrongCode"
   | "rateLimit"
+  | "smsUnavailable"
   | "validation"
   | "network";
 
@@ -213,6 +222,10 @@ export type AuthFailure =
  * `404` means different things either side of the code: asking for a code never
  * returns one (see `OtpChallenge`), so a `404` on verification is the first
  * moment the number is known to have no account.
+ *
+ * `503` is the SMS provider being down. It has to stay distinct from the rest:
+ * the form must keep the visitor on the phone step, because no code is coming
+ * and the code screen would just be a dead end.
  */
 export function classifyAuthError(error: unknown, step: "request" | "verify"): AuthFailure {
   const status = error instanceof ApiError ? error.status : 0;
@@ -220,6 +233,7 @@ export function classifyAuthError(error: unknown, step: "request" | "verify"): A
   if (status === 404) return step === "verify" ? "unregistered" : "network";
   if (status === 401) return "wrongCode";
   if (status === 429) return "rateLimit";
-  if (status === 422) return "validation";
+  if (status === 503) return "smsUnavailable";
+  if (status === 400 || status === 422) return "validation";
   return "network";
 }

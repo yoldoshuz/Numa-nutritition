@@ -2150,6 +2150,7 @@
       "alreadyRegistered": "Bu raqam allaqachon ro'yxatdan o'tgan — kiring",
       "wrongCode": "Kod noto'g'ri yoki muddati o'tgan",
       "rateLimit": "Juda ko'p urinish. Birozdan so'ng qayta urinib ko'ring",
+      "smsUnavailable": "Xabar yuborilmadi, keyinroq urinib ko'ring",
       "validation": "Kiritilgan ma'lumotlarni tekshiring",
       "network": "So'rovni bajarib bo'lmadi. Yana urinib ko'ring"
     },

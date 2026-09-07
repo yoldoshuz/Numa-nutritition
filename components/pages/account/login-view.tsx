@@ -135,7 +135,6 @@ export function LoginView({ next }: { next: string }) {
                 onChange={(event) => setOtp(event.target.value.replace(/\D/g, "").slice(0, 4))}
                 inputMode="numeric"
                 autoComplete="one-time-code"
-                placeholder="0000"
                 className={`${field} tracking-[0.4em]`}
               />
             </label>
