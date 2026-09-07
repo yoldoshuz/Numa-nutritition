@@ -1,0 +1,107 @@
+import { useTranslations } from "next-intl";
+import { ArrowRight } from "lucide-react";
+
+import { AddToCartButton } from "@/components/shared/add-to-cart-button";
+import { Price } from "@/components/shared/price";
+import { ProductBadge } from "@/components/shared/product-badge";
+import { ProductImage } from "@/components/shared/product-image";
+import { Link } from "@/lib/i18n/navigation";
+import { cn, isSoldOut } from "@/lib/utils";
+import type { Product } from "@/types";
+
+export function ProductCard({
+  product,
+  className,
+  priority = false,
+}: {
+  product: Product;
+  className?: string;
+  priority?: boolean;
+}) {
+  const t = useTranslations("Common");
+  const tProduct = useTranslations(`Product.${product.slug}`);
+  const href = `/products/${product.slug}`;
+  const soldOut = isSoldOut(product);
+
+  return (
+    <article
+      className={cn(
+        "group relative flex h-full flex-col rounded-2xl border border-line bg-white p-4 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover sm:p-5",
+        className
+      )}
+    >
+      {soldOut ? (
+        /*
+         * A zero-stock product stays in the grid — the admin keeps it "Активный"
+         * and people search for it — but it has to say so before the packshot
+         * does any selling. The badge takes the slot the hit/new mark would
+         * have used rather than sitting beside it: two chips in one corner read
+         * as decoration, one reads as a status.
+         */
+        <span className="absolute top-4 left-4 z-10 inline-flex items-center rounded-md bg-ink/80 px-2.5 py-1 text-[0.6875rem] leading-none font-semibold text-white">
+          {t("outOfStock")}
+        </span>
+      ) : (
+        <ProductBadge kind={product.badge} className="absolute top-4 left-4 z-10" />
+      )}
+
+      {/* Fixed-ratio box so every packshot occupies exactly the same space. */}
+      <Link
+        href={href}
+        tabIndex={-1}
+        aria-hidden
+        className="relative mt-7 block h-44 w-full overflow-hidden sm:h-52"
+      >
+        <ProductImage
+          slug={product.slug}
+          src={product.image}
+          alt=""
+          fill
+          priority={priority}
+          sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 240px"
+          className={cn(
+            "object-contain transition-transform duration-500 group-hover:scale-105",
+            // Drained of colour, so the card reads as unavailable at a glance.
+            soldOut && "opacity-45 saturate-25",
+          )}
+        />
+      </Link>
+
+      <div className="mt-4 flex flex-1 flex-col items-center gap-2 text-center">
+        <h3 className="font-heading text-[0.95rem] font-bold text-ink">
+          <Link href={href} className="after:absolute after:inset-0 after:content-['']">
+            {tProduct("name")}
+          </Link>
+        </h3>
+        <p className="line-clamp-2 min-h-9 text-[0.8125rem] leading-snug text-muted-ink">
+          {tProduct("short")}
+        </p>
+        <Price value={product.price} className="mt-auto pt-2 text-base sm:text-[1.0625rem]" />
+      </div>
+
+      {/*
+        Wraps instead of squeezing. Two `flex-1` buttons in a fixed row only fit
+        while the card is wide; drop the card into a three-across grid inside an
+        article and "Подробнее" gets crushed out of its own button. `flex-wrap`
+        plus a minimum width lets the pair stack the moment the card is too
+        narrow, which depends on the card, not on the viewport — the same card
+        renders at four widths across this storefront.
+      */}
+      <div className="relative z-10 mt-4 flex flex-wrap items-center gap-2">
+        <AddToCartButton
+          slug={product.slug}
+          label={t("buy")}
+          soldOut={soldOut}
+          className="h-10 min-w-30 flex-1 px-3 text-[0.8125rem] whitespace-nowrap"
+        />
+        <Link
+          href={href}
+          className="inline-flex h-10 min-w-30 flex-1 items-center justify-center gap-1.5 rounded-lg border border-brand-300 px-3 text-[0.8125rem] font-medium whitespace-nowrap text-brand-700 transition-colors duration-200 hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+        >
+          {t("details")}
+          <ArrowRight className="size-3.5 shrink-0" />
+        </Link>
+      </div>
+    </article>
+  );
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="NUMA Nutrition">
+  <rect width="512" height="512" rx="112" fill="#26d883"/>
+  <path d="M256 118c58 34 92 84 92 140 0 55-41 100-92 100s-92-45-92-100c0-56 34-106 92-140Z" fill="#ffffff" opacity="0.16"/>
+  <text x="256" y="322" text-anchor="middle" font-family="Manrope, Segoe UI, Arial, sans-serif" font-size="248" font-weight="800" fill="#ffffff" letter-spacing="-8">N</text>
+  <rect x="150" y="366" width="212" height="20" rx="10" fill="#ffffff" opacity="0.9"/>
+</svg>

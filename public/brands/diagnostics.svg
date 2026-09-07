@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="NUMA Diagnostics">
+  <title>NUMA Diagnostics</title>
+  <circle cx="36" cy="36" r="27" fill="none" stroke="#1F7F8F" stroke-width="6"/>
+  <path d="M17 36h8l6-13 9 26 6-13h9" fill="none" stroke="#1F7F8F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
