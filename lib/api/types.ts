@@ -29,7 +29,54 @@ export interface ApiMedia {
   type: "image" | "video";
   isMain: boolean;
   sortOrder: number;
+  /**
+   * Which named place on the page this file fills, or `null` for a video and for
+   * anything uploaded before the slots existed.
+   *
+   * A slotted catalogue is read through `ApiProduct.images` instead of by
+   * walking this array, so `sortOrder` no longer decides anything: the order of
+   * the pictures on the page is the layout's business.
+   */
+  slot?: ImageSlotKey | null;
 }
+
+/**
+ * The fifteen places a product picture can go.
+ *
+ * Kept in step with `GET /products/cms/media/slots`, which is the authority —
+ * the admin builds its dropzones from that response rather than from a list
+ * like this one. Here the union exists only so `images.<slot>` type-checks.
+ */
+export type ImageSlotKey =
+  | "gallery_1"
+  | "gallery_2"
+  | "gallery_3"
+  | "gallery_4"
+  | "hero_bg"
+  | "about_1"
+  | "benefits_1"
+  | "benefits_2"
+  | "how_to_use_1"
+  | "composition_1"
+  | "metrics_1"
+  | "advantages_1"
+  | "lifestyle_1"
+  | "certificate_1"
+  | "banner_wide";
+
+/**
+ * One filled slot. `width`/`height` are the slot's specification rather than the
+ * uploaded file's, which is exactly what a layout needs: the box can hold its
+ * shape before the bytes arrive, so the page does not jump when they do.
+ */
+export interface ApiImageSlot {
+  url: string;
+  width: number;
+  height: number;
+}
+
+/** All fifteen keys are always present; an unfilled place is `null`. */
+export type ApiImageSlots = Partial<Record<ImageSlotKey, ApiImageSlot | null>>;
 
 export interface ApiCategory {
   id: string;
@@ -86,6 +133,15 @@ export interface ApiProduct {
   sortOrder?: number;
   attributes: ApiProductAttributes;
   media?: ApiMedia[];
+  /**
+   * Pictures addressed by the place they occupy on the page.
+   *
+   * Carried by the by-slug response only: the catalogue lists deliberately omit
+   * it, since a grid of cards needs one photo each and not fifteen. Absent also
+   * means "this record predates slots", which is why `media` is still read as a
+   * fallback below.
+   */
+  images?: ApiImageSlots;
   category?: Pick<ApiCategory, "id" | "name" | "slug">;
   /**
    * The page's editable sections, visible ones only, in `position` order.

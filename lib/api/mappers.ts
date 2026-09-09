@@ -13,7 +13,7 @@ import { getProduct as getStaticProduct } from "@/lib/data/products";
 import type { BlogPost, Product, ProductBadge, ProductForm } from "@/types";
 
 import { resolveMediaUrl } from "./media";
-import type { ApiBlogPost, ApiProduct } from "./types";
+import type { ApiBlogPost, ApiProduct, ImageSlotKey } from "./types";
 
 /* ── mapping ─────────────────────────────────────────────────────────────── */
 
@@ -97,6 +97,31 @@ function uploadedShots(api: ApiProduct): string[] {
     .filter(Boolean);
 }
 
+/** The four gallery places, in the order the design stacks them. */
+const GALLERY_SLOTS: ImageSlotKey[] = ["gallery_1", "gallery_2", "gallery_3", "gallery_4"];
+
+/**
+ * Reads the pictures a moderator placed by hand, one named place at a time.
+ *
+ * This is what replaces guessing. Every block on the detail page used to be
+ * dressed from the same unordered upload pile — nth photo, wrapping — so which
+ * bottle appeared under "how to take" was an accident of upload order. Now each
+ * block asks for the frame that was placed in its own slot, and the pile is only
+ * consulted when nobody has placed anything.
+ *
+ * Rejected file names are honoured here too: a photo pulled for showing the
+ * wrong product must not come back just because it sits in a slot.
+ */
+function slotReader(api: ApiProduct) {
+  const rejected = REJECTED_SHOTS[api.slug];
+
+  return (slot: ImageSlotKey): string | undefined => {
+    const url = api.images?.[slot]?.url;
+    if (!url || rejected?.has(fileNameOf(url))) return undefined;
+    return img(url) || undefined;
+  };
+}
+
 /**
  * Folds an API product onto the storefront's `Product`.
  *
@@ -117,7 +142,20 @@ export function toProduct(api: ApiProduct): Product {
   const images = attrs.images ?? {};
   const base = getStaticProduct(api.slug);
 
-  const shots = uploadedShots(api);
+  const slot = slotReader(api);
+
+  /*
+   * The four gallery places win over the upload pile outright.
+   *
+   * Slots arrived after the catalogue was already full, so a product nobody has
+   * re-uploaded since has `images` empty and `media` full; reading only the
+   * slots would blank out its card. But the moment one gallery slot is filled,
+   * that placement is a deliberate choice and the pile stops being consulted —
+   * including for the places left empty, which is why the list is compacted
+   * rather than padded.
+   */
+  const placed = GALLERY_SLOTS.map(slot).filter((url): url is string => Boolean(url));
+  const shots = placed.length ? placed : uploadedShots(api);
 
   /*
    * The uploads drive the detail page's composition only when there are enough
@@ -140,12 +178,55 @@ export function toProduct(api: ApiProduct): Product {
     composed.length ? composed[index % composed.length] : undefined;
 
   const cardImage = shots[0] || base?.image || img(images.card) || "";
-  const hero = shot(1) || base?.hero || img(images.hero) || cardImage;
-  const gallery = composed.length
-    ? composed
-    : base?.gallery?.length
-      ? base.gallery
-      : imgs(images.gallery);
+  /*
+   * First slide of the detail gallery — `product-gallery` renders
+   * `[hero, ...gallery]` deduped, so this is what the visitor sees first.
+   *
+   * With a placed gallery that has to be `gallery_1`: it is the slot documented
+   * as the main photo, the one the card and the cart show, and leading the
+   * slider with anything else would open the page on a picture the visitor did
+   * not click. Without one it stays the second upload, because the card already
+   * spent the first and repeating it put the same bottle in both frames.
+   */
+  const hero = placed[0] || shot(1) || base?.hero || img(images.hero) || cardImage;
+  /*
+   * A placed gallery skips the three-photo threshold below.
+   *
+   * That rule guards against dressing five blocks from two uploads. It has no
+   * business here: a moderator who filled `gallery_1` and nothing else asked for
+   * exactly one thumbnail, and falling back to the bundled set would overrule
+   * them with artwork they had just replaced.
+   */
+  const gallery = placed.length
+    ? placed
+    : composed.length
+      ? composed
+      : base?.gallery?.length
+        ? base.gallery
+        : imgs(images.gallery);
+
+  /*
+   * What the "how to take" block showed before slots existed: two arbitrary
+   * photos from the pile, or the bundled set. Kept as the floor under the
+   * placed pictures, so a half-filled product still renders a full block.
+   */
+  const legacyUsage =
+    composed.length
+      ? { small: [shot(2)!, shot(3)!] as [string, string], wide: shot(4)! }
+      : (base?.usage ??
+        (images.usage
+          ? {
+              small: [img(images.usage.small?.[0]), img(images.usage.small?.[1])] as [
+                string,
+                string,
+              ],
+              wide: img(images.usage.wide),
+            }
+          : { small: [cardImage, cardImage], wide: cardImage }));
+
+  const placedBenefits = [slot("benefits_1"), slot("benefits_2")].filter(
+    (url): url is string => Boolean(url),
+  );
 
   return {
     id: api.id,
@@ -166,26 +247,29 @@ export function toProduct(api: ApiProduct): Product {
      * no way to notice and drop it.
      */
     gallery,
-    usage:
-      composed.length
-        ? { small: [shot(2)!, shot(3)!] as [string, string], wide: shot(4)! }
-        : (base?.usage ??
-          (images.usage
-            ? {
-                small: [img(images.usage.small?.[0]), img(images.usage.small?.[1])] as [
-                  string,
-                  string,
-                ],
-                wide: img(images.usage.wide),
-              }
-            : { small: [cardImage, cardImage], wide: cardImage })),
-    benefitSlides: composed.length
-      ? composed
-      : base?.benefitSlides?.length
-        ? base.benefitSlides
-        : (imgs(images.benefitSlides).length ? imgs(images.benefitSlides) : [cardImage]),
-    ringImage: shots[0] || base?.ringImage || img(images.ring) || cardImage,
-    statImage: shot(1) || base?.statImage || img(images.stat) || cardImage,
+    /*
+     * Each box takes the slot cut for it: the instructions photo, the lifestyle
+     * frame beside it, and the wide strip underneath. `advantages_1` backs
+     * `banner_wide` because both are the same shape and either one is a better
+     * answer than a portrait jar letterboxed across a 1200×415 panel.
+     */
+    usage: {
+      small: [
+        slot("how_to_use_1") || legacyUsage.small[0],
+        slot("lifestyle_1") || legacyUsage.small[1],
+      ] as [string, string],
+      wide: slot("banner_wide") || slot("advantages_1") || legacyUsage.wide,
+    },
+    benefitSlides: placedBenefits.length
+      ? placedBenefits
+      : composed.length
+        ? composed
+        : base?.benefitSlides?.length
+          ? base.benefitSlides
+          : (imgs(images.benefitSlides).length ? imgs(images.benefitSlides) : [cardImage]),
+    ringImage:
+      slot("composition_1") || shots[0] || base?.ringImage || img(images.ring) || cardImage,
+    statImage: slot("metrics_1") || shot(1) || base?.statImage || img(images.stat) || cardImage,
     featured: api.isFeatured,
     rating: attrs.rating ?? base?.rating ?? 5,
     reviewCount: attrs.reviewCount ?? base?.reviewCount ?? 0,
