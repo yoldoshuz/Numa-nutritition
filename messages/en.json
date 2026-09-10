@@ -303,6 +303,13 @@
     "decrease": "Decrease quantity",
     "increase": "Increase quantity",
     "added": "Product added to cart",
+    "slots": {
+      "compositionTitle": "What's on the label",
+      "compositionText": "The full composition of {name}, exactly as printed on the pack. Worth reading before you buy, especially if you take other supplements.",
+      "lifestyleTitle": "{name} every day",
+      "certificateTitle": "Quality certificate",
+      "certificateText": "The product has passed laboratory testing and certification. The document can be read in full."
+    },
     "purposeTitle": "What is {name} for?",
     "usageTitle": "How to take {name}?",
     "usageSubtitle": "Follow the usage guidelines to get the best result",

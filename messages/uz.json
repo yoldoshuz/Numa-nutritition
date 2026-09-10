@@ -303,6 +303,13 @@
     "decrease": "Miqdorni kamaytirish",
     "increase": "Miqdorni oshirish",
     "added": "Mahsulot savatga qo'shildi",
+    "slots": {
+      "compositionTitle": "Yorliqdagi tarkib",
+      "compositionText": "{name} ning to'liq tarkibi — qadoqda bosilgan holida. Xarid qilishdan oldin tekshirib chiqing, ayniqsa boshqa dorilar qabul qilayotgan bo'lsangiz.",
+      "lifestyleTitle": "{name} har kuni",
+      "certificateTitle": "Sifat sertifikati",
+      "certificateText": "Mahsulot laboratoriya nazoratidan va sertifikatlashdan o'tgan. Hujjatni to'liq ko'rib chiqish mumkin."
+    },
     "purposeTitle": "{name} nima uchun kerak?",
     "usageTitle": "{name} qanday qabul qilinadi?",
     "usageSubtitle": "Maksimal natijaga erishish uchun qo'llash bo'yicha tavsiyalarga amal qiling",

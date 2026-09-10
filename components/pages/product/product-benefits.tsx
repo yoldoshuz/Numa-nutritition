@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { Carousel } from "@/components/shared/carousel";
 import { Container } from "@/components/shared/container";
+import { SlotImage } from "@/components/shared/slot-image";
 import type { ProductContent } from "@/lib/api/blocks";
 import type { Product } from "@/types";
 
@@ -29,37 +28,23 @@ export function ProductBenefits({
           {title}
         </h2>
 
-        <Carousel
-          label={title}
-          className="mt-8"
-          itemClassName="w-full"
-          trackClassName="gap-4"
-        >
-          {/*
-            The slot takes whatever the moderator uploaded — a wide lifestyle
-            frame or an upright packshot — so it letterboxes onto the mint plate
-            instead of cropping. A 16:7 crop of a bottle is a horizontal band
-            across the middle of the label and reads as a broken image.
+        {/*
+          One picture, from the slot named after this block, in the shape it was
+          shot in.
 
-            On a phone that band is only ~145px tall, which leaves an upright
-            bottle the size of a thumbnail — so the box is a little deeper
-            below `sm`, but not so deep that one slide fills the screen.
-          */}
-          {product.benefitSlides.map((slide) => (
-            <div
-              className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[16/7]"
-              key={slide}
-            >
-              <Image
-                src={slide}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 100vw, 1100px"
-                className="object-contain"
-              />
-            </div>
-          ))}
-        </Carousel>
+          This was a carousel over the whole photo set inside a 1200×525 frame,
+          which for a catalogue shot 1:1 meant every slide was a horizontal band
+          across the middle of a bottle. On King Bee it was a carousel of one
+          bundled placeholder. Empty slot, no picture: the checklist below is
+          the section.
+        */}
+        <SlotImage
+          images={product.images}
+          slot="advantages_1"
+          alt={title}
+          sizes="(max-width: 1024px) 100vw, 900px"
+          className="mx-auto mt-8 w-full max-w-3xl rounded-2xl bg-surface-mint"
+        />
 
         <ul className="mt-8 grid gap-3 md:grid-cols-2 lg:gap-4">
           {benefits.map((benefit) => (

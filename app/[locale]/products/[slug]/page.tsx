@@ -8,6 +8,12 @@ import { ProductFaq } from "@/components/pages/product/product-faq";
 import { ProductHero } from "@/components/pages/product/product-hero";
 import { ProductHighlight } from "@/components/pages/product/product-highlight";
 import { ProductPurpose } from "@/components/pages/product/product-purpose";
+import {
+  ProductBanner,
+  ProductCertificate,
+  ProductLabel,
+  ProductLifestyle,
+} from "@/components/pages/product/product-slot-sections";
 import { ProductStats } from "@/components/pages/product/product-stats";
 import { ProductUsage } from "@/components/pages/product/product-usage";
 import { Container } from "@/components/shared/container";
@@ -55,7 +61,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       tagline: resolveProductContent(product.blocks, locale).hero?.tagline || t("tagline"),
       price: formatAmount(product.price),
     }),
-    images: [product.hero, product.image],
+    images: [product.image],
   });
 }
 
@@ -93,6 +99,17 @@ export default async function ProductPage({ params }: { params: Params }) {
     <>
       <ProductHero product={product} content={content} />
       {resolveSectionOrder(product.blocks).map((section) => SECTION[section])}
+
+      {/*
+        The four sections that are a photograph and nothing else. They have no
+        CMS block to order them, so they close the page in the order the shared
+        template lays down — label, lifestyle, certificate, wide strip — and
+        each one renders only if its slot has a file in it.
+      */}
+      <ProductLabel product={product} />
+      <ProductLifestyle product={product} />
+      <ProductCertificate product={product} />
+      <ProductBanner product={product} />
 
       <section className="pb-14 lg:pb-20">
         <Container>

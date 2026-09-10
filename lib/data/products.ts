@@ -1,4 +1,35 @@
+import {
+  EMPTY_PRODUCT_IMAGES,
+  GALLERY_SLOTS,
+  type ProductImages,
+} from "@/lib/product-images";
 import type { Product } from "@/types";
+
+/**
+ * The bundled catalogue's own photographs, placed into the gallery slots.
+ *
+ * The offline storefront has no admin behind it, so this is where its artwork
+ * declares which places it fills: the product page reads named slots and
+ * nothing else. Only the gallery is bundled — the informational slots are
+ * content, and content nobody has uploaded has no stand-in. That is what this
+ * file used to be doing wrong: `usage`, `benefitSlides`, `ringImage` and
+ * `statImage` handed every block a file whether or not the product had one, so
+ * King Bee's single photograph was printed into five frames and the page read
+ * as a product with no photographs at all.
+ *
+ * The dimensions are the slot's specification, which is all a layout needs from
+ * them.
+ */
+function bundledGallery(...urls: string[]): ProductImages {
+  return {
+    ...EMPTY_PRODUCT_IMAGES,
+    ...Object.fromEntries(
+      urls
+        .slice(0, GALLERY_SLOTS.length)
+        .map((url, index) => [GALLERY_SLOTS[index], { url, width: 1000, height: 1000 }]),
+    ),
+  };
+}
 
 /**
  * Image paths point at the exported Figma assets that already live in `public/`.
@@ -14,11 +45,11 @@ import type { Product } from "@/types";
  * Hemoglobin+ pages. Before pointing a slot at one of those frames, open the
  * file — the number says nothing about which bottle is in it.
  *
- * Products with no lifestyle shoot of their own (the jars, and Igneus) repeat
- * their packshot across the composition slots. That is deliberate: a packshot
- * shown twice is honest, another product's photo is not. `gallery` and
- * `benefitSlides` use the path as a React key, so those two arrays must stay
- * free of duplicates — `usage` may repeat a file.
+ * A product with no shoot of its own declares only the gallery places it can
+ * actually fill. It used to repeat its packshot across every composition slot
+ * so that no block rendered empty; the blocks now render empty on purpose,
+ * because a page that shows one bottle five times reads as a page with no
+ * photographs.
  */
 export const products: Product[] = [
   {
@@ -28,12 +59,12 @@ export const products: Product[] = [
     badge: "hit",
     form: "syrup",
     image: "/Asset 3 (3) 1.png",
-    hero: "/Rectangle 1699.png",
-    gallery: ["/Asset 1 1-4.png", "/Asset 3 (3) 2.png", "/image 226.png"],
-    usage: { small: ["/Rectangle 1702.png", "/Rectangle 1700.png"], wide: "/Rectangle 1701.png" },
-    benefitSlides: ["/Rectangle 1702-5.png", "/image 226.png", "/Rectangle 1699.png"],
-    ringImage: "/Asset 3 (3) 4.png",
-    statImage: "/Rectangle 1699.png",
+    images: bundledGallery(
+      "/Rectangle 1699.png",
+      "/Asset 1 1-4.png",
+      "/Asset 3 (3) 2.png",
+      "/image 226.png",
+    ),
     featured: true,
     rating: 5,
     reviewCount: 128,
@@ -48,19 +79,14 @@ export const products: Product[] = [
     form: "honey",
     // Единственный снимок King Bee в приемлемом разрешении — Asset 1 1-7.png
     // (327×493). Asset 1 1.png / Asset 1 1-1.png — иконка 112×169, в деталке
-    // выглядит мылом. Слоты ниже намеренно ссылаются на один файл: галерея и
-    // benefitSlides используют путь как React key, поэтому дубликаты в массивах
-    // недопустимы — отсюда пустой gallery и один слайд. Раньше здесь стояли
-    // Rectangle 1699-6/1700-6/1702-6, то есть фото Cardio Control на странице
-    // King Bee. Развернуть обратно в полноценную галерею можно, как только
-    // появится съёмка King Bee с нескольких ракурсов.
+    // выглядит мылом. Поэтому здесь один слот: gallery_1. Остальные пусты, и
+    // страница честно рендерится без фотографий там, где их нет — раньше этот
+    // файл дублировался в пять рамок, а до него там стояли Rectangle
+    // 1699-6/1700-6/1702-6, то есть фото Cardio Control на странице King Bee.
+    // Развернуть галерею можно, как только появится съёмка с нескольких
+    // ракурсов — загрузив её в слоты через админку, а не сюда.
     image: "/Asset 1 1-7.png",
-    hero: "/Asset 1 1-7.png",
-    gallery: [],
-    usage: { small: ["/Asset 1 1-7.png", "/Asset 1 1-7.png"], wide: "/Asset 1 1-7.png" },
-    benefitSlides: ["/Asset 1 1-7.png"],
-    ringImage: "/Asset 1 1-7.png",
-    statImage: "/Asset 1 1-7.png",
+    images: bundledGallery("/Asset 1 1-7.png"),
     featured: true,
     rating: 5,
     reviewCount: 214,
@@ -77,19 +103,11 @@ export const products: Product[] = [
     // Rectangle 1699-7/1700-7/1702-7 — the old Insulin Balance 330 ml frame and
     // two Cardio Control lifestyle frames.
     image: "/vitamin d3 (2) (3) 1.png",
-    hero: "/vitamin d3 (2) (3) 1-1.png",
-    gallery: ["/vitamin d3 (2) (3) 1.png", "/vitamin d3 (2) (3) 1-2.png"],
-    usage: {
-      small: ["/vitamin d3 (2) (3) 1-1.png", "/vitamin d3 (2) (3) 1-2.png"],
-      wide: "/vitamin d3 (2) (3) 1.png",
-    },
-    benefitSlides: [
+    images: bundledGallery(
       "/vitamin d3 (2) (3) 1-1.png",
       "/vitamin d3 (2) (3) 1.png",
       "/vitamin d3 (2) (3) 1-2.png",
-    ],
-    ringImage: "/vitamin d3 (2) (3) 1.png",
-    statImage: "/vitamin d3 (2) (3) 1-2.png",
+    ),
     featured: true,
     rating: 5,
     reviewCount: 96,
@@ -108,12 +126,12 @@ export const products: Product[] = [
     // (Rectangle 1700-5/1701/1702-5), one frame was Collagen PRO+
     // (`asal (2) 1-2`) and one the old Insulin Balance (Rectangle 1699-5).
     image: "/black-honey.png",
-    hero: "/black-honey.png",
-    gallery: ["/asal (2) 1.png", "/asal (2) 1-1.png", "/asal (2) 1-5.png"],
-    usage: { small: ["/black-honey.png", "/asal (2) 1-1.png"], wide: "/black-honey.png" },
-    benefitSlides: ["/black-honey.png", "/asal (2) 1-1.png", "/asal (2) 1-5.png"],
-    ringImage: "/black-honey.png",
-    statImage: "/black-honey.png",
+    images: bundledGallery(
+      "/black-honey.png",
+      "/asal (2) 1.png",
+      "/asal (2) 1-1.png",
+      "/asal (2) 1-5.png",
+    ),
     featured: true,
     rating: 5,
     reviewCount: 173,
@@ -127,13 +145,13 @@ export const products: Product[] = [
     badge: "hit",
     form: "syrup",
     image: "/Asset 1 12.png",
-    hero: "/Rectangle 1699-4.png",
-    gallery: ["/Asset 1 1-2.png", "/image 10.png", "/image 226-1.png"],
+    images: bundledGallery(
+      "/Rectangle 1699-4.png",
+      "/Asset 1 1-2.png",
+      "/image 10.png",
+      "/image 226-1.png",
+    ),
     // The wide slot held Rectangle 1701-2, which is the Hemoglobin+ bottle.
-    usage: { small: ["/Rectangle 1702-4.png", "/Rectangle 1700-4.png"], wide: "/image 273.png" },
-    benefitSlides: ["/image 226-1.png", "/Rectangle 1702-4.png", "/image 49.png"],
-    ringImage: "/Asset 1 1-2.png",
-    statImage: "/Rectangle 1699-4.png",
     featured: true,
     rating: 5,
     reviewCount: 187,
@@ -149,12 +167,12 @@ export const products: Product[] = [
     // Rectangle 1699-3 is the discontinued 330 ml bottle and Rectangle 1701-1
     // is Endo Marine+; both are out. What is left is the current 500 ml design.
     image: "/Asset 1 (5) 1.png",
-    hero: "/Rectangle 1700-3.png",
-    gallery: ["/Asset 1 1-3.png", "/Asset 1 9.png", "/Rectangle 1702-3.png"],
-    usage: { small: ["/Rectangle 1700-3.png", "/Asset 1 (5) 1.png"], wide: "/Rectangle 1702-3.png" },
-    benefitSlides: ["/Rectangle 1702-3.png", "/Rectangle 1700-3.png", "/Asset 1 9.png"],
-    ringImage: "/Asset 1 1-3.png",
-    statImage: "/Rectangle 1700-3.png",
+    images: bundledGallery(
+      "/Rectangle 1700-3.png",
+      "/Asset 1 1-3.png",
+      "/Asset 1 9.png",
+      "/Rectangle 1702-3.png",
+    ),
     featured: false,
     rating: 5,
     reviewCount: 142,
@@ -168,14 +186,14 @@ export const products: Product[] = [
     badge: "rec",
     form: "syrup",
     image: "/Asset 1 2.png",
-    hero: "/Rectangle 1699-1.png",
+    images: bundledGallery(
+      "/Rectangle 1699-1.png",
+      "/Asset 1 1-5.png",
+      "/Asset 1 2.png",
+      "/Rectangle 1700-1.png",
+    ),
     // The gallery repeated the hero, and the gallery keys off the path — React
     // was rendering two thumbnails under the same key.
-    gallery: ["/Asset 1 1-5.png", "/Asset 1 2.png", "/Rectangle 1700-1.png"],
-    usage: { small: ["/Rectangle 1702-1.png", "/Rectangle 1700-1.png"], wide: "/Rectangle 1701-1.png" },
-    benefitSlides: ["/Rectangle 1700-1.png", "/Rectangle 1699-1.png", "/Rectangle 1701-1.png"],
-    ringImage: "/Asset 1 1-5.png",
-    statImage: "/Rectangle 1699-1.png",
     featured: true,
     rating: 5,
     reviewCount: 118,
@@ -200,12 +218,7 @@ export const products: Product[] = [
     badge: "rec",
     form: "capsules",
     image: "/igneus.png",
-    hero: "/igneus.png",
-    gallery: [],
-    usage: { small: ["/igneus.png", "/igneus.png"], wide: "/igneus.png" },
-    benefitSlides: ["/igneus.png"],
-    ringImage: "/igneus.png",
-    statImage: "/igneus.png",
+    images: bundledGallery("/igneus.png"),
     featured: true,
     rating: 5,
     reviewCount: 0,
@@ -223,12 +236,12 @@ export const products: Product[] = [
     // 118-8 is a shelf of awards with no product in it and Rectangle 1701 is
     // Cardio Control. The frames below are all the current design.
     image: "/Asset 1 6.png",
-    hero: "/Rectangle 1700-2.png",
-    gallery: ["/Asset 1 1-6.png", "/Rectangle 1702-2.png", "/Rectangle 1701-2.png"],
-    usage: { small: ["/Rectangle 1702-2.png", "/Rectangle 1700-2.png"], wide: "/Rectangle 1701-2.png" },
-    benefitSlides: ["/Rectangle 1702-2.png", "/Rectangle 1701-2.png", "/Rectangle 1700-2.png"],
-    ringImage: "/Asset 1 1-6.png",
-    statImage: "/Rectangle 1700-2.png",
+    images: bundledGallery(
+      "/Rectangle 1700-2.png",
+      "/Asset 1 1-6.png",
+      "/Rectangle 1702-2.png",
+      "/Rectangle 1701-2.png",
+    ),
     featured: false,
     rating: 5,
     reviewCount: 165,
@@ -246,12 +259,7 @@ export const products: Product[] = [
     // whole page was other people's photos. Collagen PRO+ has no shoot of its
     // own, so it shows its own jar everywhere instead.
     image: "/collagen-pro.png",
-    hero: "/collagen-pro.png",
-    gallery: ["/asal (2) 1-2.png", "/asal (2) 1-3.png"],
-    usage: { small: ["/collagen-pro.png", "/asal (2) 1-3.png"], wide: "/collagen-pro.png" },
-    benefitSlides: ["/collagen-pro.png", "/asal (2) 1-2.png", "/asal (2) 1-3.png"],
-    ringImage: "/collagen-pro.png",
-    statImage: "/collagen-pro.png",
+    images: bundledGallery("/collagen-pro.png", "/asal (2) 1-2.png", "/asal (2) 1-3.png"),
     featured: false,
     rating: 5,
     reviewCount: 87,
@@ -267,12 +275,7 @@ export const products: Product[] = [
     // Same story as Collagen PRO+: the composition slots held Cardio Control's
     // shoot and the old Insulin Balance frame. Omega has only its own jar.
     image: "/omega-3-6-9.png",
-    hero: "/omega-3-6-9.png",
-    gallery: ["/asal (2) 1-4.png", "/asal (2) 1-6.png"],
-    usage: { small: ["/omega-3-6-9.png", "/asal (2) 1-6.png"], wide: "/omega-3-6-9.png" },
-    benefitSlides: ["/omega-3-6-9.png", "/asal (2) 1-4.png", "/asal (2) 1-6.png"],
-    ringImage: "/omega-3-6-9.png",
-    statImage: "/omega-3-6-9.png",
+    images: bundledGallery("/omega-3-6-9.png", "/asal (2) 1-4.png", "/asal (2) 1-6.png"),
     featured: false,
     rating: 5,
     reviewCount: 104,

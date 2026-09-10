@@ -30,39 +30,44 @@ export interface ApiMedia {
   isMain: boolean;
   sortOrder: number;
   /**
-   * Which named place on the page this file fills, or `null` for a video and for
-   * anything uploaded before the slots existed.
+   * Which named place on the page this file fills, or `null` for a video.
    *
-   * A slotted catalogue is read through `ApiProduct.images` instead of by
-   * walking this array, so `sortOrder` no longer decides anything: the order of
-   * the pictures on the page is the layout's business.
+   * The only thing a storefront still reads this array for is a card's cover on
+   * a list, where `images` is not sent. A product page reads `images` and never
+   * touches `media`, so `sortOrder` decides nothing: where a picture appears is
+   * the slot's business, not the upload queue's.
    */
   slot?: ImageSlotKey | null;
 }
 
 /**
- * The fifteen places a product picture can go.
+ * The fifteen places a product picture can go, in the order the page uses them.
  *
- * Kept in step with `GET /products/cms/media/slots`, which is the authority —
- * the admin builds its dropzones from that response rather than from a list
- * like this one. Here the union exists only so `images.<slot>` type-checks.
+ * One list for the whole project: every slot name the storefront knows is
+ * derived from this array, so a slot cannot be spelled one way in the mapper
+ * and another in a section. Kept in step with
+ * `GET /products/cms/media/slots`, which is the authority — the admin builds
+ * its dropzones from that response rather than from a list like this one.
  */
-export type ImageSlotKey =
-  | "gallery_1"
-  | "gallery_2"
-  | "gallery_3"
-  | "gallery_4"
-  | "hero_bg"
-  | "about_1"
-  | "benefits_1"
-  | "benefits_2"
-  | "how_to_use_1"
-  | "composition_1"
-  | "metrics_1"
-  | "advantages_1"
-  | "lifestyle_1"
-  | "certificate_1"
-  | "banner_wide";
+export const PRODUCT_IMAGE_SLOTS = [
+  "gallery_1",
+  "gallery_2",
+  "gallery_3",
+  "gallery_4",
+  "hero_bg",
+  "about_1",
+  "benefits_1",
+  "benefits_2",
+  "how_to_use_1",
+  "composition_1",
+  "metrics_1",
+  "advantages_1",
+  "lifestyle_1",
+  "certificate_1",
+  "banner_wide",
+] as const;
+
+export type ImageSlotKey = (typeof PRODUCT_IMAGE_SLOTS)[number];
 
 /**
  * One filled slot. `width`/`height` are the slot's specification rather than the
@@ -75,8 +80,14 @@ export interface ApiImageSlot {
   height: number;
 }
 
-/** All fifteen keys are always present; an unfilled place is `null`. */
-export type ApiImageSlots = Partial<Record<ImageSlotKey, ApiImageSlot | null>>;
+/**
+ * All fifteen keys are always present; an unfilled place is `null`.
+ *
+ * Deliberately not `Partial`: the backend documents the map as complete, so a
+ * section asking for its own slot gets either a picture or `null` — there is no
+ * third "the key is missing" state to guard against at every use site.
+ */
+export type ApiImageSlots = Record<ImageSlotKey, ApiImageSlot | null>;
 
 export interface ApiCategory {
   id: string;
@@ -134,12 +145,12 @@ export interface ApiProduct {
   attributes: ApiProductAttributes;
   media?: ApiMedia[];
   /**
-   * Pictures addressed by the place they occupy on the page.
+   * Pictures addressed by the place they occupy on the page — all fifteen keys,
+   * an unfilled one `null`.
    *
    * Carried by the by-slug response only: the catalogue lists deliberately omit
-   * it, since a grid of cards needs one photo each and not fifteen. Absent also
-   * means "this record predates slots", which is why `media` is still read as a
-   * fallback below.
+   * it, since a grid of cards needs one photo each and not fifteen. This is the
+   * whole of a product page's photography.
    */
   images?: ApiImageSlots;
   category?: Pick<ApiCategory, "id" | "name" | "slug">;

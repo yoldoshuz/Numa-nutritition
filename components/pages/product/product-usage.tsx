@@ -1,8 +1,10 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
+import { SlotImage } from "@/components/shared/slot-image";
 import type { ProductContent } from "@/lib/api/blocks";
+import { hasSlots } from "@/lib/product-images";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
 interface Step {
@@ -36,6 +38,17 @@ export function ProductUsage({
   const warnings = content?.warnings;
   const important = warnings?.items ?? (tProduct.raw("important") as string[]);
 
+  /*
+   * One photograph, from the slot shot for these instructions.
+   *
+   * The three frames here used to be `gallery_3`, `gallery_4` and `gallery_1` —
+   * the slider's own pictures a screen further down — and on a product with one
+   * upload, the same bundled placeholder three times. When `how_to_use_1` is
+   * empty the steps take the full width instead of a column collapsing into a
+   * mint box.
+   */
+  const illustrated = hasSlots(product.images, "how_to_use_1");
+
   return (
     <section className="py-14 lg:py-18">
       <Container>
@@ -48,7 +61,12 @@ export function ProductUsage({
           )}
         </div>
 
-        <div className="mt-9 grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-8">
+        <div
+          className={cn(
+            "mt-9 grid gap-6",
+            illustrated && "lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-8",
+          )}
+        >
           <ol className="flex flex-col gap-4">
             {steps.map((step, index) => (
               <li key={step.title + index} className="flex items-stretch gap-3">
@@ -65,68 +83,35 @@ export function ProductUsage({
             ))}
           </ol>
 
-          {/*
-            Every box below letterboxes rather than crops: these slots are
-            filled from the product's uploaded photos, which are as often an
-            upright packshot as a wide frame, and a cover-crop of a bottle is a
-            slice of its label blown up past the point of recognition.
-          */}
-          <div className="grid gap-4 sm:grid-cols-[1.4fr_1fr]">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-[4/3]">
-              <Image
-                src={product.usage.small[0]}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 60vw, 380px"
-                className="object-contain"
-              />
-            </div>
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-surface-mint sm:aspect-auto">
-              <Image
-                src={product.usage.small[1]}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 40vw, 260px"
-                className="object-contain"
-              />
-            </div>
+          <div className="flex flex-col gap-4">
+            <SlotImage
+              images={product.images}
+              slot="how_to_use_1"
+              alt={heading}
+              sizes="(max-width: 1024px) 100vw, 620px"
+              className="rounded-2xl bg-surface-mint"
+            />
 
             {/*
-              Two panels rather than text over a picture: the product keeps a
-              plate of its own and the rules keep a dark green one, so nothing
-              has to be dimmed and the copy never lands on a label.
-
-              Stacked on a phone — product above, rules below — and split in
-              half from `sm`, photo on the left. Neither panel takes its height
-              from the image file, which is what used to stretch this block to
-              517px when the slot held an upright packshot.
+              "Важно соблюдать" has no slot of its own — it is a list of rules,
+              and the photo that used to sit beside it was borrowed from the
+              gallery. It keeps the dark green plate, which is what the design
+              asks for and what the copy reads on.
             */}
-            <div className="overflow-hidden rounded-2xl bg-surface-mint sm:col-span-2 sm:grid sm:min-h-96 sm:grid-cols-2">
-              <div className="relative aspect-[16/10] w-full sm:aspect-auto sm:h-full">
-                <Image
-                  src={product.usage.wide}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 100vw, 330px"
-                  className="object-contain p-4"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center gap-2 bg-gradient-to-t from-brand-900 to-brand-700 p-6 sm:bg-gradient-to-r sm:p-8">
-                <p className="text-sm font-bold text-white">
-                  {warnings?.title || tProduct("importantTitle")}
-                </p>
-                <ul className="flex flex-col gap-1.5">
-                  {important.map((rule) => (
-                    <li
-                      key={rule}
-                      className="text-[0.6875rem] leading-snug text-white/90 before:mr-1.5 before:content-['•']"
-                    >
-                      {rule}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="flex flex-col justify-center gap-2 rounded-2xl bg-gradient-to-t from-brand-900 to-brand-700 p-6 sm:bg-gradient-to-r sm:p-8">
+              <p className="text-sm font-bold text-white">
+                {warnings?.title || tProduct("importantTitle")}
+              </p>
+              <ul className="flex flex-col gap-1.5">
+                {important.map((rule) => (
+                  <li
+                    key={rule}
+                    className="text-[0.6875rem] leading-snug text-white/90 before:mr-1.5 before:content-['•']"
+                  >
+                    {rule}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
+import { SlotImage } from "@/components/shared/slot-image";
 import type { ProductContent } from "@/lib/api/blocks";
+import { hasSlots } from "@/lib/product-images";
 import { cn, polarPosition } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -15,12 +16,17 @@ interface Chip {
  * Four chips on the ring diagonals (0° = 12 o'clock, clockwise), matching the
  * Figma composition: dosage top-left, formula top-right, intake bottom-left,
  * age bottom-right.
+ *
+ * The orbit is a desktop composition. Below `lg` every chip is `static`, which
+ * makes the browser ignore both `placement` and the polar `top`/`left`, and the
+ * four of them fall into the grid their list gives them — one markup, laid out
+ * two ways, rather than two copies of the block with one of them hidden.
  */
 const chipOrbit: Array<{ angle: number; placement: string }> = [
-  { angle: 315, placement: "right-5 bottom-1 items-end text-right" },
-  { angle: 45, placement: "left-5 bottom-1 items-start text-left" },
-  { angle: 225, placement: "right-5 top-1 items-end text-right" },
-  { angle: 135, placement: "left-5 top-1 items-start text-left" },
+  { angle: 315, placement: "lg:right-5 lg:bottom-1 lg:items-end lg:text-right" },
+  { angle: 45, placement: "lg:left-5 lg:bottom-1 lg:items-start lg:text-left" },
+  { angle: 225, placement: "lg:right-5 lg:top-1 lg:items-end lg:text-right" },
+  { angle: 135, placement: "lg:left-5 lg:top-1 lg:items-start lg:text-left" },
 ];
 
 export function ProductHighlight({
@@ -45,85 +51,99 @@ export function ProductHighlight({
   const heading = cms?.title || t("highlightTitle");
   const body = cms?.text || t("highlightText");
 
+  /*
+   * The ring holds `about_1` — the photograph shot for this block.
+   *
+   * It used to hold whichever photo was marked main, which is `gallery_1`: the
+   * picture the slider opens on, shown again a screen below. And it was
+   * rendered twice, the second copy in a block hidden from `lg` and laid out at
+   * 0×0 — a file fetched on every visit to be shown at no size at all. With the
+   * slot empty the copy and the numbers take the whole width and the ring is
+   * not drawn around an empty middle.
+   */
+  const illustrated = hasSlots(product.images, "about_1");
+
   return (
     <section className="bg-surface-soft/60 py-14 lg:py-18">
-      <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12">
+      <Container
+        className={cn(
+          "grid items-center gap-10",
+          illustrated && "lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12",
+        )}
+      >
         <div className="flex flex-col gap-4">
           <h2 className="max-w-md font-heading text-2xl leading-tight font-extrabold text-ink sm:text-[2rem]">
             {heading}
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-muted-ink">{body}</p>
+
+          {/* No ring to orbit, so the numbers stand on their own row. */}
+          {!illustrated && (
+            <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {chips.map((chip, index) => (
+                <li
+                  key={chip.label + index}
+                  className="rounded-xl bg-brand px-4 py-3 text-center text-white shadow-card"
+                >
+                  <p className="font-heading text-sm leading-tight font-extrabold">
+                    {chip.value}
+                  </p>
+                  <p className="mt-0.5 text-[0.6875rem] leading-snug text-white/90">
+                    {chip.label}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        {/* Below `lg` the ring collapses into a readable chip grid. */}
-        <div className="flex flex-col items-center gap-6 lg:hidden">
-          <Image
-            src={product.ringImage}
-            alt=""
-            width={220}
-            height={420}
-            sizes="40vw"
-            // Bounded on both axes. `w-auto` took its width from the file, so a
-            // landscape frame in this slot came out ~2.4× as wide as it is tall
-            // and ran off the side of a phone.
-            className="h-52 w-full max-w-64 object-contain"
-          />
-          <ul className="grid w-full grid-cols-2 gap-3">
-            {chips.map((chip, index) => (
-              <li key={chip.label + index} className="rounded-xl bg-brand px-4 py-3 text-center text-white shadow-card">
-                <p className="font-heading text-sm leading-tight font-extrabold">{chip.value}</p>
-                <p className="mt-0.5 text-[0.6875rem] leading-snug text-white/90">{chip.label}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {illustrated && (
+          <div className="relative mx-auto flex w-full max-w-sm flex-col items-center gap-6 lg:aspect-[7/5] lg:block lg:max-w-none">
+            <div className="w-full lg:absolute lg:top-1/2 lg:left-1/2 lg:aspect-square lg:w-[52%] lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-full lg:border lg:border-dashed lg:border-brand/45">
+              <SlotImage
+                images={product.images}
+                slot="about_1"
+                alt={t("name")}
+                sizes="(max-width: 1024px) 90vw, 300px"
+                className="rounded-2xl bg-surface-mint lg:absolute lg:top-1/2 lg:left-1/2 lg:w-[84%] lg:-translate-x-1/2 lg:-translate-y-1/2 lg:bg-transparent"
+              />
 
-        <div className="relative hidden aspect-[7/5] w-full lg:block">
-          <div className="absolute top-1/2 left-1/2 aspect-square w-[52%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand/45">
-            {/*
-              The image occupies a fixed square inside the ring and letterboxes
-              into it, so whatever ends up in this slot cannot change its size.
-
-              It used to be `h-[86%] w-auto`, which took the width from the
-              file: a packshot sat neatly inside the ring, but any landscape
-              frame — and most of the catalogue's photography is 1518×621 —
-              came out over twice the ring's width and laid itself across the
-              four chips orbiting it. `ringImage` is whichever photo the admin
-              marked as the product's main one, so the slot has to survive being
-              handed a wide one.
-            */}
-            <Image
-              src={product.ringImage}
-              alt=""
-              width={240}
-              height={460}
-              sizes="240px"
-              className="absolute top-1/2 left-1/2 size-[86%] -translate-x-1/2 -translate-y-1/2 object-contain"
-            />
-
-            {chips.map((chip, index) => {
-              const { angle, placement } = chipOrbit[index];
-              return (
-                <div key={chip.label + index} className="absolute size-0" style={polarPosition(angle)}>
-                  <span
-                    aria-hidden
-                    className="absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand"
-                  />
-                  <div className={cn("absolute flex w-40 flex-col", placement)}>
-                    <span className="rounded-xl bg-brand px-4 py-3 text-white shadow-card">
-                      <span className="block font-heading text-sm leading-tight font-extrabold">
-                        {chip.value}
-                      </span>
-                      <span className="mt-0.5 block text-[0.6875rem] leading-snug text-white/90">
-                        {chip.label}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
+              <ul className="mt-6 grid w-full grid-cols-2 gap-3 lg:contents">
+                {chips.map((chip, index) => {
+                  const { angle, placement } = chipOrbit[index];
+                  return (
+                    <li
+                      key={chip.label + index}
+                      style={polarPosition(angle)}
+                      // A grid cell below `lg`; from `lg` a zero-sized anchor
+                      // sitting on the ring, with the chip hung off it.
+                      className="lg:absolute lg:size-0"
+                    >
+                      <span
+                        aria-hidden
+                        className="hidden lg:absolute lg:block lg:size-2.5 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-full lg:bg-brand"
+                      />
+                      <div
+                        className={cn(
+                          "flex flex-col rounded-xl bg-brand px-4 py-3 text-center text-white shadow-card",
+                          "lg:absolute lg:w-40 lg:text-left",
+                          placement,
+                        )}
+                      >
+                        <span className="font-heading text-sm leading-tight font-extrabold">
+                          {chip.value}
+                        </span>
+                        <span className="mt-0.5 text-[0.6875rem] leading-snug text-white/90">
+                          {chip.label}
+                        </span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
-        </div>
+        )}
       </Container>
     </section>
   );
