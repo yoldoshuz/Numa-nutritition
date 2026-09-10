@@ -1,4 +1,5 @@
 import type { AppLocale } from "@/lib/i18n/routing";
+import { galleryOf } from "@/lib/product-images";
 import { htmlLang } from "@/lib/i18n/routing";
 import { localizedUrl } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -105,7 +106,14 @@ export function productJsonLd({
     description,
     sku: product.slug,
     brand: { "@type": "Brand", name: siteConfig.name },
-    image: [product.image, product.hero].map((src) => absoluteUrl(src)),
+    /*
+     * The cover plus whatever the gallery holds, deduped. Search engines want
+     * several views of the same product; `hero` used to supply the second one
+     * and was the gallery's first frame under another name.
+     */
+    image: [...new Set([product.image, ...galleryOf(product.images).map((i) => i.url)])]
+      .filter(Boolean)
+      .map((src) => absoluteUrl(src)),
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: product.rating,

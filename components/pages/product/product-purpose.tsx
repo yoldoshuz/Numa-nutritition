@@ -2,7 +2,10 @@ import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
+import { SlotImage } from "@/components/shared/slot-image";
 import type { ProductContent } from "@/lib/api/blocks";
+import { hasSlots } from "@/lib/product-images";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
 interface PurposeItem {
@@ -26,6 +29,17 @@ export function ProductPurpose({
   const heading = cms?.title || tProduct("purposeTitle", { name: t("name") });
   const subtitle = cms?.subtitle || t("purposeSubtitle");
 
+  /*
+   * Two photographs belong to this block and the section never showed either —
+   * only the decorative bottles the storefront bundles. `benefits_1` and
+   * `benefits_2` have been fillable in the admin all along, which is also why
+   * nobody filled them: there was nowhere for them to appear. One or both may
+   * be empty; the section is text-only when both are.
+   */
+  const shots = hasSlots(product.images, "benefits_1", "benefits_2");
+  const paired =
+    hasSlots(product.images, "benefits_1") && hasSlots(product.images, "benefits_2");
+
   return (
     <section className="relative isolate bg-surface-soft/60 py-14 lg:py-18">
       <LeafDecor position="right" />
@@ -38,6 +52,30 @@ export function ProductPurpose({
             <p className="text-sm leading-relaxed text-muted-ink">{subtitle}</p>
           )}
         </div>
+
+        {shots && (
+          <div
+            className={cn(
+              "mt-8 grid gap-4",
+              paired ? "sm:grid-cols-2" : "mx-auto max-w-2xl",
+            )}
+          >
+            <SlotImage
+              images={product.images}
+              slot="benefits_1"
+              alt={heading}
+              sizes={paired ? "(max-width: 640px) 100vw, 45vw" : "(max-width: 768px) 100vw, 680px"}
+              className="rounded-2xl bg-surface-mint"
+            />
+            <SlotImage
+              images={product.images}
+              slot="benefits_2"
+              alt={heading}
+              sizes={paired ? "(max-width: 640px) 100vw, 45vw" : "(max-width: 768px) 100vw, 680px"}
+              className="rounded-2xl bg-surface-mint"
+            />
+          </div>
+        )}
 
         <ul className="mt-9 grid gap-4 md:grid-cols-2 lg:gap-5">
           {items.map((item) => (

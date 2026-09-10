@@ -1,4 +1,5 @@
 import type { ApiProductBlock } from "@/lib/api/types";
+import type { ProductImages } from "@/lib/product-images";
 
 export type ProductBadge = "hit" | "new" | "rec";
 
@@ -25,20 +26,26 @@ export interface Product {
   price: number;
   badge: ProductBadge;
   form: ProductForm;
-  /** Packshot on a transparent background. */
+  /** Packshot on a transparent background — the card and the cart read this. */
   image: string;
-  /** Large image shown in the detail gallery. */
-  hero: string;
-  /** Thumbnails under the gallery hero (front / back / lifestyle). */
-  gallery: string[];
-  /** Two portrait shots + one wide shot used by the "how to take" block. */
-  usage: { small: [string, string]; wide: string };
-  /** Slides of the benefits carousel. */
-  benefitSlides: string[];
-  /** Bottle centred inside the highlights ring. */
-  ringImage: string;
-  /** Product trio inside the mint circle next to the stat bars. */
-  statImage: string;
+  /**
+   * Every place a photograph can go on this product's page, keyed by the name
+   * of the place.
+   *
+   * This is the whole of the page's photography. Each section asks for the slot
+   * that carries its own name — `benefits` reads `benefits_1`/`benefits_2`,
+   * `metrics` reads `metrics_1` — and an empty slot means that section renders
+   * without a picture.
+   *
+   * It replaces `hero`, `gallery`, `usage`, `benefitSlides`, `ringImage` and
+   * `statImage`. Those were positions in an unordered upload pile, so which
+   * bottle appeared under "как принимать" was an accident of upload order, and
+   * a product with one photograph had it printed into five frames.
+   *
+   * Absent on a catalogue list: the endpoint does not send it there, and a grid
+   * of cards needs one photo each rather than fifteen.
+   */
+  images?: ProductImages;
   /** Rendered on the home page carousel. */
   featured: boolean;
   rating: number;

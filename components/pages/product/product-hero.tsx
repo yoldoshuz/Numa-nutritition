@@ -7,6 +7,7 @@ import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
 import { Price } from "@/components/shared/price";
 import { ProductBadge } from "@/components/shared/product-badge";
+import { SlotBackground } from "@/components/shared/slot-image";
 import type { ProductContent } from "@/lib/api/blocks";
 import { isSoldOut } from "@/lib/utils";
 import type { Product } from "@/types";
@@ -44,7 +45,18 @@ export function ProductHero({
   const description = content?.hero?.text || t("description");
 
   return (
-    <section className="relative isolate pt-6 pb-12 lg:pt-8 lg:pb-16">
+    <section className="relative isolate overflow-hidden pt-6 pb-12 lg:pt-8 lg:pb-16">
+      {/*
+        `hero_bg` — uploaded for most of the catalogue, Cardio Control included,
+        and rendered nowhere until now. It sits behind the buy box under a veil
+        that keeps the price and the spec sheet legible; a product without one
+        keeps the plain ground the design specifies.
+      */}
+      <SlotBackground images={product.images} slot="hero_bg" className="-z-20" />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-white/85 via-white/93 to-white"
+      />
       <LeafDecor position="right" />
       <Container className="grid gap-8 lg:grid-cols-2 lg:gap-12">
         <ProductGallery product={product} name={name} />

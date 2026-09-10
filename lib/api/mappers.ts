@@ -10,10 +10,15 @@
 
 import { getPost as getStaticPost } from "@/lib/data/content";
 import { getProduct as getStaticProduct } from "@/lib/data/products";
+import {
+  PRODUCT_IMAGE_SLOTS,
+  toProductImages,
+  type ProductImages,
+} from "@/lib/product-images";
 import type { BlogPost, Product, ProductBadge, ProductForm } from "@/types";
 
 import { resolveMediaUrl } from "./media";
-import type { ApiBlogPost, ApiProduct, ImageSlotKey } from "./types";
+import type { ApiBlogPost, ApiProduct } from "./types";
 
 /* ── mapping ─────────────────────────────────────────────────────────────── */
 
@@ -38,10 +43,7 @@ function resolveOrder(
   return bundled ?? fallback;
 }
 
-
 const img = (url: string | null | undefined) => resolveMediaUrl(url);
-const imgs = (urls: (string | null | undefined)[] | undefined) =>
-  (urls ?? []).map(img).filter(Boolean);
 
 /**
  * Uploaded photos that must never reach the storefront, by product slug and
@@ -51,13 +53,12 @@ const imgs = (urls: (string | null | undefined)[] | undefined) =>
  * Insulin Balance carried a frame of the pre-redesign 330 ml bottle and a shot
  * of three Hemoglobin+ bottles; Hemoglobin+ carried three frames of its own
  * discontinued blue bottle, while the product on sale is the purple 500 ml one.
- * Both sets are attached to the live records, so they arrive on every request
- * and outrank everything the storefront bundles.
+ * Both sets are attached to the live records, so they arrive on every request.
  *
  * This is a stopgap, not the fix. The photos have to be deleted in the admin
- * (`DELETE /products/cms/:id/media/:mediaId`); once they are, these entries do
- * nothing and should be dropped. Matching is on the file name rather than the
- * whole URL so moving the media origin does not quietly re-admit them.
+ * (`DELETE /products/cms/:id/media/slot/:slot`); once they are, these entries
+ * do nothing and should be dropped. Matching is on the file name rather than
+ * the whole URL so moving the media origin does not quietly re-admit them.
  */
 const REJECTED_SHOTS: Record<string, ReadonlySet<string>> = {
   "insulin-balance": new Set([
@@ -77,49 +78,49 @@ const fileNameOf = (url: string): string => {
 };
 
 /**
- * The photos uploaded through the admin, the one marked main first and the rest
- * in their sort order.
+ * Empties the slots holding a photo of the wrong product.
  *
- * These outrank `attributes.images` on purpose. `attributes` is seed data that
- * no admin screen writes to, so as long as it won, a moderator could replace a
- * product's whole photo set and watch the storefront ignore every one of them —
- * and some of those seeded URLs have since rotted to 404s, which is how the
- * flagship product ended up rendering a broken card image.
+ * A rejected file must not come back just because someone placed it in a slot,
+ * and the answer is the same as for a slot nobody filled: the section renders
+ * without a picture. Levelling it to `null` here rather than at each use site
+ * means every reader — gallery, section, cover — agrees about what exists.
  */
-function uploadedShots(api: ApiProduct): string[] {
-  const rejected = REJECTED_SHOTS[api.slug];
+function withoutRejected(slug: string, images: ProductImages): ProductImages {
+  const rejected = REJECTED_SHOTS[slug];
+  if (!rejected) return images;
 
-  return [...(api.media ?? [])]
-    .filter((m) => m.type !== "video")
-    .filter((m) => !rejected?.has(fileNameOf(m.url ?? "")))
-    .sort((a, b) => Number(b.isMain) - Number(a.isMain) || a.sortOrder - b.sortOrder)
-    .map((m) => img(m.url))
-    .filter(Boolean);
+  for (const slot of PRODUCT_IMAGE_SLOTS) {
+    const image = images[slot];
+    if (image && rejected.has(fileNameOf(image.url))) images[slot] = null;
+  }
+  return images;
 }
 
-/** The four gallery places, in the order the design stacks them. */
-const GALLERY_SLOTS: ImageSlotKey[] = ["gallery_1", "gallery_2", "gallery_3", "gallery_4"];
-
 /**
- * Reads the pictures a moderator placed by hand, one named place at a time.
+ * The one photo a card needs: the product's cover.
  *
- * This is what replaces guessing. Every block on the detail page used to be
- * dressed from the same unordered upload pile — nth photo, wrapping — so which
- * bottle appeared under "how to take" was an accident of upload order. Now each
- * block asks for the frame that was placed in its own slot, and the pile is only
- * consulted when nobody has placed anything.
+ * The by-slug response answers with the full `images` map, but a catalogue list
+ * does not — it carries `media` only — so a card resolves its cover from the
+ * slot each file says it sits in. `gallery_1` is the documented cover; `isMain`
+ * is the same fact spelled the old way and stands behind it; the first upload
+ * is the last resort, for a record whose files predate slots entirely.
  *
- * Rejected file names are honoured here too: a photo pulled for showing the
- * wrong product must not come back just because it sits in a slot.
+ * This is the only place `media` is still read, and the only place `isMain` is
+ * consulted. Nothing on a product page goes near either.
  */
-function slotReader(api: ApiProduct) {
+function coverShot(api: ApiProduct): string {
   const rejected = REJECTED_SHOTS[api.slug];
+  const photos = (api.media ?? [])
+    .filter((m) => m.type !== "video")
+    .filter((m) => !rejected?.has(fileNameOf(m.url ?? "")));
 
-  return (slot: ImageSlotKey): string | undefined => {
-    const url = api.images?.[slot]?.url;
-    if (!url || rejected?.has(fileNameOf(url))) return undefined;
-    return img(url) || undefined;
-  };
+  const cover =
+    api.images?.gallery_1?.url ??
+    photos.find((m) => m.slot === "gallery_1")?.url ??
+    photos.find((m) => m.isMain)?.url ??
+    photos[0]?.url;
+
+  return img(cover);
 }
 
 /**
@@ -129,104 +130,20 @@ function slotReader(api: ApiProduct) {
  * seeded `attributes`, so whatever a moderator can edit is what the page shows
  * and the rest still has something to fall back on.
  *
- * Imagery is why the static entry outranks `attributes`. The seeded URLs point
- * at the originals the catalogue was built from — one of them a 10 MB PNG of a
- * single bottle — and the image optimizer gives up fetching those after seven
- * seconds and answers 500, which is how several cards ended up rendering a
- * broken-image box. The bundled copies are the same artwork at web weight and
- * are served off this deployment, so they cannot time out. Uploaded media still
- * wins over both: that is the one set a moderator controls.
+ * Photography is the exception, and deliberately so. It comes from the live
+ * record's named slots and from nowhere else: the page reads `images` and an
+ * empty slot means that section has no picture. Falling back to the bundle here
+ * is what put `/Asset 1 1-7.png` — a file King Bee happens to share with
+ * nothing, standing in for four missing slots — across a page whose product has
+ * exactly one photograph. The bundled artwork still answers for the offline
+ * catalogue, which declares its own slots in `lib/data/products.ts`.
  */
 export function toProduct(api: ApiProduct): Product {
   const attrs = api.attributes ?? {};
-  const images = attrs.images ?? {};
   const base = getStaticProduct(api.slug);
 
-  const slot = slotReader(api);
-
-  /*
-   * The four gallery places win over the upload pile outright.
-   *
-   * Slots arrived after the catalogue was already full, so a product nobody has
-   * re-uploaded since has `images` empty and `media` full; reading only the
-   * slots would blank out its card. But the moment one gallery slot is filled,
-   * that placement is a deliberate choice and the pile stops being consulted —
-   * including for the places left empty, which is why the list is compacted
-   * rather than padded.
-   */
-  const placed = GALLERY_SLOTS.map(slot).filter((url): url is string => Boolean(url));
-  const shots = placed.length ? placed : uploadedShots(api);
-
-  /*
-   * The uploads drive the detail page's composition only when there are enough
-   * of them to fill it.
-   *
-   * The blocks below want five distinct photos between them. Wrapping a shorter
-   * set round to fill the slots put the same bottle in three boxes on one
-   * screen, and after a review pulled the wrong photos off Hemoglobin+ it would
-   * have left that page with a single packshot repeated down the whole page
-   * while four correct ones sat in the bundle unused. Three is the same
-   * threshold `usage` has always applied; it now governs the gallery and the
-   * benefits carousel too, so a product is dressed from one source rather than
-   * half from each.
-   *
-   * The card image is exempt: it is one slot, and one upload fills it.
-   */
-  const composed = shots.length >= 3 ? shots : [];
-  /** Nth photo of the composition set, wrapping. */
-  const shot = (index: number): string | undefined =>
-    composed.length ? composed[index % composed.length] : undefined;
-
-  const cardImage = shots[0] || base?.image || img(images.card) || "";
-  /*
-   * First slide of the detail gallery — `product-gallery` renders
-   * `[hero, ...gallery]` deduped, so this is what the visitor sees first.
-   *
-   * With a placed gallery that has to be `gallery_1`: it is the slot documented
-   * as the main photo, the one the card and the cart show, and leading the
-   * slider with anything else would open the page on a picture the visitor did
-   * not click. Without one it stays the second upload, because the card already
-   * spent the first and repeating it put the same bottle in both frames.
-   */
-  const hero = placed[0] || shot(1) || base?.hero || img(images.hero) || cardImage;
-  /*
-   * A placed gallery skips the three-photo threshold below.
-   *
-   * That rule guards against dressing five blocks from two uploads. It has no
-   * business here: a moderator who filled `gallery_1` and nothing else asked for
-   * exactly one thumbnail, and falling back to the bundled set would overrule
-   * them with artwork they had just replaced.
-   */
-  const gallery = placed.length
-    ? placed
-    : composed.length
-      ? composed
-      : base?.gallery?.length
-        ? base.gallery
-        : imgs(images.gallery);
-
-  /*
-   * What the "how to take" block showed before slots existed: two arbitrary
-   * photos from the pile, or the bundled set. Kept as the floor under the
-   * placed pictures, so a half-filled product still renders a full block.
-   */
-  const legacyUsage =
-    composed.length
-      ? { small: [shot(2)!, shot(3)!] as [string, string], wide: shot(4)! }
-      : (base?.usage ??
-        (images.usage
-          ? {
-              small: [img(images.usage.small?.[0]), img(images.usage.small?.[1])] as [
-                string,
-                string,
-              ],
-              wide: img(images.usage.wide),
-            }
-          : { small: [cardImage, cardImage], wide: cardImage }));
-
-  const placedBenefits = [slot("benefits_1"), slot("benefits_2")].filter(
-    (url): url is string => Boolean(url),
-  );
+  const images = withoutRejected(api.slug, toProductImages(api.images));
+  const cardImage = coverShot(api) || base?.image || "";
 
   return {
     id: api.id,
@@ -238,38 +155,11 @@ export function toProduct(api: ApiProduct): Product {
     badge: (attrs.badge as ProductBadge) ?? base?.badge ?? "rec",
     form: (attrs.form as ProductForm) ?? base?.form ?? "capsules",
     image: cardImage,
-    hero,
     /*
-     * Left empty when the product has no second photo. It used to fall back to
-     * the card image, which put a thumbnail of the picture already filling the
-     * frame above it directly underneath — and since the bundled copy and the
-     * uploaded original are different URLs of the same artwork, the gallery had
-     * no way to notice and drop it.
+     * Empty on a list, which is correct: the endpoint does not send `images`
+     * there and every section that reads a slot lives on the product page.
      */
-    gallery,
-    /*
-     * Each box takes the slot cut for it: the instructions photo, the lifestyle
-     * frame beside it, and the wide strip underneath. `advantages_1` backs
-     * `banner_wide` because both are the same shape and either one is a better
-     * answer than a portrait jar letterboxed across a 1200×415 panel.
-     */
-    usage: {
-      small: [
-        slot("how_to_use_1") || legacyUsage.small[0],
-        slot("lifestyle_1") || legacyUsage.small[1],
-      ] as [string, string],
-      wide: slot("banner_wide") || slot("advantages_1") || legacyUsage.wide,
-    },
-    benefitSlides: placedBenefits.length
-      ? placedBenefits
-      : composed.length
-        ? composed
-        : base?.benefitSlides?.length
-          ? base.benefitSlides
-          : (imgs(images.benefitSlides).length ? imgs(images.benefitSlides) : [cardImage]),
-    ringImage:
-      slot("composition_1") || shots[0] || base?.ringImage || img(images.ring) || cardImage,
-    statImage: slot("metrics_1") || shot(1) || base?.statImage || img(images.stat) || cardImage,
+    images,
     featured: api.isFeatured,
     rating: attrs.rating ?? base?.rating ?? 5,
     reviewCount: attrs.reviewCount ?? base?.reviewCount ?? 0,
@@ -296,4 +186,3 @@ export function toBlogPost(api: ApiBlogPost): BlogPost {
     featured: base?.featured ?? false,
   };
 }
-
