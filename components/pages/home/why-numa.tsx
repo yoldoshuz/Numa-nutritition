@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/shared/container";
 import { LeafDecor } from "@/components/shared/leaf-decor";
+import { LogoMark } from "@/components/shared/logo";
 import { benefitWheel } from "@/lib/data/content";
 import { Link } from "@/lib/i18n/navigation";
 import { cn, polarPosition } from "@/lib/utils";
@@ -84,15 +85,16 @@ export function WhyNuma() {
         <div className="relative hidden aspect-[7/5] w-full lg:block">
           {/* The dashed circle IS the coordinate space, so every item is exact. */}
           <div className="absolute top-1/2 left-1/2 aspect-square w-[44%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand/45">
-            <div className="absolute top-1/2 left-1/2 grid size-[62%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-brand/25 bg-white text-center shadow-card">
-              <span className="flex flex-col leading-none text-brand-700">
-                <span className="font-heading text-[1.6rem] font-extrabold tracking-tight">
-                  NUMA
-                </span>
-                <span className="mt-1.5 text-[0.5rem] font-bold tracking-[0.36em]">
-                  NUTRITION
-                </span>
-              </span>
+            {/*
+              The real wordmark, not a typed copy of it. The hub used to set
+              "NUMA / NUTRITION" in the heading face with hand-picked tracking,
+              which came out as a near-miss of the logo standing two hundred
+              pixels from the header — wrong letterforms, wrong weight, and no
+              ® at all. The height classes are overridden rather than removed so
+              the mark scales with the wheel, which only exists from `lg` up.
+            */}
+            <div className="absolute top-1/2 left-1/2 grid size-[62%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-brand/25 bg-white px-[12%] shadow-card">
+              <LogoMark className="h-auto w-full sm:h-auto lg:h-auto" />
             </div>
 
             {benefitWheel.map((item) => {

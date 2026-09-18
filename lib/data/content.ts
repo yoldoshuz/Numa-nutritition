@@ -300,11 +300,11 @@ export const expertVideos: ExpertVideo[] = [
 export const ISO_22000_CERTIFICATE = "/certificates/iso-22000-2018.pdf";
 
 export const certificates: Certificate[] = [
-  { id: "euroleaf", icon: "/Ellipse 254.png" },
-  { id: "halal", icon: "/Ellipse 255.png" },
-  { id: "usda", icon: "/Ellipse 256.png" },
-  { id: "iso", icon: "/Ellipse 257.png" },
-  { id: "gmp", icon: "/Ellipse 258.png" },
+  { id: "euroleaf", icon: "/cert-euro-leaf.png" },
+  { id: "halal", icon: "/cert-halal.png" },
+  { id: "usda", icon: "/cert-usda-organic.png" },
+  { id: "iso", icon: "/cert-iso-22000.png" },
+  { id: "gmp", icon: "/cert-gmp.png" },
 ];
 
 export const reviews: Review[] = [
